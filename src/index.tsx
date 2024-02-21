@@ -4,26 +4,13 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
-import styled from '@emotion/styled'
-import { css } from '@emotion/react'
-
-const Container = styled.div`
-  height: 100px;
-  width: 100%;
-  color: pink;
-`
+import { Global } from '@emotion/react'
+import globalStyles from './styles/globalStyles'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <Container>Hello</Container>
-    <h2
-      css={css`
-        color: pink;
-      `}
-    >
-      React
-    </h2>
+    <Global styles={globalStyles} />
     <App />
   </React.StrictMode>,
 )
