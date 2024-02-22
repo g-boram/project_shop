@@ -51,6 +51,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.2.5"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:18.2.0"],\
+          ["react-icons", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.0.1"],\
           ["react-router-dom", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:6.22.1"],\
           ["react-scripts", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.0.1"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
@@ -16871,6 +16872,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.2.5"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:18.2.0"],\
+          ["react-icons", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.0.1"],\
           ["react-router-dom", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:6.22.1"],\
           ["react-scripts", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.0.1"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
@@ -17156,6 +17158,28 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/react-error-overlay-npm-6.0.11-021cdeaa92-10c0.zip/node_modules/react-error-overlay/",\
         "packageDependencies": [\
           ["react-error-overlay", "npm:6.0.11"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-icons", [\
+      ["npm:5.0.1", {\
+        "packageLocation": "../../../.yarn/berry/cache/react-icons-npm-5.0.1-5e01385cf2-10c0.zip/node_modules/react-icons/",\
+        "packageDependencies": [\
+          ["react-icons", "npm:5.0.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.0.1", {\
+        "packageLocation": "./.yarn/__virtual__/react-icons-virtual-5ba381e5d6/4/.yarn/berry/cache/react-icons-npm-5.0.1-5e01385cf2-10c0.zip/node_modules/react-icons/",\
+        "packageDependencies": [\
+          ["react-icons", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.0.1"],\
+          ["@types/react", "npm:18.2.57"],\
+          ["react", "npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\

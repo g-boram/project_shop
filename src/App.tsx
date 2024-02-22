@@ -1,25 +1,22 @@
-import Button from './components/shared/Button'
 import { useAlertContext } from './contexts/AlertContext'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+import Layout from './components/shared/Layout'
+import Navbar from './components/shared/Navbar'
+import HomePage from './pages'
 
 function App() {
   const { open } = useAlertContext()
 
   return (
-    <div>
-      <Button
-        onClick={() => {
-          open({
-            title: '알림창 열기',
-            description: 'description',
-            onButtonClick: () => {
-              //
-            },
-          })
-        }}
-      >
-        Alert 오픈
-      </Button>
-    </div>
+    <BrowserRouter>
+      {/* <Navbar /> */}
+      <Layout>
+        <Routes>
+          <Route path="/" Component={HomePage} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   )
 }
 
