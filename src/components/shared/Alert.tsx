@@ -11,6 +11,7 @@ interface AlertProps {
   title: React.ReactNode
   description?: React.ReactNode
   buttonLabel?: string
+  width?: string
   onButtonClick: () => void
 }
 

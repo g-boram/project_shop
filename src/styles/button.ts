@@ -3,15 +3,15 @@ import { colors } from './colorPalette'
 
 export const buttonColorMap = {
   primary: css`
-    background-color: ${colors.blue};
+    background-color: ${colors.btnBlue};
     color: ${colors.white};
   `,
   success: css`
-    background-color: ${colors.green};
+    background-color: ${colors.btnGreen};
     color: ${colors.white};
   `,
   error: css`
-    background-color: ${colors.red};
+    background-color: ${colors.btnRed};
     color: ${colors.white};
   `,
 }
@@ -19,18 +19,18 @@ export const buttonColorMap = {
 export const buttonWeakMap = {
   primary: css`
     background-color: ${colors.white};
-    color: ${colors.blue};
-    border: 1px solid ${colors.blue};
+    color: ${colors.btnBlue};
+    border: 1px solid ${colors.btnBlue};
   `,
   success: css`
     background-color: ${colors.white};
-    color: ${colors.green};
-    border: 1px solid ${colors.green};
+    color: ${colors.btnGreen};
+    border: 1px solid ${colors.btnGreen};
   `,
   error: css`
     background-color: ${colors.white};
-    color: ${colors.red};
-    border: 1px solid ${colors.red};
+    color: ${colors.btnRed};
+    border: 1px solid ${colors.btnRed};
   `,
 }
 

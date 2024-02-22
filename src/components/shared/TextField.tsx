@@ -7,6 +7,7 @@ import {
 
 import Text from './Text'
 import Input from './Input'
+import Flex from './Flex'
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: React.ReactNode
@@ -21,7 +22,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ) {
     const [focused, setFocused] = useState(false)
 
-    const labelColor = hasError ? 'red' : focused ? 'blue' : undefined
+    const labelColor = hasError ? 'inputRed' : focused ? 'inputBlue' : undefined
 
     const handleFocus: FocusEventHandler<HTMLInputElement> = (event) => {
       setFocused(true)
@@ -35,17 +36,28 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <div>
-        {label ? (
-          <Text
-            typography="t7"
-            color={labelColor}
-            display="inline-block"
-            style={{ marginBottom: 6 }}
-          >
-            {label}
-          </Text>
-        ) : null}
-
+        <Flex align={'center'} justify={'space-between'}>
+          {label ? (
+            <Text
+              typography="t7"
+              color={labelColor}
+              display="inline-block"
+              style={{ marginTop: 10, marginBottom: 6 }}
+            >
+              {label}
+            </Text>
+          ) : null}
+          {helpMessage ? (
+            <Text
+              typography="t7"
+              color={labelColor}
+              display="inline-block"
+              style={{ marginTop: 10, marginBottom: 6, fontSize: 11 }}
+            >
+              {helpMessage}
+            </Text>
+          ) : null}
+        </Flex>
         <Input
           ref={ref}
           aria-invalid={hasError}
@@ -53,17 +65,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           onBlur={handleBlur}
           {...props}
         />
-
-        {helpMessage ? (
-          <Text
-            typography="t7"
-            color={labelColor}
-            display="inline-block"
-            style={{ marginTop: 6, fontSize: 12 }}
-          >
-            {helpMessage}
-          </Text>
-        ) : null}
       </div>
     )
   },
