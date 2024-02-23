@@ -6,7 +6,6 @@ function HomePage() {
 
 const HomePageContainer = styled.div`
   background: pink;
-  height: auto;
   width: 100%;
 `
 export default HomePage

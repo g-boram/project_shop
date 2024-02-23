@@ -1,11 +1,11 @@
+import { colors } from '@styles/colorPalette'
 import styled from '@emotion/styled'
-import { colors } from '../../styles/colorPalette'
 
 const Input = styled.input`
   padding: 0 16px;
-  font-size: 15px;
-  height: 48px;
-  font-weight: 500:
+  font-size: 12px;
+  height: 40px;
+  font-weight: 500;
   border: 1px solid ${colors.inputGrey};
   border-radius: 6px;
   width: 100%;
@@ -13,10 +13,12 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${colors.inputBlue};
+    border-color: ${colors.blue};
   }
+
   &[aria-invalid='true'] {
-    border-color: &{color.inputRed};
+    border-color: ${colors.red};
   }
 `
+
 export default Input

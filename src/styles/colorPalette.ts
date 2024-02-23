@@ -14,7 +14,7 @@ export const colorPalette = css`
     --btnBlue: #2396f3;
     --btnGreen: #4caf50;
 
-    --inputGrey: #f0efef;
+    --inputGrey: #e2e2e2;
     --inputRed: #f44336;
     --inputBlue: #2396f3;
     --inputGreen: #4caf50;

@@ -16,8 +16,9 @@ const LayoutContainer = styled.div`
   width: auto;
   margin: 0 auto;
   background: pink;
+  height: 100vh;
 `
 const PagesContainer = styled.div`
-  height: 1500px;
   padding: 10px 24px;
+  height: auto;
 `

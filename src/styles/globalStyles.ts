@@ -8,6 +8,7 @@ export default css`
     --dimmed-zindex: 10;
     --alert-zindex: 11;
   }
+
   html,
   body,
   div,
@@ -138,19 +139,10 @@ export default css`
     padding: 0;
     width: auto;
     overflow: visible;
-
     background: transparent;
-
-    /* inherit font & color from ancestor */
     color: inherit;
     font: inherit;
-
-    /* Corrects font smoothing for webkit */
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
-
-    /* Corrects inability to style clickable 'input' types in iOS */
-    -webkit-appearance: none;
+    line-height: normal;
   }
   a {
     color: inherit;
