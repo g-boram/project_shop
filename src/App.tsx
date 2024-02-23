@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './components/shared/Layout'
 import Navbar from './components/shared/Navbar'
 import HomePage from './pages'
+import styled from '@emotion/styled'
 
 function App() {
   const { open } = useAlertContext()

@@ -13,12 +13,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 }
 
 const LayoutContainer = styled.div`
-  position: relative;
-  width: 100%;
+  width: auto;
+  margin: 0 auto;
   background: pink;
 `
 const PagesContainer = styled.div`
-  position: absolute;
-  width: 100%;
-  top: 100px;
+  height: 1500px;
+  padding: 10px 24px;
 `

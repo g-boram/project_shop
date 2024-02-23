@@ -48,7 +48,7 @@ function Navbar() {
 
   return (
     <>
-      <Flex justify="space-between" align="center" css={navbarContainerStyles}>
+      <Flex justify="space-between" align="center" css={topNavbarStyles}>
         <Flex justify="left" align="center">
           <NavLogo>Logo</NavLogo>
           <NavItem>
@@ -84,7 +84,7 @@ function Navbar() {
 }
 
 // 네비바 컨테이너
-const navbarContainerStyles = css`
+const topNavbarStyles = css`
   padding: 10px 24px;
   position: sticky;
   height: 30px;
@@ -137,12 +137,12 @@ const MobileNavbar = () => {
   )
 }
 
-// 네비바 컨테이너
+// 모바일용 네비바 컨테이너
 const mobileNavbarContainerStyles = css`
   padding: 10px 24px;
+  height: auto;
   position: sticky;
-  height: 100%;
-  top: 0;
+  top: 50px;
   background-color: ${colors.green};
   gap: 20px;
   color: ${colors.white};
