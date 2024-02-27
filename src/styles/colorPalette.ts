@@ -20,6 +20,10 @@ export const colorPalette = css`
     --inputRed: #f44336;
     --inputBlue: #2396f3;
     --inputGreen: #4caf50;
+
+    --hoverBlue: #2396f3;
+    --hoverGreen: #4caf50;
+    --hoverRed: #f44336;
   }
 `
 
@@ -37,6 +41,10 @@ export const colors = {
   btnGreen: 'var(--btnGreen)',
   btnPink: 'var(--btnPink)',
   btnGrey: 'var(--btnGrey)',
+
+  hoverRed: 'var(--hoverRed)',
+  hoverBlue: 'var(--hoverBlue)',
+  hoverGreen: 'var(--hoverGreen)',
 
   inputGrey: 'var(--inputGrey)',
   inputRed: 'var(--inputRed)',

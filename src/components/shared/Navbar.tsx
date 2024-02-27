@@ -11,6 +11,10 @@ import Flex from '@shared/Flex'
 import Button from '@shared/Button'
 import styled from '@emotion/styled'
 import Dimmed from './Dimmed'
+import useUser from '@/hooks/auth/useUser'
+import { signOut } from 'firebase/auth'
+import { auth } from '@/remote/firebase'
+import Spacing from './Spacing'
 
 const navItem = [
   { to: '/', name: 'Home1' },
@@ -26,28 +30,47 @@ function Navbar() {
   const showSignButton =
     ['/signup', '/signin'].includes(location.pathname) === false
 
-  // @TODO
-  const user = null
+  const user = useUser()
+
+  const handleLogout = useCallback(() => {
+    signOut(auth)
+  }, [])
 
   const renderButton = useCallback(() => {
     if (user != null) {
       return (
-        <Link to="/my">
-          <img src="" alt="" />
-        </Link>
+        <>
+          <Button size="small" color="pink" onClick={handleLogout}>
+            로그아웃
+          </Button>
+          <Spacing size={5} direction="horizontal" />
+          <Link to="/my">
+            <img
+              src={
+                user.photoURL ??
+                'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-128.png'
+              }
+              alt="userImg"
+              width={40}
+              height={40}
+              style={{ borderRadius: '100%' }}
+            />
+          </Link>
+        </>
       )
     }
-
+    // 로그인 회원가입 화면이 아닐경우
     if (showSignButton) {
       return (
         <Link to="/signin">
-          <Button>로그인/회원가입</Button>
+          <Button size="medium" color="pink">
+            로그인/회원가입
+          </Button>
         </Link>
       )
     }
-
     return null
-  }, [user, showSignButton])
+  }, [user, showSignButton, handleLogout])
 
   // 오른쪽 슬라이딩 바 토글여부로 활성화
   const ToggleBtn = () => {
@@ -86,7 +109,10 @@ function Navbar() {
     <>
       <Flex justify="space-between" align="center" css={topNavbarStyles}>
         <Flex justify="left" align="center">
-          <NavLogo>Logo</NavLogo>
+          <NavLogo>
+            <Link to="/">Logo</Link>
+          </NavLogo>
+          <Spacing size={10} direction="horizontal" />
           <NavItem
             onMouseOver={() => setIsHovering(1)}
             // onMouseOut={() => setIsHovering(0)}
@@ -142,7 +168,7 @@ function Navbar() {
 const topNavbarStyles = css`
   padding: 10px 24px;
   position: sticky;
-  height: 30px;
+  height: 40px;
   top: 0;
   background-color: ${colors.white};
   z-index: 10;

@@ -227,7 +227,6 @@ function Form({ onSubmit }: { onSubmit: (formValues: FormValues) => void }) {
 }
 
 // 유효성 체크하기
-
 function validate(formValues: FormValues) {
   let errors: Partial<FormValues> = {}
 
@@ -266,6 +265,7 @@ function validate(formValues: FormValues) {
   return errors
 }
 
+// CSS
 const btnGender = css`
   height: 40px;
   width: 100%;

@@ -9,8 +9,11 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth, store } from '@/remote/firebase'
 import { collection, doc, setDoc } from 'firebase/firestore'
 import { COLLECTIONS } from '@/constants'
+import { useNavigate } from 'react-router-dom'
 
 function SignupPage() {
+  const navigate = useNavigate()
+
   const handleSubmit = async (formValues: FormValues) => {
     const { email, password, name, phone, year, month, day, gender } =
       formValues
@@ -48,11 +51,6 @@ function SignupPage() {
   )
 }
 
-const formTitle = css`
-  flex-shrink: 0;
-  height: 100px;
-  background: pink;
-`
 const SignupWrapper = styled.div`
   display: flex;
 
@@ -79,4 +77,9 @@ const FormBox = styled.div`
   flex-grow: 2;
 `
 
+const formTitle = css`
+  flex-shrink: 0;
+  height: 100px;
+  background: pink;
+`
 export default SignupPage

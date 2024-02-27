@@ -30,7 +30,7 @@ function Alert({
     <Dimmed>
       <AlertContainer>
         <Text
-          typography="t4"
+          typography="t6"
           bold={true}
           display="block"
           style={{ marginBottom: 6 }}
