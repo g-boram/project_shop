@@ -14,6 +14,14 @@ export const buttonColorMap = {
     background-color: ${colors.btnRed};
     color: ${colors.white};
   `,
+  pink: css`
+    background-color: ${colors.btnPink};
+    color: ${colors.white};
+  `,
+  grey: css`
+    background-color: ${colors.btnGrey};
+    color: ${colors.white};
+  `,
 }
 
 export const buttonWeakMap = {
@@ -31,6 +39,16 @@ export const buttonWeakMap = {
     background-color: ${colors.white};
     color: ${colors.btnRed};
     border: 1px solid ${colors.btnRed};
+  `,
+  pink: css`
+    background-color: ${colors.white};
+    color: ${colors.btnPink};
+    border: 1px solid ${colors.btnPink};
+  `,
+  grey: css`
+    background-color: ${colors.white};
+    color: ${colors.btnGrey};
+    border: 1px solid ${colors.btnGrey};
   `,
 }
 

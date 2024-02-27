@@ -4,6 +4,7 @@ import Flex from './Flex'
 import Text from './Text'
 import styled from '@emotion/styled'
 import { colors } from '@styles/colorPalette'
+import { css } from '@emotion/react'
 
 export interface Option {
   label: string
@@ -17,12 +18,13 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 const BaseSelect = styled.select`
-  height: 52px;
-  background-color: ${colors.grey};
-  border: none;
-  border-radius: 16px;
+  height: 40px;
+  background-color: ${colors.white};
+  border: 1px solid ${colors.inputGrey};
+  border-radius: 6px;
   padding: 0 16px;
   cursor: pointer;
+  position: relative;
 
   &:required:invalid {
     color: #c0c4c7;

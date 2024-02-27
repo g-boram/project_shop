@@ -13,6 +13,8 @@ export const colorPalette = css`
     --btnRed: #f44336;
     --btnBlue: #2396f3;
     --btnGreen: #4caf50;
+    --btnPink: #de9eb2;
+    --btnGrey: #e2e2e2;
 
     --inputGrey: #e2e2e2;
     --inputRed: #f44336;
@@ -33,6 +35,8 @@ export const colors = {
   btnRed: 'var(--btnRed)',
   btnBlue: 'var(--btnBlue)',
   btnGreen: 'var(--btnGreen)',
+  btnPink: 'var(--btnPink)',
+  btnGrey: 'var(--btnGrey)',
 
   inputGrey: 'var(--inputGrey)',
   inputRed: 'var(--inputRed)',
