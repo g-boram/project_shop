@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { signInWithPopup, signOut, GithubAuthProvider } from 'firebase/auth'
 import { useCallback } from 'react'
 import { collection, doc, setDoc, getDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
@@ -7,11 +7,11 @@ import { auth, store } from '@remote/firebase'
 import { COLLECTIONS } from '@constants'
 import { FirebaseError } from 'firebase/app'
 
-function useGoogleSignin() {
+function useGithubSignin() {
   const navigate = useNavigate()
 
-  const googleSignin = useCallback(async () => {
-    const provider = new GoogleAuthProvider()
+  const gitHubSignin = useCallback(async () => {
+    const provider = new GithubAuthProvider()
 
     try {
       const { user } = await signInWithPopup(auth, provider)
@@ -49,11 +49,11 @@ function useGoogleSignin() {
     }
   }, [navigate])
 
-  const googleSignout = useCallback(() => {
+  const gitHubSignout = useCallback(() => {
     signOut(auth)
   }, [])
 
-  return { googleSignin, googleSignout }
+  return { gitHubSignin, gitHubSignout }
 }
 
-export default useGoogleSignin
+export default useGithubSignin

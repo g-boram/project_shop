@@ -4,15 +4,28 @@ import { colors } from '@/styles/colorPalette'
 import { css } from '@emotion/react'
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { SiKakaotalk } from 'react-icons/si'
+import { FaGoogle } from 'react-icons/fa'
+import { FaGithub } from 'react-icons/fa'
 import validator from 'validator'
 import Button from '../shared/Button'
 import Flex from '../shared/Flex'
 import Spacing from '../shared/Spacing'
 import Text from '../shared/Text'
 import TextField from '../shared/TextField'
+import useGithubSignin from '@/hooks/useGithubSignin'
+import styled from '@emotion/styled'
 
 function Form({ onSubmit }: { onSubmit: (formValues: FormValues) => void }) {
-  const { signin } = useGoogleSignin()
+  const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY
+  const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URL
+  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+
+  const loginHandler = () => {
+    window.location.href = link
+  }
+  const { googleSignin } = useGoogleSignin()
+  const { gitHubSignin } = useGithubSignin()
 
   const [formValues, setFormValues] = useState({
     email: '',
@@ -44,26 +57,56 @@ function Form({ onSubmit }: { onSubmit: (formValues: FormValues) => void }) {
 
   return (
     <div>
-      <Spacing size={10} />
-      {/* Google 로그인 */}
-      <Button
-        color="pink"
-        onClick={signin}
-        css={css`
-          width: 100%;
-        `}
-      >
-        <Flex align="center" justify="center">
-          <img
-            src="https://cdn3.iconfinder.com/data/icons/logos-brands-3/24/logo_brand_brands_logos_google-64.png"
-            alt=""
-            width={20}
-            height={20}
-          />
-          <Spacing direction="horizontal" size={10} />
-          Google 로그인
-        </Flex>
-      </Button>
+      <SNSBtnBox>
+        {/* Kakao 로그인 */}
+        <Button
+          color="yellow"
+          onClick={loginHandler}
+          css={css`
+            width: 100%;
+            height: 40px;
+          `}
+        >
+          <Flex align="center" justify="center">
+            <SiKakaotalk size={24} fill={'white'} />
+            <Spacing direction="horizontal" size={20} />
+            Kakao 로그인
+          </Flex>
+        </Button>
+        <Spacing size={10} />
+        {/* Google 로그인 */}
+        <Button
+          color="lightBlue"
+          onClick={googleSignin}
+          css={css`
+            width: 100%;
+            height: 40px;
+          `}
+        >
+          <Flex align="center" justify="center">
+            <FaGoogle size={23} />
+            <Spacing direction="horizontal" size={18} />
+            Google 로그인
+          </Flex>
+        </Button>
+        <Spacing size={10} />
+
+        {/* GitHub 로그인 */}
+        <Button
+          color="lightPurple"
+          onClick={gitHubSignin}
+          css={css`
+            width: 100%;
+            height: 40px;
+          `}
+        >
+          <Flex align="center" justify="center">
+            <FaGithub size={24} />
+            <Spacing direction="horizontal" size={18} />
+            GitHub 로그인
+          </Flex>
+        </Button>
+      </SNSBtnBox>
 
       <Flex direction="column">
         <Spacing size={10} />
@@ -100,7 +143,7 @@ function Form({ onSubmit }: { onSubmit: (formValues: FormValues) => void }) {
         </Button>
 
         <Spacing size={15} />
-        <Link to="signup" css={linkStyles}>
+        <Link to="/signup" css={linkStyles}>
           <Text typography="t8" color="black">
             이메일 계정 만들러 가기
           </Text>
@@ -128,9 +171,15 @@ function validate(formValues: FormValues) {
 // CSS
 const linkStyles = css`
   text-align: center;
-
   & > span:hover {
     color: ${colors.hoverBlue};
   }
+`
+
+const SNSBtnBox = styled.div`
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 export default Form

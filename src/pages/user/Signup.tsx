@@ -10,8 +10,11 @@ import { auth, store } from '@/remote/firebase'
 import { collection, doc, setDoc } from 'firebase/firestore'
 import { COLLECTIONS } from '@/constants'
 import { useNavigate } from 'react-router-dom'
+import { FirebaseError } from 'firebase/app'
+import { useAlertContext } from '@/contexts/AlertContext'
 
 function SignupPage() {
+  const { open } = useAlertContext()
   const navigate = useNavigate()
 
   const handleSubmit = async (formValues: FormValues) => {
@@ -20,20 +23,41 @@ function SignupPage() {
 
     const { user } = await createUserWithEmailAndPassword(auth, email, password)
 
-    await updateProfile(user, {
-      displayName: name,
-    })
+    try {
+      await updateProfile(user, {
+        displayName: name,
+      })
 
-    const newUser = {
-      uid: user.uid,
-      email: user.email,
-      displayName: name,
-      phone: phone,
-      gender: gender,
-      birth: { year: year, month: month, day: day },
+      const newUser = {
+        uid: user.uid,
+        email: user.email,
+        displayName: name,
+        phone: phone,
+        gender: gender,
+        photoURL: '',
+        birth: { year: year, month: month, day: day },
+      }
+      await setDoc(doc(collection(store, COLLECTIONS.USER), user.uid), newUser)
+
+      navigate('/signin')
+    } catch (e) {
+      if (e instanceof FirebaseError) {
+        if (e.code === 'auth/invalid-credential') {
+          open({
+            title: '입력한 정보를 다시 확인해주세요',
+            onButtonClick: () => {},
+          })
+          return
+        }
+        if (e.code === 'auth/email-already-in-use') {
+          open({
+            title: '이미 가입된 이메일 입니다.',
+            onButtonClick: () => {},
+          })
+          return
+        }
+      }
     }
-
-    await setDoc(doc(collection(store, COLLECTIONS.USER), user.uid), newUser)
   }
 
   return (

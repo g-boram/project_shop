@@ -12,9 +12,12 @@ export const colorPalette = css`
 
     --btnRed: #f44336;
     --btnBlue: #2396f3;
+    --btnLightBlue: #aadbff;
+    --btnLightPurple: #b4b4ff;
     --btnGreen: #4caf50;
     --btnPink: #de9eb2;
     --btnGrey: #e2e2e2;
+    --btnYellow: #ffd700;
 
     --inputGrey: #e2e2e2;
     --inputRed: #f44336;
@@ -41,6 +44,9 @@ export const colors = {
   btnGreen: 'var(--btnGreen)',
   btnPink: 'var(--btnPink)',
   btnGrey: 'var(--btnGrey)',
+  btnYellow: 'var(--btnYellow)',
+  btnLightBlue: 'var(--btnLightBlue)',
+  btnLightPurple: 'var(--btnLightPurple)',
 
   hoverRed: 'var(--hoverRed)',
   hoverBlue: 'var(--hoverBlue)',

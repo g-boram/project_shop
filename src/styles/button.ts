@@ -14,6 +14,22 @@ export const buttonColorMap = {
     background-color: ${colors.btnRed};
     color: ${colors.white};
   `,
+  lightBlue: css`
+    background-color: ${colors.btnLightBlue};
+    color: ${colors.white};
+    &:hover {
+      background-color: #64d6ff;
+      transition: 0.5s;
+    }
+  `,
+  lightPurple: css`
+    background-color: ${colors.btnLightPurple};
+    color: ${colors.white};
+    &:hover {
+      background-color: #a0a0ff;
+      transition: 0.5s;
+    }
+  `,
   pink: css`
     background-color: ${colors.btnPink};
     color: ${colors.white};
@@ -25,6 +41,14 @@ export const buttonColorMap = {
   white: css`
     background-color: ${colors.white};
     color: ${colors.black};
+  `,
+  yellow: css`
+    background-color: ${colors.btnYellow};
+    color: ${colors.white};
+    &:hover {
+      background-color: #ffc300;
+      transition: 0.5s;
+    }
   `,
 }
 
@@ -58,6 +82,21 @@ export const buttonWeakMap = {
     background-color: ${colors.white};
     color: ${colors.black};
     border: 1px solid ${colors.white};
+  `,
+  yellow: css`
+    background-color: ${colors.white};
+    color: ${colors.btnYellow};
+    border: 1px solid ${colors.btnYellow};
+  `,
+  lightBlue: css`
+    background-color: ${colors.white};
+    color: ${colors.btnLightBlue};
+    border: 1px solid ${colors.btnLightBlue};
+  `,
+  lightPurple: css`
+    background-color: ${colors.white};
+    color: ${colors.btnLightPurple};
+    border: 1px solid ${colors.btnLightPurple};
   `,
 }
 

@@ -15,6 +15,8 @@ import useUser from '@/hooks/auth/useUser'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/remote/firebase'
 import Spacing from './Spacing'
+import { useSetRecoilState } from 'recoil'
+import { userAtom } from '@/atom/user'
 
 const navItem = [
   { to: '/', name: 'Home1' },
@@ -26,14 +28,22 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isHovering, setIsHovering] = useState(0)
 
+  const user = useUser()
+  const isKakao = sessionStorage.getItem('kakao')
   const location = useLocation()
   const showSignButton =
     ['/signup', '/signin'].includes(location.pathname) === false
 
-  const user = useUser()
+  const setUser = useSetRecoilState(userAtom)
 
+  // 로그아웃
   const handleLogout = useCallback(() => {
-    signOut(auth)
+    if (isKakao !== null) {
+      sessionStorage.removeItem('kakao')
+      setUser(null)
+    } else {
+      signOut(auth)
+    }
   }, [])
 
   const renderButton = useCallback(() => {
@@ -43,12 +53,13 @@ function Navbar() {
           <Button size="small" color="pink" onClick={handleLogout}>
             로그아웃
           </Button>
-          <Spacing size={5} direction="horizontal" />
+          <Spacing size={10} direction="horizontal" />
           <Link to="/my">
             <img
               src={
-                user.photoURL ??
-                'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-128.png'
+                user.photoURL !== ''
+                  ? user.photoURL
+                  : 'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-128.png'
               }
               alt="userImg"
               width={40}
@@ -63,7 +74,7 @@ function Navbar() {
     if (showSignButton) {
       return (
         <Link to="/signin">
-          <Button size="medium" color="pink">
+          <Button size="small" color="pink">
             로그인/회원가입
           </Button>
         </Link>
@@ -113,10 +124,7 @@ function Navbar() {
             <Link to="/">Logo</Link>
           </NavLogo>
           <Spacing size={10} direction="horizontal" />
-          <NavItem
-            onMouseOver={() => setIsHovering(1)}
-            // onMouseOut={() => setIsHovering(0)}
-          >
+          <NavItem onMouseOver={() => setIsHovering(1)}>
             {navItem?.map((nav, i) => (
               <Link
                 to={nav.to}

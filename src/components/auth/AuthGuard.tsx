@@ -7,6 +7,7 @@ import { useSetRecoilState } from 'recoil'
 // 인증처리
 function AuthGuard({ children }: { children: React.ReactNode }) {
   const [initialize, setInitialize] = useState(false)
+  const getToken = sessionStorage.getItem('kakao')
   const setUser = useSetRecoilState(userAtom)
 
   onAuthStateChanged(auth, (user) => {
@@ -16,12 +17,16 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
         uid: user.uid,
         email: user.email ?? '',
         displayName: user.displayName ?? '',
+        photoURL: user.photoURL ?? '',
       })
     } else {
+      if (getToken !== null) {
+        const kakaoToken = JSON.parse(getToken)
+        setUser(kakaoToken)
+      }
       // 로그인 되지 않았을 경우 null 저장
       setUser(null)
     }
-
     setInitialize(true)
   })
 

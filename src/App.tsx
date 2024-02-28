@@ -6,6 +6,7 @@ import SigninPage from './pages/user/Signin'
 import SignupPage from './pages/user/Signup'
 import MyPage from './pages/user/MyPage'
 import PrivateRoute from './components/auth/PrivateRoute'
+import KakaoLogin from './components/auth/KakaoLogin'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" Component={HomePage} />
+        <Route path="/auth/kakao" Component={KakaoLogin} />
         <Route path="/signin" Component={SigninPage} />
         <Route path="/signup" Component={SignupPage} />
         <Route path="/my" Component={MyPage} />
