@@ -5,13 +5,16 @@ import HomePage from './pages'
 import SigninPage from './pages/user/Signin'
 import SignupPage from './pages/user/Signup'
 import MyPage from './pages/user/MyPage'
-import PrivateRoute from './components/auth/PrivateRoute'
 import KakaoLogin from './components/auth/KakaoLogin'
+
+import ManagerPage from './pages/manager'
+import M_MainPage from './pages/manager/main'
+
+import PrivateRoute from './components/auth/PrivateRoute'
 
 function App() {
   return (
     <BrowserRouter>
-      {/* <Layout> */}
       <Navbar />
       <Routes>
         <Route path="/" Component={HomePage} />
@@ -19,6 +22,9 @@ function App() {
         <Route path="/signin" Component={SigninPage} />
         <Route path="/signup" Component={SignupPage} />
         <Route path="/my" Component={MyPage} />
+        {/* 관리자 페이지 */}
+        <Route path="/manager" Component={ManagerPage} />
+        <Route path="/manager/main" Component={M_MainPage} />
         {/* 
           @TODO: 인증이 필요한 페이지 나누기 ex) 관리자,유저의 등급 ...
           <Route path='' element={
@@ -28,7 +34,6 @@ function App() {
           }/> 
         */}
       </Routes>
-      {/* </Layout> */}
     </BrowserRouter>
   )
 }
