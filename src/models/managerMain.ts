@@ -10,3 +10,16 @@ export interface mainEventBanner {
   upload_ManagerId?: string
   upload_ManagerName?: string
 }
+
+export interface mainCategoryIcon {
+  name?: string
+  order?: number
+  url?: string
+}
+
+export interface Icon {
+  id: string
+  url: string
+  name: string
+  order: number
+}

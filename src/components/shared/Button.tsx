@@ -33,7 +33,6 @@ const BaseButton = styled.button<ButtonProps>(
       ? css`
           display: block;
           width: 100%;
-          border-radius: 0;
         `
       : undefined,
   ({ disabled }) =>

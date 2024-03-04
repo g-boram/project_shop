@@ -11,11 +11,13 @@ import ManagerPage from './pages/manager'
 import M_MainPage from './pages/manager/main'
 
 import PrivateRoute from './components/auth/PrivateRoute'
+import SetMainBanner from './pages/manager/main/SetMainBanner'
+import SetCategoryIcons from './pages/manager/main/SetCategoryIcons'
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" Component={HomePage} />
         <Route path="/auth/kakao" Component={KakaoLogin} />
@@ -24,7 +26,11 @@ function App() {
         <Route path="/my" Component={MyPage} />
         {/* 관리자 페이지 */}
         <Route path="/manager" Component={ManagerPage} />
-        <Route path="/manager/main" Component={M_MainPage} />
+        <Route path="/manager/main/setMainBanner" Component={SetMainBanner} />
+        <Route
+          path="/manager/main/setCategoryIcons"
+          Component={SetCategoryIcons}
+        />
         {/* 
           @TODO: 인증이 필요한 페이지 나누기 ex) 관리자,유저의 등급 ...
           <Route path='' element={

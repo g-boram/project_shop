@@ -1,5 +1,5 @@
 import { COLLECTIONS } from '@/constants'
-import { mainEventBanner } from '@/models/managerMain'
+import { Icon, mainCategoryIcon, mainEventBanner } from '@/models/managerMain'
 import { store } from '@/remote/firebase'
 import {
   doc,
@@ -8,6 +8,9 @@ import {
   getDocs,
   deleteDoc,
   setDoc,
+  query,
+  orderBy,
+  writeBatch,
 } from 'firebase/firestore'
 
 // 데이터 베이스
@@ -33,4 +36,32 @@ export const deleteMainBanner = async (id: string) => {
 export const upDateNewImg = async (newData: mainEventBanner) => {
   const upDateRef = doc(collection(store, `${COLLECTIONS.MAIN}`))
   await setDoc(upDateRef, newData)
+}
+
+export const getCategoryIcon = async () => {
+  const snapshot = await getDocs(
+    query(
+      collection(store, `${COLLECTIONS.CATEGORYICON}`),
+      orderBy('order', 'asc'),
+    ),
+  )
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as Icon[]
+}
+
+export function updateOrder(icon: Icon[]) {
+  const batch = writeBatch(store)
+
+  icon.forEach((icon, index) => {
+    batch.update(
+      doc(collection(store, `${COLLECTIONS.CATEGORYICON}`), icon.id),
+      {
+        order: index + 1,
+      },
+    )
+  })
+
+  return batch.commit()
 }
