@@ -1,13 +1,17 @@
-// 아이콘 제작자: justicon - Flaticon
+import { BsInfoCircleFill } from 'react-icons/bs'
 
 import { useMainCategoryIcons } from '@/hooks/data/useMainData'
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
 import Button from '../shared/Button'
+import Flex from '../shared/Flex'
+import Text from '../shared/Text'
+import Spacing from '../shared/Spacing'
+import { css } from '@emotion/react'
+import { PropagateLoader } from 'react-spinners'
 
 const MainIconBox = () => {
-  const { data, isLoading } = useMainCategoryIcons()
+  const { data, isLoading = true } = useMainCategoryIcons()
   const [isMore, setIsMore] = useState(false)
 
   const [innerWidth, setInnerWidth] = useState(0)
@@ -20,24 +24,21 @@ const MainIconBox = () => {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-  console.log('innerWidth', innerWidth)
 
   const handleIsMore = () => {
     setIsMore((prev) => !prev)
   }
-  console.log('isMore', isMore)
+
+  if (data == null || isLoading) {
+    return (
+      <LoadingBox>
+        <PropagateLoader color="#e6a4b4" />
+      </LoadingBox>
+    )
+  }
+
   return (
     <>
-      {/* <IconCotainer>
-        {data?.map((icon, index) => {
-          return (
-            <IconBox>
-              <img src={icon.url} alt={icon.name} />
-              <span>{icon.name}</span>
-            </IconBox>
-          )
-        })}
-      </IconCotainer> */}
       {innerWidth < 600 ? (
         <>
           {isMore ? (
@@ -50,6 +51,14 @@ const MainIconBox = () => {
                   </IconBox>
                 )
               })}
+              <Spacing size={10} direction={'horizontal'} />
+              <Flex align={'center'}>
+                <BsInfoCircleFill size={'13px'} fillOpacity={'0.3'} />
+                <Spacing size={5} direction={'horizontal'} />
+                <Text typography={'t8'} color={'fontGrey'}>
+                  아이콘 제작자: justicon - Flaticon
+                </Text>
+              </Flex>
             </IconMoreCotainer>
           ) : (
             <IconCotainer>
@@ -63,7 +72,7 @@ const MainIconBox = () => {
               })}
             </IconCotainer>
           )}
-          <Button full onClick={handleIsMore}>
+          <Button full color={'pink'} onClick={handleIsMore}>
             {isMore ? '닫기' : '더보기'}
           </Button>
         </>
@@ -77,6 +86,30 @@ const MainIconBox = () => {
               </IconBox>
             )
           })}
+          <Spacing size={15} direction={'horizontal'} />
+          <Flex
+            align={'center'}
+            justify={'center'}
+            direction={'column'}
+            css={css`
+              text-align: center;
+            `}
+          >
+            <BsInfoCircleFill size={'13px'} fillOpacity={'0.3'} />
+            <Spacing size={5} />
+            <Text typography={'t8'} color={'fontGrey'}>
+              아이콘 제작자
+            </Text>
+            <Text typography={'t8'} color={'fontGrey'}>
+              justicon
+            </Text>
+            <Text typography={'t8'} color={'fontGrey'}>
+              -
+            </Text>
+            <Text typography={'t8'} color={'fontGrey'}>
+              Flaticon
+            </Text>
+          </Flex>
         </IconCotainer>
       )}
     </>
@@ -86,8 +119,9 @@ const MainIconBox = () => {
 const IconMoreCotainer = styled.div`
   display: flex;
   height: auto;
-  background-color: pink;
+  background-color: #fff4f5;
   padding: 10px;
+
   @media (max-width: 600px) {
     flex-wrap: wrap;
     justify-content: center;
@@ -100,7 +134,6 @@ const IconMoreCotainer = styled.div`
 const IconCotainer = styled.div`
   display: flex;
   height: auto;
-  background-color: pink;
   padding: 10px;
   @media (max-width: 600px) {
     overflow: hidden;
@@ -109,19 +142,7 @@ const IconCotainer = styled.div`
     overflow: scroll;
   }
 `
-// @media (max-width: 600px) {
-//   flex-wrap: wrap;
-//   justify-content: center;
-//   align-items: center;
-// }
-const hiddenIcon = css`
-  overflow: hidden;
-`
-const moreIcon = css`
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-`
+
 const IconBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -129,6 +150,7 @@ const IconBox = styled.div`
   height: auto;
   width: 20%;
   align-items: center;
+  color: ${`var(--fontBlack)`};
 
   & span {
     margin-top: 15px;
@@ -137,6 +159,7 @@ const IconBox = styled.div`
     text-align: center;
   }
   & img {
+    border: 1px solid #f0d9da;
     height: auto;
     width: 100%;
     background-color: white;
@@ -150,5 +173,10 @@ const IconBox = styled.div`
     width: 10%;
   }
 `
-
+const LoadingBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+`
 export default MainIconBox

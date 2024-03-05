@@ -1,5 +1,7 @@
 import Navbar from '@/components/shared/Navbar'
+import Search from '@/components/shared/Search'
 import MainBanner from '@/components/user/MainBanner'
+import MainCosmeticList from '@/components/user/MainCosmeticList'
 import MainIconBox from '@/components/user/MainIconBox'
 import styled from '@emotion/styled'
 
@@ -13,6 +15,9 @@ function HomePage() {
           <Navbar />
           <MainBanner />
           <MainIconBox />
+
+          <Search />
+          <MainCosmeticList />
         </HomeComponentWrapper>
         <BottomNavbar>bottom</BottomNavbar>
       </HomePageContainer>
@@ -22,6 +27,7 @@ function HomePage() {
 
 const HomeComponentWrapper = styled.div`
   height: 100%;
+  overflow: scroll;
 `
 
 const HomePageContainer = styled.div`

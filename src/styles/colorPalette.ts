@@ -27,6 +27,9 @@ export const colorPalette = css`
     --hoverBlue: #2396f3;
     --hoverGreen: #4caf50;
     --hoverRed: #f44336;
+
+    --fontBlack: #333333;
+    --fontGrey: #a8a8a8;
   }
 `
 
@@ -56,6 +59,9 @@ export const colors = {
   inputRed: 'var(--inputRed)',
   inputBlue: 'var(--inputBlue)',
   inputGreen: 'var(--inputGreen)',
+
+  fontBlack: 'var(--fontBlack)',
+  fontGrey: 'var(--fontGrey)',
 }
 
 export type Colors = keyof typeof colors

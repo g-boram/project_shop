@@ -13,6 +13,9 @@ import M_MainPage from './pages/manager/main'
 import PrivateRoute from './components/auth/PrivateRoute'
 import SetMainBanner from './pages/manager/main/SetMainBanner'
 import SetCategoryIcons from './pages/manager/main/SetCategoryIcons'
+import SetCosmeticData from './pages/manager/data/SetCosmeticData'
+import BoardPage from './pages/user/BoardPage'
+import StoreMapPage from './pages/user/StoreMapPage'
 
 function App() {
   return (
@@ -24,12 +27,18 @@ function App() {
         <Route path="/signin" Component={SigninPage} />
         <Route path="/signup" Component={SignupPage} />
         <Route path="/my" Component={MyPage} />
+        <Route path="/board" Component={BoardPage} />
+        <Route path="/storeMap" Component={StoreMapPage} />
         {/* 관리자 페이지 */}
         <Route path="/manager" Component={ManagerPage} />
         <Route path="/manager/main/setMainBanner" Component={SetMainBanner} />
         <Route
           path="/manager/main/setCategoryIcons"
           Component={SetCategoryIcons}
+        />
+        <Route
+          path="/manager/data/setCosmeticData"
+          Component={SetCosmeticData}
         />
         {/* 
           @TODO: 인증이 필요한 페이지 나누기 ex) 관리자,유저의 등급 ...

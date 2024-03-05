@@ -5,6 +5,7 @@ export default css`
   ${colorPalette}
 
   :root {
+    --searchBox-zindex: 9;
     --dimmed-zindex: 10;
     --alert-zindex: 11;
   }

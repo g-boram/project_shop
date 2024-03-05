@@ -4,7 +4,8 @@ import HeadTitle from '@/components/shared/HeadTitle'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import M_MainPage from './main'
+import SettingDataPage from './data'
+import SettingMainPage from './main'
 
 interface LinkBtnProps {
   color?: number
@@ -21,12 +22,14 @@ function ManagerPage() {
       >
         <LinkBtnContainer>
           <Button size="large">메인페이지 관리</Button>
+          <Button size="large">데이터 관리</Button>
         </LinkBtnContainer>
         <ShowImgContainer>
           {/* @ TODO */}
           <MainPageBox>
-            <M_MainPage />
+            <SettingMainPage />
           </MainPageBox>
+          <SettingDataPage />
         </ShowImgContainer>
       </Flex>
     </ManagerPageContainer>

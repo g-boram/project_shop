@@ -2,4 +2,5 @@ export const COLLECTIONS = {
   USER: 'USER',
   MAIN: 'MAIN',
   CATEGORYICON: 'CATERYICON',
+  COSMETIC: 'COSMETIC',
 } as const

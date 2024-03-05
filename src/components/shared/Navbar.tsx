@@ -17,11 +17,17 @@ import { auth } from '@/remote/firebase'
 import Spacing from './Spacing'
 import { useSetRecoilState } from 'recoil'
 import { userAtom } from '@/atom/user'
+import Text from './Text'
 
+const navList = [
+  { to: '/my', name: '마이페이지' },
+  { to: '/storeMap', name: '매장찾기' },
+  { to: '/board', name: '게시판' },
+]
 const navItem = [
-  { to: '/', name: 'Home1' },
-  { to: '/', name: 'Home2' },
-  { to: '/', name: 'Home3' },
+  { to: '/', name: 'Link - 1' },
+  { to: '/', name: 'Link - 2' },
+  { to: '/', name: 'Link - 3' },
 ]
 
 function Navbar() {
@@ -83,6 +89,57 @@ function Navbar() {
     return null
   }, [user, showSignButton, handleLogout])
 
+  const renderMobieNavButton = useCallback(() => {
+    if (user != null) {
+      return (
+        <>
+          <Link to="/my">
+            <img
+              src={
+                user.photoURL !== ''
+                  ? user.photoURL
+                  : 'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-128.png'
+              }
+              alt="userImg"
+              width={100}
+              height={100}
+              style={{ borderRadius: '100%' }}
+            />
+          </Link>
+          <Spacing size={10} />
+          <Button size="small" full color="pink" onClick={handleLogout}>
+            로그아웃
+          </Button>
+          <Spacing size={50} />
+          <TodayCommentBox>
+            {/* @TODO: 랜덤하게 바꾸기 */}
+            <Flex direction="column" align={'center'} justify={'center'}>
+              <div>{user.displayName} 님! 오늘도 좋은하루 되세요! </div>
+              <Spacing size={10} />
+              <div>봄느낌 가득한 이상품 어때요?</div>
+              <Spacing size={20} />
+              <Button full color="lightPurple">
+                🌸 봄추천 상품 바로가기 !
+              </Button>
+            </Flex>
+          </TodayCommentBox>
+          <Spacing size={30} />
+        </>
+      )
+    }
+    // 로그인 회원가입 화면이 아닐경우
+    if (showSignButton) {
+      return (
+        <Link to="/signin">
+          <Button size="small" color="pink">
+            로그인/회원가입
+          </Button>
+        </Link>
+      )
+    }
+    return null
+  }, [user, showSignButton, handleLogout])
+
   // 오른쪽 슬라이딩 바 토글여부로 활성화
   const ToggleBtn = () => {
     return (
@@ -98,13 +155,18 @@ function Navbar() {
       <Dimmed>
         <Flex direction="column" align="left" css={mobileNavbarContainerStyles}>
           <Flex justify="right">{ToggleBtn()}</Flex>
-          {navItem?.map((nav, i) => (
+          <Flex justify={'center'} direction={'column'} align={'center'}>
+            {renderMobieNavButton()}
+          </Flex>
+          {navList?.map((nav, i) => (
             <Link
               to={nav.to}
               key={i}
               css={css`
+                margin: 10px;
                 &:hover {
-                  color: blue;
+                  transition: 0.5s;
+                  color: #c86b85;
                 }
               `}
             >
@@ -125,13 +187,15 @@ function Navbar() {
           </NavLogo>
           <Spacing size={10} direction="horizontal" />
           <NavItem onMouseOver={() => setIsHovering(1)}>
-            {navItem?.map((nav, i) => (
+            {navList?.map((nav, i) => (
               <Link
                 to={nav.to}
                 key={i}
                 css={css`
+                  color: grey;
+                  margin-left: 20px;
                   &:hover {
-                    color: blue;
+                    color: black;
                   }
                 `}
               >
@@ -152,17 +216,21 @@ function Navbar() {
         >
           <Flex direction="column">
             {navItem?.map((nav, i) => (
-              <Link
-                to={nav.to}
-                key={i}
-                css={css`
-                  &:hover {
-                    color: blue;
-                  }
-                `}
-              >
-                {nav.name}
-              </Link>
+              <>
+                <Link
+                  to={nav.to}
+                  key={i}
+                  css={css`
+                    color: grey;
+                    &:hover {
+                      color: black;
+                    }
+                  `}
+                >
+                  {nav.name}
+                </Link>
+                <Spacing size={10} />
+              </>
             ))}
           </Flex>
         </NavItemBottomBox>
@@ -182,7 +250,13 @@ const topNavbarStyles = css`
   z-index: 10;
   border-bottom: 1px solid ${colors.grey};
 `
-// 네비바 로고
+// 랜덤 한마디 영역
+const TodayCommentBox = styled.div`
+  height: 100px;
+  width: 100%;
+  font-size: 18px;
+  padding: 10px;
+`
 const NavLogo = styled.div`
   margin-right: 10px;
   cursor: pointer;
@@ -199,10 +273,11 @@ const NavItem = styled.div`
 `
 // 상단 네비바 박스
 const NavItemBottomBox = styled.div`
-  padding: 10px 24px;
+  padding: 20px;
   height: auto;
+  min-height: 150px;
   width: 100%;
-  background-color: #401b28;
+  background-color: #efefef;
   gap: 20px;
   color: ${colors.white};
   font-size: 18px;
@@ -229,13 +304,14 @@ const slideRightBox = keyframes`
   } 
 `
 const mobileNavbarContainerStyles = css`
-  padding: 10px 24px;
+  padding: 20px 24px;
   height: 100vh;
   width: 60%;
-  background-color: #401b28;
+  background-color: #e7b3b3;
   gap: 20px;
   float: right;
-  color: ${colors.white};
+  color: #fff;
+  font-weight: 600;
   font-size: 18px;
   z-index: 10;
   transform: translateX(100%);
