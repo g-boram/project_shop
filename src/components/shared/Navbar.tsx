@@ -65,7 +65,7 @@ function Navbar() {
               src={
                 user.photoURL !== ''
                   ? user.photoURL
-                  : 'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-128.png'
+                  : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
               }
               alt="userImg"
               width={40}
@@ -162,6 +162,7 @@ function Navbar() {
             <Link
               to={nav.to}
               key={i}
+              onClick={() => setIsOpen(false)}
               css={css`
                 margin: 10px;
                 &:hover {
@@ -254,7 +255,7 @@ const topNavbarStyles = css`
 const TodayCommentBox = styled.div`
   height: 100px;
   width: 100%;
-  font-size: 18px;
+  font-size: 14px;
   padding: 10px;
 `
 const NavLogo = styled.div`
@@ -304,15 +305,15 @@ const slideRightBox = keyframes`
   } 
 `
 const mobileNavbarContainerStyles = css`
-  padding: 20px 24px;
+  padding: 20px 20px;
   height: 100vh;
   width: 60%;
   background-color: #e7b3b3;
-  gap: 20px;
+  gap: 10px;
   float: right;
   color: #fff;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 15px;
   z-index: 10;
   transform: translateX(100%);
   animation: ${slideRightBox} 0.5s ease-in-out forwards;

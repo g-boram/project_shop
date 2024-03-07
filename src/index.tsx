@@ -10,6 +10,7 @@ import { RecoilRoot } from 'recoil'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { AlertContextProvider } from './contexts/AlertContext'
 import AuthGuard from './components/auth/AuthGuard'
+import { ToastContainer } from 'react-toastify'
 
 const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)

@@ -2,16 +2,29 @@ import styled from '@emotion/styled'
 
 interface titleProps {
   title: string
+  desc?: string
 }
-export default function HeadTitle({ title }: titleProps) {
-  return <Title>{title}</Title>
+export default function HeadTitle({ title, desc }: titleProps) {
+  return (
+    <Containder>
+      <Title>{title}</Title>
+      {desc ? <Desc>{desc}</Desc> : null}
+    </Containder>
+  )
 }
 
-const Title = styled.div`
+const Containder = styled.div`
   display: flex;
+  padding: 20px 25px;
+  align-items: flex-end;
+  height: 60px;
+  margin-bottom: 10px;
+`
+const Title = styled.div`
   font-size: 30px;
-  padding: 20px;
-  align-items: center;
-  height: 80px;
-  width: 100%;
+  margin-right: 30px;
+`
+const Desc = styled.div`
+  font-size: 12px;
+  color: ${`var(--fontGrey)`};
 `

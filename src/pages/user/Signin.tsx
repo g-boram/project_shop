@@ -1,5 +1,4 @@
 import Flex from '@/components/shared/Flex'
-import Layout from '@/components/shared/Layout'
 import Form from '@/components/signin/Form'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
@@ -50,17 +49,15 @@ function SigninPage() {
   )
 
   return (
-    <Layout>
-      <SignupWrapper>
-        <ImgBox>SignupImgBox</ImgBox>
-        <FormBox>
-          <Flex justify="center" align="center" css={formTitle}>
-            로그인
-          </Flex>
-          <Form onSubmit={handleSubmit} />
-        </FormBox>
-      </SignupWrapper>
-    </Layout>
+    <SignupWrapper>
+      <ImgBox>SignupImgBox</ImgBox>
+      <FormBox>
+        <Flex justify="center" align="center" css={formTitle}>
+          로그인
+        </Flex>
+        <Form onSubmit={handleSubmit} />
+      </FormBox>
+    </SignupWrapper>
   )
 }
 

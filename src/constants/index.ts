@@ -3,4 +3,6 @@ export const COLLECTIONS = {
   MAIN: 'MAIN',
   CATEGORYICON: 'CATERYICON',
   COSMETIC: 'COSMETIC',
+  BOARD: 'BOARD',
+  CHAT: 'CHAT',
 } as const

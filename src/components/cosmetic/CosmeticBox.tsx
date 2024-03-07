@@ -5,10 +5,10 @@ import Flex from '../shared/Flex'
 import Text from '../shared/Text'
 import Spacing from '../shared/Spacing'
 import { css } from '@emotion/react'
-import addDelimiter from '@/utils/addDelimiter'
+import addDelimiter from '../../utils/addDelimiter'
 import { useEffect, useState } from 'react'
 import { differenceInMilliseconds, parseISO } from 'date-fns'
-import formatTime from '@/utils/formatTime'
+import formatTime from '../../utils/formatTime'
 import Tag from '../shared/Tag'
 
 function CosmeticBox({ cosmetic }: { cosmetic: Cosmetic }) {

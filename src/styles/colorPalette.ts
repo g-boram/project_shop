@@ -30,6 +30,7 @@ export const colorPalette = css`
 
     --fontBlack: #333333;
     --fontGrey: #a8a8a8;
+    --fontDarkGrey: #595959;
   }
 `
 
@@ -62,6 +63,7 @@ export const colors = {
 
   fontBlack: 'var(--fontBlack)',
   fontGrey: 'var(--fontGrey)',
+  fontDarkGrey: 'var(--fontDarkGrey)',
 }
 
 export type Colors = keyof typeof colors

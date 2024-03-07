@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 
 import Form from '@/components/signup/Form'
 import Flex from '@/components/shared/Flex'
-import Layout from '@/components/shared/Layout'
 import { FormValues } from '@/models/signup'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth, store } from '@/remote/firebase'
@@ -61,17 +60,15 @@ function SignupPage() {
   }
 
   return (
-    <Layout>
-      <SignupWrapper>
-        <ImgBox>SignupImgBox</ImgBox>
-        <FormBox>
-          <Flex justify="center" align="center" css={formTitle}>
-            회원가입
-          </Flex>
-          <Form onSubmit={handleSubmit} />
-        </FormBox>
-      </SignupWrapper>
-    </Layout>
+    <SignupWrapper>
+      <ImgBox>SignupImgBox</ImgBox>
+      <FormBox>
+        <Flex justify="center" align="center" css={formTitle}>
+          회원가입
+        </Flex>
+        <Form onSubmit={handleSubmit} />
+      </FormBox>
+    </SignupWrapper>
   )
 }
 

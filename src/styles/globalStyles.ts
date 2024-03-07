@@ -149,4 +149,15 @@ export default css`
     color: inherit;
     text-decoration: inherit;
   }
+
+  /* 스크롤바 커스텀*/
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+  }
 `
