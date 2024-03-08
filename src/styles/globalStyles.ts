@@ -152,11 +152,12 @@ export default css`
 
   /* 스크롤바 커스텀*/
   ::-webkit-scrollbar {
-    width: 4px;
+    width: 2px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: white;
+    background-color: #c86b85;
     border-radius: 10px;
+    height: 3px;
   }
   ::-webkit-scrollbar-track {
   }

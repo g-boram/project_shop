@@ -79,11 +79,6 @@ function BoardPage() {
             <Flex justify={'flex-end'} align={'flex-end'} css={linkBtnBoxStyle}>
               <Link to={'/board/category'}>
                 <Button color="pink" size="small">
-                  내가쓴글
-                </Button>
-              </Link>
-              <Link to={'/board/category'}>
-                <Button color="pink" size="small">
                   글쓰기
                 </Button>
               </Link>
@@ -187,6 +182,10 @@ const moreBtn = css`
   font-size: 12px;
   color: grey;
   cursor: pointer;
+  &: hover {
+    transition: 0.5s;
+    color: black;
+  }
 `
 const linkBtnBoxStyle = css`
   height: 60px;

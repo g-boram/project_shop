@@ -1,17 +1,13 @@
-import BoardForm from '@/components/board/BoardForm'
 import BoardList from '@/components/board/BoardList'
-import Button from '@/components/shared/Button'
 import Flex from '@/components/shared/Flex'
 import HeadTitle from '@/components/shared/HeadTitle'
 import Spacing from '@/components/shared/Spacing'
+import styled from '@emotion/styled'
 import Text from '@/components/shared/Text'
 import { getBoardList } from '@/remote/board'
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
-import { useState } from 'react'
 import { IoNotificationsCircle } from 'react-icons/io5'
 import { useQuery } from 'react-query'
-import { Link } from 'react-router-dom'
 
 // * 게시판 페이지 - 카테고리별 이동
 ////////////////////////////////////////
@@ -46,7 +42,6 @@ function BoardCategoryPage() {
               )}
             </Flex>
           </NoticeBox>
-
           <BoardList />
         </CategoryWrapper>
       </CategoryContainer>
@@ -55,7 +50,6 @@ function BoardCategoryPage() {
 }
 
 const CategoryContainer = styled.div`
-  width: 100%;
   margin: 0 auto;
   margin-top: 40px;
 `

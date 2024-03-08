@@ -70,7 +70,7 @@ function Navbar() {
               alt="userImg"
               width={40}
               height={40}
-              style={{ borderRadius: '100%' }}
+              style={{ borderRadius: '100%', border: '2px solid #fff' }}
             />
           </Link>
         </>
@@ -98,12 +98,12 @@ function Navbar() {
               src={
                 user.photoURL !== ''
                   ? user.photoURL
-                  : 'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-128.png'
+                  : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
               }
               alt="userImg"
               width={100}
               height={100}
-              style={{ borderRadius: '100%' }}
+              style={{ borderRadius: '100%', border: '2px solid #fff' }}
             />
           </Link>
           <Spacing size={10} />
@@ -184,7 +184,17 @@ function Navbar() {
       <Flex justify="space-between" align="center" css={topNavbarStyles}>
         <Flex justify="left" align="center">
           <NavLogo>
-            <Link to="/">Logo</Link>
+            <Link to="/">
+              <img
+                src="https://cdn3.iconfinder.com/data/icons/webdesigncreative/free_icons_128x128_png/Calling.png"
+                alt="Logo"
+                width={30}
+                height={30}
+              />
+              <Text typography="t7" color="fontDarkGrey">
+                BR
+              </Text>
+            </Link>
           </NavLogo>
           <Spacing size={10} direction="horizontal" />
           <NavItem onMouseOver={() => setIsHovering(1)}>
@@ -247,7 +257,7 @@ const topNavbarStyles = css`
   position: sticky;
   height: 40px;
   top: 0;
-  background-color: ${colors.white};
+  background-color: #fff9f9;
   z-index: 10;
   border-bottom: 1px solid ${colors.grey};
 `
@@ -272,18 +282,17 @@ const NavItem = styled.div`
     display: none;
   }
 `
+
 // 상단 네비바 박스
 const NavItemBottomBox = styled.div`
   padding: 20px;
   height: auto;
   min-height: 150px;
-  width: 100%;
-  background-color: #efefef;
+  background-color: #f9ecec;
   gap: 20px;
   color: ${colors.white};
   font-size: 18px;
   z-index: 10;
-
   @media (max-width: 600px) {
     display: none;
   }

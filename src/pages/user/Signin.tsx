@@ -21,7 +21,7 @@ function SigninPage() {
       try {
         await signInWithEmailAndPassword(auth, email, password)
 
-        navigate('/')
+        navigate(-1)
       } catch (e) {
         console.log('err', e)
         // firebase 의 에러

@@ -22,7 +22,7 @@ function useGithubSignin() {
 
       // 이미 가입한 유저
       if (userSnapshot.exists()) {
-        navigate('/')
+        navigate(-1)
       } else {
         const 새로운유저 = {
           uid: user.uid,

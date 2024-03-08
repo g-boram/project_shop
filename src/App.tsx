@@ -22,6 +22,8 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import styled from '@emotion/styled'
 import BoardCategoryPage from './pages/user/board/BoardCategoryPage'
+import BoardDetailPage from './pages/user/board/BoardDetailPage'
+import BoardEditPage from './pages/user/board/BoardEditPage'
 
 function App() {
   return (
@@ -40,6 +42,10 @@ function App() {
             <Route path="/board" Component={BoardPage} />
             {/* 게시판 글작성 페이지 */}
             <Route path="/board/form" Component={BoardFormPage} />
+            {/* 게시판 글 상세보기 페이지 */}
+            <Route path="/board/detail/:id" Component={BoardDetailPage} />
+            {/* 게시판 글 수정 페이지 */}
+            <Route path="/board/edit/:id" Component={BoardEditPage} />
             {/* 게시판 카테고리별 리스트 페이지 */}
             <Route path="/board/category" Component={BoardCategoryPage} />
             <Route path="/storeMap" Component={StoreMapPage} />

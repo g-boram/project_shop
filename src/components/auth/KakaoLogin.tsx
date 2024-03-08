@@ -106,7 +106,7 @@ export default function KakaoLogin() {
       )
       // 이미 가입한 유저
       if (userSnapshot.exists()) {
-        navigate('/')
+        navigate(-1)
         setUser(loginUser)
         sessionStorage.setItem('kakao', JSON.stringify(loginUser))
       } else {
@@ -116,7 +116,7 @@ export default function KakaoLogin() {
         )
         setUser(loginUser)
         sessionStorage.setItem('kakao', JSON.stringify(loginUser))
-        navigate('/')
+        navigate(-1)
       }
     } catch (error) {
       console.log('카카오 로그인 유저정보 저장 실패', error)

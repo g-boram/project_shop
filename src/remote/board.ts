@@ -9,6 +9,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  updateDoc,
   where,
 } from 'firebase/firestore'
 import { store } from './firebase'
@@ -55,4 +56,10 @@ export const getBoardList = async () => {
         // 문서 아이디로 수정,삭제 구현됨
       }) as BoardFormProps,
   )
+}
+
+//
+export const upDateBoard = async (formValue: any, id: string) => {
+  const boardRef = doc(store, `${COLLECTIONS.BOARD}`, id)
+  await updateDoc(boardRef, formValue)
 }

@@ -1,11 +1,14 @@
+import { COLLECTIONS } from '@/constants'
 import { BoardCategoryOption, USER_CATEGORY } from '@/constants/board'
 import useUser from '@/hooks/auth/useUser'
 import { BoardFormProps } from '@/models/board'
-import { addBoard } from '@/remote/board'
+import { upDateBoard } from '@/remote/board'
+import { store } from '@/remote/firebase'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { doc, getDoc } from 'firebase/firestore'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import CreatableSelect from 'react-select/creatable'
 import { toast } from 'react-toastify'
 import Button from '../shared/Button'
@@ -13,10 +16,30 @@ import Flex from '../shared/Flex'
 import Spacing from '../shared/Spacing'
 import Text from '../shared/Text'
 
-// 카테고리: chat(실시간), qna, info, notice
-const BoardForm = () => {
+const BoardEditForm = () => {
   const user = useUser()
+  const params = useParams()
   const navigate = useNavigate()
+
+  const [board, setBoard] = useState<BoardFormProps | null>(null)
+
+  const getDetailBoard = async (id: string) => {
+    const docRef = doc(store, `${COLLECTIONS.BOARD}`, id)
+    const docSnap = await getDoc(docRef)
+
+    setBoard({ id: docSnap.id, ...(docSnap.data() as BoardFormProps) })
+  }
+
+  useEffect(() => {
+    if (params?.id) getDetailBoard(params?.id)
+  }, [params?.id])
+
+  useEffect(() => {
+    if (board) {
+      setFormValues(board)
+    }
+  }, [board])
+
   const [category, setCategory] = useState<BoardCategoryOption | null>()
   const [formValues, setFormValues] = useState<BoardFormProps>({
     title: '',
@@ -43,35 +66,48 @@ const BoardForm = () => {
       uid: user?.uid,
       email: user?.email,
       name: user?.displayName,
-      category: category ? category.value : 'info',
+      category: category ? category.value : board?.category,
+      updateAt: new Date()?.toLocaleDateString('ko', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      }),
     }
     try {
-      await addBoard(formData)
-
-      setFormValues({
-        title: '',
-        content: '',
-        category: '',
-        uid: '',
-        email: '',
-        name: '',
-      })
-      toast.success('게시글 등록 완료!')
-      navigate('/board/category')
+      if (board && board.id) {
+        await upDateBoard(formData, board?.id)
+        toast.success('게시글 수정 완료!')
+        navigate(`/board/detail/${board.id}`)
+      }
     } catch (e: any) {
       console.log('error', e)
     }
   }
 
+  const changeValue = (val: any) => {
+    if (val === 'info') return '정보공유'
+    if (val === 'qna') return 'QnA'
+    if (val === 'event') return '이벤트'
+    if (val === 'notice') return '공지사항'
+  }
+
   return (
     <>
+      <NoticeBox>
+        <Flex
+          align={'center'}
+          css={css`
+            height: 100%;
+          `}
+        ></Flex>
+      </NoticeBox>
       <Flex
         justify={'flex-end'}
         align={'flex-end'}
         direction={'column'}
         css={formTitleStyle}
       >
-        <Text typography="t4">게시글 작성</Text>
+        <Text typography="t4">게시글 수정</Text>
         <Text typography="t7" color="fontDarkGrey">
           서로를 존중하는 말로 좋은 게시글 문화를 만들어가요
         </Text>
@@ -84,7 +120,11 @@ const BoardForm = () => {
             <Label>카테고리</Label>
             <>
               <CreatableSelect
-                placeholder="미선택시 정보공유 게시판에 등록됩니다"
+                placeholder={
+                  board
+                    ? changeValue(board.category)
+                    : '카테고리를 선택해주세요'
+                }
                 onChange={(newValue) => setCategory(newValue)}
                 options={USER_CATEGORY}
                 value={category}
@@ -211,4 +251,13 @@ const InputBox = styled.div`
     height: 40px;
   }
 `
-export default BoardForm
+const NoticeBox = styled.div`
+  background-color: white;
+  padding: 0 10px;
+  border: 2px solid #f9ecec;
+  box-shadow: 0px 0px 10px -2px #ffbdd2;
+  height: 60px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+`
+export default BoardEditForm

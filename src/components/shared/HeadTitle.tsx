@@ -18,7 +18,7 @@ const Containder = styled.div`
   padding: 20px 25px;
   align-items: flex-end;
   height: 60px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 `
 const Title = styled.div`
   font-size: 30px;

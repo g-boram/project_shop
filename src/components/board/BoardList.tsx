@@ -25,7 +25,7 @@ const BoardList = () => {
       return setData
     },
   })
-  console.log('data', data)
+
   const [page, setPage] = useState(1)
   const offset = (page - 1) * 10
   const [innerWidth, setInnerWidth] = useState(0)
@@ -43,6 +43,12 @@ const BoardList = () => {
   }
 
   useEffect(() => {
+    if (innerWidth === 0) {
+      window.addEventListener('resize', handleResize)
+
+      setInnerWidth(window.innerWidth)
+      window.removeEventListener('resize', handleResize)
+    }
     window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('resize', handleResize)
@@ -64,6 +70,16 @@ const BoardList = () => {
       color: pink;
     }
   `
+
+  const NoDataBox = () => {
+    return (
+      <NoData>
+        <FcDeleteDatabase size={40} />
+        <Flex>작성된 글이 없습니다</Flex>
+        <Flex>지금 바로 게시물을 작성해 보세요!</Flex>
+      </NoData>
+    )
+  }
   return (
     <>
       <Flex justify={'flex-end'} align={'flex-end'} css={linkBtnBoxStyle}>
@@ -108,126 +124,131 @@ const BoardList = () => {
         </CategoryBtn>
       </Flex>
       <Spacing size={10} />
+      <LabelLine />
       <BoardListContainer>
-        <LabelLine />
-
         {innerWidth < 500 ? (
           <>
             {isMyBoard ? (
               <>
                 {myBoard.length === 0 ? (
-                  <NoData>
-                    <FcDeleteDatabase size={40} />
-                    <Flex>작성된 글이 없습니다</Flex>
-                    <Flex>지금 바로 게시물을 작성해 보세요!</Flex>
-                  </NoData>
+                  <NoDataBox />
                 ) : (
                   <>
-                    {myBoard?.slice(offset, offset + 10).map((data, idx) => (
-                      <Flex
-                        key={idx}
-                        justify={'space-between'}
-                        align={'center'}
-                        css={css`
-                          width: 100%;
-                          height: 45px;
-                          &: hover {
-                            background-color: #fff5f5;
-                            cursor: pointer;
-                          }
-                        `}
-                      >
-                        <Text
-                          typography="t6"
-                          color="fontGrey"
+                    {myBoard?.map((data, idx) => (
+                      <Link to={`/board/detail/${data.id}`}>
+                        <Flex
+                          key={idx}
+                          justify={'space-between'}
+                          align={'center'}
                           css={css`
-                            width: 10%;
-                            overflow: hidden;
-                            text-wrap: nowrap;
-                            text-align: center;
+                            width: 100%;
+                            height: 45px;
+                            &: hover {
+                              background-color: #fff5f5;
+                              cursor: pointer;
+                            }
                           `}
                         >
-                          {idx + 1}
-                        </Text>
-                        <Text
-                          typography="t6"
-                          color="fontDarkGrey"
-                          css={css`
-                            width: 70%;
-                            overflow: hidden;
-                            text-wrap: nowrap;
-                          `}
-                        >
-                          {data.title}
-                        </Text>
-                        <Text
-                          typography="t7"
-                          color="fontDarkGrey"
-                          css={css`
-                            width: 15%;
-                            overflow: hidden;
-                            text-wrap: nowrap;
-                          `}
-                        >
-                          {data.name}
-                        </Text>
-                      </Flex>
+                          <Text
+                            typography="t6"
+                            color="fontGrey"
+                            css={css`
+                              width: 10%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                              text-align: center;
+                            `}
+                          >
+                            {idx + 1}
+                          </Text>
+                          <Text
+                            typography="t6"
+                            color="fontDarkGrey"
+                            css={css`
+                              width: 70%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data.title}
+                          </Text>
+                          <Text
+                            typography="t7"
+                            color="fontDarkGrey"
+                            css={css`
+                              width: 15%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data.name}
+                          </Text>
+                        </Flex>
+                      </Link>
                     ))}
                   </>
                 )}
               </>
             ) : (
               <>
-                {data?.slice(offset, offset + 10).map((data, idx) => (
-                  <Flex
-                    key={idx}
-                    justify={'space-between'}
-                    align={'center'}
-                    css={css`
-                      width: 100%;
-                      height: 45px;
-                      &: hover {
-                        background-color: #fff5f5;
-                        cursor: pointer;
-                      }
-                    `}
-                  >
-                    <Text
-                      typography="t6"
-                      color="fontGrey"
-                      css={css`
-                        width: 10%;
-                        overflow: hidden;
-                        text-wrap: nowrap;
-                        text-align: center;
-                      `}
-                    >
-                      {idx + 1}
-                    </Text>
-                    <Text
-                      typography="t6"
-                      color="fontDarkGrey"
-                      css={css`
-                        width: 70%;
-                        overflow: hidden;
-                        text-wrap: nowrap;
-                      `}
-                    >
-                      {data.title}
-                    </Text>
-                    <Text
-                      typography="t7"
-                      color="fontDarkGrey"
-                      css={css`
-                        width: 15%;
-                        overflow: hidden;
-                        text-wrap: nowrap;
-                      `}
-                    >
-                      {data.name}
-                    </Text>
-                  </Flex>
-                ))}
+                {data ? (
+                  <>
+                    {data?.slice(offset, offset + 10).map((data, idx) => (
+                      <Link to={`/board/detail/${data.id}`}>
+                        <Flex
+                          key={idx}
+                          justify={'space-between'}
+                          align={'center'}
+                          css={css`
+                            width: 100%;
+                            height: 45px;
+                            &: hover {
+                              background-color: #fff5f5;
+                              cursor: pointer;
+                            }
+                          `}
+                        >
+                          <Text
+                            typography="t6"
+                            color="fontGrey"
+                            css={css`
+                              width: 10%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                              text-align: center;
+                            `}
+                          >
+                            {idx + 1}
+                          </Text>
+                          <Text
+                            typography="t6"
+                            color="fontDarkGrey"
+                            css={css`
+                              width: 70%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data.title}
+                          </Text>
+                          <Text
+                            typography="t7"
+                            color="fontDarkGrey"
+                            css={css`
+                              width: 15%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data.name}
+                          </Text>
+                        </Flex>
+                      </Link>
+                    ))}
+                  </>
+                ) : (
+                  <NoDataBox />
+                )}
               </>
             )}
           </>
@@ -237,161 +258,167 @@ const BoardList = () => {
               <>
                 {myBoard ? (
                   <>
-                    {myBoard?.slice(offset, offset + 10).map((data, idx) => (
-                      <Flex
-                        justify={'space-between'}
-                        align={'center'}
-                        key={idx}
-                        css={css`
-                          width: 100%;
-                          height: 45px;
-                          &: hover {
-                            background-color: #fff5f5;
-                            cursor: pointer;
-                          }
-                        `}
-                      >
-                        <Text
-                          typography="t6"
-                          color="fontGrey"
+                    {myBoard?.map((data, idx) => (
+                      <Link to={`/board/detail/${data.id}`}>
+                        <Flex
+                          justify={'space-between'}
+                          align={'center'}
+                          key={idx}
                           css={css`
-                            width: 10%;
-                            overflow: hidden;
-                            text-align: center;
-                            text-wrap: nowrap;
+                            width: 100%;
+                            height: 45px;
+                            &: hover {
+                              background-color: #fff5f5;
+                              cursor: pointer;
+                            }
                           `}
                         >
-                          {idx + 1}
-                        </Text>
-                        <Text
-                          typography="t6"
-                          color="fontDarkGrey"
-                          css={css`
-                            width: 50%;
-                            overflow: hidden;
-                            text-wrap: nowrap;
-                          `}
-                        >
-                          {data.title}
-                        </Text>
-                        <Text
-                          typography="t6"
-                          color="fontDarkGrey"
-                          css={css`
-                            width: 25%;
-                            overflow: hidden;
-                            text-wrap: nowrap;
-                          `}
-                        >
-                          {data.content}
-                        </Text>
-                        <Text
-                          typography="t7"
-                          color="fontDarkGrey"
-                          css={css`
-                            width: 8%;
-                            overflow: hidden;
-                            text-wrap: nowrap;
-                          `}
-                        >
-                          {data.name}
-                        </Text>
-                        <Text
-                          typography="t7"
-                          color="fontGrey"
-                          css={css`
-                            width: 10%;
-                            overflow: hidden;
-                            text-wrap: nowrap;
-                          `}
-                        >
-                          {data?.createAt?.slice(0, 10)}
-                        </Text>
-                      </Flex>
+                          <Text
+                            typography="t6"
+                            color="fontGrey"
+                            css={css`
+                              width: 10%;
+                              overflow: hidden;
+                              text-align: center;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {idx + 1}
+                          </Text>
+                          <Text
+                            typography="t6"
+                            color="fontDarkGrey"
+                            css={css`
+                              width: 50%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data.title}
+                          </Text>
+                          <Text
+                            typography="t6"
+                            color="fontDarkGrey"
+                            css={css`
+                              width: 25%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data.content}
+                          </Text>
+                          <Text
+                            typography="t7"
+                            color="fontDarkGrey"
+                            css={css`
+                              width: 8%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data.name}
+                          </Text>
+                          <Text
+                            typography="t7"
+                            color="fontGrey"
+                            css={css`
+                              width: 10%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data?.createAt?.slice(0, 10)}
+                          </Text>
+                        </Flex>
+                      </Link>
                     ))}
                   </>
                 ) : (
-                  <NoData>
-                    <FcDeleteDatabase size={40} />
-                    <Flex>작성된 글이 없습니다</Flex>
-                    <Flex>지금 바로 게시물을 작성해 보세요!</Flex>
-                  </NoData>
+                  <NoDataBox />
                 )}
               </>
             ) : (
               <>
-                {data?.slice(offset, offset + 10).map((data, idx) => (
-                  <Flex
-                    justify={'space-between'}
-                    align={'center'}
-                    key={idx}
-                    css={css`
-                      width: 100%;
-                      height: 45px;
-                      &: hover {
-                        background-color: #fff5f5;
-                        cursor: pointer;
-                      }
-                    `}
-                  >
-                    <Text
-                      typography="t6"
-                      color="fontGrey"
-                      css={css`
-                        width: 10%;
-                        overflow: hidden;
-                        text-align: center;
-                        text-wrap: nowrap;
-                      `}
-                    >
-                      {idx + 1}
-                    </Text>
-                    <Text
-                      typography="t6"
-                      color="fontDarkGrey"
-                      css={css`
-                        width: 50%;
-                        overflow: hidden;
-                        text-wrap: nowrap;
-                      `}
-                    >
-                      {data.title}
-                    </Text>
-                    <Text
-                      typography="t6"
-                      color="fontDarkGrey"
-                      css={css`
-                        width: 25%;
-                        overflow: hidden;
-                        text-wrap: nowrap;
-                      `}
-                    >
-                      {data.content}
-                    </Text>
-                    <Text
-                      typography="t7"
-                      color="fontDarkGrey"
-                      css={css`
-                        width: 8%;
-                        overflow: hidden;
-                        text-wrap: nowrap;
-                      `}
-                    >
-                      {data.name}
-                    </Text>
-                    <Text
-                      typography="t7"
-                      color="fontGrey"
-                      css={css`
-                        width: 10%;
-                        overflow: hidden;
-                        text-wrap: nowrap;
-                      `}
-                    >
-                      {data?.createAt?.slice(0, 10)}
-                    </Text>
-                  </Flex>
-                ))}
+                {data ? (
+                  <>
+                    {data?.slice(offset, offset + 10).map((data, idx) => (
+                      <Link to={`/board/detail/${data.id}`}>
+                        <Flex
+                          justify={'space-between'}
+                          align={'center'}
+                          key={idx}
+                          css={css`
+                            width: 100%;
+                            height: 45px;
+                            &: hover {
+                              background-color: #fff5f5;
+                              cursor: pointer;
+                            }
+                          `}
+                        >
+                          <Text
+                            typography="t6"
+                            color="fontGrey"
+                            css={css`
+                              width: 10%;
+                              overflow: hidden;
+                              text-align: center;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {idx + 1}
+                          </Text>
+                          <Text
+                            typography="t6"
+                            color="fontDarkGrey"
+                            css={css`
+                              width: 50%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data.title}
+                          </Text>
+                          <Text
+                            typography="t6"
+                            color="fontDarkGrey"
+                            css={css`
+                              width: 25%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data.content}
+                          </Text>
+                          <Text
+                            typography="t7"
+                            color="fontDarkGrey"
+                            css={css`
+                              width: 8%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data.name}
+                          </Text>
+                          <Text
+                            typography="t7"
+                            color="fontGrey"
+                            css={css`
+                              width: 10%;
+                              overflow: hidden;
+                              text-wrap: nowrap;
+                            `}
+                          >
+                            {data?.createAt?.slice(0, 10)}
+                          </Text>
+                        </Flex>
+                      </Link>
+                    ))}
+                  </>
+                ) : (
+                  <NoDataBox />
+                )}
               </>
             )}
           </>
@@ -419,6 +446,7 @@ const BoardListContainer = styled.div`
   margin-bottom: 30px;
   border: 1px solid #eee;
   border-radius: 5px;
+  overflow: scroll;
 `
 
 const NoData = styled.div`

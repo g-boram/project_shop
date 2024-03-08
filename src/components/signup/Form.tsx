@@ -150,6 +150,11 @@ function Form({ onSubmit }: { onSubmit: (formValues: FormValues) => void }) {
               ...controlStyles,
               border: '1px solid #e2e2e2',
             }),
+            menu: (controlStyles) => ({
+              ...controlStyles,
+              height: '200px',
+              overflow: 'scroll',
+            }),
           }}
         />
         <Spacing size={10} direction="horizontal" />
@@ -168,6 +173,11 @@ function Form({ onSubmit }: { onSubmit: (formValues: FormValues) => void }) {
               ...controlStyles,
               border: '1px solid #e2e2e2',
             }),
+            menu: (controlStyles) => ({
+              ...controlStyles,
+              height: '200px',
+              overflow: 'scroll',
+            }),
           }}
         />
         <Spacing size={10} direction="horizontal" />
@@ -185,6 +195,11 @@ function Form({ onSubmit }: { onSubmit: (formValues: FormValues) => void }) {
             control: (controlStyles) => ({
               ...controlStyles,
               border: '1px solid #e2e2e2',
+            }),
+            menu: (controlStyles) => ({
+              ...controlStyles,
+              height: '200px',
+              overflow: 'scroll',
             }),
           }}
         />
