@@ -15,8 +15,8 @@ export interface CommentsInterface {
   content: string
   uid: string
   displayName: string
-  createdAt: string
-  photoUrl: string
+  createAt: string
+  photoURL: string
 }
 export interface ChatingProps {
   id?: string

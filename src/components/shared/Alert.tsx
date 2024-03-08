@@ -8,11 +8,13 @@ import Button from './Button'
 
 interface AlertProps {
   open?: boolean
+  isCancle?: boolean
   title: React.ReactNode
   description?: React.ReactNode
   buttonLabel?: string
   width?: string
   onButtonClick: () => void
+  onCancleClick: () => void
 }
 
 function Alert({
@@ -20,7 +22,9 @@ function Alert({
   title,
   description,
   buttonLabel = '확인',
+  isCancle = true,
   onButtonClick,
+  onCancleClick,
 }: AlertProps) {
   if (open === false) {
     return null
@@ -39,6 +43,17 @@ function Alert({
         </Text>
         {description ? <Text typography="t7">{description}</Text> : null}
         <Flex justify="flex-end">
+          {isCancle ? (
+            <Button
+              onClick={onCancleClick}
+              weak={true}
+              style={{ marginTop: 12, border: 'none' }}
+            >
+              취소
+            </Button>
+          ) : (
+            <></>
+          )}
           <Button
             onClick={onButtonClick}
             weak={true}

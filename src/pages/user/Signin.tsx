@@ -29,9 +29,9 @@ function SigninPage() {
           if (e.code === 'auth/invalid-credential') {
             open({
               title: '입력한 정보를 다시 확인해주세요',
-              onButtonClick: () => {
-                //
-              },
+              isCancle: false,
+              onCancleClick: () => {},
+              onButtonClick: () => {},
             })
             return
           }
@@ -39,9 +39,9 @@ function SigninPage() {
         // 일반적인 에러
         open({
           title: '잠시 후 다시 시도해주세요.',
-          onButtonClick: () => {
-            //
-          },
+          isCancle: false,
+          onCancleClick: () => {},
+          onButtonClick: () => {},
         })
       }
     },
@@ -49,45 +49,80 @@ function SigninPage() {
   )
 
   return (
-    <SignupWrapper>
-      <ImgBox>SignupImgBox</ImgBox>
-      <FormBox>
-        <Flex justify="center" align="center" css={formTitle}>
-          로그인
-        </Flex>
-        <Form onSubmit={handleSubmit} />
-      </FormBox>
-    </SignupWrapper>
+    <SigninConatiner>
+      <SignupWrapper>
+        <ImgBox>
+          <img
+            src={
+              'https://cdn.pixabay.com/photo/2021/02/26/11/51/cosmetics-6051633_1280.jpg'
+            }
+            alt="signin"
+          />
+        </ImgBox>
+        <FormBox>
+          <Flex justify="center" align="center" css={formTitle}>
+            로그인
+          </Flex>
+          <Form onSubmit={handleSubmit} />
+        </FormBox>
+      </SignupWrapper>
+    </SigninConatiner>
   )
 }
 
+const SigninConatiner = styled.div`
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+`
 const SignupWrapper = styled.div`
   display: flex;
+  width: 100%;
 
   @media (max-width: 600px) {
     gap: 10px;
     flex-direction: column;
   }
   @media (min-width: 600px) {
+    max-width: 1000px;
     gap: 10px;
   }
 `
 
 const ImgBox = styled.div`
-  background: #002d34;
   flex-grow: 0;
-  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  padding: 10px;
+  & > img {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+  }
 
   @media (max-width: 600px) {
-    width: 100%;
+    height: 200px;
+    width: 96%;
+    padding: 10px;
+    margin-top: 0px;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
   @media (min-width: 600px) {
+    margin-top: 160px;
     width: 40%;
   }
 `
 
 const FormBox = styled.div`
-  background: #fff;
   padding: 20px;
   height: auto;
   flex-grow: 1;
@@ -96,6 +131,5 @@ const FormBox = styled.div`
 const formTitle = css`
   flex-shrink: 0;
   height: 100px;
-  background: pink;
 `
 export default SigninPage

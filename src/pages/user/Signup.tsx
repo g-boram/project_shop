@@ -44,6 +44,8 @@ function SignupPage() {
         if (e.code === 'auth/invalid-credential') {
           open({
             title: '입력한 정보를 다시 확인해주세요',
+            isCancle: false,
+            onCancleClick: () => {},
             onButtonClick: () => {},
           })
           return
@@ -51,6 +53,8 @@ function SignupPage() {
         if (e.code === 'auth/email-already-in-use') {
           open({
             title: '이미 가입된 이메일 입니다.',
+            isCancle: false,
+            onCancleClick: () => {},
             onButtonClick: () => {},
           })
           return
@@ -60,39 +64,81 @@ function SignupPage() {
   }
 
   return (
-    <SignupWrapper>
-      <ImgBox>SignupImgBox</ImgBox>
-      <FormBox>
-        <Flex justify="center" align="center" css={formTitle}>
-          회원가입
-        </Flex>
-        <Form onSubmit={handleSubmit} />
-      </FormBox>
-    </SignupWrapper>
+    <SignupContainer>
+      <SignupWrapper>
+        <ImgBox>
+          <img
+            src={
+              'https://cdn.pixabay.com/photo/2019/06/02/10/02/mortar-4246084_1280.jpg'
+            }
+            alt="signin"
+          />
+        </ImgBox>
+        <FormBox>
+          <Flex justify="center" align="center" css={formTitle}>
+            회원가입
+          </Flex>
+          <Form onSubmit={handleSubmit} />
+        </FormBox>
+      </SignupWrapper>
+    </SignupContainer>
   )
 }
 
+const SignupContainer = styled.div`
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+
 const SignupWrapper = styled.div`
   display: flex;
+  width: 100%;
 
   @media (max-width: 600px) {
     gap: 10px;
     flex-direction: column;
   }
   @media (min-width: 600px) {
+    max-width: 1000px;
     gap: 10px;
   }
 `
 
 const ImgBox = styled.div`
-  background: #002d34;
-  flex-grow: 1;
-  height: 200px;
-  min-width: 300px;
+  flex-grow: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  padding: 10px;
+
+  & > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+
+  @media (max-width: 600px) {
+    height: 200px;
+    width: 96%;
+    padding: 10px;
+    margin-top: 0px;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  @media (min-width: 600px) {
+    margin-top: 160px;
+    width: 40%;
+  }
 `
 
 const FormBox = styled.div`
-  background: #fff;
   padding: 20px;
   height: auto;
   flex-grow: 2;
@@ -101,6 +147,5 @@ const FormBox = styled.div`
 const formTitle = css`
   flex-shrink: 0;
   height: 100px;
-  background: pink;
 `
 export default SignupPage

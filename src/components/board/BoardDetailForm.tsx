@@ -22,6 +22,7 @@ const BoardDetailForm = () => {
   const params = useParams()
   const navigate = useNavigate()
   const user = useUser()
+  const { open } = useAlertContext()
 
   const [board, setBoard] = useState<BoardFormProps | null>(null)
 
@@ -44,7 +45,9 @@ const BoardDetailForm = () => {
     if (val === 'notice') return '공지사항'
   }
 
-  const handleBoardDelete = () => {}
+  const handleBoardDelete = () => {
+    console.log('게시글 삭제')
+  }
 
   return (
     <>
@@ -98,7 +101,16 @@ const BoardDetailForm = () => {
                 <Button
                   size="medium"
                   color="error"
-                  onClick={() => navigate(-1)}
+                  onClick={() =>
+                    open({
+                      title: '게시글을 삭제 하시겠습니까?',
+                      description: '삭제시 복구가 되지않습니다.',
+                      onCancleClick: () => {},
+                      onButtonClick: () => {
+                        handleBoardDelete()
+                      },
+                    })
+                  }
                 >
                   삭제
                 </Button>

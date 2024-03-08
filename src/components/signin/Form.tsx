@@ -134,6 +134,7 @@ function Form({ onSubmit }: { onSubmit: (formValues: FormValues) => void }) {
         <Spacing size={50} />
         <Button
           size="small"
+          color="pink"
           disabled={isValidate === false}
           onClick={() => {
             onSubmit(formValues)
@@ -172,7 +173,7 @@ function validate(formValues: FormValues) {
 const linkStyles = css`
   text-align: center;
   & > span:hover {
-    color: ${colors.hoverBlue};
+    color: ${colors.hoverPink};
   }
 `
 

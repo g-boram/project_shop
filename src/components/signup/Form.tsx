@@ -228,8 +228,10 @@ function Form({ onSubmit }: { onSubmit: (formValues: FormValues) => void }) {
       <Spacing size={50} />
       <Flex justify="center">
         <Button
+          size="small"
+          color="pink"
+          full
           disabled={isValidate === false}
-          css={btnBottom}
           onClick={() => {
             onSubmit(formValues)
           }}
@@ -285,8 +287,5 @@ const btnGender = css`
   height: 40px;
   width: 100%;
 `
-const btnBottom = css`
-  height: 40px;
-  width: 100%;
-`
+
 export default Form

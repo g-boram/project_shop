@@ -4,12 +4,16 @@ import { useAlertContext } from '@/contexts/AlertContext'
 import useUser from '@/hooks/auth/useUser'
 import { BoardFormProps } from '@/models/board'
 import { store } from '@/remote/firebase'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
 import { ChangeEvent, useState } from 'react'
 import { toast } from 'react-toastify'
+import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
+import { RiEmotionSadLine } from 'react-icons/ri'
 import Button from '../shared/Button'
 import Flex from '../shared/Flex'
+import Spacing from '../shared/Spacing'
 import Text from '../shared/Text'
 
 interface CommentsProps {
@@ -19,6 +23,7 @@ interface CommentsProps {
 
 const CommentBox = ({ board, getDetailBoard }: CommentsProps) => {
   const [comment, setComment] = useState('')
+  const [isMore, setIsMore] = useState<boolean>(false)
   const user = useUser()
   const { open } = useAlertContext()
 
@@ -58,6 +63,8 @@ const CommentBox = ({ board, getDetailBoard }: CommentsProps) => {
         } else {
           open({
             title: '로그인이 필요한 서비스 입니다',
+            isCancle: false,
+            onCancleClick: () => {},
             onButtonClick: () => {
               //
             },
@@ -68,25 +75,159 @@ const CommentBox = ({ board, getDetailBoard }: CommentsProps) => {
       console.log('error', e)
     }
   }
+
+  const handleMore = () => {
+    setIsMore((prev) => !prev)
+  }
+  const UserImg = styled.div<{ uid?: string }>`
+    width: 38px;
+    height: 38px;
+    border-radius: 100%;
+    border: ${(props) =>
+      props.uid === user?.uid ? '2px solid #c86b85' : '2px solid #fff'};
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  `
+  const CommentArea = () => {
+    return (
+      <>
+        {isMore ? (
+          <>
+            <CommentMoreList>
+              {board?.comments
+                ?.slice(0)
+                ?.reverse()
+                .map((comment) => (
+                  <Flex justify={'space-between'} align={'center'}>
+                    <Flex
+                      justify={'flex-start'}
+                      align={'center'}
+                      css={commentLineStyle}
+                    >
+                      <UserImg uid={comment.uid}>
+                        <img
+                          src={
+                            comment.photoURL !== ''
+                              ? comment.photoURL
+                              : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
+                          }
+                          alt=""
+                        />
+                      </UserImg>
+                      <Spacing size={10} direction={'horizontal'} />
+                      <Flex direction="column">
+                        <Text typography="t6">{comment.content}</Text>
+                        <Spacing size={3} />
+                        <Flex>
+                          <Text typography="t8" color="fontDarkGrey">
+                            {comment.displayName}
+                          </Text>
+                          <Spacing size={10} direction={'horizontal'} />
+                          <Text typography="t8" color="fontGrey">
+                            {comment.createAt}
+                          </Text>
+                        </Flex>
+                      </Flex>
+                    </Flex>
+                    {user?.uid === comment.uid ? <DelBtn>삭제</DelBtn> : null}
+                  </Flex>
+                ))}
+            </CommentMoreList>
+            <Button full color="pink" onClick={handleMore}>
+              <IoIosArrowUp size={15} />
+            </Button>
+          </>
+        ) : (
+          <>
+            <CommentList>
+              {board?.comments
+                ?.slice(-5)
+                ?.reverse()
+                .map((comment) => (
+                  <Flex justify={'space-between'} align={'center'}>
+                    <Flex
+                      justify={'flex-start'}
+                      align={'center'}
+                      css={commentLineStyle}
+                    >
+                      <UserImg uid={comment.uid}>
+                        <img
+                          src={
+                            comment.photoURL !== ''
+                              ? comment.photoURL
+                              : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
+                          }
+                          alt=""
+                        />
+                      </UserImg>
+                      <Spacing size={10} direction={'horizontal'} />
+                      <Flex direction="column">
+                        <Text typography="t6">{comment.content}</Text>
+                        <Spacing size={3} />
+                        <Flex>
+                          <Text typography="t8" color="fontDarkGrey">
+                            {comment.displayName}
+                          </Text>
+                          <Spacing size={10} direction={'horizontal'} />
+                          <Text typography="t8" color="fontGrey">
+                            {comment.createAt}
+                          </Text>
+                        </Flex>
+                      </Flex>
+                    </Flex>
+                    {user?.uid === comment.uid ? <DelBtn>삭제</DelBtn> : null}
+                  </Flex>
+                ))}
+            </CommentList>
+            <Button full color="pink" onClick={handleMore}>
+              댓글 더보기
+            </Button>
+          </>
+        )}
+      </>
+    )
+  }
   return (
     <CommentContainer>
       <CommentHead>
-        <Text typography="t7" color="fontDarkGrey">
-          댓글 0개
+        <Text typography="t7" color="black">
+          댓글 {board?.comments ? board?.comments.length : 0}개
         </Text>
       </CommentHead>
-      <CommentList>
-        <CommentLine>유저 이미지/ 이름/ 작성시간/ 내용</CommentLine>
-      </CommentList>
+      {board?.comments ? (
+        <CommentArea />
+      ) : (
+        <NotComment>
+          <Spacing size={30} />
+          <Flex direction="column" justify={'center'} align={'center'}>
+            <RiEmotionSadLine size={20} color={'grey'} />
+            <Spacing size={10} direction={'horizontal'} />
+            <Text typography="t7" color="fontGrey">
+              아직 댓글이 없어요
+            </Text>
+          </Flex>
+        </NotComment>
+      )}
       <CommentForm>
-        <Flex>
+        <Flex justify={'space-between'} align={'center'}>
           <UserImg>
-            <img src="" alt="" />
+            <img
+              src={
+                user?.photoURL !== ''
+                  ? user?.photoURL
+                  : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
+              }
+              alt=""
+            />
           </UserImg>
           <InputBox>
             <input type="text" value={comment} onChange={setCommentValue} />
           </InputBox>
-          <Button color="pink" onClick={onSubmitComment}>
+
+          <Button size={'medium'} color="pink" onClick={onSubmitComment}>
             입력
           </Button>
         </Flex>
@@ -95,48 +236,68 @@ const CommentBox = ({ board, getDetailBoard }: CommentsProps) => {
   )
 }
 
+const commentLineStyle = css`
+  margin: 10px 0px;
+`
 const CommentHead = styled.div`
-  height: 30px;
+  height: 25px;
   background-color: white;
-  border-bottom: 5px solid pink;
+  border-bottom: 1px solid #f3d7ca;
   padding: 0px 20px;
 `
-const CommentList = styled.div`
-  height: 200px;
-  background-color: white;
-  border-bottom: 5px solid pink;
-  padding: 20px;
+const CommentMoreList = styled.div`
+  height: 500px;
+  background-color: #fff7f9;
+  padding: 10px 20px;
+  overflow: scroll;
 `
-const UserImg = styled.div``
-const CommentLine = styled.div``
+const CommentList = styled.div`
+  height: 300px;
+  background-color: #fff7f9;
+  padding: 10px 20px;
+`
+const NotComment = styled.div`
+  height: 100px;
+  background-color: #fff7f9;
+  padding: 10px 20px;
+`
+
 const CommentForm = styled.div`
-  height: 80px;
+  height: 30px;
   background-color: white;
-  margin-top: 20px;
-  border: 5px solid pink;
-  padding: 20px;
+  margin-top: 15px;
+  padding: 10px;
 `
 
 const CommentContainer = styled.div`
   height: 500px;
   padding: 20px 0px;
-  background-color: #c86b85;
-  border-radius: 8px;
 `
 
+const DelBtn = styled.div`
+  font-size: 13px;
+  cursor: pointer;
+  color: grey;
+  &: hover {
+    color: red;
+  }
+`
 const InputBox = styled.div`
-  height: 40px;
-  width: 100%;
+  height: 30px;
+  width: 73%;
   display: flex;
   align-items: center;
   justify-content: center;
 
+  @media (max-width: 600px) {
+    width: 60%;
+  }
   & input {
     border: 1px solid #f4aeba;
     width: 100%;
     padding: 0px 10px;
     border-radius: 5px;
-    height: 40px;
+    height: 30px;
   }
 `
 export default CommentBox
