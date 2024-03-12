@@ -2,7 +2,9 @@ import { COLLECTIONS } from '@/constants'
 import { BoardFormProps, ChatingProps } from '@/models/board'
 import {
   addDoc,
+  arrayRemove,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -58,8 +60,21 @@ export const getBoardList = async () => {
   )
 }
 
-//
+// 게시글 수정하기
 export const upDateBoard = async (formValue: any, id: string) => {
   const boardRef = doc(store, `${COLLECTIONS.BOARD}`, id)
   await updateDoc(boardRef, formValue)
+}
+
+// 선택한 문서 삭제하기
+export const deleteBoard = async (id: string) => {
+  await deleteDoc(doc(store, `${COLLECTIONS.BOARD}`, id))
+}
+
+// 선택한 댓글 삭제하기
+export const deleteComment = async (id: string, data: any) => {
+  const boardRef = doc(store, `${COLLECTIONS.BOARD}`, id)
+  await updateDoc(boardRef, {
+    comments: arrayRemove(data),
+  })
 }

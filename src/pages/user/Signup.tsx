@@ -11,6 +11,7 @@ import { COLLECTIONS } from '@/constants'
 import { useNavigate } from 'react-router-dom'
 import { FirebaseError } from 'firebase/app'
 import { useAlertContext } from '@/contexts/AlertContext'
+import Text from '@/components/shared/Text'
 
 function SignupPage() {
   const { open } = useAlertContext()
@@ -76,7 +77,7 @@ function SignupPage() {
         </ImgBox>
         <FormBox>
           <Flex justify="center" align="center" css={formTitle}>
-            회원가입
+            <Text typography="t1">회원가입</Text>
           </Flex>
           <Form onSubmit={handleSubmit} />
         </FormBox>
@@ -139,7 +140,7 @@ const ImgBox = styled.div`
 `
 
 const FormBox = styled.div`
-  padding: 20px;
+  padding: 50px 20px 20px 20px;
   height: auto;
   flex-grow: 2;
 `

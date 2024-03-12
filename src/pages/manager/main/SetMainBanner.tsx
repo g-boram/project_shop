@@ -3,7 +3,7 @@ import Button from '@/components/shared/Button'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { newImg } from '@/models/managerMain'
 
@@ -15,20 +15,19 @@ import {
 import { imgUploadAndUrl } from '@/hooks/data/useStorage'
 
 import useUser from '@/hooks/auth/useUser'
-import HeadTitle from '@/components/shared/HeadTitle'
 import { FadeLoader } from 'react-spinners'
-import ManagerPageLayout from '@/components/shared/Layout/ManagerPageLayout'
 import Spacing from '@/components/shared/Spacing'
 import Text from '@/components/shared/Text'
 import { useMainBanner } from '@/hooks/data/useMainData'
+import ManagerHead from '@/components/shared/ManagerHead'
+import { Link } from 'react-router-dom'
+import ManagerPageLayout from '@/components/shared/Layout/ManagerPageLayout'
+import { useAlertContext } from '@/contexts/AlertContext'
+import { RiCameraOffFill } from 'react-icons/ri'
 
 export default function SetMainBanner() {
-  // @TODO --------------------------------------------
-  // 1. 모달창 만들어서 getImgUrl -> newUpload합치기
-  // 2. 데이터 로딩
-  // 3. 기능 확인 알림창 ex) 삭제 하시겠습니까?
-
   const user = useUser()
+  const { open } = useAlertContext()
   const [currentImg, setCurrentImg] = useState<newImg>()
   const [newImgUrl, setNewImgUrl] = useState<string>()
 
@@ -58,6 +57,7 @@ export default function SetMainBanner() {
   const newUpload = () => {
     mutationUploadBanner.mutate()
   }
+
   // 데이터베이스 이미지데이터 가져오기
   const { isLoading, isError, error, data, refetch } = useMainBanner()
 
@@ -69,21 +69,22 @@ export default function SetMainBanner() {
   const handleUploadFile = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
 
-    if (!files) return
-    const theFile = files[0]
-    const currentImgName = files[0].name
+    if (files !== null) {
+      const theFile = files[0]
+      const currentImgName = files[0]?.name
 
-    const reader = new FileReader()
-    reader.onloadend = (finishedEvent) => {
-      // 업로드한 이미지 URL 저장
-      const result = (finishedEvent.target as FileReader).result as string
-      setCurrentImg({
-        name: currentImgName,
-        img: result,
-      })
+      const reader = new FileReader()
+      reader.onloadend = (finishedEvent) => {
+        // 업로드한 이미지 URL 저장
+        const result = (finishedEvent.target as FileReader).result as string
+        setCurrentImg({
+          name: currentImgName,
+          img: result,
+        })
+      }
+      if (!theFile) return
+      reader.readAsDataURL(theFile)
     }
-    if (!theFile) return
-    reader.readAsDataURL(theFile)
   }
 
   // 선택된 이미지 url 얻기
@@ -91,6 +92,14 @@ export default function SetMainBanner() {
     if (!currentImg) return
     const getUrl = await imgUploadAndUrl(currentImg)
     setNewImgUrl(getUrl)
+    open({
+      title: '배너 이미지를 등록 하시겠습니까?',
+      isCancle: true,
+      onCancleClick: () => {},
+      onButtonClick: () => {
+        newUpload()
+      },
+    })
   }
 
   // 이미지 박스 컴포넌트
@@ -120,7 +129,20 @@ export default function SetMainBanner() {
           )}
         </ImgWrapper>
         <Flex justify="center">
-          <Button color="error" size="medium" onClick={deleteFn}>
+          <Button
+            color="error"
+            size="medium"
+            onClick={() =>
+              open({
+                title: '이미지를 삭제 하시겠습니까?',
+                isCancle: true,
+                onCancleClick: () => {},
+                onButtonClick: () => {
+                  deleteFn()
+                },
+              })
+            }
+          >
             삭제하기
           </Button>
         </Flex>
@@ -129,89 +151,109 @@ export default function SetMainBanner() {
   }
 
   return (
-    <ManagerPageLayout>
-      <HeadTitle title={'Main Banner'} />
-      <ImgListContianer>
-        {data
-          ? data.map((img: any, i: any) => {
-              return <BannerImgBox img={img} i={i} key={`mainBanner${i}`} />
-            })
-          : ''}
-      </ImgListContianer>
-      <NewImgContianer>
-        <NewImgWrapper>
-          {currentImg?.img !== '' ? <img src={currentImg?.img} alt="" /> : null}
-        </NewImgWrapper>
-        <NewImgBtnWrapper>
-          <Flex>
-            <div css={currentName}>
-              {currentImg?.name !== '' ? currentImg?.name : ''}
-            </div>
-            <label key="newImg" css={labelStyle} htmlFor={`new`}>
-              이미지 선택
-            </label>
-            <Button onClick={getImgUrl}>이미지 스토리지저장</Button>
-          </Flex>
-          <Spacing size={10} />
-          <Flex>
-            <Button full size="medium" onClick={newUpload}>
-              Upload
-            </Button>
-          </Flex>
-          <input
-            key="newImg"
-            type="file"
-            id={`new`}
-            onChange={handleUploadFile}
-          />
-          <NewImgDescBox>
-            <Text
-              typography="t7"
-              display="block"
-              style={{ marginTop: 10, marginBottom: 6 }}
-            >
-              * 이미지 업로드 양식 1
-            </Text>
-            <Text
-              typography="t7"
-              display="block"
-              style={{ marginTop: 10, marginBottom: 6 }}
-            >
-              * 이미지 업로드 양식 2
-            </Text>
-            <Text
-              typography="t7"
-              display="block"
-              style={{ marginTop: 10, marginBottom: 6 }}
-            >
-              * 이미지 업로드 양식 3
-            </Text>
-          </NewImgDescBox>
-        </NewImgBtnWrapper>
-      </NewImgContianer>
-    </ManagerPageLayout>
+    <>
+      <ManagerPageLayout>
+        <ManagerHead
+          title={'Main Banner Setting'}
+          desc={'메인 페이지 이벤트 배너 영역 이미지 추가 및 삭제'}
+        />
+        <SettingContainer>
+          <ImgListContianer>
+            {data
+              ? data.map((img: any, i: any) => {
+                  return <BannerImgBox img={img} i={i} key={`mainBanner${i}`} />
+                })
+              : ''}
+          </ImgListContianer>
+          <NewImgContianer>
+            <NewImgWrapper>
+              {currentImg?.img !== null ? (
+                <img src={currentImg?.img} alt="" />
+              ) : (
+                <></>
+              )}
+            </NewImgWrapper>
+            <NewImgBtnWrapper>
+              <Flex>
+                <div css={currentName}>
+                  {currentImg?.name !== '' ? currentImg?.name : ''}
+                </div>
+                <label key="newImg" css={labelStyle} htmlFor={`new`}>
+                  이미지 선택
+                </label>
+              </Flex>
+              <Spacing size={10} />
+              <Flex>
+                <Button full color="pink" size="large" onClick={getImgUrl}>
+                  Upload
+                </Button>
+              </Flex>
+              <input
+                key="newImg"
+                type="file"
+                id={`new`}
+                onChange={handleUploadFile}
+              />
+              <NewImgDescBox>
+                <Text
+                  typography="t7"
+                  display="block"
+                  style={{ marginTop: 10, marginBottom: 6 }}
+                >
+                  * 업로드 가능한 이미지 사이즈는 1280 x 853 입니다.
+                </Text>
+                <Text
+                  typography="t7"
+                  display="block"
+                  style={{ marginTop: 10, marginBottom: 6 }}
+                >
+                  * 삭제 이미지 복구 필요시 담당자에게 문의해 주세요
+                </Text>
+                <Text
+                  typography="t7"
+                  display="block"
+                  style={{ marginTop: 10, marginBottom: 6 }}
+                >
+                  * 배너 이미지는 5개 입니다. 추가 등록 희망시 담당자 회의 후
+                  진행해 주세요
+                </Text>
+                <Text
+                  typography="t7"
+                  display="block"
+                  style={{ marginTop: 10, marginBottom: 6 }}
+                >
+                  * 배너 이미지는 실시간 적용됩니다. 승인된 이미지만
+                  진행해주세요
+                </Text>
+              </NewImgDescBox>
+            </NewImgBtnWrapper>
+          </NewImgContianer>
+        </SettingContainer>
+      </ManagerPageLayout>
+    </>
   )
 }
+
+const SettingContainer = styled.div`
+  overflow: scroll;
+  padding: 20px;
+  height: 800px;
+`
 
 // 기존 배너이미지 영역
 const ImgListContianer = styled.div`
   display: flex;
-  height: 380px;
-  width: 100%;
+  height: 400px;
   overflow: scroll;
-  background-color: #f0d9da;
-
-  & > div {
-    padding: 5px;
-  }
 `
+
 const ImgWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 450px;
   height: 300px;
-  background-color: #fefefe;
+  padding: 10px;
   margin-bottom: 10px;
 
   & img {
@@ -222,11 +264,10 @@ const ImgWrapper = styled.div`
 `
 // 업로드할 이미지 영역
 const NewImgContianer = styled.div`
-  height: 450px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0d9da;
   padding: 10px;
   display: flex;
 `
@@ -235,7 +276,8 @@ const NewImgWrapper = styled.div`
   width: 450px;
   height: 300px;
   margin-right: 10px;
-  background-color: #fefefe;
+  background-color: #f8f8f8;
+
   & img {
     width: 100%;
     height: 100%;
@@ -253,6 +295,7 @@ const NewImgDescBox = styled.div`
   height: 180px;
   margin-top: 20px;
   padding: 10px;
+  box-shadow: 0px 0px 10px -2px #ffbdd2;
 `
 
 const labelStyle = css`
@@ -264,7 +307,7 @@ const labelStyle = css`
   font-size: 13px;
   width: 120px;
   margin-left: 10px;
-  background-color: blue;
+  background-color: #c0a3e3;
   color: white;
   border-radius: 5px;
   font-weight: bold;
@@ -278,4 +321,5 @@ const currentName = css`
   padding: 0px 10px;
   align-items: center;
   background-color: white;
+  border: 1px solid #bcbcbc;
 `

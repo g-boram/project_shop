@@ -114,6 +114,8 @@ export default css`
   }
   body {
     line-height: 1;
+    font-family: 'NanumBaReunHiPi';
+    letter-spacing: 1.5px;
   }
   ol,
   ul {
@@ -155,9 +157,8 @@ export default css`
     width: 2px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #c86b85;
+    background-color: #ebd5d5;
     border-radius: 10px;
-    height: 3px;
   }
   ::-webkit-scrollbar-track {
   }

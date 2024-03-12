@@ -14,9 +14,10 @@ export const colorPalette = css`
     --btnBlue: #2396f3;
     --btnLightBlue: #aadbff;
     --btnLightPurple: #b4b4ff;
+    --btnPurple: #6643b5;
     --btnGreen: #4caf50;
     --btnPink: #de9eb2;
-    --btnGrey: #e2e2e2;
+    --btnGrey: #bbbbbb;
     --btnYellow: #ffd700;
 
     --inputGrey: #e2e2e2;
@@ -30,7 +31,7 @@ export const colorPalette = css`
     --hoverPink: #ea8a8a;
 
     --fontBlack: #333333;
-    --fontGrey: #a8a8a8;
+    --fontGrey: #626262;
     --fontDarkGrey: #595959;
   }
 `
@@ -49,6 +50,7 @@ export const colors = {
   btnGreen: 'var(--btnGreen)',
   btnPink: 'var(--btnPink)',
   btnGrey: 'var(--btnGrey)',
+  btnPurple: 'var(--btnPurple)',
   btnYellow: 'var(--btnYellow)',
   btnLightBlue: 'var(--btnLightBlue)',
   btnLightPurple: 'var(--btnLightPurple)',

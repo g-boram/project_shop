@@ -56,7 +56,7 @@ const LoadingBox = styled.div`
     height: 250px;
   }
   @media (min-width: 600px) {
-    height: 360px;
+    height: 400px;
   }
 `
 const containerStyles = css`
@@ -73,7 +73,7 @@ const containerStyles = css`
     transition: 1s;
   }
   @media (min-width: 600px) {
-    height: 360px;
+    height: 400px;
     transition: 1s;
   }
 `

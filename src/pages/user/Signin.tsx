@@ -9,6 +9,7 @@ import { FirebaseError } from 'firebase/app'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Text from '@/components/shared/Text'
 
 function SigninPage() {
   const { open } = useAlertContext()
@@ -61,7 +62,7 @@ function SigninPage() {
         </ImgBox>
         <FormBox>
           <Flex justify="center" align="center" css={formTitle}>
-            로그인
+            <Text typography="t1">로그인</Text>
           </Flex>
           <Form onSubmit={handleSubmit} />
         </FormBox>
@@ -123,7 +124,7 @@ const ImgBox = styled.div`
 `
 
 const FormBox = styled.div`
-  padding: 20px;
+  padding: 50px 20px 20px 20px;
   height: auto;
   flex-grow: 1;
 `

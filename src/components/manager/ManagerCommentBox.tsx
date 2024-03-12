@@ -16,17 +16,19 @@ import { toast } from 'react-toastify'
 import { IoIosArrowUp } from 'react-icons/io'
 import { RiEmotionSadLine } from 'react-icons/ri'
 import { deleteComment } from '@/remote/board'
+import { useNavigate } from 'react-router-dom'
 
 interface CommentsProps {
   board: BoardFormProps | null
   getDetailBoard: (id: string) => Promise<void>
 }
 
-const CommentBox = ({ board, getDetailBoard }: CommentsProps) => {
+const ManagerCommentBox = ({ board, getDetailBoard }: CommentsProps) => {
+  const user = useUser()
+  const navigate = useNavigate()
+  const { open } = useAlertContext()
   const [comment, setComment] = useState('')
   const [isMore, setIsMore] = useState<boolean>(false)
-  const user = useUser()
-  const { open } = useAlertContext()
 
   // 댓글 입력
   const setCommentValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -80,12 +82,13 @@ const CommentBox = ({ board, getDetailBoard }: CommentsProps) => {
   const handleMore = () => {
     setIsMore((prev) => !prev)
   }
+
   const UserImg = styled.div<{ uid?: string }>`
     width: 38px;
     height: 38px;
     border-radius: 100%;
     border: ${(props) =>
-      props.uid === user?.uid ? '2px solid #c86b85' : '2px solid #fff'};
+      props.uid === user?.uid ? '2px solid #6643b5' : '2px solid #fff'};
     & img {
       width: 100%;
       height: 100%;
@@ -161,7 +164,7 @@ const CommentBox = ({ board, getDetailBoard }: CommentsProps) => {
                   </Flex>
                 ))}
             </CommentMoreList>
-            <Button full color="pink" onClick={handleMore}>
+            <Button full color="purple" onClick={handleMore}>
               <IoIosArrowUp size={15} />
             </Button>
           </>
@@ -203,26 +206,24 @@ const CommentBox = ({ board, getDetailBoard }: CommentsProps) => {
                         </Flex>
                       </Flex>
                     </Flex>
-                    {user?.uid === comment.uid ? (
-                      <DelBtn
-                        onClick={() =>
-                          open({
-                            title: '해당 댓글을 삭제 하시겠습니까?',
-                            description: '삭제시 복구가 되지않습니다.',
-                            onCancleClick: () => {},
-                            onButtonClick: () => {
-                              handleCommentDelete(comment)
-                            },
-                          })
-                        }
-                      >
-                        삭제
-                      </DelBtn>
-                    ) : null}
+                    <DelBtn
+                      onClick={() =>
+                        open({
+                          title: '해당 댓글을 삭제 하시겠습니까?',
+                          description: '삭제시 복구가 되지않습니다.',
+                          onCancleClick: () => {},
+                          onButtonClick: () => {
+                            handleCommentDelete(comment)
+                          },
+                        })
+                      }
+                    >
+                      삭제
+                    </DelBtn>
                   </Flex>
                 ))}
             </CommentList>
-            <Button full color="pink" onClick={handleMore}>
+            <Button full color="purple" onClick={handleMore}>
               댓글 더보기
             </Button>
           </>
@@ -267,7 +268,7 @@ const CommentBox = ({ board, getDetailBoard }: CommentsProps) => {
             <input type="text" value={comment} onChange={setCommentValue} />
           </InputBox>
 
-          <Button size={'medium'} color="pink" onClick={onSubmitComment}>
+          <Button size={'medium'} color="purple" onClick={onSubmitComment}>
             입력
           </Button>
         </Flex>
@@ -281,24 +282,28 @@ const commentLineStyle = css`
 `
 const CommentHead = styled.div`
   height: 25px;
+  width: 1000px;
   background-color: white;
-  border-bottom: 1px solid #f3d7ca;
+  border-bottom: 1px solid #ededff;
   padding: 0px 20px;
 `
 const CommentMoreList = styled.div`
   height: 500px;
-  background-color: #fff7f9;
+  width: 1000px;
+  background-color: #ededff;
   padding: 10px 20px;
   overflow: scroll;
 `
 const CommentList = styled.div`
   height: 300px;
-  background-color: #fff7f9;
+  width: 1000px;
+  background-color: #ededff;
   padding: 10px 20px;
 `
 const NotComment = styled.div`
   height: 100px;
-  background-color: #fff7f9;
+  width: 1000px;
+  background-color: #ededff;
   padding: 10px 20px;
 `
 
@@ -333,11 +338,11 @@ const InputBox = styled.div`
     width: 60%;
   }
   & input {
-    border: 1px solid #f4aeba;
+    border: 2px solid #ededff;
     width: 100%;
     padding: 0px 10px;
     border-radius: 5px;
     height: 30px;
   }
 `
-export default CommentBox
+export default ManagerCommentBox

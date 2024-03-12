@@ -24,6 +24,10 @@ import styled from '@emotion/styled'
 import BoardCategoryPage from './pages/user/board/BoardCategoryPage'
 import BoardDetailPage from './pages/user/board/BoardDetailPage'
 import BoardEditPage from './pages/user/board/BoardEditPage'
+import SetBoardData from './pages/manager/data/SetBoard'
+import ManagerBoardEditForm from './components/manager/ManagerBoardEditForm'
+import ManagerBoardForm from './components/manager/ManagerBoardForm'
+import ManagerBoardDetail from './components/manager/ManagerBoardDetail'
 
 function App() {
   return (
@@ -62,6 +66,16 @@ function App() {
             <Route
               path="/manager/data/setCosmeticData"
               Component={SetCosmeticData}
+            />
+            <Route path="/manager/data/setBoardData" Component={SetBoardData} />
+            <Route path="/manager/board/form" Component={ManagerBoardForm} />
+            <Route
+              path="/manager/board/detail/:id"
+              Component={ManagerBoardDetail}
+            />
+            <Route
+              path="/manager/board/edit/:id"
+              Component={ManagerBoardEditForm}
             />
             {/* 
             @TODO: 인증이 필요한 페이지 나누기 ex) 관리자,유저의 등급 ...

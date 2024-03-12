@@ -56,6 +56,12 @@ function Navbar() {
     if (user != null) {
       return (
         <>
+          <Link to="/manager">
+            <Button size="small" color="grey">
+              관리자 페이지
+            </Button>
+          </Link>
+          <Spacing size={10} direction="horizontal" />
           <Button size="small" color="pink" onClick={handleLogout}>
             로그아웃
           </Button>
@@ -79,11 +85,19 @@ function Navbar() {
     // 로그인 회원가입 화면이 아닐경우
     if (showSignButton) {
       return (
-        <Link to="/signin">
-          <Button size="small" color="pink">
-            로그인/회원가입
-          </Button>
-        </Link>
+        <>
+          <Link to="/manager">
+            <Button size="small" color="grey">
+              관리자 페이지
+            </Button>
+          </Link>
+          <Spacing size={10} direction="horizontal" />
+          <Link to="/signin">
+            <Button size="small" color="pink">
+              로그인/회원가입
+            </Button>
+          </Link>
+        </>
       )
     }
     return null

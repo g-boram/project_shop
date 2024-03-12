@@ -30,13 +30,29 @@ export const buttonColorMap = {
       transition: 0.5s;
     }
   `,
+  purple: css`
+    background-color: ${colors.btnPurple};
+    color: ${colors.white};
+    &:hover {
+      background-color: #50358f;
+      transition: 0.5s;
+    }
+  `,
   pink: css`
     background-color: ${colors.btnPink};
     color: ${colors.white};
+    &:hover {
+      background-color: #c86b85;
+      transition: 0.5s;
+    }
   `,
   grey: css`
     background-color: ${colors.btnGrey};
     color: ${colors.white};
+    &:hover {
+      background-color: #9b9b9b;
+      transition: 0.5s;
+    }
   `,
   white: css`
     background-color: ${colors.white};
@@ -87,6 +103,11 @@ export const buttonWeakMap = {
     background-color: ${colors.white};
     color: ${colors.btnYellow};
     border: 1px solid ${colors.btnYellow};
+  `,
+  purple: css`
+    background-color: ${colors.white};
+    color: ${colors.btnPurple};
+    border: 1px solid ${colors.btnPurple};
   `,
   lightBlue: css`
     background-color: ${colors.white};

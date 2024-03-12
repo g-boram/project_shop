@@ -1,27 +1,27 @@
-import { COLLECTIONS } from '@/constants'
-import { BoardFormProps } from '@/models/board'
-import { store } from '@/remote/firebase'
-import { css } from '@emotion/react'
-import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
-import { ChangeEvent, useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-
 import styled from '@emotion/styled'
 import Button from '../shared/Button'
 import Flex from '../shared/Flex'
 import Spacing from '../shared/Spacing'
 import Text from '../shared/Text'
 import useUser from '@/hooks/auth/useUser'
+import CommentBox from './CommentBox'
+
+import { COLLECTIONS } from '@/constants'
+import { BoardFormProps } from '@/models/board'
+import { store } from '@/remote/firebase'
+import { css } from '@emotion/react'
+import { doc, getDoc } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { MoonLoader } from 'react-spinners'
-import { text } from 'stream/consumers'
 import { useAlertContext } from '@/contexts/AlertContext'
 import { toast } from 'react-toastify'
-import CommentBox from './CommentBox'
+import { deleteBoard } from '@/remote/board'
 
 const BoardDetailForm = () => {
   const params = useParams()
-  const navigate = useNavigate()
   const user = useUser()
+  const navigate = useNavigate()
   const { open } = useAlertContext()
 
   const [board, setBoard] = useState<BoardFormProps | null>(null)
@@ -46,7 +46,11 @@ const BoardDetailForm = () => {
   }
 
   const handleBoardDelete = () => {
-    console.log('게시글 삭제')
+    if (board?.id) {
+      deleteBoard(board.id)
+      toast.success('게시글 삭제 완료!')
+      navigate(-1)
+    }
   }
 
   return (
