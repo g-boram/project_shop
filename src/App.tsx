@@ -28,6 +28,9 @@ import SetBoardData from './pages/manager/data/SetBoard'
 import ManagerBoardEditForm from './components/manager/ManagerBoardEditForm'
 import ManagerBoardForm from './components/manager/ManagerBoardForm'
 import ManagerBoardDetail from './components/manager/ManagerBoardDetail'
+import CosmeticPage from './pages/user/cosmetic'
+import ManagerCosmeticForm from './components/manager/ManagerCosmeticForm'
+import CosmeticDetailPage from './pages/user/cosmetic/CosmeticDetailPage'
 
 function App() {
   return (
@@ -42,17 +45,19 @@ function App() {
             <Route path="/signin" Component={SigninPage} />
             <Route path="/signup" Component={SignupPage} />
             <Route path="/my" Component={MyPage} />
+            {/* 화장품 관련 페이지 */}
+            <Route path="/cosmetic" Component={CosmeticPage} />
+            <Route path="/cosmetic/:category" Component={CosmeticPage} />
+            <Route path="/cosmetic/detail/:id" Component={CosmeticDetailPage} />
             {/* 게시판 & 채팅 페이지 */}
             <Route path="/board" Component={BoardPage} />
-            {/* 게시판 글작성 페이지 */}
             <Route path="/board/form" Component={BoardFormPage} />
-            {/* 게시판 글 상세보기 페이지 */}
             <Route path="/board/detail/:id" Component={BoardDetailPage} />
-            {/* 게시판 글 수정 페이지 */}
             <Route path="/board/edit/:id" Component={BoardEditPage} />
             {/* 게시판 카테고리별 리스트 페이지 */}
             <Route path="/board/category" Component={BoardCategoryPage} />
             <Route path="/storeMap" Component={StoreMapPage} />
+
             {/* 관리자 페이지 */}
             <Route path="/manager" Component={ManagerPage} />
             <Route
@@ -67,6 +72,11 @@ function App() {
               path="/manager/data/setCosmeticData"
               Component={SetCosmeticData}
             />
+            <Route
+              path="/manager/cosmetic/form"
+              Component={ManagerCosmeticForm}
+            />
+
             <Route path="/manager/data/setBoardData" Component={SetBoardData} />
             <Route path="/manager/board/form" Component={ManagerBoardForm} />
             <Route

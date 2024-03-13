@@ -73,7 +73,7 @@ const containerStyles = css`
     transition: 1s;
   }
   @media (min-width: 600px) {
-    height: 400px;
+    height: 500px;
     transition: 1s;
   }
 `

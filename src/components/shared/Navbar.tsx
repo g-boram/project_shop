@@ -1,38 +1,30 @@
-import { css, keyframes } from '@emotion/react'
-import { colors } from '@styles/colorPalette'
-
-import { BiMenu } from 'react-icons/bi'
-import { AiOutlineClose } from 'react-icons/ai'
-
-import { Link, useLocation } from 'react-router-dom'
-import { useCallback, useState } from 'react'
-
 import Flex from '@shared/Flex'
 import Button from '@shared/Button'
 import styled from '@emotion/styled'
 import Dimmed from './Dimmed'
 import useUser from '@/hooks/auth/useUser'
+import Spacing from './Spacing'
+import Text from './Text'
+
+import { css, keyframes } from '@emotion/react'
+import { colors } from '@styles/colorPalette'
+import { BiMenu } from 'react-icons/bi'
+import { AiOutlineClose } from 'react-icons/ai'
+import { Link, useLocation } from 'react-router-dom'
+import { useCallback, useState } from 'react'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/remote/firebase'
-import Spacing from './Spacing'
 import { useSetRecoilState } from 'recoil'
 import { userAtom } from '@/atom/user'
-import Text from './Text'
 
 const navList = [
   { to: '/my', name: '마이페이지' },
   { to: '/storeMap', name: '매장찾기' },
   { to: '/board', name: '게시판' },
 ]
-const navItem = [
-  { to: '/', name: 'Link - 1' },
-  { to: '/', name: 'Link - 2' },
-  { to: '/', name: 'Link - 3' },
-]
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isHovering, setIsHovering] = useState(0)
 
   const user = useUser()
   const isKakao = sessionStorage.getItem('kakao')
@@ -211,7 +203,7 @@ function Navbar() {
             </Link>
           </NavLogo>
           <Spacing size={10} direction="horizontal" />
-          <NavItem onMouseOver={() => setIsHovering(1)}>
+          <NavItem>
             {navList?.map((nav, i) => (
               <Link
                 to={nav.to}
@@ -234,33 +226,6 @@ function Navbar() {
           {ToggleBtn()}
         </Flex>
       </Flex>
-      {isHovering ? (
-        <NavItemBottomBox
-          onMouseOver={() => setIsHovering(1)}
-          onMouseOut={() => setIsHovering(0)}
-        >
-          <Flex direction="column">
-            {navItem?.map((nav, i) => (
-              <>
-                <Link
-                  to={nav.to}
-                  key={i}
-                  css={css`
-                    color: grey;
-                    &:hover {
-                      color: black;
-                    }
-                  `}
-                >
-                  {nav.name}
-                </Link>
-                <Spacing size={10} />
-              </>
-            ))}
-          </Flex>
-        </NavItemBottomBox>
-      ) : null}
-      {isOpen && <MobileNavbar />}
     </>
   )
 }
@@ -292,21 +257,6 @@ const NavItem = styled.div`
   gap: 10px;
   font-size: 14px;
 
-  @media (max-width: 600px) {
-    display: none;
-  }
-`
-
-// 상단 네비바 박스
-const NavItemBottomBox = styled.div`
-  padding: 20px;
-  height: auto;
-  min-height: 150px;
-  background-color: #f9ecec;
-  gap: 20px;
-  color: ${colors.white};
-  font-size: 18px;
-  z-index: 10;
   @media (max-width: 600px) {
     display: none;
   }

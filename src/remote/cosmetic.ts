@@ -10,6 +10,7 @@ import {
   where,
   documentId,
   orderBy,
+  addDoc,
 } from 'firebase/firestore'
 
 import { COLLECTIONS } from '@/constants'
@@ -97,20 +98,15 @@ export async function getRecommentHoels(hotelsId: string[]) {
   )
 }
 
-// export async function getHotelWithRoom({
-//   hotelId,
-//   roomId,
-// }: {
-//   hotelId: string
-//   roomId: string
-// }) {
-//   const hotelSanpshot = await getDoc(doc(store, COLLECTIONS.COSMETIC, hotelId))
-//   const roomSanpshot = await getDoc(
-//     doc(hotelSanpshot.ref, COLLECTIONS.COSMETIC, roomId),
-//   )
-
-//   return {
-//     hotel: hotelSanpshot.data() as Hotel,
-//     room: roomSanpshot.data() as Room,
-//   }
-// }
+// 화장품 데이터 저장하기
+export const addCosmetic = async (cosmeticData: Cosmetic) => {
+  const cosmeticRef = collection(store, `${COLLECTIONS.COSMETIC}`)
+  await addDoc(cosmeticRef, {
+    ...cosmeticData,
+    createAt: new Date()?.toLocaleDateString('ko', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    }),
+  })
+}

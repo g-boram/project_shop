@@ -1,29 +1,20 @@
 import Flex from '@/components/shared/Flex'
 import Button from '@/components/shared/Button'
 import styled from '@emotion/styled'
-import { css } from '@emotion/react'
-
-import { ChangeEvent, useEffect, useState } from 'react'
-import { useMutation, useQuery } from 'react-query'
-import { newImg } from '@/models/managerMain'
-
-import {
-  deleteMainBanner,
-  getMainEventBanner,
-  upDateNewImg,
-} from '@/hooks/data/useStore'
-import { imgUploadAndUrl } from '@/hooks/data/useStorage'
-
 import useUser from '@/hooks/auth/useUser'
-import { FadeLoader } from 'react-spinners'
 import Spacing from '@/components/shared/Spacing'
 import Text from '@/components/shared/Text'
-import { useMainBanner } from '@/hooks/data/useMainData'
 import ManagerHead from '@/components/shared/ManagerHead'
-import { Link } from 'react-router-dom'
 import ManagerPageLayout from '@/components/shared/Layout/ManagerPageLayout'
+import { css } from '@emotion/react'
+import { ChangeEvent, useState } from 'react'
+import { useMutation } from 'react-query'
+import { newImg } from '@/models/managerMain'
+import { deleteMainBanner, upDateNewImg } from '@/hooks/data/useStore'
+import { imgUploadAndUrl } from '@/hooks/data/useStorage'
+import { FadeLoader } from 'react-spinners'
+import { useMainBanner } from '@/hooks/data/useMainData'
 import { useAlertContext } from '@/contexts/AlertContext'
-import { RiCameraOffFill } from 'react-icons/ri'
 
 export default function SetMainBanner() {
   const user = useUser()

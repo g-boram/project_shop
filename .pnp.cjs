@@ -38,6 +38,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/react", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:13.4.0"],\
           ["@testing-library/user-event", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:13.5.0"],\
           ["@types/babel__preset-env", "npm:7.9.6"],\
+          ["@types/chroma-js", "npm:2.4.4"],\
           ["@types/eslint", "npm:8.56.2"],\
           ["@types/jest", "npm:27.5.2"],\
           ["@types/node", "npm:16.18.82"],\
@@ -46,6 +47,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.19"],\
           ["@types/validator", "npm:13.11.9"],\
           ["axios", "npm:1.6.7"],\
+          ["chroma-js", "npm:2.4.2"],\
           ["craco-alias", "npm:3.0.1"],\
           ["date-fns", "npm:3.3.1"],\
           ["eslint", "npm:8.56.0"],\
@@ -7554,6 +7556,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/chroma-js", [\
+      ["npm:2.4.4", {\
+        "packageLocation": "../../../.yarn/berry/cache/@types-chroma-js-npm-2.4.4-c618a374f5-10c0.zip/node_modules/@types/chroma-js/",\
+        "packageDependencies": [\
+          ["@types/chroma-js", "npm:2.4.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/connect", [\
       ["npm:3.4.38", {\
         "packageLocation": "../../../.yarn/berry/cache/@types-connect-npm-3.4.38-a8a4c38337-10c0.zip/node_modules/@types/connect/",\
@@ -10384,6 +10395,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/chownr-npm-2.0.0-638f1c9c61-10c0.zip/node_modules/chownr/",\
         "packageDependencies": [\
           ["chownr", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["chroma-js", [\
+      ["npm:2.4.2", {\
+        "packageLocation": "../../../.yarn/berry/cache/chroma-js-npm-2.4.2-76dd14218f-10c0.zip/node_modules/chroma-js/",\
+        "packageDependencies": [\
+          ["chroma-js", "npm:2.4.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -21300,6 +21320,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/react", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:13.4.0"],\
           ["@testing-library/user-event", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:13.5.0"],\
           ["@types/babel__preset-env", "npm:7.9.6"],\
+          ["@types/chroma-js", "npm:2.4.4"],\
           ["@types/eslint", "npm:8.56.2"],\
           ["@types/jest", "npm:27.5.2"],\
           ["@types/node", "npm:16.18.82"],\
@@ -21308,6 +21329,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.19"],\
           ["@types/validator", "npm:13.11.9"],\
           ["axios", "npm:1.6.7"],\
+          ["chroma-js", "npm:2.4.2"],\
           ["craco-alias", "npm:3.0.1"],\
           ["date-fns", "npm:3.3.1"],\
           ["eslint", "npm:8.56.0"],\

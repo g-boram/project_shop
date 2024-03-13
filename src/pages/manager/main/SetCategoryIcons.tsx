@@ -41,7 +41,10 @@ export default function SetCategoryIcons() {
         <DescBox>
           <Flex direction="column">
             <Text typography="t5">
-              * 카테고리 이미지 변경은 개발자에게 문의 해주세요
+              * 아이콘을 클릭 하여 희망순서로 드래그 해주세요
+            </Text>
+            <Text typography="t5">
+              * 카테고리 이미지/이름 변경은 개발자에게 문의 해주세요
             </Text>
             <Text typography="t5">
               * 순서변경은 실시간으로 반영되니 신중히 정한 후 저장 해주세요
@@ -139,13 +142,14 @@ function StrictModeDroppable({ children, ...props }: DroppableProps) {
 
 const DragContainer = styled.div`
   display: flex;
+  height: 400px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
-  height: 300px;
+  margin-bottom: 30px;
+  overflow: scroll;
 `
 const DescBox = styled.div`
-  height: 60px;
+  height: auto;
   padding: 10px;
   box-shadow: 0px 0px 10px -2px #ffbdd2;
 `
@@ -154,7 +158,6 @@ const SettingContainer = styled.div`
   height: 800px;
 `
 const IconBox = styled.div`
-  margin: 0 10px;
   height: 100px;
   width: 70px;
   padding: 5px;

@@ -13,7 +13,7 @@ const Tag = styled.span<TagProps>(
     fontWeight: 'bold',
     borderRadius: '2px',
     textAlign: 'center',
-    width: '140px',
+    width: '100%',
     display: 'inline-block',
     color: color in colors ? colors[color as Colors] : color,
     backgroundColor:

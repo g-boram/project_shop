@@ -5,14 +5,7 @@ import Spacing from '../shared/Spacing'
 
 import { ChatingProps } from '@/models/board'
 import { addChating } from '@/remote/board'
-import {
-  KeyboardEventHandler,
-  LegacyRef,
-  ReactHTMLElement,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { BsFillSendCheckFill } from 'react-icons/bs'
 import { css } from '@emotion/react'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'

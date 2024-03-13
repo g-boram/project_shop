@@ -1,20 +1,17 @@
 import { COLLECTIONS } from '@/constants'
 import { BoardFormProps, ChatingProps } from '@/models/board'
+import { store } from './firebase'
 import {
   addDoc,
   arrayRemove,
   collection,
   deleteDoc,
   doc,
-  getDoc,
   getDocs,
-  onSnapshot,
   orderBy,
   query,
   updateDoc,
-  where,
 } from 'firebase/firestore'
-import { store } from './firebase'
 
 // 게시글 저장하기
 export const addBoard = async (newBoard: BoardFormProps) => {

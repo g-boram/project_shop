@@ -9,9 +9,10 @@ import Text from '../shared/Text'
 import Spacing from '../shared/Spacing'
 import { css } from '@emotion/react'
 import { PropagateLoader } from 'react-spinners'
+import { Link } from 'react-router-dom'
 
 const MainIconBox = () => {
-  const { data, isLoading = true } = useMainCategoryIcons()
+  const { data, isLoading } = useMainCategoryIcons()
   const [isMore, setIsMore] = useState(false)
 
   const [innerWidth, setInnerWidth] = useState(0)
@@ -24,7 +25,6 @@ const MainIconBox = () => {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-
   const handleIsMore = () => {
     setIsMore((prev) => !prev)
   }
@@ -36,19 +36,46 @@ const MainIconBox = () => {
       </LoadingBox>
     )
   }
-
+  const EventIcons = [
+    {
+      name: 'Time',
+      url: 'https://firebasestorage.googleapis.com/v0/b/project-shop-62c72.appspot.com/o/main%2FcategoryIcons%2FtimeSale.jpg?alt=media&token=a03cfd55-d858-4bfa-9abf-1799f3874151',
+    },
+    {
+      name: 'Gift',
+      url: 'https://firebasestorage.googleapis.com/v0/b/project-shop-62c72.appspot.com/o/main%2FcategoryIcons%2FgiftBox.png?alt=media&token=66f01b0a-6b57-4ba3-a2d2-914ec7f2fd0d',
+    },
+    {
+      name: 'Sale',
+      url: 'https://firebasestorage.googleapis.com/v0/b/project-shop-62c72.appspot.com/o/main%2FcategoryIcons%2Fsale_icon.png?alt=media&token=890d6f60-f03d-460a-b554-e78398f2d1c0',
+    },
+  ]
   return (
     <>
       {innerWidth < 600 ? (
         <>
           {isMore ? (
             <IconMoreCotainer>
+              <>
+                {EventIcons.map((icon, index) => {
+                  return (
+                    <Link to={`/cosmetic`}>
+                      <IconBox>
+                        <img src={icon.url} alt={icon.name} />
+                        <span>{icon.name}</span>
+                      </IconBox>
+                    </Link>
+                  )
+                })}
+              </>
               {data?.map((icon, index) => {
                 return (
-                  <IconBox>
-                    <img src={icon.url} alt={icon.name} />
-                    <span>{icon.name}</span>
-                  </IconBox>
+                  <Link to={`/cosmetic/${icon.category}`}>
+                    <IconBox>
+                      <img src={icon.url} alt={icon.name} />
+                      <span>{icon.name}</span>
+                    </IconBox>
+                  </Link>
                 )
               })}
               <Spacing size={10} direction={'horizontal'} />
@@ -62,12 +89,26 @@ const MainIconBox = () => {
             </IconMoreCotainer>
           ) : (
             <IconCotainer>
+              <>
+                {EventIcons.map((icon, index) => {
+                  return (
+                    <Link to={`/cosmetic`}>
+                      <IconBox>
+                        <img src={icon.url} alt={icon.name} />
+                        <span>{icon.name}</span>
+                      </IconBox>
+                    </Link>
+                  )
+                })}
+              </>
               {data?.map((icon, index) => {
                 return (
-                  <IconBox>
-                    <img src={icon.url} alt={icon.name} />
-                    <span>{icon.name}</span>
-                  </IconBox>
+                  <Link to={`/cosmetic/${icon.category}`}>
+                    <IconBox>
+                      <img src={icon.url} alt={icon.name} />
+                      <span>{icon.name}</span>
+                    </IconBox>
+                  </Link>
                 )
               })}
             </IconCotainer>
@@ -78,12 +119,26 @@ const MainIconBox = () => {
         </>
       ) : (
         <IconCotainer>
+          <>
+            {EventIcons.map((icon, index) => {
+              return (
+                <Link to={`/cosmetic`}>
+                  <IconBox>
+                    <img src={icon.url} alt={icon.name} />
+                    <span>{icon.name}</span>
+                  </IconBox>
+                </Link>
+              )
+            })}
+          </>
           {data?.map((icon, index) => {
             return (
-              <IconBox>
-                <img src={icon.url} alt={icon.name} />
-                <span>{icon.name}</span>
-              </IconBox>
+              <Link to={`/cosmetic/${icon.category}`}>
+                <IconBox>
+                  <img src={icon.url} alt={icon.name} />
+                  <span>{icon.name}</span>
+                </IconBox>
+              </Link>
             )
           })}
           <Spacing size={15} direction={'horizontal'} />
@@ -133,14 +188,11 @@ const IconMoreCotainer = styled.div`
 `
 const IconCotainer = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   height: auto;
   padding: 10px;
-  @media (max-width: 600px) {
-    overflow: hidden;
-  }
-  @media (min-width: 600px) {
-    overflow: scroll;
-  }
+  overflow: scroll;
 `
 
 const IconBox = styled.div`
@@ -148,7 +200,7 @@ const IconBox = styled.div`
   flex-direction: column;
   margin: 10px 15px;
   height: auto;
-  width: 20%;
+  width: 60px;
   align-items: center;
   color: ${`var(--fontBlack)`};
 
