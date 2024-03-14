@@ -2,6 +2,10 @@ export interface newImg {
   name: string
   img: string
 }
+export interface newSubImg {
+  name: string | undefined
+  img: string | undefined
+}
 export interface mainEventBanner {
   name: string
   fileName: string

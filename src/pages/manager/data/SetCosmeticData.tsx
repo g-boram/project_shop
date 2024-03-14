@@ -1,5 +1,4 @@
 import Button from '@/components/shared/Button'
-import HeadTitle from '@/components/shared/HeadTitle'
 import ManagerPageLayout from '@/components/shared/Layout/ManagerPageLayout'
 import ManagerHead from '@/components/shared/ManagerHead'
 import { COLLECTIONS } from '@/constants'

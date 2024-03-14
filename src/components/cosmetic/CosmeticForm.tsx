@@ -7,17 +7,20 @@ import chroma from 'chroma-js'
 import Select, { MultiValue, StylesConfig } from 'react-select'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Cosmetic } from '@/models/cosmetic'
+import { FaTrashAlt } from 'react-icons/fa'
+import { useAlertContext } from '@/contexts/AlertContext'
+import { newImg, newSubImg } from '@/models/managerMain'
+import { css } from '@emotion/react'
 import {
   colourOptions,
   ColourOption,
   CosmeticCategoryOption,
   COSMETIC_CATEGORY,
 } from '@/constants/cosmetic'
-import Text from '../shared/Text'
-import { useAlertContext } from '@/contexts/AlertContext'
-import { newImg } from '@/models/managerMain'
-import { cosmeticImgUploadAndUrl } from '@/hooks/data/useStorage'
-import { css } from '@emotion/react'
+import {
+  cosmeticImgUploadAndUrl,
+  cosmeticSubImgUploadAndUrl,
+} from '@/hooks/data/useStorage'
 
 export default function CosmeticForm({
   onSubmit,
@@ -26,7 +29,14 @@ export default function CosmeticForm({
 }) {
   const [colors, setColors] = useState<MultiValue<ColourOption | undefined>[]>()
   const [category, setCategory] = useState<CosmeticCategoryOption | null>()
+
   const [currentImg, setCurrentImg] = useState<newImg>()
+  const [currentSubImg, setCurrentSubImg] = useState<any[]>()
+
+  const [subImg1, setSubImg1] = useState<newSubImg>()
+  const [subImg2, setSubImg2] = useState<newSubImg>()
+  const [subImg3, setSubImg3] = useState<newSubImg>()
+
   const [newImgUrl, setNewImgUrl] = useState<string>('')
   const [formValues, setFormValues] = useState<Cosmetic>({
     name: '',
@@ -75,6 +85,42 @@ export default function CosmeticForm({
       reader.readAsDataURL(theFile)
     }
   }
+  // (Sub) 선택된 이미지 미리보기 생성 하기
+  const handleUploadSubFile = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+
+    if (files !== null) {
+      const theFile = files[0]
+      const currentImgName = files[0]?.name
+
+      const reader = new FileReader()
+      reader.onloadend = (finishedEvent) => {
+        // 업로드한 이미지 URL 저장
+        const result = (finishedEvent.target as FileReader).result as string
+
+        if (e.target.name === 'sub1') {
+          setSubImg1({
+            name: currentImgName,
+            img: result,
+          })
+        }
+        if (e.target.name === 'sub2') {
+          setSubImg2({
+            name: currentImgName,
+            img: result,
+          })
+        }
+        if (e.target.name === 'sub3') {
+          setSubImg3({
+            name: currentImgName,
+            img: result,
+          })
+        }
+      }
+      if (!theFile) return
+      reader.readAsDataURL(theFile)
+    }
+  }
 
   useEffect(() => {
     if (newImgUrl !== '') {
@@ -91,9 +137,37 @@ export default function CosmeticForm({
 
   // 선택된 이미지 url 얻기
   const getImgUrl = async () => {
-    if (!currentImg) return
-    const getUrl = await cosmeticImgUploadAndUrl(currentImg)
-    setNewImgUrl(getUrl)
+    const subUrl = []
+
+    if (subImg1 !== undefined) {
+      const getSubUrl1 = await cosmeticSubImgUploadAndUrl(subImg1)
+      subUrl.push({
+        name: subImg1.name,
+        url: getSubUrl1,
+      })
+    }
+    if (subImg2 !== undefined) {
+      const getSubUrl2 = await cosmeticSubImgUploadAndUrl(subImg2)
+      subUrl.push({
+        name: subImg2.name,
+        url: getSubUrl2,
+      })
+    }
+    if (subImg3 !== undefined) {
+      const getSubUrl3 = await cosmeticSubImgUploadAndUrl(subImg3)
+      subUrl.push({
+        name: subImg3.name,
+        url: getSubUrl3,
+      })
+    }
+
+    if (subUrl !== undefined) {
+      setCurrentSubImg(subUrl)
+
+      if (!currentImg) return
+      const getUrl = await cosmeticImgUploadAndUrl(currentImg)
+      setNewImgUrl(getUrl)
+    }
   }
 
   // 부모 컴포넌트로 보낼 완전가공된 데이터
@@ -111,6 +185,7 @@ export default function CosmeticForm({
       totalSale: Number(formValues.price) / Number(formValues.salePercent),
       color: colorArr,
       url: newImgUrl,
+      subUrl: currentSubImg,
     } as Cosmetic
     onSubmit(setValues)
   }
@@ -192,17 +267,132 @@ export default function CosmeticForm({
                 {currentImg?.name !== '' ? currentImg?.name : ''}
               </div>
               <label key="newImg" css={labelStyle} htmlFor={`new`}>
-                이미지 선택
+                메인 이미지 선택
               </label>
             </Flex>
-            <Spacing size={10} />
             <input
               key="newImg"
               type="file"
               id={`new`}
               onChange={handleUploadFile}
             />
-            <NewImgDescBox>
+            <Spacing size={80} />
+            <Flex>
+              <Flex direction="column" justify={'center'} align={'center'}>
+                <SubImgWrapper>
+                  {subImg1?.img !== undefined ? (
+                    <img src={subImg1?.img} alt="" />
+                  ) : (
+                    <></>
+                  )}
+                </SubImgWrapper>
+                <Flex direction="column" align={'center'}>
+                  <div css={subCurrentName}>
+                    {subImg1?.name !== '' ? subImg1?.name : ''}
+                  </div>
+                  <Flex align={'center'}>
+                    <label key="sub1" css={subLabelStyle} htmlFor={`sub1`}>
+                      서브 이미지 선택1
+                    </label>
+                    {subImg1 !== undefined ? (
+                      <>
+                        <Spacing size={10} direction="horizontal" />
+                        <FaTrashAlt
+                          color="grey"
+                          onClick={() => setSubImg1(undefined)}
+                        />
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </Flex>
+                </Flex>
+                <input
+                  key="sub1"
+                  type="file"
+                  id={`sub1`}
+                  name={`sub1`}
+                  onChange={handleUploadSubFile}
+                />
+              </Flex>
+              <Spacing size={10} direction="horizontal" />
+              <Flex direction="column" justify={'center'} align={'center'}>
+                <SubImgWrapper>
+                  {subImg2?.img !== undefined ? (
+                    <img src={subImg2?.img} alt="" />
+                  ) : (
+                    <></>
+                  )}
+                </SubImgWrapper>
+                <Flex direction="column" align={'center'}>
+                  <div css={subCurrentName}>
+                    {subImg2?.name !== '' ? subImg2?.name : ''}
+                  </div>
+                  <Flex align={'center'}>
+                    <label key="sub2" css={subLabelStyle} htmlFor={`sub2`}>
+                      서브 이미지 선택2
+                    </label>
+                    {subImg2 !== undefined ? (
+                      <>
+                        <Spacing size={10} direction="horizontal" />
+                        <FaTrashAlt
+                          color="grey"
+                          onClick={() => setSubImg2(undefined)}
+                        />
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </Flex>
+                </Flex>
+                <input
+                  key="sub2"
+                  type="file"
+                  id={`sub2`}
+                  name={`sub2`}
+                  onChange={handleUploadSubFile}
+                />
+              </Flex>
+              <Spacing size={10} direction="horizontal" />
+              <Flex direction="column" justify={'center'} align={'center'}>
+                <SubImgWrapper>
+                  {subImg3?.img !== undefined ? (
+                    <img src={subImg3?.img} alt="" />
+                  ) : (
+                    <></>
+                  )}
+                </SubImgWrapper>
+                <Flex direction="column" align={'center'}>
+                  <div css={subCurrentName}>
+                    {subImg3?.name !== '' ? subImg3?.name : ''}
+                  </div>
+                  <Flex align={'center'}>
+                    <label key="sub3" css={subLabelStyle} htmlFor={`sub3`}>
+                      서브 이미지 선택3
+                    </label>
+                    {subImg3 !== undefined ? (
+                      <>
+                        <Spacing size={10} direction="horizontal" />
+                        <FaTrashAlt
+                          color="grey"
+                          onClick={() => setSubImg3(undefined)}
+                        />
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </Flex>
+                </Flex>
+                <input
+                  key="sub3"
+                  type="file"
+                  id={`sub3`}
+                  name={`sub3`}
+                  onChange={handleUploadSubFile}
+                />
+              </Flex>
+            </Flex>
+            {/* <NewImgDescBox>
               <Text
                 typography="t7"
                 display="block"
@@ -219,7 +409,7 @@ export default function CosmeticForm({
                 * 저장완료 된 데이터는 실시간 적용됩니다. 꼼꼼히 확인 후
                 진행해주세요
               </Text>
-            </NewImgDescBox>
+            </NewImgDescBox> */}
           </NewImgBtnWrapper>
         </Flex>
         <Spacing size={20} />
@@ -449,6 +639,18 @@ const InputBox = styled.div`
   }
 `
 
+const SubImgWrapper = styled.div`
+  width: 130px;
+  height: 130px;
+  margin-bottom: 10px;
+  background-color: #f8f8f8;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+`
 const NewImgWrapper = styled.div`
   width: 250px;
   height: 320px;
@@ -479,6 +681,20 @@ const NewImgDescBox = styled.div`
   box-shadow: 0px 0px 10px -2px #c0a3e3;
 `
 
+const subLabelStyle = css`
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  width: 100px;
+  height: 30px;
+  background-color: #c0a3e3;
+  color: white;
+  border-radius: 5px;
+
+  font-weight: bold;
+`
 const labelStyle = css`
   cursor: pointer;
   display: flex;
@@ -492,6 +708,15 @@ const labelStyle = css`
   color: white;
   border-radius: 5px;
   font-weight: bold;
+`
+const subCurrentName = css`
+  display: flex;
+  height: 25px;
+  width: 130px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  overflow: hidden;
+  background-color: white;
 `
 const currentName = css`
   height: 35px;

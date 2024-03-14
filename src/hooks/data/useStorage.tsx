@@ -1,4 +1,4 @@
-import { newImg } from '@/models/managerMain'
+import { newImg, newSubImg } from '@/models/managerMain'
 import { storage } from '@/remote/firebase'
 import { ref, uploadString, getDownloadURL, listAll } from 'firebase/storage'
 
@@ -14,6 +14,15 @@ export const imgUploadAndUrl = async (current: newImg) => {
 }
 // 화장품 이미지 저장 & 저장된 이미지 url 구하기
 export const cosmeticImgUploadAndUrl = async (current: newImg) => {
+  const fileRef = ref(storage, `main/cosmetic/${current.name}`)
+  const upload = await uploadString(fileRef, current.img, 'data_url')
+  const url = await getDownloadURL(upload.ref)
+
+  return url
+}
+// 화장품 이미지 저장 & 저장된 이미지 url 구하기 (서브)
+export const cosmeticSubImgUploadAndUrl = async (current: newSubImg) => {
+  if (current.img === undefined) return
   const fileRef = ref(storage, `main/cosmetic/${current.name}`)
   const upload = await uploadString(fileRef, current.img, 'data_url')
   const url = await getDownloadURL(upload.ref)
