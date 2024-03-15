@@ -1,7 +1,10 @@
 import Button from '@/components/shared/Button'
+import Flex from '@/components/shared/Flex'
 import Spacing from '@/components/shared/Spacing'
 import CosmeticList from '@/components/user/CosmeticList'
+import MobileCosmeticList from '@/components/user/MobileCosmeticList'
 import { CATEGORY } from '@/constants/cosmetic'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -25,6 +28,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 const CosmeticPage = () => {
   const params = useParams()
+  const [innerWidth, setInnerWidth] = useState(0)
   const [category, setCategory] = useState<string>('shadow')
 
   useEffect(() => {
@@ -33,10 +37,27 @@ const CosmeticPage = () => {
     }
   }, [params?.category])
 
+  const handleResize = () => {
+    setInnerWidth(window.innerWidth)
+  }
+
+  useEffect(() => {
+    if (innerWidth === 0) {
+      window.addEventListener('resize', handleResize)
+
+      setInnerWidth(window.innerWidth)
+      window.removeEventListener('resize', handleResize)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
-    <CosmeticContainer>
-      <CosmeticWrapper>
-        <CosmeticBox>
+    <>
+      {innerWidth > 600 ? (
+        <CosmeticContainer>
           <CategoryNavBox>
             <EventBannerBox>EventBannerBox</EventBannerBox>
             <Spacing size={30} />
@@ -58,26 +79,68 @@ const CosmeticPage = () => {
           <CosmeticListBox>
             <CosmeticList category={category} />
           </CosmeticListBox>
-        </CosmeticBox>
-      </CosmeticWrapper>
-    </CosmeticContainer>
+        </CosmeticContainer>
+      ) : (
+        <MobileCosmeticContainer>
+          <MobileEventBannerBox>EentBanner</MobileEventBannerBox>
+          <MobileCategory>
+            {CATEGORY.map((cate, idx) => (
+              <MCategory key={idx} onClick={() => setCategory(cate.value)}>
+                {cate.name}
+              </MCategory>
+            ))}
+          </MobileCategory>
+          <MobileListBox>
+            <Flex justify={'space-between'} css={mobileHeader}>
+              {category}
+            </Flex>
+            <MobileCosmeticList category={category} />
+          </MobileListBox>
+        </MobileCosmeticContainer>
+      )}
+    </>
   )
 }
 
-const CosmeticContainer = styled.div`
-  min-width: 1200px;
-  min-height: 1000px;
+const MobileCosmeticContainer = styled.div`
+  background-color: pink;
+  height: auto;
+  padding: 10px;
+`
+const MobileEventBannerBox = styled.div`
+  background-color: grey;
+  width: 100%;
+  height: 80px;
+`
+const MobileCategory = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+const MCategory = styled.div`
+  background-color: white;
+  height: 30px;
+  width: 50%;
+  margin-top: 10px;
+`
+const MobileListBox = styled.div`
+  background-color: white;
+  padding: 10px;
   overflow: scroll;
+  margin-top: 20px;
+`
+
+const mobileHeader = css`
+  height: 50px;
+  background-color: yellow;
+  font-size: 16px;
+  font-weight: bold;
+`
+const CosmeticContainer = styled.div`
+  width: 1350px;
+  padding-top: 10px;
   margin: 0 auto;
   background-color: pink;
-  padding: 0 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-const CosmeticWrapper = styled.div`
-  background-color: white;
-  width: 1400px;
 `
 
 const EventBannerBox = styled.div`
@@ -86,20 +149,18 @@ const EventBannerBox = styled.div`
   width: 100%;
 `
 
-const CosmeticBox = styled.div`
-  background-color: pink;
-  display: flex;
-  padding: 10px;
-`
 const CategoryNavBox = styled.div`
   background-color: grey;
   height: auto;
-  padding: 10px;
-  width: 20%;
+  flex-basis: 200px;
 `
 const CosmeticListBox = styled.div`
+  flex-basis: 1150px;
   background-color: white;
-  width: 80%;
-  min-height: 900px;
+  padding: 5px;
+  overflow: scroll;
+  display: flex;
+  justify-content: center;
 `
+
 export default CosmeticPage

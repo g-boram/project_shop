@@ -59,7 +59,7 @@ export default function ManagerPageLayout({
 const Container = styled.div`
   display: flex;
   height: 1000px;
-  width: 100%;
+  width: 1400px;
 `
 const MoveNavBox = styled.div`
   display: flex;

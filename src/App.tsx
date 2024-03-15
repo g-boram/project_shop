@@ -36,8 +36,8 @@ function App() {
   return (
     <BrowserRouter>
       <ToastContainer autoClose={1000} />
+      <Navbar />
       <LayoutContainer>
-        <Navbar />
         <PageContainer>
           <Routes>
             <Route path="/" Component={HomePage} />
@@ -106,10 +106,15 @@ function App() {
 const LayoutContainer = styled.div`
   position: relative;
   height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 `
 const PageContainer = styled.div`
   height: auto;
   overflow: scroll;
   padding-bottom: 80px;
+  max-width: 1400px;
 `
 export default App

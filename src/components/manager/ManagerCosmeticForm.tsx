@@ -18,6 +18,7 @@ const ManagerCosmeticForm = () => {
   const navigate = useNavigate()
 
   const [isLoading, setIsLoading] = useState(false)
+  const handleLoading = () => setIsLoading(true)
 
   // 등록 버튼
   const handleSubmit = async (formValues: Cosmetic) => {
@@ -28,7 +29,6 @@ const ManagerCosmeticForm = () => {
       email: user?.email,
       name: user?.displayName,
     }
-    console.log('formData', formData)
     toast.success('게시글 등록 완료!')
     navigate('/manager/data/setCosmeticData')
     try {
@@ -42,23 +42,22 @@ const ManagerCosmeticForm = () => {
     <ManagerPageLayout>
       <ManagerHead title={'Set Cosmetic Data'} />
       <SettingContainer>
+        <CosmeticForm onSubmit={handleSubmit} setLoading={handleLoading} />
         {isLoading ? (
           <DimmedBox>
-            <PuffLoader color="#de9eb2" />
+            <PuffLoader color="#6643b5" size={'200px'} />
           </DimmedBox>
         ) : (
-          <>
-            <CosmeticForm onSubmit={handleSubmit} />
-            <Spacing size={20} />
-            <Flex justify={'center'}>
-              <Link to={'/manager/data/setBoardData'}>
-                <Button size="medium" color="purple">
-                  목록
-                </Button>
-              </Link>
-            </Flex>
-          </>
+          <></>
         )}
+        <Spacing size={20} />
+        <Flex justify={'center'}>
+          <Link to={'/manager/data/setBoardData'}>
+            <Button size="medium" color="purple">
+              목록
+            </Button>
+          </Link>
+        </Flex>
       </SettingContainer>
     </ManagerPageLayout>
   )
@@ -70,9 +69,11 @@ const SettingContainer = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 800px;
-  width: 100%;
 `
 const DimmedBox = styled.div`
+  position: absolute;
+  bottom: 10;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;

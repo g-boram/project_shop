@@ -21,16 +21,22 @@ import {
   cosmeticImgUploadAndUrl,
   cosmeticSubImgUploadAndUrl,
 } from '@/hooks/data/useStorage'
+import Text from '../shared/Text'
 
 export default function CosmeticForm({
   onSubmit,
+  setLoading,
 }: {
   onSubmit: (formValues: Cosmetic) => void
+  setLoading: () => void
 }) {
   const [colors, setColors] = useState<MultiValue<ColourOption | undefined>[]>()
   const [category, setCategory] = useState<CosmeticCategoryOption | null>()
-
+  // 메인사진
   const [currentImg, setCurrentImg] = useState<newImg>()
+  // 내용사진
+  const [currentContentImg, setCurrentContentImg] = useState<newImg>()
+  // 서브사진
   const [currentSubImg, setCurrentSubImg] = useState<any[]>()
 
   const [subImg1, setSubImg1] = useState<newSubImg>()
@@ -38,6 +44,7 @@ export default function CosmeticForm({
   const [subImg3, setSubImg3] = useState<newSubImg>()
 
   const [newImgUrl, setNewImgUrl] = useState<string>('')
+  const [contentImgUrl, setContentImgUrl] = useState<string>('')
   const [formValues, setFormValues] = useState<Cosmetic>({
     name: '',
     brand_name: '',
@@ -64,7 +71,7 @@ export default function CosmeticForm({
     }))
   }
 
-  // 선택된 이미지 미리보기 생성 하기
+  // (main) 선택된 이미지 미리보기 생성 하기
   const handleUploadFile = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
 
@@ -77,6 +84,27 @@ export default function CosmeticForm({
         // 업로드한 이미지 URL 저장
         const result = (finishedEvent.target as FileReader).result as string
         setCurrentImg({
+          name: currentImgName,
+          img: result,
+        })
+      }
+      if (!theFile) return
+      reader.readAsDataURL(theFile)
+    }
+  }
+  // (content) 선택된 이미지 미리보기 생성 하기
+  const handleUploadContentFile = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+
+    if (files !== null) {
+      const theFile = files[0]
+      const currentImgName = files[0]?.name
+
+      const reader = new FileReader()
+      reader.onloadend = (finishedEvent) => {
+        // 업로드한 이미지 URL 저장
+        const result = (finishedEvent.target as FileReader).result as string
+        setCurrentContentImg({
           name: currentImgName,
           img: result,
         })
@@ -123,7 +151,7 @@ export default function CosmeticForm({
   }
 
   useEffect(() => {
-    if (newImgUrl !== '') {
+    if (newImgUrl !== '' && contentImgUrl !== '') {
       open({
         title: '신규 화장품을 등록 하시겠습니까?',
         isCancle: true,
@@ -137,6 +165,7 @@ export default function CosmeticForm({
 
   // 선택된 이미지 url 얻기
   const getImgUrl = async () => {
+    setLoading()
     const subUrl = []
 
     if (subImg1 !== undefined) {
@@ -164,6 +193,10 @@ export default function CosmeticForm({
     if (subUrl !== undefined) {
       setCurrentSubImg(subUrl)
 
+      if (!currentContentImg) return
+      const getContentUrl = await cosmeticImgUploadAndUrl(currentContentImg)
+      setContentImgUrl(getContentUrl)
+
       if (!currentImg) return
       const getUrl = await cosmeticImgUploadAndUrl(currentImg)
       setNewImgUrl(getUrl)
@@ -186,6 +219,7 @@ export default function CosmeticForm({
       color: colorArr,
       url: newImgUrl,
       subUrl: currentSubImg,
+      contentUrl: currentContentImg,
     } as Cosmetic
     onSubmit(setValues)
   }
@@ -253,6 +287,32 @@ export default function CosmeticForm({
   return (
     <FormContainer>
       <Flex direction="column">
+        <NewImgDescBox>
+          <Text
+            typography="t7"
+            display="block"
+            style={{ marginTop: 10, marginBottom: 6 }}
+          >
+            * 메인/서브 이미지 000 x 000, 내용이미지 000 x 000 사이즈를 다시
+            한번 확인해주세요
+          </Text>
+          <Text
+            typography="t7"
+            display="block"
+            style={{ marginTop: 10, marginBottom: 6 }}
+          >
+            * 메인/서브/내용 이미지 등록은 필수입니다. 하나라도 선택하지 않은
+            경우 등록되지 않습니다.
+          </Text>
+          <Text
+            typography="t7"
+            display="block"
+            style={{ marginTop: 10, marginBottom: 6 }}
+          >
+            * 저장완료 된 데이터는 실시간 적용됩니다. 꼼꼼히 확인 후
+            진행해주세요
+          </Text>
+        </NewImgDescBox>
         <Flex justify={'center'}>
           <NewImgWrapper>
             {currentImg?.img !== null ? (
@@ -392,24 +452,6 @@ export default function CosmeticForm({
                 />
               </Flex>
             </Flex>
-            {/* <NewImgDescBox>
-              <Text
-                typography="t7"
-                display="block"
-                style={{ marginTop: 10, marginBottom: 6 }}
-              >
-                * 업로드 이미지 사이즈는 450 x 300 입니다. 사이즈를 다시 한번
-                확인해주세요
-              </Text>
-              <Text
-                typography="t7"
-                display="block"
-                style={{ marginTop: 10, marginBottom: 6 }}
-              >
-                * 저장완료 된 데이터는 실시간 적용됩니다. 꼼꼼히 확인 후
-                진행해주세요
-              </Text>
-            </NewImgDescBox> */}
           </NewImgBtnWrapper>
         </Flex>
         <Spacing size={20} />
@@ -564,19 +606,49 @@ export default function CosmeticForm({
         <Spacing size={10} />
         <Flex>
           <Label>내용</Label>
-          <TextareaBox>
-            <textarea
-              name="desc"
-              id="desc"
-              onChange={handleFormValues}
-              value={formValues.desc}
-            />
-          </TextareaBox>
+          <Flex
+            direction="column"
+            css={css`
+              width: 100%;
+            `}
+          >
+            <TextareaBox>
+              <textarea
+                name="desc"
+                id="desc"
+                onChange={handleFormValues}
+                value={formValues.desc}
+              />
+            </TextareaBox>
+            <Spacing size={10} />
+            <ContentImgBtnWrapper>
+              <div css={currentName}>
+                {currentContentImg?.name !== '' ? currentContentImg?.name : ''}
+              </div>
+              <label key="content" css={labelStyle} htmlFor={`content`}>
+                내용 이미지 선택
+              </label>
+              <input
+                key="content"
+                type="file"
+                id={`content`}
+                onChange={handleUploadContentFile}
+              />
+            </ContentImgBtnWrapper>
+            <Spacing size={10} />
+            <ContentImgArea>
+              {currentContentImg?.img !== null ? (
+                <img src={currentContentImg?.img} alt="" />
+              ) : (
+                <></>
+              )}
+            </ContentImgArea>
+          </Flex>
         </Flex>
       </Flex>
       <Spacing size={20} />
       <Flex justify={'center'}>
-        <Button color="lightPurple" full onClick={getImgUrl}>
+        <Button size="large" color="lightPurple" full onClick={getImgUrl}>
           게시글 등록
         </Button>
       </Flex>
@@ -608,19 +680,33 @@ const Label = styled.div`
   font-weight: bold;
   background-color: #6643b5;
 `
-const TextareaBox = styled.div`
+const ContentImgArea = styled.div`
   height: auto;
+  min-height: 50px;
+  overflow: scroll;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 2px solid #ededff;
+  border-radius: 5px;
 
+  & img {
+    margin-top: 10px;
+    width: 90%;
+    height: auto;
+    object-fit: contain;
+  }
+`
+const TextareaBox = styled.div`
   & textarea {
+    width: 97%;
     border: 1px solid #cdcdff;
-    width: 100%;
-    padding: 10px 10px;
+    padding: 10px;
     border-radius: 5px;
-    height: 300px;
+    height: 100px;
+    resize: none;
   }
 `
 const InputBox = styled.div`
@@ -651,6 +737,7 @@ const SubImgWrapper = styled.div`
     object-fit: contain;
   }
 `
+
 const NewImgWrapper = styled.div`
   width: 250px;
   height: 320px;
@@ -661,6 +748,14 @@ const NewImgWrapper = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+`
+const ContentImgBtnWrapper = styled.div`
+  height: auto;
+  width: 100%;
+  display: flex;
+  & input {
+    display: none;
   }
 `
 const NewImgBtnWrapper = styled.div`
@@ -675,9 +770,9 @@ const NewImgBtnWrapper = styled.div`
 
 const NewImgDescBox = styled.div`
   background-color: white;
-  height: 180px;
-  margin-top: 20px;
+  height: 100px;
   padding: 10px;
+  margin-bottom: 50px;
   box-shadow: 0px 0px 10px -2px #c0a3e3;
 `
 
@@ -720,12 +815,10 @@ const subCurrentName = css`
 `
 const currentName = css`
   height: 35px;
-  padding: 4px;
-  width: 300px;
+  width: 100%;
   border-radius: 5px;
   display: flex;
   padding: 0px 10px;
   align-items: center;
-  background-color: white;
   border: 1px solid #bcbcbc;
 `

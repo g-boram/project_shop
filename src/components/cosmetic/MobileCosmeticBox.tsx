@@ -14,7 +14,7 @@ import { MdOutlineRateReview } from 'react-icons/md'
 import { BiLike } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 
-function CosmeticCategoryBox({ cosmetic }: { cosmetic: Cosmetic }) {
+function MobileCosmeticBox({ cosmetic }: { cosmetic: Cosmetic }) {
   const [remainedTime, setRemainedTime] = useState(0)
   // console.log(cosmetic)
   useEffect(() => {
@@ -82,33 +82,10 @@ function CosmeticCategoryBox({ cosmetic }: { cosmetic: Cosmetic }) {
         <Spacing size={10} />
 
         <Flex justify={'space-between'}>
-          <Flex align={'center'}>
-            <BiLike />
-            <Spacing size={10} direction={'horizontal'} />
-            <Text typography="t7">{cosmetic.like}</Text>
-          </Flex>
-          <Flex align={'center'}>
-            <Text typography="t7">
-              {cosmetic.reviews ? cosmetic.reviews?.length : 0}
-            </Text>
-            <Spacing size={10} direction={'horizontal'} />
-            <MdOutlineRateReview />
-          </Flex>
-        </Flex>
-        <Spacing size={10} />
-
-        <Flex justify={'space-between'}>
-          <Flex>
-            <FaStar fill="#ffdb00" />
-            <Spacing size={5} direction={'horizontal'} />
-            <Text typography="t7" bold>
-              {cosmetic.rating}
-            </Text>
-          </Flex>
+          <Text typography="t6" css={salePerStyle}>
+            {addDelimiter(cosmetic.salePercent) + '%'}
+          </Text>
           <Flex align={'flex-end'}>
-            <Text typography="t6" css={salePerStyle}>
-              {addDelimiter(cosmetic.salePercent) + '%'}
-            </Text>
             <Spacing size={5} direction={'horizontal'} />
             <Text typography="t9" css={saleTextStyle}>
               {addDelimiter(cosmetic.price)}
@@ -121,30 +98,41 @@ function CosmeticCategoryBox({ cosmetic }: { cosmetic: Cosmetic }) {
             </Text>
           </Flex>
         </Flex>
+
+        <Spacing size={10} />
+        <Flex justify={'space-between'}>
+          <Flex>
+            <FaStar fill="#ffdb00" />
+            <Spacing size={5} direction={'horizontal'} />
+            <Text typography="t7" bold>
+              {cosmetic.rating}
+            </Text>
+          </Flex>
+          <Flex align={'center'}>
+            <BiLike />
+            <Spacing size={10} direction={'horizontal'} />
+            <Text typography="t7">{cosmetic.like}</Text>
+          </Flex>
+        </Flex>
       </CosmeticContainer>
     </Link>
   )
 }
 
 const CosmeticContainer = styled.div`
-  display: flex;
-  flex-shrink: 0;
-  flex-direction: column;
-  background-color: white;
   border: 2px solid #eee;
   padding: 10px;
-  height: 320px;
-  width: 180px;
-  margin: 10px;
+  max-width: 120px;
 `
 const ImgWrapper = styled.div`
-  height: 240px;
+  height: 150px;
   width: 100%;
   position: relative;
   background-color: #f7f7f7;
   & img {
-    height: auto;
+    height: 100%;
     width: 100%;
+    object-fit: contain;
   }
 `
 const TagStyle = styled.div`
@@ -163,4 +151,4 @@ const salePerStyle = css`
 const saleTextStyle = css`
   text-decoration-line: line-through;
 `
-export default CosmeticCategoryBox
+export default MobileCosmeticBox

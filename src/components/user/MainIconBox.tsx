@@ -56,18 +56,17 @@ const MainIconBox = () => {
         <>
           {isMore ? (
             <IconMoreCotainer>
-              <>
-                {EventIcons.map((icon, index) => {
-                  return (
-                    <Link to={`/cosmetic`}>
-                      <IconBox>
-                        <img src={icon.url} alt={icon.name} />
-                        <span>{icon.name}</span>
-                      </IconBox>
-                    </Link>
-                  )
-                })}
-              </>
+              {/* 너비 600 이하 && 더보기 버튼 활성화 */}
+              {EventIcons.map((icon, index) => {
+                return (
+                  <Link to={`/cosmetic`}>
+                    <IconBox>
+                      <img src={icon.url} alt={icon.name} />
+                      <span>{icon.name}</span>
+                    </IconBox>
+                  </Link>
+                )
+              })}
               {data?.map((icon, index) => {
                 return (
                   <Link to={`/cosmetic/${icon.category}`}>
@@ -89,6 +88,7 @@ const MainIconBox = () => {
             </IconMoreCotainer>
           ) : (
             <IconCotainer>
+              {/* 너비 600 이하 && 더보기 버튼 비활성화 */}
               <>
                 {EventIcons.map((icon, index) => {
                   return (
@@ -118,8 +118,9 @@ const MainIconBox = () => {
           </Button>
         </>
       ) : (
-        <IconCotainer>
-          <>
+        <>
+          <IconCotainer>
+            {/* 너비 600 이상 */}
             {EventIcons.map((icon, index) => {
               return (
                 <Link to={`/cosmetic`}>
@@ -130,42 +131,32 @@ const MainIconBox = () => {
                 </Link>
               )
             })}
-          </>
-          {data?.map((icon, index) => {
-            return (
-              <Link to={`/cosmetic/${icon.category}`}>
-                <IconBox>
-                  <img src={icon.url} alt={icon.name} />
-                  <span>{icon.name}</span>
-                </IconBox>
-              </Link>
-            )
-          })}
-          <Spacing size={15} direction={'horizontal'} />
+            {data?.map((icon, index) => {
+              return (
+                <Link to={`/cosmetic/${icon.category}`}>
+                  <IconBox>
+                    <img src={icon.url} alt={icon.name} />
+                    <span>{icon.name}</span>
+                  </IconBox>
+                </Link>
+              )
+            })}
+            <Spacing size={15} direction={'horizontal'} />
+          </IconCotainer>
           <Flex
             align={'center'}
-            justify={'center'}
-            direction={'column'}
+            justify={'flex-end'}
             css={css`
-              text-align: center;
+              height: 20px;
             `}
           >
-            <BsInfoCircleFill size={'13px'} fillOpacity={'0.3'} />
-            <Spacing size={5} />
+            <BsInfoCircleFill size={'10px'} fillOpacity={'0.3'} />
+            <Spacing size={5} direction={'horizontal'} />
             <Text typography={'t8'} color={'fontGrey'}>
-              아이콘 제작자
-            </Text>
-            <Text typography={'t8'} color={'fontGrey'}>
-              justicon
-            </Text>
-            <Text typography={'t8'} color={'fontGrey'}>
-              -
-            </Text>
-            <Text typography={'t8'} color={'fontGrey'}>
-              Flaticon
+              아이콘 제작자 justicon-Flaticon
             </Text>
           </Flex>
-        </IconCotainer>
+        </>
       )}
     </>
   )
@@ -182,16 +173,13 @@ const IconMoreCotainer = styled.div`
     justify-content: center;
     align-items: center;
   }
-  @media (min-width: 600px) {
-    overflow: scroll;
-  }
 `
 const IconCotainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   height: auto;
-  padding: 10px;
+  padding: 5px;
   overflow: scroll;
 `
 
@@ -222,7 +210,7 @@ const IconBox = styled.div`
   @media (max-width: 600px) {
     font-size: 0.7rem;
     transition: 0.5s;
-    width: 10%;
+    width: 40px;
   }
 `
 const LoadingBox = styled.div`
