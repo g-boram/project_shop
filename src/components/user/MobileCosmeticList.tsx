@@ -11,11 +11,9 @@ const MobileCosmeticList = ({ category }: { category: string }) => {
 
   return (
     <CosmeticContainer>
-      {/* <ListContainer> */}
       {cosmetic?.map((cos, i) => {
         return <MobileCosmeticBox cosmetic={cos} key={i} />
       })}
-      {/* </ListContainer> */}
     </CosmeticContainer>
   )
 }

@@ -1,18 +1,27 @@
 import styled from '@emotion/styled'
-import Flex from '../shared/Flex'
-import Top from '../shared/Top'
+import useLike from '@/hooks/like/useLike'
 import useCosmeticsCategory from '@/hooks/data/useCosmeticsCategory'
 import CosmeticCategoryBox from '../cosmetic/CosmeticCategoryBox'
-import { css } from '@emotion/react'
 
 const CosmeticList = ({ category }: { category: string }) => {
   const { data: cosmetic } = useCosmeticsCategory(category)
+  const { data: likes, mutate: like } = useLike()
+  console.log('likes', likes)
 
   return (
     <CosmeticContainer>
       <ListContainer>
         {cosmetic?.map((cos, i) => {
-          return <CosmeticCategoryBox cosmetic={cos} key={i} />
+          return (
+            <CosmeticCategoryBox
+              key={i}
+              isLike={Boolean(
+                likes?.find((like) => like.cosmeticId === cos.id),
+              )}
+              onLike={like}
+              cosmetic={cos}
+            />
+          )
         })}
       </ListContainer>
     </CosmeticContainer>

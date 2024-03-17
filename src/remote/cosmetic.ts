@@ -15,7 +15,8 @@ import {
 
 import { COLLECTIONS } from '@/constants'
 import { store } from './firebase'
-import { Cosmetic } from '@/models/cosmetic'
+import { Cosmetic, Review } from '@/models/cosmetic'
+import { User } from '@/models/user'
 
 // 저장된 전체데이터에 인피니티 스크롤 기능 적용하기
 export async function getCosmetics(pageParams?: QuerySnapshot<Cosmetic>) {

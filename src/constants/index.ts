@@ -5,4 +5,6 @@ export const COLLECTIONS = {
   COSMETIC: 'COSMETIC',
   BOARD: 'BOARD',
   CHAT: 'CHAT',
+  REVIEW: 'REVIEW',
+  LIKE: 'LIKE',
 } as const

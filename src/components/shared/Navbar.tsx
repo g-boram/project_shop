@@ -25,7 +25,6 @@ const navList = [
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-
   const user = useUser()
   const isKakao = sessionStorage.getItem('kakao')
   const location = useLocation()
@@ -226,6 +225,7 @@ function Navbar() {
           {ToggleBtn()}
         </Flex>
       </Flex>
+      {isOpen ? MobileNavbar() : <></>}
     </>
   )
 }

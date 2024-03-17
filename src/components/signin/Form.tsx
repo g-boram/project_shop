@@ -182,5 +182,9 @@ const SNSBtnBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  @media (max-width: 600px) {
+    height: 200px;
+  }
 `
 export default Form

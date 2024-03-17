@@ -228,7 +228,7 @@ function Form({ onSubmit }: { onSubmit: (formValues: FormValues) => void }) {
       <Spacing size={50} />
       <Flex justify="center">
         <Button
-          size="small"
+          size="medium"
           color="pink"
           full
           disabled={isValidate === false}

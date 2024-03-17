@@ -73,7 +73,7 @@ function SigninPage() {
 
 const SigninConatiner = styled.div`
   margin: 0 auto;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -106,7 +106,7 @@ const ImgBox = styled.div`
   }
 
   @media (max-width: 600px) {
-    height: 200px;
+    height: 150px;
     width: 96%;
     padding: 10px;
     margin-top: 0px;
@@ -127,10 +127,18 @@ const FormBox = styled.div`
   padding: 50px 20px 20px 20px;
   height: auto;
   flex-grow: 1;
+
+  @media (max-width: 600px) {
+    padding: 20px;
+  }
 `
 
 const formTitle = css`
   flex-shrink: 0;
   height: 100px;
+
+  @media (max-width: 600px) {
+    height: 60px;
+  }
 `
 export default SigninPage

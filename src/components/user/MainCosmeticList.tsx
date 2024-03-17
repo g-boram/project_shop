@@ -51,7 +51,7 @@ const MainCosmeticList = () => {
   )
 }
 const CosmeticContainer = styled.div`
-  padding: 20px 30px;
+  padding: 20px;
 `
 const ListContainer = styled.div`
   display: flex;

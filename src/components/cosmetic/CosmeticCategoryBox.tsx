@@ -6,7 +6,7 @@ import Text from '../shared/Text'
 import Spacing from '../shared/Spacing'
 import { css } from '@emotion/react'
 import addDelimiter from '../../utils/addDelimiter'
-import { useEffect, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 import { differenceInMilliseconds, parseISO } from 'date-fns'
 import formatTime from '../../utils/formatTime'
 import Tag from '../shared/Tag'
@@ -14,32 +14,45 @@ import { MdOutlineRateReview } from 'react-icons/md'
 import { BiLike } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 
-function CosmeticCategoryBox({ cosmetic }: { cosmetic: Cosmetic }) {
+function CosmeticCategoryBox({
+  cosmetic,
+  isLike,
+  onLike,
+}: {
+  cosmetic: Cosmetic
+  isLike: boolean
+  onLike: ({
+    cosmetic,
+  }: {
+    cosmetic: Pick<Cosmetic, 'name' | 'id' | 'url'>
+  }) => void
+}) {
   const [remainedTime, setRemainedTime] = useState(0)
   // console.log(cosmetic)
-  useEffect(() => {
-    if (cosmetic.events == null || cosmetic.events.promoEndTime == null) {
-      return
-    }
 
-    const promoEndTime = cosmetic.events.promoEndTime
+  // useEffect(() => {
+  //   if (cosmetic.events == null || cosmetic.events.promoEndTime == null) {
+  //     return
+  //   }
 
-    const timer = setInterval(() => {
-      const 남은초 = differenceInMilliseconds(
-        parseISO(promoEndTime),
-        new Date(),
-      )
-      if (남은초 < 0) {
-        clearInterval(timer)
-        return
-      }
-      setRemainedTime(남은초)
-    }, 1_000)
+  //   const promoEndTime = cosmetic.events.promoEndTime
 
-    return () => {
-      clearInterval(timer)
-    }
-  }, [cosmetic.events])
+  //   const timer = setInterval(() => {
+  //     const 남은초 = differenceInMilliseconds(
+  //       parseISO(promoEndTime),
+  //       new Date(),
+  //     )
+  //     if (남은초 < 0) {
+  //       clearInterval(timer)
+  //       return
+  //     }
+  //     setRemainedTime(남은초)
+  //   }, 1_000)
+
+  //   return () => {
+  //     clearInterval(timer)
+  //   }
+  // }, [cosmetic.events])
 
   // 태그 컴포넌트
   const tagComponent = () => {
@@ -64,14 +77,36 @@ function CosmeticCategoryBox({ cosmetic }: { cosmetic: Cosmetic }) {
     )
   }
 
-  return (
-    <Link to={`/cosmetic/detail/${cosmetic.id}`}>
-      <CosmeticContainer>
-        <ImgWrapper>
-          {cosmetic.url ? <img src={cosmetic.url} alt={cosmetic.name} /> : null}
-          <TagStyle>{tagComponent()}</TagStyle>
-        </ImgWrapper>
+  const handleLike = (e: MouseEvent<HTMLImageElement>) => {
+    e.preventDefault()
+    onLike({
+      cosmetic: {
+        name: cosmetic.name,
+        url: cosmetic.url,
+        id: cosmetic.id,
+      },
+    })
+  }
 
+  return (
+    <CosmeticContainer>
+      <ImgWrapper>
+        <IconWrapper>
+          <img
+            src={
+              isLike
+                ? 'https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-64.png'
+                : 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-64.png'
+            }
+            alt=""
+            onClick={handleLike}
+          />
+        </IconWrapper>
+        {cosmetic.url ? <img src={cosmetic.url} alt={cosmetic.name} /> : null}
+        <TagStyle>{tagComponent()}</TagStyle>
+      </ImgWrapper>
+
+      <Link to={`/cosmetic/detail/${cosmetic.id}`}>
         <Flex direction="column" css={nameStyle}>
           <Text typography="t7">{cosmetic.brand_name}</Text>
           <Spacing size={5} direction={'horizontal'} />
@@ -121,8 +156,8 @@ function CosmeticCategoryBox({ cosmetic }: { cosmetic: Cosmetic }) {
             </Text>
           </Flex>
         </Flex>
-      </CosmeticContainer>
-    </Link>
+      </Link>
+    </CosmeticContainer>
   )
 }
 
@@ -138,9 +173,9 @@ const CosmeticContainer = styled.div`
   margin: 10px;
 `
 const ImgWrapper = styled.div`
+  position: relative;
   height: 240px;
   width: 100%;
-  position: relative;
   background-color: #f7f7f7;
   & img {
     height: auto;
@@ -162,5 +197,19 @@ const salePerStyle = css`
 `
 const saleTextStyle = css`
   text-decoration-line: line-through;
+`
+
+const IconWrapper = styled.div`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 `
 export default CosmeticCategoryBox

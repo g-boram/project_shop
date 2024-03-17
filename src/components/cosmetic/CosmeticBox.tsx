@@ -1,15 +1,16 @@
-import { Cosmetic } from '@/models/cosmetic'
-import { FaStar } from 'react-icons/fa'
 import styled from '@emotion/styled'
 import Flex from '../shared/Flex'
 import Text from '../shared/Text'
 import Spacing from '../shared/Spacing'
-import { css } from '@emotion/react'
 import addDelimiter from '../../utils/addDelimiter'
-import { useEffect, useState } from 'react'
-import { differenceInMilliseconds, parseISO } from 'date-fns'
 import formatTime from '../../utils/formatTime'
 import Tag from '../shared/Tag'
+
+import { Cosmetic } from '@models/cosmetic'
+import { FaStar } from 'react-icons/fa'
+import { css } from '@emotion/react'
+import { useEffect, useState } from 'react'
+import { differenceInMilliseconds, parseISO } from 'date-fns'
 
 function CosmeticBox({ cosmetic }: { cosmetic: Cosmetic }) {
   const [remainedTime, setRemainedTime] = useState(0)
@@ -121,6 +122,7 @@ const nameStyle = css`
 
 const tagStyle = css`
   position: absolute;
+  width: 100%;
   bottom: 0;
 `
 export default CosmeticBox

@@ -3,9 +3,10 @@ import Flex from '@/components/shared/Flex'
 import Spacing from '@/components/shared/Spacing'
 import CosmeticList from '@/components/user/CosmeticList'
 import MobileCosmeticList from '@/components/user/MobileCosmeticList'
+import TopMoveBanner from '../../../assets/moveBanner/gif_squareBanner_1.gif'
+import styled from '@emotion/styled'
 import { CATEGORY } from '@/constants/cosmetic'
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -59,7 +60,9 @@ const CosmeticPage = () => {
       {innerWidth > 600 ? (
         <CosmeticContainer>
           <CategoryNavBox>
-            <EventBannerBox>EventBannerBox</EventBannerBox>
+            <NavEventBanner>
+              <img src={TopMoveBanner} alt="" />
+            </NavEventBanner>
             <Spacing size={30} />
             {CATEGORY.map((cate, idx) => (
               <>
@@ -77,6 +80,7 @@ const CosmeticPage = () => {
             ))}
           </CategoryNavBox>
           <CosmeticListBox>
+            <MoveMainBanner>MoveMainBanner</MoveMainBanner>
             <CosmeticList category={category} />
           </CosmeticListBox>
         </CosmeticContainer>
@@ -139,18 +143,25 @@ const CosmeticContainer = styled.div`
   width: 1350px;
   padding-top: 10px;
   margin: 0 auto;
-  background-color: pink;
   display: flex;
 `
-
-const EventBannerBox = styled.div`
-  background-color: white;
+const MoveMainBanner = styled.div`
+  background-color: grey;
   height: 250px;
   width: 100%;
 `
+const NavEventBanner = styled.div`
+  background-color: white;
+  height: 250px;
+  width: 100%;
 
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+`
 const CategoryNavBox = styled.div`
-  background-color: grey;
   height: auto;
   flex-basis: 200px;
 `
@@ -160,7 +171,8 @@ const CosmeticListBox = styled.div`
   padding: 5px;
   overflow: scroll;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
 `
 
 export default CosmeticPage

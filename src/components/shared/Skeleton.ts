@@ -8,7 +8,7 @@ const opacity = keyframes`
     }
 
     50% {
-        opacity: 0.4;
+        opacity: 0.2;
     }
 
     100% {
@@ -16,11 +16,11 @@ const opacity = keyframes`
     }
 `
 
-const Skeleton = styled.div<{ width: number; height: number }>(
-  ({ width, height }) => ({
+const Skeleton = styled.div<{ width: number | string; height: number }>(
+  ({ width = '100%', height }) => ({
     width,
     height,
-    backgroundColor: colors.grey,
+    backgroundColor: '#e5e5e5',
     animation: `${opacity} 2s ease-in-out 0.5s infinite`,
   }),
 )
