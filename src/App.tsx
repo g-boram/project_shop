@@ -114,7 +114,13 @@ const LayoutContainer = styled.div`
 const PageContainer = styled.div`
   height: auto;
   overflow: scroll;
-  padding-bottom: 80px;
   max-width: 1400px;
+  padding-bottom: 80px;
+
+  @media (min-width: 600px) {
+    max-width: 1400px;
+    min-width: 1200px;
+    padding-bottom: 0;
+  }
 `
 export default App

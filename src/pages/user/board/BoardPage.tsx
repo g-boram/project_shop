@@ -45,74 +45,69 @@ function BoardPage() {
   `
   return (
     <BoardContainer>
-      <BoardWrapper>
-        <HeadTitle title="게시판" desc="함께 소통해요 우리들의 게시판" />
-        <Flex css={layoutStyle}>
-          <ChatingContainer>
-            <EventImgBox>
-              <img
-                src="https://cdn.pixabay.com/photo/2020/04/02/05/19/beauty-4993472_1280.jpg"
-                alt="boardImg"
-              />
-            </EventImgBox>
-            <ChatingBox />
-          </ChatingContainer>
-          <BoardListContainer>
-            <NoticeBox>
-              <Flex
-                align={'center'}
-                css={css`
-                  height: 100%;
-                `}
-              >
-                <IoNotificationsCircle size={30} fill={'#f4aeba'} />
-                <Spacing size={10} direction={'horizontal'} />
-                {notice ? (
-                  <Text typography="t6" color="fontDarkGrey">
-                    {notice.content}
-                  </Text>
-                ) : (
-                  <Text typography="t7">안내사항이 없습니다</Text>
-                )}
+      <HeadTitle title="게시판" desc="함께 소통해요 우리들의 게시판" />
+      <Flex css={layoutStyle}>
+        <ChatingContainer>
+          <EventImgBox>
+            <img
+              src="https://cdn.pixabay.com/photo/2020/04/02/05/19/beauty-4993472_1280.jpg"
+              alt="boardImg"
+            />
+          </EventImgBox>
+          <ChatingBox />
+        </ChatingContainer>
+        <BoardListContainer>
+          <NoticeBox>
+            <Flex
+              align={'center'}
+              css={css`
+                height: 100%;
+              `}
+            >
+              <IoNotificationsCircle size={30} fill={'#f4aeba'} />
+              <Spacing size={10} direction={'horizontal'} />
+              {notice ? (
+                <Text typography="t6" color="fontDarkGrey">
+                  {notice.content}
+                </Text>
+              ) : (
+                <Text typography="t7">안내사항이 없습니다</Text>
+              )}
+            </Flex>
+          </NoticeBox>
+          <Flex justify={'flex-end'} align={'flex-end'} css={linkBtnBoxStyle}>
+            <Link to={'/board/category'}>
+              <Button color="pink" size="small">
+                글쓰기
+              </Button>
+            </Link>
+          </Flex>
+          <CategoryBox>
+            <Flex justify={'space-between'} align={'center'}>
+              <Flex>
+                <CategoryBtn cate="info" onClick={() => setCategory('info')}>
+                  Info
+                </CategoryBtn>
+                <CategoryBtn cate="qna" onClick={() => setCategory('qna')}>
+                  QnA
+                </CategoryBtn>
+                <CategoryBtn cate="event" onClick={() => setCategory('event')}>
+                  Event
+                </CategoryBtn>
               </Flex>
-            </NoticeBox>
-            <Flex justify={'flex-end'} align={'flex-end'} css={linkBtnBoxStyle}>
               <Link to={'/board/category'}>
-                <Button color="pink" size="small">
-                  글쓰기
-                </Button>
+                <Flex css={moreBtn} align={'center'}>
+                  더보기
+                  <FaArrowRightLong size={10} />
+                </Flex>
               </Link>
             </Flex>
-            <CategoryBox>
-              <Flex justify={'space-between'} align={'center'}>
-                <Flex>
-                  <CategoryBtn cate="info" onClick={() => setCategory('info')}>
-                    Info
-                  </CategoryBtn>
-                  <CategoryBtn cate="qna" onClick={() => setCategory('qna')}>
-                    QnA
-                  </CategoryBtn>
-                  <CategoryBtn
-                    cate="event"
-                    onClick={() => setCategory('event')}
-                  >
-                    Event
-                  </CategoryBtn>
-                </Flex>
-                <Link to={'/board/category'}>
-                  <Flex css={moreBtn} align={'center'}>
-                    더보기
-                    <FaArrowRightLong size={10} />
-                  </Flex>
-                </Link>
-              </Flex>
-            </CategoryBox>
-            <BoardListBox>
-              <BoardMove category={category} />
-            </BoardListBox>
-          </BoardListContainer>
-        </Flex>
-      </BoardWrapper>
+          </CategoryBox>
+          <BoardListBox>
+            <BoardMove category={category} />
+          </BoardListBox>
+        </BoardListContainer>
+      </Flex>
     </BoardContainer>
   )
 }
@@ -125,17 +120,16 @@ const CategoryBox = styled.div`
 `
 
 const BoardContainer = styled.div`
-  height: 100vh;
-`
-const BoardWrapper = styled.div`
-  height: 100%;
-  overflow: scroll;
+  height: auto;
+
+  @media (min-width: 800px) {
+    min-width: 1200px;
+  }
 `
 const ChatingContainer = styled.div`
-  padding: 10px;
   flex-grow: 0;
   @media (min-width: 800px) {
-    width: 350px;
+    width: 380px;
     height: 630px;
   }
   @media (max-width: 800px) {
@@ -146,8 +140,11 @@ const ChatingContainer = styled.div`
 const BoardListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 20px;
   flex-grow: 1;
+
+  @media (max-width: 800px) {
+    width: 800px;
+  }
 `
 
 const BoardListBox = styled.div`

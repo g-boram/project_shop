@@ -51,14 +51,14 @@ function BoardCategoryPage() {
 
 const CategoryContainer = styled.div`
   margin: 0 auto;
-  margin-top: 40px;
+  margin-top: 20px;
 `
 const CategoryWrapper = styled.div`
   @media (max-width: 600px) {
     padding: 0 20px;
   }
   @media (min-width: 600px) {
-    padding: 0 100px;
+    min-width: 1200px;
   }
 `
 const NoticeBox = styled.div`
