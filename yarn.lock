@@ -1724,6 +1724,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.22.15":
+  version: 7.24.1
+  resolution: "@babel/runtime@npm:7.24.1"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 10c0/500c6a99ddd84f37c7bc5dbc84777af47b1372b20e879941670451d55484faf18a673c5ebee9ca2b0f36208a729417873b35b1b92e76f811620f6adf7b8cb0f1
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.22.15, @babel/template@npm:^7.23.9, @babel/template@npm:^7.3.3":
   version: 7.23.9
   resolution: "@babel/template@npm:7.23.9"
@@ -11744,6 +11753,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"kakao.maps.d.ts@npm:^0.1.39":
+  version: 0.1.39
+  resolution: "kakao.maps.d.ts@npm:0.1.39"
+  checksum: 10c0/2752382aaea86dbeb86021f8aa3397ce9cf9991667f651dd038676aae6db55c74bc5e054d84c64cc759d5424e994771db1c49f441ae6a4ce7ee174847cc8d4ed
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^4.5.3":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -14928,6 +14944,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     react-icons: "npm:^5.0.1"
     react-infinite-scroll-component: "npm:^6.1.0"
+    react-kakao-maps-sdk: "npm:^1.1.26"
     react-query: "npm:^3.39.3"
     react-router-dom: "npm:^6.22.1"
     react-scripts: "npm:5.0.1"
@@ -15256,6 +15273,19 @@ __metadata:
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: 10c0/6eb5e4b28028c23e2bfcf73371e72cd4162e4ac7ab445ddae2afe24e347a37d6dc22fae6e1748632cd43c6d4f9b8f86dcf26bf9275e1874f436d129952528ae0
+  languageName: node
+  linkType: hard
+
+"react-kakao-maps-sdk@npm:^1.1.26":
+  version: 1.1.26
+  resolution: "react-kakao-maps-sdk@npm:1.1.26"
+  dependencies:
+    "@babel/runtime": "npm:^7.22.15"
+    kakao.maps.d.ts: "npm:^0.1.39"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
+  checksum: 10c0/0ed8792d2881cfa6bfa9e1e5cf78be148d23aa5c1bce1c5fe814e25cf6880b5ad73f3f7c1ecb42bf20c41c329edd9418efe34ac8e988a9ca1840da3e0c3c9b68
   languageName: node
   linkType: hard
 

@@ -64,6 +64,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:18.2.0"],\
           ["react-icons", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.0.1"],\
           ["react-infinite-scroll-component", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:6.1.0"],\
+          ["react-kakao-maps-sdk", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:1.1.26"],\
           ["react-query", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:3.39.3"],\
           ["react-router-dom", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:6.22.1"],\
           ["react-scripts", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.0.1"],\
@@ -4481,6 +4482,14 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/@babel-runtime-npm-7.24.0-7eb1dd11a2-10c0.zip/node_modules/@babel/runtime/",\
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.24.0"],\
+          ["regenerator-runtime", "npm:0.14.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:7.24.1", {\
+        "packageLocation": "../../../.yarn/berry/cache/@babel-runtime-npm-7.24.1-45c3176b83-10c0.zip/node_modules/@babel/runtime/",\
+        "packageDependencies": [\
+          ["@babel/runtime", "npm:7.24.1"],\
           ["regenerator-runtime", "npm:0.14.1"]\
         ],\
         "linkType": "HARD"\
@@ -17074,6 +17083,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["kakao.maps.d.ts", [\
+      ["npm:0.1.39", {\
+        "packageLocation": "../../../.yarn/berry/cache/kakao.maps.d.ts-npm-0.1.39-333b43bbc2-10c0.zip/node_modules/kakao.maps.d.ts/",\
+        "packageDependencies": [\
+          ["kakao.maps.d.ts", "npm:0.1.39"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["keyv", [\
       ["npm:4.5.4", {\
         "packageLocation": "../../../.yarn/berry/cache/keyv-npm-4.5.4-4c8e2cf7f7-10c0.zip/node_modules/keyv/",\
@@ -21368,6 +21386,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:18.2.0"],\
           ["react-icons", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.0.1"],\
           ["react-infinite-scroll-component", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:6.1.0"],\
+          ["react-kakao-maps-sdk", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:1.1.26"],\
           ["react-query", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:3.39.3"],\
           ["react-router-dom", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:6.22.1"],\
           ["react-scripts", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.0.1"],\
@@ -21821,6 +21840,34 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/react-is-npm-18.2.0-0cc5edb910-10c0.zip/node_modules/react-is/",\
         "packageDependencies": [\
           ["react-is", "npm:18.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-kakao-maps-sdk", [\
+      ["npm:1.1.26", {\
+        "packageLocation": "../../../.yarn/berry/cache/react-kakao-maps-sdk-npm-1.1.26-cb792bba23-10c0.zip/node_modules/react-kakao-maps-sdk/",\
+        "packageDependencies": [\
+          ["react-kakao-maps-sdk", "npm:1.1.26"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:1.1.26", {\
+        "packageLocation": "./.yarn/__virtual__/react-kakao-maps-sdk-virtual-b1029d9862/4/.yarn/berry/cache/react-kakao-maps-sdk-npm-1.1.26-cb792bba23-10c0.zip/node_modules/react-kakao-maps-sdk/",\
+        "packageDependencies": [\
+          ["react-kakao-maps-sdk", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:1.1.26"],\
+          ["@babel/runtime", "npm:7.24.1"],\
+          ["@types/react", "npm:18.2.57"],\
+          ["@types/react-dom", "npm:18.2.19"],\
+          ["kakao.maps.d.ts", "npm:0.1.39"],\
+          ["react", "npm:18.2.0"],\
+          ["react-dom", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\

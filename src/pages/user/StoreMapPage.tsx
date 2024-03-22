@@ -4,7 +4,7 @@ import Map from '@/components/shared/Map'
 import Markers from '@/components/shared/Markers'
 import { Location } from '@/models/location'
 import styled from '@emotion/styled'
-import * as stores from '@/mock/storeData.json'
+import stores from '@/mock/storeData.json'
 import { useState } from 'react'
 
 function StoreMapPage() {
@@ -21,13 +21,13 @@ function StoreMapPage() {
   // }
 
   const [map, setMap] = useState(null)
-  const storeDatas = stores["DATA"]
+  const storeDatas = stores['DATA']
 
   return (
     <UserPageLayout>
       <HeadTitle title="매장찾기" desc="오프라인 위치 찾기" />
       <MapContainer>
-        <Map setMap={setMap} />
+        <Map />
         <Markers storeDatas={storeDatas} map={map} />
       </MapContainer>
     </UserPageLayout>
