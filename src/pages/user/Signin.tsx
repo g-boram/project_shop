@@ -73,7 +73,6 @@ function SigninPage() {
 
 const SigninConatiner = styled.div`
   margin: 0 auto;
-  width: 100vw;
   height: 100%;
   display: flex;
   justify-content: center;

@@ -236,6 +236,7 @@ const topNavbarStyles = css`
   position: sticky;
   height: 40px;
   top: 0;
+
   background-color: #fff9f9;
   z-index: 10;
   border-bottom: 1px solid ${colors.grey};

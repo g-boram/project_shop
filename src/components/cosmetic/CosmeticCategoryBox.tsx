@@ -89,24 +89,24 @@ function CosmeticCategoryBox({
   }
 
   return (
-    <CosmeticContainer>
-      <ImgWrapper>
-        <IconWrapper>
-          <img
-            src={
-              isLike
-                ? 'https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-64.png'
-                : 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-64.png'
-            }
-            alt=""
-            onClick={handleLike}
-          />
-        </IconWrapper>
-        {cosmetic.url ? <img src={cosmetic.url} alt={cosmetic.name} /> : null}
-        <TagStyle>{tagComponent()}</TagStyle>
-      </ImgWrapper>
+    <Link to={`/cosmetic/detail/${cosmetic.id}`}>
+      <CosmeticContainer>
+        <ImgWrapper>
+          <IconWrapper>
+            <img
+              src={
+                isLike
+                  ? 'https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-64.png'
+                  : 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-64.png'
+              }
+              alt=""
+              onClick={handleLike}
+            />
+          </IconWrapper>
+          {cosmetic.url ? <img src={cosmetic.url} alt={cosmetic.name} /> : null}
+          <TagStyle>{tagComponent()}</TagStyle>
+        </ImgWrapper>
 
-      <Link to={`/cosmetic/detail/${cosmetic.id}`}>
         <Flex direction="column" css={nameStyle}>
           <Text typography="t7">{cosmetic.brand_name}</Text>
           <Spacing size={5} direction={'horizontal'} />
@@ -156,8 +156,8 @@ function CosmeticCategoryBox({
             </Text>
           </Flex>
         </Flex>
-      </Link>
-    </CosmeticContainer>
+      </CosmeticContainer>
+    </Link>
   )
 }
 

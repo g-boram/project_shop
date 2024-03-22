@@ -15,7 +15,8 @@
           "@hooks/*": ["src/hooks/*"],
           "@store/*": ["src/store/*"],
           "@atom/*": ["src/atom/*"],
-          "@contexts/*": ["src/contexts/*"]
+          "@contexts/*": ["src/contexts/*"],
+          "@mock/*": ["src/mock/*"]
       }
   }
 }

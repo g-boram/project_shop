@@ -88,7 +88,6 @@ function SignupPage() {
 
 const SignupContainer = styled.div`
   margin: 0 auto;
-  width: 100vw;
   display: flex;
   justify-content: center;
 `

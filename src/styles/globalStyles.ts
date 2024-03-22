@@ -8,6 +8,7 @@ export default css`
     --searchBox-zindex: 9;
     --dimmed-zindex: 10;
     --alert-zindex: 11;
+    --bottomNavbar-zindex: 8;
   }
 
   html,

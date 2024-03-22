@@ -72,7 +72,7 @@ export async function getCosmeticListAll() {
   )
 }
 
-// 저장된 호텔의 데이터를 가져올 함수
+// 저장된 데이터를 가져올 함수
 export async function getHotel(id: string) {
   const snapshot = await getDoc(doc(store, COLLECTIONS.COSMETIC, id))
 
@@ -110,4 +110,12 @@ export const addCosmetic = async (cosmeticData: Cosmetic) => {
       second: '2-digit',
     }),
   })
+}
+
+// 화장품 상세 데이터 가져오기
+export const getDetailCosmetic = async (id: string) => {
+  const docRef = doc(store, `${COLLECTIONS.COSMETIC}`, id)
+  const docSnap = await getDoc(docRef)
+
+  return { id: docSnap.id, ...(docSnap.data() as Cosmetic) }
 }

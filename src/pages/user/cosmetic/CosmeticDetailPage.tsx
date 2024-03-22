@@ -19,33 +19,73 @@ import { CATEGORY } from '@/constants/cosmetic'
 import { Cosmetic } from '@/models/cosmetic'
 import { store } from '@/remote/firebase'
 import { css } from '@emotion/react'
+import { RxCross2 } from 'react-icons/rx'
 import { differenceInMilliseconds, parseISO } from 'date-fns'
-import { doc, getDoc } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
+import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore'
+import { useEffect, useRef, useState } from 'react'
 import { BiLike } from 'react-icons/bi'
 import { FaStar } from 'react-icons/fa'
 import { MdOutlineRateReview } from 'react-icons/md'
 import { Link, useParams } from 'react-router-dom'
+import useLike from '@/hooks/like/useLike'
+import CopyToClipboard from 'react-copy-to-clipboard'
+import useShare from '@/hooks/share/useShare'
+import useDetailCosmetic from '@/hooks/data/useDetailCosmetic'
+import { useQuery, useQueryClient } from 'react-query'
+import { getDetailCosmetic } from '@/remote/cosmetic'
+import Select from 'react-select'
+import { preProcessFile } from 'typescript'
 
 const CosmeticDetailPage = () => {
   const params = useParams()
+  const share = useShare()
 
   const [innerWidth, setInnerWidth] = useState(0)
   const [moveInfo, setMoveInfo] = useState(0)
   const [currentImg, setCurrentImg] = useState('')
+
+  const [buyItem, setBuyItem] = useState<CosmeticItemOption[]>([])
+  const [item, setItem] = useState<any>([])
+  const [itemOptions, setItemOptions] = useState<
+    CosmeticItemOption[] | undefined
+  >([])
+
   const [cosmetic, setCosmetic] = useState<Cosmetic | null>(null)
-
-  // 게시판 데이터 가져오기
-  const getDetailBoard = async (id: string) => {
-    const docRef = doc(store, `${COLLECTIONS.COSMETIC}`, id)
-    const docSnap = await getDoc(docRef)
-
-    setCosmetic({ id: docSnap.id, ...(docSnap.data() as Cosmetic) })
-    setCurrentImg(docSnap.data()?.url)
+  interface CosmeticItemOption {
+    readonly id: string
+    readonly label: string
+    readonly value: string | null
   }
 
   useEffect(() => {
-    if (params?.id) getDetailBoard(params?.id)
+    if (cosmetic) {
+      const arrayOpt = cosmetic.color?.map((col: any, idx: any) => ({
+        id: idx,
+        label: `${cosmetic?.name} ( ${col} )`,
+        value: `${cosmetic?.name},${col}`,
+      }))
+      setItemOptions(arrayOpt)
+    }
+  }, [cosmetic])
+
+  const { data: likes, mutate: like } = useLike()
+  const isLike = Boolean(
+    likes?.find((like) => like.cosmeticId === cosmetic?.id),
+  )
+
+  const getDetailCosmetic = async (id: string) => {
+    await onSnapshot(doc(store, `${COLLECTIONS.COSMETIC}`, id), (item) => {
+      const data = {
+        id: item.id,
+        ...item.data(),
+      } as Cosmetic
+      setCosmetic(data)
+      setCurrentImg(item.data()?.url)
+    })
+  }
+
+  useEffect(() => {
+    if (params?.id) getDetailCosmetic(params?.id)
   }, [params?.id])
 
   const NavItem = styled.div<{ cate: number }>`
@@ -135,6 +175,140 @@ const CosmeticDetailPage = () => {
   //   )
   // }
 
+  // 찜하기, 공유하기 영역
+  const topActionBox = () => {
+    return (
+      <TopIconBox>
+        <Flex direction="column" align={'center'}>
+          <IconWrapper>
+            <img
+              src={
+                isLike
+                  ? 'https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-64.png'
+                  : 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-64.png'
+              }
+              alt=""
+              onClick={() => {
+                like({
+                  cosmetic: {
+                    name: cosmetic?.name,
+                    url: cosmetic?.url,
+                    id: cosmetic?.id,
+                  },
+                })
+              }}
+            />
+          </IconWrapper>
+          <Text typography="t6">찜하기</Text>
+        </Flex>
+
+        <Flex direction="column" align={'center'}>
+          <IconWrapper>
+            <img
+              src={
+                'https://cdn1.iconfinder.com/data/icons/rounded-social-media/512/kakao-64.png'
+              }
+              alt=""
+              onClick={() => {
+                share({
+                  title: cosmetic?.name,
+                  description: cosmetic?.comment,
+                  imageUrl: cosmetic?.url,
+                  buttonLabel: '지금 당장 쇼핑몰에서 보기 Go!',
+                })
+              }}
+            />
+          </IconWrapper>
+          <Text typography="t6">카카오공유</Text>
+        </Flex>
+
+        <Flex direction="column" align={'center'}>
+          <IconWrapper>
+            <CopyToClipboard
+              text={window.location.href}
+              onCopy={() => {
+                alert('링크가 복사되었습니다.')
+              }}
+            >
+              <img
+                src="https://cdn4.iconfinder.com/data/icons/basic-user-interface-elements/700/paste-clipboard-copy-512.png"
+                alt=""
+              />
+            </CopyToClipboard>
+          </IconWrapper>
+          <Text typography="t6">링크공유</Text>
+        </Flex>
+      </TopIconBox>
+    )
+  }
+
+  // 품절갯수 계산
+  const isTotalCountBadge = () => {
+    const deadline =
+      Number(cosmetic?.count) <= 10 && Number(cosmetic?.count) !== 0
+    const soldOut = Number(cosmetic?.count) === 0
+    return (
+      <Flex
+        justify={'space-between'}
+        align={'center'}
+        direction="column"
+        css={css`
+          width: 100%;
+          margin-bottom: 20px;
+        `}
+      >
+        {deadline === true ? (
+          <Tag fontSize="16px" height="20px" backgroundColor="red">
+            마감임박 현재수량 {cosmetic?.count} 개
+          </Tag>
+        ) : null}
+        <Spacing size={10} />
+
+        {soldOut === true ? (
+          <Button color="grey" size="large" full>
+            매진
+          </Button>
+        ) : (
+          <Button color="pink" size="large" full>
+            구매하기
+          </Button>
+        )}
+      </Flex>
+    )
+  }
+
+  console.log('item', item)
+  console.log('setBuyItem', buyItem)
+  // 선택된 아이템
+  const controlItem = (newValue: any) => {
+    console.log('newValue', newValue)
+    if (item.length === 0) {
+      setBuyItem([newValue])
+    } else {
+      setBuyItem((prevValue) => {
+        if (Array.isArray(prevValue)) {
+          // 이전 상태가 배열인 경우에만 새로운 값을 추가하여 새로운 배열을 반환합니다.
+          const isId = prevValue.filter((v, i) => v.id === newValue.id)
+          if (isId.length === 0) {
+            return [...prevValue, newValue]
+          } else {
+            return [...prevValue]
+          }
+          // console.log('isId', isId)
+        } else {
+          // 이전 상태가 배열이 아닌 경우에는 새로운 배열을 반환합니다.
+          console.error('prevValue is not an array')
+          return [...prevValue]
+        }
+      })
+    }
+    setItem(newValue)
+  }
+
+  // 선택된 아이템 지우기
+  const handleDelItem = (id: string) => {
+    setBuyItem((prevItems) => prevItems.filter((item) => item.id !== id))
+  }
   return (
     <>
       {innerWidth > 600 ? (
@@ -165,7 +339,13 @@ const CosmeticDetailPage = () => {
                 <SubImg>
                   {cosmetic?.url ? (
                     <SubImgItem>
-                      <img src={cosmetic.url} alt={`mainImg`} />
+                      <img
+                        src={cosmetic.url}
+                        alt={`mainImg`}
+                        onClick={() =>
+                          setCurrentImg(cosmetic.url ? cosmetic.url : '')
+                        }
+                      />
                     </SubImgItem>
                   ) : (
                     <>
@@ -176,7 +356,11 @@ const CosmeticDetailPage = () => {
                   {cosmetic?.subUrl ? (
                     cosmetic?.subUrl.map((sub, idx) => (
                       <SubImgItem>
-                        <img src={sub.url} alt={`subImg${idx}`} />
+                        <img
+                          src={sub.url}
+                          alt={`subImg${idx}`}
+                          onClick={() => setCurrentImg(sub.url ? sub.url : '')}
+                        />
                       </SubImgItem>
                     ))
                   ) : (
@@ -188,6 +372,7 @@ const CosmeticDetailPage = () => {
                 </SubImg>
               </MainImg>
               <DetailDesc>
+                {topActionBox()}
                 <DescBox>
                   <Spacing size={10} />
                   {/* 제품명/브랜드명 */}
@@ -200,6 +385,7 @@ const CosmeticDetailPage = () => {
                         <Text typography="t2" bold>
                           {cosmetic.name}
                         </Text>
+
                         <CateTag>{cosmetic.category}</CateTag>
                       </Flex>
                     </Flex>
@@ -278,6 +464,69 @@ const CosmeticDetailPage = () => {
                   </Flex>
                   {/* <TagStyle>{tagComponent()}</TagStyle> */}
                 </DescBox>
+                <BuyCosmeticBox>
+                  <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    name="cosmeticItem"
+                    placeholder={'상품을 선택해주세요'}
+                    options={itemOptions}
+                    value={item}
+                    onChange={(newValue) => controlItem(newValue)}
+                    styles={{
+                      container: (containerStyles) => ({
+                        ...containerStyles,
+                        width: '100%',
+                        fontSize: '13px',
+                        height: '40px',
+                        borderRadius: '5px',
+                      }),
+                      menu: (controlStyles) => ({
+                        ...controlStyles,
+                        height: '150px',
+                        backgroundColor: '#fff',
+                        overflow: 'scroll',
+                      }),
+                    }}
+                  />
+                  {buyItem.length !== 0 ? (
+                    <Flex direction="column">
+                      <SelectItemBox>
+                        {buyItem.map((item, idx) => {
+                          return (
+                            <Flex justify={'space-between'}>
+                              <div>{item.label}</div>
+                              <div
+                                css={css`
+                                  cursor: pointer;
+                                `}
+                                onClick={() => handleDelItem(item.id)}
+                              >
+                                <RxCross2 size={15} />
+                              </div>
+                            </Flex>
+                          )
+                        })}
+                      </SelectItemBox>
+                      <TotalCountBox>
+                        <Text typography="t6" bold>
+                          Total :
+                        </Text>
+                        <Text typography="t6">
+                          {addDelimiter(
+                            (Number(cosmetic?.price) -
+                              Number(cosmetic?.totalSale)) *
+                              buyItem.length,
+                          )}{' '}
+                          원
+                        </Text>
+                      </TotalCountBox>
+                    </Flex>
+                  ) : (
+                    <></>
+                  )}
+                </BuyCosmeticBox>
+                {isTotalCountBadge()}
                 <DescEventBanner>
                   {NewUserBanner ? (
                     <Link to={'/signup'}>
@@ -325,7 +574,9 @@ const CosmeticDetailPage = () => {
           </MobileImgWrapper>
           {/* <MobileTagStyle>{tagComponent()}</MobileTagStyle> */}
           <MobileDetailBox>
-            <Spacing size={10} />
+            <Spacing size={20} />
+            {topActionBox()}
+            <Spacing size={20} />
             {/* 제품명/브랜드명 */}
             {cosmetic?.brand_name && cosmetic?.name ? (
               <Flex direction="column" css={nameStyle}>
@@ -384,7 +635,71 @@ const CosmeticDetailPage = () => {
                 </Text>
               </Flex>
             </Flex>
-
+            <Spacing size={20} />
+            <BuyCosmeticBox>
+              <Select
+                className="basic-single"
+                classNamePrefix="select"
+                name="cosmeticItem"
+                placeholder={'상품을 선택해주세요'}
+                options={itemOptions}
+                value={item}
+                onChange={(newValue) => controlItem(newValue)}
+                styles={{
+                  container: (containerStyles) => ({
+                    ...containerStyles,
+                    width: '100%',
+                    fontSize: '13px',
+                    height: '40px',
+                    borderRadius: '5px',
+                  }),
+                  menu: (controlStyles) => ({
+                    ...controlStyles,
+                    height: '150px',
+                    backgroundColor: '#fff',
+                    overflow: 'scroll',
+                  }),
+                }}
+              />
+              {buyItem.length !== 0 ? (
+                <Flex direction="column">
+                  <SelectItemBox>
+                    {buyItem.map((item, idx) => {
+                      return (
+                        <Flex justify={'space-between'}>
+                          <div>{item.label}</div>
+                          <div
+                            css={css`
+                              cursor: pointer;
+                            `}
+                            onClick={() => handleDelItem(item.id)}
+                          >
+                            <RxCross2 size={15} />
+                          </div>
+                        </Flex>
+                      )
+                    })}
+                  </SelectItemBox>
+                  <TotalCountBox>
+                    <Text typography="t6" bold>
+                      Total :
+                    </Text>
+                    <Text typography="t6">
+                      {addDelimiter(
+                        (Number(cosmetic?.price) -
+                          Number(cosmetic?.totalSale)) *
+                          buyItem.length,
+                      )}{' '}
+                      원
+                    </Text>
+                  </TotalCountBox>
+                </Flex>
+              ) : (
+                <></>
+              )}
+            </BuyCosmeticBox>
+            <Spacing size={20} />
+            {isTotalCountBadge()}
             <MobileNewUserBanner>
               {NewUserBanner ? (
                 <Link to={'/signup'}>
@@ -420,13 +735,13 @@ const CosmeticDetailPage = () => {
 
 // 모바일 - Mobile
 const MobileContainer = styled.div`
-  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `
 const MobileDetailBox = styled.div`
-  width: 85%;
+  width: 90%;
   margin-bottom: 20px;
 `
 
@@ -490,7 +805,6 @@ const DescEventBanner = styled.div`
   & img {
     height: 100%;
     width: 100%;
-    object-fit: contain;
   }
 `
 const DetailInfoBox = styled.div`
@@ -506,8 +820,27 @@ const CosmeticDetailBox = styled.div`
   flex-basis: 1150px;
   display: flex;
   flex-direction: column;
-  padding: 10px;
   overflow: scroll;
+`
+const SelectItemBox = styled.div`
+  width: 100%;
+  min-height: 150px;
+  margin: 10px 0;
+  border: 1px solid #eee;
+  border-radius: 5px;
+
+  & > div {
+    background-color: white;
+    padding: 10px;
+  }
+`
+const TotalCountBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 60px;
+  margin: 10px 0;
 `
 const MoveNavRow = styled.div`
   width: 100%;
@@ -520,10 +853,17 @@ const MoveDetailContent = styled.div`
   height: auto;
   width: 100%;
 `
+const BuyCosmeticBox = styled.div`
+  display: flex;
+  min-height: 80px;
+  width: 100%;
+  flex-direction: column;
+`
 const DetailBox = styled.div`
   display: flex;
   justify-content: center;
-  min-height: 600px;
+  min-height: 700px;
+  height: auto;
   width: 100%;
   padding-top: 60px;
 `
@@ -570,7 +910,7 @@ const MainImg = styled.div`
 const DescBox = styled.div`
   position: relative;
   width: 400px;
-  height: 400px;
+  min-height: 400px;
 `
 const DetailDesc = styled.div`
   background-color: white;
@@ -580,6 +920,22 @@ const DetailDesc = styled.div`
   width: 500px;
   min-height: 500px;
   margin-left: 10px;
+`
+const IconWrapper = styled.div`
+  height: 30px;
+  width: 30px;
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    cursor: pointer;
+  }
+`
+const TopIconBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+  width: 100%;
 `
 const CateTag = styled.div`
   padding: 2px 8px;

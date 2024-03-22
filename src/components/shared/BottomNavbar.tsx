@@ -52,14 +52,15 @@ export default function BottomNavbar() {
 }
 
 const BottomNavContainer = styled.div`
-  position: fixed;
+  position: absolute;
   background-color: white;
   padding-top: 10px;
   box-shadow: 0px 0px 10px -2px #ffbdd2;
   height: 50px;
   width: 100%;
-  display: sticky;
+  position: sticky;
   bottom: 0;
+  z-index: ${`var(--bottomNavbar-zindex)`};
   @media (min-width: 600px) {
     display: none;
   }
