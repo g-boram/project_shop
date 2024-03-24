@@ -2,11 +2,14 @@ import styled from '@emotion/styled'
 import Flex from './Flex'
 import Spacing from './Spacing'
 import stores from '@/mock/storeData.json'
-
-import { css } from '@emotion/react'
-import { useEffect, useRef, useState } from 'react'
 import Skeleton from './Skeleton'
 import Text from './Text'
+
+import { IoIosSend } from 'react-icons/io'
+import { MdPhoneIphone } from 'react-icons/md'
+import { css } from '@emotion/react'
+import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 declare global {
   interface Window {
@@ -15,9 +18,9 @@ declare global {
 }
 
 function Map() {
+  const mapContainer = useRef(null)
   const [isLoading, setIsLoading] = useState(true)
   const [currentStore, setCurrentStore] = useState<any>(null)
-  const mapContainer = useRef(null)
 
   const loadKakaoMap = () => {
     const storeDatas: any[] = stores['DATA']
@@ -109,13 +112,6 @@ function Map() {
     loadKakaoMap()
   }, [])
 
-  // useEffect(() => {
-  //   if (currentStore !== '') {
-  //     const data = JSON.stringify(currentStore)
-  //     setCurrentStore(data)
-  //   }
-  // }, [currentStore])
-
   console.log('currentStore', currentStore)
   return (
     <>
@@ -131,33 +127,74 @@ function Map() {
         <DescBox>
           <DescWrapper>
             {currentStore ? (
-              <Flex>
-                <img
-                  src={
-                    currentStore?.category
-                      ? `/images/markers/${currentStore?.category}.png`
-                      : '/images/markers/default.png'
-                  }
-                  alt=""
-                />
-                <Spacing size={20} direction="horizontal" />
+              <Flex
+                css={flexMobileStyle}
+                justify={'space-between'}
+                align={'center'}
+              >
                 <Flex
-                  direction="column"
+                  align={'center'}
                   css={css`
                     width: 100%;
                   `}
                 >
-                  <Text typography="t6">{currentStore.category}</Text>
-                  <Text typography="t6">{currentStore.name}</Text>
-                  <Text typography="t6">{currentStore.address}</Text>
+                  <IconBox>
+                    <img
+                      src={
+                        currentStore?.category
+                          ? `/images/markers/${currentStore?.category}.png`
+                          : '/images/markers/default.png'
+                      }
+                      alt=""
+                    />
+                  </IconBox>
+                  <Flex
+                    direction="column"
+                    css={css`
+                      margin: 0px 30px;
+                    `}
+                  >
+                    <Text typography="t6" css={categoryStyle}>
+                      {currentStore.category} / {currentStore.code_name}
+                    </Text>
+                    <Spacing size={10} />
+                    <Text typography="t4" bold css={categoryStyle}>
+                      {currentStore.name}
+                    </Text>
+                    <Spacing size={10} />
+                    <Text typography="t6" css={categoryStyle}>
+                      운영시간: {currentStore.open} ~ {currentStore.close}
+                    </Text>
+                    <Spacing size={5} />
+                    <Text typography="t6" css={categoryStyle}>
+                      매주 {currentStore.weekClose} 휴무
+                    </Text>
+                    <Spacing size={10} />
+                    <Text typography="t6" css={categoryStyle}>
+                      Tel: {currentStore.tel_no}
+                    </Text>
+                    <Spacing size={5} />
+                    <Text typography="t6" css={categoryStyle}>
+                      {currentStore.address}
+                    </Text>
+                  </Flex>
                 </Flex>
-                <Flex direction="column">
-                  <Text typography="t6">{currentStore.tel_no}</Text>
-                  <a href={`tel:${currentStore.tel_no}`}>전화 걸기</a>
-                </Flex>
-                <Flex direction="column">
-                  <Text typography="t6">{currentStore.tel_no}</Text>
-                  <a href={`tel:${currentStore.tel_no}`}>전화 걸기</a>
+                <Flex css={flexMobileJustify}>
+                  <a href={`tel:${currentStore.tel_no}`}>
+                    <Flex direction="column" align={'center'}>
+                      <MdPhoneIphone size={30} />
+                      <Spacing size={10} />
+                      전화 걸기
+                    </Flex>
+                  </a>
+                  <Spacing size={20} direction="horizontal" />
+                  <Link to={'/'}>
+                    <Flex direction="column" align={'center'}>
+                      <IoIosSend size={30} />
+                      <Spacing size={10} />
+                      사이트 이동
+                    </Flex>
+                  </Link>
                 </Flex>
               </Flex>
             ) : (
@@ -174,35 +211,70 @@ const MapBox = styled.div``
 
 const HeadLine = styled.div`
   height: 50px;
-  width: 80%;
+  width: 95%;
   margin-top: 40px;
   background-color: #303030;
   border-radius: 15px 15px 0 0;
 `
 const DescWrapper = styled.div`
-  height: 200px;
   width: 90%;
+  min-height: 170px;
   background-color: white;
+  padding: 10px;
+  border-radius: 10px;
 `
 const DescBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
-  width: 80%;
+  min-height: 200px;
+  padding: 15px 0;
+  width: 95%;
   background-color: #eee;
   border-radius: 0 0 15px 15px;
-  border: solid 1px #eee;
+`
+const IconBox = styled.div`
+  height: 80px;
+  width: 80px;
+
+  @media (max-width: 600px) {
+    height: 60px;
+    width: 60px;
+  }
+  & img {
+    height: 100%;
+    width: 100%;
+  }
 `
 const StoreDescBox = styled.div`
-  height: 300px;
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+
+  @media (max-width: 600px) {
+    margin-bottom: 80px;
+  }
 `
 
+const categoryStyle = css`
+  display: contents;
+`
+const flexMobileStyle = css`
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+`
+const flexMobileJustify = css`
+  width: 20%;
+  @media (max-width: 600px) {
+    width: 100%;
+    margin-top: 40px;
+    justify-content: space-around;
+  }
+`
 const MapArea = styled.div`
   height: 500px;
   width: 100%:

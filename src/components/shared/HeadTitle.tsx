@@ -18,7 +18,6 @@ const Containder = styled.div`
   padding: 20px 25px;
   align-items: flex-end;
   height: 60px;
-  width: 100vw;
   margin-bottom: 50px;
 `
 const Title = styled.div`

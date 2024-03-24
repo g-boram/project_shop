@@ -44,7 +44,6 @@ function App() {
         <Route path="/auth/kakao" Component={KakaoLogin} />
         <Route path="/signin" Component={SigninPage} />
         <Route path="/signup" Component={SignupPage} />
-        <Route path="/my" Component={MyPage} />
         {/* 화장품 관련 페이지 */}
         <Route path="/cosmetic" Component={CosmeticPage} />
         <Route path="/cosmetic/:category" Component={CosmeticPage} />
@@ -81,14 +80,16 @@ function App() {
           path="/manager/board/edit/:id"
           Component={ManagerBoardEditForm}
         />
-        {/* 
-            @TODO: 인증이 필요한 페이지 나누기 ex) 관리자,유저의 등급 ...
-            <Route path='' element={
-              <PrivateRoute>
-                <oooooPage />
-              </PrivateRoute>
-            }/> 
-          */}
+
+        {/* @TODO: 인증이 필요한 페이지 나누기 ex) 관리자,유저의 등급 ... */}
+        <Route
+          path="/my"
+          element={
+            <PrivateRoute>
+              <MyPage />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       {/* </PageContainer> */}
       <BottomNavbar />

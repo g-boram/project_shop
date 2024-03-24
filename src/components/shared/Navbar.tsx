@@ -16,6 +16,7 @@ import { signOut } from 'firebase/auth'
 import { auth } from '@/remote/firebase'
 import { useSetRecoilState } from 'recoil'
 import { userAtom } from '@/atom/user'
+import { IoMdSettings } from 'react-icons/io'
 
 const navList = [
   { to: '/my', name: '마이페이지' },
@@ -56,6 +57,10 @@ function Navbar() {
           <Button size="small" color="pink" onClick={handleLogout}>
             로그아웃
           </Button>
+          <Spacing size={10} direction="horizontal" />
+          <Link to="/my">
+            <IoMdSettings size={30} color="grey" />
+          </Link>
           <Spacing size={10} direction="horizontal" />
           <Link to="/my">
             <img
@@ -236,7 +241,6 @@ const topNavbarStyles = css`
   position: sticky;
   height: 40px;
   top: 0;
-
   background-color: #fff9f9;
   z-index: 10;
   border-bottom: 1px solid ${colors.grey};
