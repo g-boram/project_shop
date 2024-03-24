@@ -780,7 +780,7 @@ const MobileNewUserBanner = styled.div`
 
 // 웹 - Web
 const CosmeticContainer = styled.div`
-  width: 1350px;
+  width: 1400px;
   padding-top: 10px;
   margin: 0 auto;
   display: flex;

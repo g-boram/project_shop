@@ -37,57 +37,51 @@ function App() {
     <BrowserRouter>
       <ToastContainer autoClose={1000} />
       <Navbar />
-      <LayoutContainer>
-        <PageContainer>
-          <Routes>
-            <Route path="/" Component={HomePage} />
-            <Route path="/auth/kakao" Component={KakaoLogin} />
-            <Route path="/signin" Component={SigninPage} />
-            <Route path="/signup" Component={SignupPage} />
-            <Route path="/my" Component={MyPage} />
-            {/* 화장품 관련 페이지 */}
-            <Route path="/cosmetic" Component={CosmeticPage} />
-            <Route path="/cosmetic/:category" Component={CosmeticPage} />
-            <Route path="/cosmetic/detail/:id" Component={CosmeticDetailPage} />
-            {/* 게시판 & 채팅 페이지 */}
-            <Route path="/board" Component={BoardPage} />
-            <Route path="/board/form" Component={BoardFormPage} />
-            <Route path="/board/detail/:id" Component={BoardDetailPage} />
-            <Route path="/board/edit/:id" Component={BoardEditPage} />
-            {/* 게시판 카테고리별 리스트 페이지 */}
-            <Route path="/board/category" Component={BoardCategoryPage} />
-            <Route path="/storeMap" Component={StoreMapPage} />
+      {/* <LayoutContainer> */}
+      {/* <PageContainer> */}
+      <Routes>
+        <Route path="/" Component={HomePage} />
+        <Route path="/auth/kakao" Component={KakaoLogin} />
+        <Route path="/signin" Component={SigninPage} />
+        <Route path="/signup" Component={SignupPage} />
+        <Route path="/my" Component={MyPage} />
+        {/* 화장품 관련 페이지 */}
+        <Route path="/cosmetic" Component={CosmeticPage} />
+        <Route path="/cosmetic/:category" Component={CosmeticPage} />
+        <Route path="/cosmetic/detail/:id" Component={CosmeticDetailPage} />
+        {/* 게시판 & 채팅 페이지 */}
+        <Route path="/board" Component={BoardPage} />
+        <Route path="/board/form" Component={BoardFormPage} />
+        <Route path="/board/detail/:id" Component={BoardDetailPage} />
+        <Route path="/board/edit/:id" Component={BoardEditPage} />
+        {/* 게시판 카테고리별 리스트 페이지 */}
+        <Route path="/board/category" Component={BoardCategoryPage} />
+        <Route path="/storeMap" Component={StoreMapPage} />
 
-            {/* 관리자 페이지 */}
-            <Route path="/manager" Component={ManagerPage} />
-            <Route
-              path="/manager/main/setMainBanner"
-              Component={SetMainBanner}
-            />
-            <Route
-              path="/manager/main/setCategoryIcons"
-              Component={SetCategoryIcons}
-            />
-            <Route
-              path="/manager/data/setCosmeticData"
-              Component={SetCosmeticData}
-            />
-            <Route
-              path="/manager/cosmetic/form"
-              Component={ManagerCosmeticForm}
-            />
+        {/* 관리자 페이지 */}
+        <Route path="/manager" Component={ManagerPage} />
+        <Route path="/manager/main/setMainBanner" Component={SetMainBanner} />
+        <Route
+          path="/manager/main/setCategoryIcons"
+          Component={SetCategoryIcons}
+        />
+        <Route
+          path="/manager/data/setCosmeticData"
+          Component={SetCosmeticData}
+        />
+        <Route path="/manager/cosmetic/form" Component={ManagerCosmeticForm} />
 
-            <Route path="/manager/data/setBoardData" Component={SetBoardData} />
-            <Route path="/manager/board/form" Component={ManagerBoardForm} />
-            <Route
-              path="/manager/board/detail/:id"
-              Component={ManagerBoardDetail}
-            />
-            <Route
-              path="/manager/board/edit/:id"
-              Component={ManagerBoardEditForm}
-            />
-            {/* 
+        <Route path="/manager/data/setBoardData" Component={SetBoardData} />
+        <Route path="/manager/board/form" Component={ManagerBoardForm} />
+        <Route
+          path="/manager/board/detail/:id"
+          Component={ManagerBoardDetail}
+        />
+        <Route
+          path="/manager/board/edit/:id"
+          Component={ManagerBoardEditForm}
+        />
+        {/* 
             @TODO: 인증이 필요한 페이지 나누기 ex) 관리자,유저의 등급 ...
             <Route path='' element={
               <PrivateRoute>
@@ -95,10 +89,10 @@ function App() {
               </PrivateRoute>
             }/> 
           */}
-          </Routes>
-        </PageContainer>
-        <BottomNavbar />
-      </LayoutContainer>
+      </Routes>
+      {/* </PageContainer> */}
+      <BottomNavbar />
+      {/* </LayoutContainer> */}
     </BrowserRouter>
   )
 }
@@ -106,7 +100,7 @@ function App() {
 const LayoutContainer = styled.div`
   position: relative;
   height: 100%;
-  width: 100%;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;

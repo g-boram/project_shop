@@ -140,7 +140,7 @@ const mobileHeader = css`
   font-weight: bold;
 `
 const CosmeticContainer = styled.div`
-  width: 1350px;
+  width: 1400px;
   padding-top: 10px;
   margin: 0 auto;
   display: flex;

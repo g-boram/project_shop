@@ -60,6 +60,8 @@ const LoadingBox = styled.div`
   }
 `
 const containerStyles = css`
+  width: 100%;
+
   .swiper-button-next,
   .swiper-button-prev {
     color: pink;

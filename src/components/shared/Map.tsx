@@ -6,6 +6,7 @@ import stores from '@/mock/storeData.json'
 import { css } from '@emotion/react'
 import { useEffect, useRef, useState } from 'react'
 import Skeleton from './Skeleton'
+import Text from './Text'
 
 declare global {
   interface Window {
@@ -15,7 +16,7 @@ declare global {
 
 function Map() {
   const [isLoading, setIsLoading] = useState(true)
-  const [currentStore, setCurrentStore] = useState('')
+  const [currentStore, setCurrentStore] = useState<any>(null)
   const mapContainer = useRef(null)
 
   const loadKakaoMap = () => {
@@ -108,52 +109,102 @@ function Map() {
     loadKakaoMap()
   }, [])
 
+  // useEffect(() => {
+  //   if (currentStore !== '') {
+  //     const data = JSON.stringify(currentStore)
+  //     setCurrentStore(data)
+  //   }
+  // }, [currentStore])
+
   console.log('currentStore', currentStore)
   return (
-    <MapBox>
-      {isLoading ? (
-        <Skeleton width={'100%'} height={600} />
-      ) : (
-        <MapArea ref={mapContainer}></MapArea>
-      )}
-
-      {/* <MapWrapper>
-        <MapArea ref={mapContainer}></MapArea>
-        <Spacing size={20} />
-        <Flex justify={'center'}>
-          <a
-            href={location.link}
-            target="_blank"
-            rel="noreferrer"
-            css={linkBtnStyle}
-          >
-            길 찾기
-          </a> 
-        </Flex>
-      </MapWrapper> */}
-    </MapBox>
+    <>
+      <MapBox>
+        {isLoading ? (
+          <Skeleton width={'100%'} height={600} />
+        ) : (
+          <MapArea ref={mapContainer}></MapArea>
+        )}
+      </MapBox>
+      <StoreDescBox>
+        <HeadLine />
+        <DescBox>
+          <DescWrapper>
+            {currentStore ? (
+              <Flex>
+                <img
+                  src={
+                    currentStore?.category
+                      ? `/images/markers/${currentStore?.category}.png`
+                      : '/images/markers/default.png'
+                  }
+                  alt=""
+                />
+                <Spacing size={20} direction="horizontal" />
+                <Flex
+                  direction="column"
+                  css={css`
+                    width: 100%;
+                  `}
+                >
+                  <Text typography="t6">{currentStore.category}</Text>
+                  <Text typography="t6">{currentStore.name}</Text>
+                  <Text typography="t6">{currentStore.address}</Text>
+                </Flex>
+                <Flex direction="column">
+                  <Text typography="t6">{currentStore.tel_no}</Text>
+                  <a href={`tel:${currentStore.tel_no}`}>전화 걸기</a>
+                </Flex>
+                <Flex direction="column">
+                  <Text typography="t6">{currentStore.tel_no}</Text>
+                  <a href={`tel:${currentStore.tel_no}`}>전화 걸기</a>
+                </Flex>
+              </Flex>
+            ) : (
+              <></>
+            )}
+          </DescWrapper>
+        </DescBox>
+      </StoreDescBox>
+    </>
   )
 }
 
 const MapBox = styled.div``
-const MapWrapper = styled.div`
-  width: 100%;
+
+const HeadLine = styled.div`
+  height: 50px;
+  width: 80%;
+  margin-top: 40px;
+  background-color: #303030;
+  border-radius: 15px 15px 0 0;
 `
-const infowindow = css`
+const DescWrapper = styled.div`
   height: 200px;
-  width: 400px:
-  background-color: grey;
+  width: 90%;
+  background-color: white;
 `
-const linkBtnStyle = css`
-  padding: 10px 15px;
-  border-radius: 15px;
-  border: 1px solid #eee;
-  &: hover {
-    background-color: #eee;
-  }
+const DescBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 80%;
+  background-color: #eee;
+  border-radius: 0 0 15px 15px;
+  border: solid 1px #eee;
 `
+const StoreDescBox = styled.div`
+  height: 300px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
 const MapArea = styled.div`
-  height: 600px;
+  height: 500px;
   width: 100%:
   z-index: 1;
   
