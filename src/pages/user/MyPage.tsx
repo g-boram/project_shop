@@ -85,11 +85,9 @@ const UserInfo = styled.div`
 
 const UserContentBox = styled.div`
   width: 100%;
-  background-color: yellow;
 `
 const UserContentWrapper = styled.div`
   width: 100%;
-  height: auto;
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
@@ -102,15 +100,14 @@ const UserContentWrapper = styled.div`
   }
 `
 const CateItem = styled.div`
-  width: 30%;
-  height: 80px;
+  width: 100%;
+  height: 60px;
   background-color: white;
   cursor: pointer;
 `
 const categoryLine = css`
   width: 100%;
-  height: 80px;
-  background-color: pink;
+  height: 60px;
   border-bottom: 2px solid #000;
 `
 export default MyPage

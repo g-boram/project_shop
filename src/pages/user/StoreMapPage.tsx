@@ -1,6 +1,5 @@
 import HeadTitle from '@/components/shared/HeadTitle'
 import Map from '@/components/shared/Map'
-import styled from '@emotion/styled'
 
 function StoreMapPage() {
   return (

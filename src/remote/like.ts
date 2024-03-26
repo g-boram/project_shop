@@ -40,7 +40,19 @@ export async function toggleLike({
   cosmetic,
   userId,
 }: {
-  cosmetic: Pick<Cosmetic, 'name' | 'id' | 'url'>
+  cosmetic: Pick<
+    Cosmetic,
+    | 'name'
+    | 'id'
+    | 'url'
+    | 'price'
+    | 'brand_name'
+    | 'category'
+    | 'comment'
+    | 'volume'
+    | 'salePercent'
+    | 'totalSale'
+  >
   userId: string
 }) {
   const findSnapshot = await getDocs(
@@ -93,13 +105,20 @@ export async function toggleLike({
     const lastOrder = lastLikeSnapshot.empty
       ? 0
       : lastLikeSnapshot.docs[0].data().order
-
+    console.log('cosmetic', cosmetic)
     const newLike = {
       order: lastOrder + 1,
       cosmeticId: cosmetic.id,
       cosmeticName: cosmetic.name,
       url: cosmetic.url,
       userId,
+      price: cosmetic.price,
+      comment: cosmetic.comment,
+      brand_name: cosmetic.brand_name,
+      volume: cosmetic.volume,
+      category: cosmetic.category,
+      salePercent: cosmetic.salePercent,
+      totalSale: cosmetic.totalSale,
     }
 
     return setDoc(doc(collection(store, COLLECTIONS.LIKE)), newLike)

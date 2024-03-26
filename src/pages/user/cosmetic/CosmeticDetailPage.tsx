@@ -189,13 +189,22 @@ const CosmeticDetailPage = () => {
               }
               alt=""
               onClick={() => {
-                like({
-                  cosmetic: {
-                    name: cosmetic?.name,
-                    url: cosmetic?.url,
-                    id: cosmetic?.id,
-                  },
-                })
+                if (cosmetic) {
+                  like({
+                    cosmetic: {
+                      name: cosmetic?.name,
+                      url: cosmetic?.url,
+                      id: cosmetic?.id,
+                      price: cosmetic?.price,
+                      comment: cosmetic?.comment,
+                      brand_name: cosmetic?.brand_name,
+                      volume: cosmetic?.volume,
+                      category: cosmetic?.category,
+                      salePercent: cosmetic?.salePercent,
+                      totalSale: cosmetic?.totalSale,
+                    },
+                  })
+                }
               }}
             />
           </IconWrapper>
@@ -277,8 +286,6 @@ const CosmeticDetailPage = () => {
     )
   }
 
-  console.log('item', item)
-  console.log('setBuyItem', buyItem)
   // 선택된 아이템
   const controlItem = (newValue: any) => {
     console.log('newValue', newValue)

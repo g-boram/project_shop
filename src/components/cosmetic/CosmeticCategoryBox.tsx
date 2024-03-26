@@ -24,7 +24,19 @@ function CosmeticCategoryBox({
   onLike: ({
     cosmetic,
   }: {
-    cosmetic: Pick<Cosmetic, 'name' | 'id' | 'url'>
+    cosmetic: Pick<
+      Cosmetic,
+      | 'name'
+      | 'id'
+      | 'url'
+      | 'price'
+      | 'brand_name'
+      | 'category'
+      | 'comment'
+      | 'volume'
+      | 'salePercent'
+      | 'totalSale'
+    >
   }) => void
 }) {
   const [remainedTime, setRemainedTime] = useState(0)
@@ -84,6 +96,13 @@ function CosmeticCategoryBox({
         name: cosmetic.name,
         url: cosmetic.url,
         id: cosmetic.id,
+        price: cosmetic.price,
+        comment: cosmetic.comment,
+        brand_name: cosmetic.brand_name,
+        volume: cosmetic.volume,
+        category: cosmetic.category,
+        salePercent: cosmetic.salePercent,
+        totalSale: cosmetic.totalSale,
       },
     })
   }

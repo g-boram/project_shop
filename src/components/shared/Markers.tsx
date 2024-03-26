@@ -1,8 +1,4 @@
-// import { currentStoreState, locationState, mapState } from '@/atom'
-import { StoreType } from '@/models/store'
-
-import { useEffect, useCallback, Dispatch, SetStateAction } from 'react'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useEffect, useCallback } from 'react'
 
 interface MarkerProps {
   map: any
@@ -10,10 +6,6 @@ interface MarkerProps {
 }
 
 export default function Markers({ map, storeDatas }: MarkerProps) {
-  // const map = useRecoilValue(mapState)
-  // const setCurrentStore = useSetRecoilState(currentStoreState)
-  // const [location, setLocation] = useRecoilState(locationState)
-
   const loadKakoMarkers = useCallback(() => {
     if (map) {
       // 식당 데이터 마커 띄우기
@@ -68,19 +60,8 @@ export default function Markers({ map, storeDatas }: MarkerProps) {
           // 마커에 마우스아웃 이벤트가 발생하면 커스텀 오버레이를 제거합니다
           customOverlay.setMap(null)
         })
-
-        // 선택한 가게 저장
-        // window.kakao.maps.event.addListener(marker, 'click', function () {
-        //   setCurrentStore(store)
-        //   setLocation({
-        //     ...location,
-        //     lat: store.lat,
-        //     lng: store.lng,
-        //   })
-        // })
       })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map])
 
   useEffect(() => {

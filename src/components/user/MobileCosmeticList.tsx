@@ -1,9 +1,5 @@
 import styled from '@emotion/styled'
-import Flex from '../shared/Flex'
-import Top from '../shared/Top'
 import useCosmeticsCategory from '@/hooks/data/useCosmeticsCategory'
-import CosmeticCategoryBox from '../cosmetic/CosmeticCategoryBox'
-import { css } from '@emotion/react'
 import MobileCosmeticBox from '../cosmetic/MobileCosmeticBox'
 import useLike from '@/hooks/like/useLike'
 

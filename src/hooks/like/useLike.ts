@@ -21,7 +21,23 @@ function useLike() {
   )
 
   const { mutate } = useMutation(
-    ({ cosmetic }: { cosmetic: Pick<Cosmetic, 'name' | 'id' | 'url'> }) => {
+    ({
+      cosmetic,
+    }: {
+      cosmetic: Pick<
+        Cosmetic,
+        | 'name'
+        | 'id'
+        | 'url'
+        | 'price'
+        | 'brand_name'
+        | 'category'
+        | 'comment'
+        | 'volume'
+        | 'salePercent'
+        | 'totalSale'
+      >
+    }) => {
       if (user == null) {
         throw new Error('로그인필요')
       }
