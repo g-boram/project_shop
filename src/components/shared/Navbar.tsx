@@ -201,8 +201,8 @@ function Navbar() {
                 width={30}
                 height={30}
               />
-              <Text typography="t7" color="fontDarkGrey">
-                BR
+              <Text typography="t4" color="fontDarkGrey">
+                BoRamy
               </Text>
             </Link>
           </NavLogo>
@@ -241,7 +241,7 @@ const topNavbarStyles = css`
   position: sticky;
   height: 40px;
   top: 0;
-  background-color: #fff9f9;
+  background-color: white;
   z-index: 10;
   border-bottom: 1px solid ${colors.grey};
 `

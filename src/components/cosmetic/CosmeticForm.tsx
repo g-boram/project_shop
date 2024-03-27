@@ -22,6 +22,7 @@ import {
   cosmeticSubImgUploadAndUrl,
 } from '@/hooks/data/useStorage'
 import Text from '../shared/Text'
+import { toast } from 'react-toastify'
 
 export default function CosmeticForm({
   onSubmit,
@@ -38,6 +39,9 @@ export default function CosmeticForm({
   const [currentContentImg, setCurrentContentImg] = useState<newImg>()
   // 서브사진
   const [currentSubImg, setCurrentSubImg] = useState<any[]>()
+
+  const [hashTag, setHashTag] = useState<string>('')
+  const [tags, setTags] = useState<string[]>([])
 
   const [subImg1, setSubImg1] = useState<newSubImg>()
   const [subImg2, setSubImg2] = useState<newSubImg>()
@@ -60,6 +64,7 @@ export default function CosmeticForm({
     totalSale: '',
     rating: 0,
     like: 0,
+    hashTags: [],
   })
   const { open } = useAlertContext()
   const handleFormValues = (
@@ -220,6 +225,7 @@ export default function CosmeticForm({
       url: newImgUrl,
       subUrl: currentSubImg,
       contentUrl: currentContentImg,
+      hashTags: tags,
     } as Cosmetic
     onSubmit(setValues)
   }
@@ -284,6 +290,25 @@ export default function CosmeticForm({
     }),
   }
 
+  // 해시태그 입력
+  const onChangeHashTag = (e: any) => {
+    setHashTag(e?.target?.value?.trim())
+  }
+  const handleKeyUp = (e: any) => {
+    if (e.keyCode === 32 && e.target.value.trim() !== '') {
+      // 만약 같은 태그가 있다면 에러를 띄운다.
+      // 아니라면 태그를 생성해준다.
+      if (tags?.includes(e.target.value?.trim())) {
+        toast.error('같은 태그가 있습니다.')
+      } else {
+        setTags((prev) => (prev?.length > 0 ? [...prev, hashTag] : [hashTag]))
+        setHashTag('')
+      }
+    }
+  }
+  const removeTag = (tag: string) => {
+    setTags(tags?.filter((val) => val !== tag))
+  }
   return (
     <FormContainer>
       <Flex direction="column">
@@ -454,7 +479,7 @@ export default function CosmeticForm({
             </Flex>
           </NewImgBtnWrapper>
         </Flex>
-        <Spacing size={20} />
+        <Spacing size={50} />
         <Flex>
           <Label>제품명</Label>
           <InputBox>
@@ -616,13 +641,14 @@ export default function CosmeticForm({
               <textarea
                 name="desc"
                 id="desc"
+                placeholder="텍스트 입력하기"
                 onChange={handleFormValues}
                 value={formValues.desc}
               />
             </TextareaBox>
             <Spacing size={10} />
             <ContentImgBtnWrapper>
-              <div css={currentName}>
+              <div css={currentContentName}>
                 {currentContentImg?.name !== '' ? currentContentImg?.name : ''}
               </div>
               <label key="content" css={labelStyle} htmlFor={`content`}>
@@ -645,6 +671,34 @@ export default function CosmeticForm({
             </ContentImgArea>
           </Flex>
         </Flex>
+        <Spacing size={30} />
+        <Flex>
+          <Label>해시태그</Label>
+          <Flex
+            direction="column"
+            css={css`
+              width: 100%;
+            `}
+          >
+            <HashTagForm>
+              {tags?.map((tag, index) => (
+                <Tags key={index} onClick={() => removeTag(tag)}>
+                  #{tag}
+                </Tags>
+              ))}
+            </HashTagForm>
+            <Flex>
+              <TagInput
+                id="hashtag"
+                name="hashtag"
+                placeholder="해시태그 + 스페이스바 = 입력 / 삭제는 해시태그 클릭"
+                onChange={onChangeHashTag}
+                onKeyUp={handleKeyUp}
+                value={hashTag}
+              />
+            </Flex>
+          </Flex>
+        </Flex>
       </Flex>
       <Spacing size={20} />
       <Flex justify={'center'}>
@@ -656,6 +710,32 @@ export default function CosmeticForm({
     </FormContainer>
   )
 }
+
+const TagInput = styled.input`
+  border: 2px solid #ededff;
+  width: 98%;
+  font-size: 16px;
+  padding-left: 10px;
+  height: 35px;
+  border-radius: 5px;
+`
+const Tags = styled.div`
+  border: 1px solid grey;
+  border-radius: 15px;
+  padding: 8px 15px;
+  width: max-content;
+  height: max-content;
+  margin-right: 5px;
+`
+const HashTagForm = styled.div`
+  display: flex;
+  padding: 5px;
+  flex-wrap: wrap;
+  height: auto;
+  min-height: 80px;
+  margin-bottom: 10px;
+  width: 100%;
+`
 
 const FormContainer = styled.div`
   height: auto;
@@ -680,6 +760,7 @@ const Label = styled.div`
   font-weight: bold;
   background-color: #6643b5;
 `
+
 const ContentImgArea = styled.div`
   height: auto;
   min-height: 50px;
@@ -812,6 +893,15 @@ const subCurrentName = css`
   margin-bottom: 10px;
   overflow: hidden;
   background-color: white;
+`
+const currentContentName = css`
+  height: 35px;
+  width: 99%;
+  border-radius: 5px;
+  display: flex;
+  padding: 0px 10px;
+  align-items: center;
+  border: 1px solid #bcbcbc;
 `
 const currentName = css`
   height: 35px;

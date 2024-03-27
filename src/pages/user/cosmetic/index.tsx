@@ -9,6 +9,8 @@ import { CATEGORY } from '@/constants/cosmetic'
 import { css } from '@emotion/react'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import Search from '@/components/shared/Search'
+import useSearchCosmetics from '@/hooks/data/useSearchCosmetics'
 
 // 카테고리 category
 // 선물 - gift
@@ -81,6 +83,7 @@ const CosmeticPage = () => {
           </CategoryNavBox>
           <CosmeticListBox>
             <MoveMainBanner>MoveMainBanner</MoveMainBanner>
+            <Search />
             <CosmeticList category={category} />
           </CosmeticListBox>
         </CosmeticContainer>

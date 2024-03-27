@@ -34,7 +34,6 @@ import useDetailCosmetic from '@/hooks/data/useDetailCosmetic'
 import { useQuery, useQueryClient } from 'react-query'
 import { getDetailCosmetic } from '@/remote/cosmetic'
 import Select from 'react-select'
-import { preProcessFile } from 'typescript'
 
 const CosmeticDetailPage = () => {
   const params = useParams()
@@ -827,7 +826,6 @@ const CosmeticDetailBox = styled.div`
   flex-basis: 1150px;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
 `
 const SelectItemBox = styled.div`
   width: 100%;

@@ -19,6 +19,7 @@ export interface Cosmetic {
   reviews?: string[]
   totalSale: number | string
   category: string
+  hashTags: string[]
   events?: {
     name: string
     promoEndTime?: string

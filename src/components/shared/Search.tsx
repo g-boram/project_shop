@@ -2,7 +2,7 @@ import { COLLECTIONS } from '@/constants'
 import { Cosmetic } from '@/models/cosmetic'
 import { store } from '@/remote/firebase'
 import { css } from '@emotion/react'
-import { IoMdSearch } from 'react-icons/io'
+import { RxCross2 } from 'react-icons/rx'
 import styled from '@emotion/styled'
 import {
   collection,
@@ -18,15 +18,25 @@ import Badge from './Badge'
 import Flex from './Flex'
 import Spacing from './Spacing'
 import Text from './Text'
+import { Link } from 'react-router-dom'
+import { cosmeticAtom } from '@/atom/cosmetic'
+import { useSetRecoilState } from 'recoil'
 
 export default function Search() {
   const [post, setPost] = useState<Cosmetic[]>([])
   const [isFocus, setIsFocus] = useState(false)
   const [inputQuery, setInputQuery] = useState<string>('')
 
+  const setCosmetic = useSetRecoilState(cosmeticAtom)
+
   const onChange = (e: any) => {
     setInputQuery(e?.target?.value?.trim())
     setIsFocus(true)
+    if (e?.target?.value) {
+      setCosmetic(post as Cosmetic[])
+    } else {
+      setCosmetic(null)
+    }
   }
   const onFocusHandler = () => {
     setIsFocus(true)
@@ -49,6 +59,16 @@ export default function Search() {
     })
   }, [inputQuery])
 
+  const onEnter = (e: any) => {
+    if (e.keyCode === 13) {
+      if (e?.target?.value) {
+        setCosmetic(post as Cosmetic[])
+      } else {
+        setCosmetic(null)
+      }
+    }
+  }
+
   return (
     <SearchContainer onClick={() => setIsFocus((pre) => !pre)}>
       <Flex align={'center'}>
@@ -57,33 +77,32 @@ export default function Search() {
           placeholder="'상품명' 으로 검색하기"
           onFocus={onFocusHandler}
           onChange={onChange}
+          onKeyUp={onEnter}
         />
         <Spacing size={10} direction="horizontal" />
-        <IoMdSearch size={28} color={'#fff'} />
+        <RxCross2 size={28} color={'#121212'} />
       </Flex>
       {isFocus ? (
         <PostContainer>
           {post?.length > 0 ? (
             <Flex direction="column">
-              {post.map((post) => (
-                <>
-                  <Flex align={'center'}>
-                    <Flex
-                      css={css`
-                        min-width: 200px;
-                      `}
-                    >
-                      <Badge label={post.brand_name} color={'#f0f0f0'} />
+              {post.map((post) => {
+                return (
+                  <Link to={`/cosmetic/detail/${post.id}`}>
+                    <Flex align={'center'} css={lowStyle}>
+                      <Flex css={badgeStyle}>
+                        <Badge label={post.brand_name} color={'#f0f0f0'} />
+                      </Flex>
+                      <Flex>
+                        <Text typography="t5" color="fontBlack">
+                          {post.name}
+                        </Text>
+                      </Flex>
                     </Flex>
-                    <Flex>
-                      <Text typography="t7" color="fontBlack">
-                        {post.name}
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Spacing size={3} />
-                </>
-              ))}
+                    {/* <Spacing size={10} /> */}
+                  </Link>
+                )
+              })}
             </Flex>
           ) : (
             <Text typography="t7" color="fontBlack">
@@ -107,6 +126,7 @@ const SearchContainer = styled.div`
 
   & input {
     min-width: 250px;
+    width: 100%;
     height: 35px;
     border: none;
     border-radius: 30px;
@@ -118,6 +138,19 @@ const SearchContainer = styled.div`
       min-width: 500px;
       transition: 1s;
     }
+  }
+`
+const badgeStyle = css`
+  min-width: 200px;
+
+  @media (max-width: 600px) {
+    min-width: 100px;
+  }
+`
+const lowStyle = css`
+  padding: 8px 10px;
+  &: hover {
+    background-color: #fff9ff;
   }
 `
 const PostContainer = styled.div`
