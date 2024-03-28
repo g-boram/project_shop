@@ -1,14 +1,12 @@
 import Button from '@/components/shared/Button'
 import Flex from '@/components/shared/Flex'
-import HeadTitle from '@/components/shared/HeadTitle'
 import ManagerHead from '@/components/shared/ManagerHead'
 import Spacing from '@/components/shared/Spacing'
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import SettingDataPage from './data'
 import SettingMainPage from './main'
+import { css } from '@emotion/react'
+import { useState } from 'react'
 
 function ManagerPage() {
   const [setting, setSetting] = useState(0)
@@ -60,15 +58,15 @@ function ManagerPage() {
 
 const ManagerPageContainer = styled.div`
   background: #fff7f9;
-  height: 100vh;
-  padding: 0 100px;
+  width: 1400px;
+  height: 900px;
 `
 
 const LinkBtnContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 700px;
+  height: 800px;
   width: 250px;
   padding: 15px;
   flex-shrink: 0;
@@ -79,7 +77,7 @@ const ShowImgContainer = styled.div`
   box-shadow: 0px 0px 10px -2px #ffbdd2;
 `
 const MainPageBox = styled.div`
-  background: #fff1f4;
+  background: white;
   height: 100%;
 `
 

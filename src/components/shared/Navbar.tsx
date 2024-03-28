@@ -7,7 +7,7 @@ import Spacing from './Spacing'
 import Text from './Text'
 
 import { css, keyframes } from '@emotion/react'
-import { colors } from '@styles/colorPalette'
+import { FaUserCircle } from 'react-icons/fa'
 import { BiMenu } from 'react-icons/bi'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Link, useLocation } from 'react-router-dom'
@@ -19,9 +19,9 @@ import { userAtom } from '@/atom/user'
 import { IoMdSettings } from 'react-icons/io'
 
 const navList = [
-  { to: '/my', name: '마이페이지' },
-  { to: '/storeMap', name: '매장찾기' },
-  { to: '/board', name: '게시판' },
+  { to: '/my', name: '• 마이 페이지' },
+  { to: '/storeMap', name: '• 매장 찾기' },
+  { to: '/board', name: '• 게시판' },
 ]
 
 function Navbar() {
@@ -44,22 +44,22 @@ function Navbar() {
     }
   }, [])
 
+  // 로그인 여부에 따른 링크
   const renderButton = useCallback(() => {
     if (user != null) {
       return (
+        // 로그인이 된 경우
         <>
           <Link to="/manager">
-            <Button size="small" color="grey">
-              관리자 페이지
-            </Button>
+            <div css={fontWhiteStyle}>관리자 페이지</div>
           </Link>
           <Spacing size={10} direction="horizontal" />
-          <Button size="small" color="pink" onClick={handleLogout}>
+          <div css={fontWhiteStyle} onClick={handleLogout}>
             로그아웃
-          </Button>
+          </div>
           <Spacing size={10} direction="horizontal" />
           <Link to="/my">
-            <IoMdSettings size={30} color="grey" />
+            <IoMdSettings size={25} color="#eee" />
           </Link>
           <Spacing size={10} direction="horizontal" />
           <Link to="/my">
@@ -67,12 +67,16 @@ function Navbar() {
               src={
                 user.photoURL !== ''
                   ? user.photoURL
-                  : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
+                  : 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_female2-1024.png'
               }
               alt="userImg"
-              width={40}
-              height={40}
-              style={{ borderRadius: '100%', border: '2px solid #fff' }}
+              width={30}
+              height={30}
+              style={{
+                borderRadius: '100%',
+                border: '2px solid #fff',
+                backgroundColor: '#fff',
+              }}
             />
           </Link>
         </>
@@ -83,15 +87,11 @@ function Navbar() {
       return (
         <>
           <Link to="/manager">
-            <Button size="small" color="grey">
-              관리자 페이지
-            </Button>
+            <div css={fontWhiteStyle}>관리자 페이지</div>
           </Link>
           <Spacing size={10} direction="horizontal" />
           <Link to="/signin">
-            <Button size="small" color="pink">
-              로그인/회원가입
-            </Button>
+            <div css={fontWhiteStyle}>로그인/회원가입</div>
           </Link>
         </>
       )
@@ -99,40 +99,53 @@ function Navbar() {
     return null
   }, [user, showSignButton, handleLogout])
 
+  // 모바일 오른쪽 활성화 네비박스
   const renderMobieNavButton = useCallback(() => {
     if (user != null) {
       return (
         <>
           <Link to="/my">
-            <img
-              src={
-                user.photoURL !== ''
-                  ? user.photoURL
-                  : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
-              }
-              alt="userImg"
-              width={100}
-              height={100}
-              style={{ borderRadius: '100%', border: '2px solid #fff' }}
-            />
+            <UserImgBox>
+              <img
+                src={
+                  user.photoURL !== ''
+                    ? user.photoURL
+                    : 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_female2-1024.png'
+                }
+                alt="userImg"
+                width={50}
+                height={50}
+                style={{
+                  borderRadius: '100%',
+                  border: '2px solid #fff',
+                  backgroundColor: '#eee',
+                  marginLeft: '10px',
+                }}
+              />
+              <Spacing size={20} direction={'horizontal'} />
+              <Flex direction="column">
+                <Text typography="t6">{user.displayName}</Text>
+                <Spacing size={10} />
+                <Text typography="t6">{user.email}</Text>
+              </Flex>
+            </UserImgBox>
           </Link>
           <Spacing size={10} />
           <Button size="small" full color="pink" onClick={handleLogout}>
             로그아웃
           </Button>
           <Spacing size={50} />
-          <TodayCommentBox>
-            {/* @TODO: 랜덤하게 바꾸기 */}
-            <Flex direction="column" align={'center'} justify={'center'}>
-              <div>{user.displayName} 님! 오늘도 좋은하루 되세요! </div>
-              <Spacing size={10} />
-              <div>봄느낌 가득한 이상품 어때요?</div>
-              <Spacing size={20} />
-              <Button full color="lightPurple">
-                🌸 봄추천 상품 바로가기 !
-              </Button>
-            </Flex>
-          </TodayCommentBox>
+          <Flex direction="column" align={'center'} justify={'center'}>
+            <div>{user.displayName} 님! 오늘도 좋은하루 되세요! </div>
+            <Spacing size={10} />
+            <div>봄느낌 가득한 이상품 어때요?</div>
+            <Spacing size={20} />
+          </Flex>
+          <TodayCommentBox>{/* @TODO: 랜덤하게 바꾸기 */}</TodayCommentBox>
+          <Spacing size={10} />
+          <Button full color="lightPurple">
+            🌸 봄추천 상품 바로가기 !
+          </Button>
           <Spacing size={30} />
         </>
       )
@@ -141,9 +154,7 @@ function Navbar() {
     if (showSignButton) {
       return (
         <Link to="/signin">
-          <Button size="small" color="pink">
-            로그인/회원가입
-          </Button>
+          <div css={fontWhiteStyle}>로그인/회원가입</div>
         </Link>
       )
     }
@@ -154,7 +165,11 @@ function Navbar() {
   const ToggleBtn = () => {
     return (
       <ToggleIcon onClick={() => setIsOpen((val) => !val)}>
-        {isOpen ? <AiOutlineClose size={'20px'} /> : <BiMenu size={'20px'} />}
+        {isOpen ? (
+          <AiOutlineClose size={'20px'} color={'#fff'} />
+        ) : (
+          <BiMenu size={'20px'} color={'#fff'} />
+        )}
       </ToggleIcon>
     )
   }
@@ -195,13 +210,7 @@ function Navbar() {
         <Flex justify="left" align="center">
           <NavLogo>
             <Link to="/">
-              <img
-                src="https://cdn3.iconfinder.com/data/icons/webdesigncreative/free_icons_128x128_png/Calling.png"
-                alt="Logo"
-                width={30}
-                height={30}
-              />
-              <Text typography="t4" color="fontDarkGrey">
+              <Text typography="t3" color="white" bold>
                 BoRamy
               </Text>
             </Link>
@@ -213,10 +222,12 @@ function Navbar() {
                 to={nav.to}
                 key={i}
                 css={css`
-                  color: grey;
+                  color: #eee;
                   margin-left: 20px;
+                  font-weight: bold;
+                  font-size: 16px;
                   &:hover {
-                    color: black;
+                    color: white;
                   }
                 `}
               >
@@ -235,22 +246,45 @@ function Navbar() {
   )
 }
 
+const fontWhiteStyle = css`
+  color: #eee;
+  font-weight: bold;
+  margin: 0px 10px;
+  cursor: pointer;
+
+  &: hover {
+    color: white;
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+`
 // 네비바 컨테이너
 const topNavbarStyles = css`
   padding: 10px 24px;
   position: sticky;
   height: 40px;
   top: 0;
-  background-color: white;
+  background-color: #303030;
   z-index: 10;
-  border-bottom: 1px solid ${colors.grey};
 `
 // 랜덤 한마디 영역
 const TodayCommentBox = styled.div`
   height: 100px;
-  width: 100%;
+  min-width: 240px;
+  padding: 20px 10px;
+  background-color: #fff;
+  border-radius: 10px;
   font-size: 14px;
-  padding: 10px;
+`
+const UserImgBox = styled.div`
+  height: 60px;
+  min-width: 240px;
+  padding: 20px 10px;
+  display: flex;
+  background-color: #fff;
+  border-radius: 10px;
 `
 const NavLogo = styled.div`
   margin-right: 10px;
@@ -286,16 +320,19 @@ const mobileNavbarContainerStyles = css`
   padding: 20px 20px;
   height: 100vh;
   width: 60%;
-  background-color: #e7b3b3;
+  background-color: #555;
   gap: 10px;
   float: right;
-  color: #fff;
-  font-weight: 600;
-  font-size: 15px;
+  color: #eee;
+  font-weight: bold;
+  font-size: 18px;
   z-index: 10;
   transform: translateX(100%);
   animation: ${slideRightBox} 0.5s ease-in-out forwards;
 
+  &: hover {
+    color: white;
+  }
   @media (min-width: 600px) {
     display: none;
   }

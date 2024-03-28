@@ -41,12 +41,12 @@ const MainCosmeticList = () => {
       </ListContainer>
 
       <Spacing size={10} />
-      <Top title="⭐️ 별점 4 이상 상품" subTitle="스킨부터 크림까지 최저가" />
+      {/* <Top title="⭐️ 별점 4 이상 상품" subTitle="스킨부터 크림까지 최저가" />
       <ListContainer>
         {higtStar?.map((cos, i) => {
           return <CosmeticBox cosmetic={cos} key={i} />
         })}
-      </ListContainer>
+      </ListContainer> */}
     </CosmeticContainer>
   )
 }

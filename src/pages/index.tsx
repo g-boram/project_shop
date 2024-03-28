@@ -1,3 +1,4 @@
+import SlideBanner from '@/components/main/SlideBanner'
 import Search from '@/components/shared/Search'
 import MainBanner from '@/components/user/MainBanner'
 import MainCosmeticList from '@/components/user/MainCosmeticList'
@@ -13,6 +14,7 @@ function HomePage() {
       <MainIconBox />
       <Search />
       <MainCosmeticList />
+      <SlideBanner />
     </Layout>
   )
 }

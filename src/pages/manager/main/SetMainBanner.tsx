@@ -143,11 +143,11 @@ export default function SetMainBanner() {
 
   return (
     <>
+      <ManagerHead
+        title={'Main Banner Setting'}
+        desc={'메인 페이지 이벤트 배너 영역 이미지 추가 및 삭제'}
+      />
       <ManagerPageLayout>
-        <ManagerHead
-          title={'Main Banner Setting'}
-          desc={'메인 페이지 이벤트 배너 영역 이미지 추가 및 삭제'}
-        />
         <SettingContainer>
           <ImgListContianer>
             {data
@@ -187,21 +187,21 @@ export default function SetMainBanner() {
               />
               <NewImgDescBox>
                 <Text
-                  typography="t7"
+                  typography="t6"
                   display="block"
                   style={{ marginTop: 10, marginBottom: 6 }}
                 >
-                  * 업로드 가능한 이미지 사이즈는 1280 x 853 입니다.
+                  * 업로드 가능한 이미지 사이즈는 000 x 000 입니다.
                 </Text>
                 <Text
-                  typography="t7"
+                  typography="t6"
                   display="block"
                   style={{ marginTop: 10, marginBottom: 6 }}
                 >
                   * 삭제 이미지 복구 필요시 담당자에게 문의해 주세요
                 </Text>
                 <Text
-                  typography="t7"
+                  typography="t6"
                   display="block"
                   style={{ marginTop: 10, marginBottom: 6 }}
                 >
@@ -209,7 +209,7 @@ export default function SetMainBanner() {
                   진행해 주세요
                 </Text>
                 <Text
-                  typography="t7"
+                  typography="t6"
                   display="block"
                   style={{ marginTop: 10, marginBottom: 6 }}
                 >

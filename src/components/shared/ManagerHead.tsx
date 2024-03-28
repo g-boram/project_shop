@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import Flex from './Flex'
 
 interface titleProps {
   title: string
@@ -15,17 +16,19 @@ export default function ManagerHead({ title, desc }: titleProps) {
 
 const Containder = styled.div`
   display: flex;
-  align-items: center;
-  height: 70px;
+  align-items: flex-end;
+  height: 80px;
   width: 100%;
+  margin-top: 20px;
+  padding-bottom: 25px;
   background-color: #ffecec;
 `
 const Title = styled.div`
   font-size: 30px;
-  margin-right: 30px;
+  margin-right: 50px;
   margin-left: 30px;
 `
 const Desc = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   color: ${`var(--fontGrey)`};
 `

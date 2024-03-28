@@ -32,6 +32,18 @@ const MainIconBox = () => {
   if (data == null || isLoading) {
     return (
       <LoadingBox>
+        <Flex>
+          <IconItem />
+          <IconItem />
+          <IconItem />
+          <IconItem />
+          <IconItem />
+          <IconItem />
+          <IconItem />
+          <IconItem />
+          <IconItem />
+          <IconItem />
+        </Flex>
         <PropagateLoader color="#e6a4b4" />
       </LoadingBox>
     )
@@ -42,12 +54,12 @@ const MainIconBox = () => {
       url: 'https://firebasestorage.googleapis.com/v0/b/project-shop-62c72.appspot.com/o/main%2FcategoryIcons%2FtimeSale.jpg?alt=media&token=a03cfd55-d858-4bfa-9abf-1799f3874151',
     },
     {
-      name: 'Gift',
-      url: 'https://firebasestorage.googleapis.com/v0/b/project-shop-62c72.appspot.com/o/main%2FcategoryIcons%2FgiftBox.png?alt=media&token=66f01b0a-6b57-4ba3-a2d2-914ec7f2fd0d',
-    },
-    {
       name: 'Sale',
       url: 'https://firebasestorage.googleapis.com/v0/b/project-shop-62c72.appspot.com/o/main%2FcategoryIcons%2Fsale_icon.png?alt=media&token=890d6f60-f03d-460a-b554-e78398f2d1c0',
+    },
+    {
+      name: 'Gift',
+      url: 'https://firebasestorage.googleapis.com/v0/b/project-shop-62c72.appspot.com/o/main%2FcategoryIcons%2Ficon_giftBox.png?alt=media&token=bf12a3c2-ec05-42b1-94ba-9b674286a591',
     },
   ]
   return (
@@ -77,14 +89,6 @@ const MainIconBox = () => {
                   </Link>
                 )
               })}
-              <Spacing size={10} direction={'horizontal'} />
-              <Flex align={'center'}>
-                <BsInfoCircleFill size={'13px'} fillOpacity={'0.3'} />
-                <Spacing size={5} direction={'horizontal'} />
-                <Text typography={'t8'} color={'fontGrey'}>
-                  아이콘 제작자: justicon - Flaticon
-                </Text>
-              </Flex>
             </IconMoreCotainer>
           ) : (
             <IconCotainer>
@@ -113,59 +117,60 @@ const MainIconBox = () => {
               })}
             </IconCotainer>
           )}
-          <Button full color={'pink'} onClick={handleIsMore}>
+          <Button full color={'grey'} onClick={handleIsMore}>
             {isMore ? '닫기' : '더보기'}
           </Button>
         </>
       ) : (
-        <>
-          <IconCotainer>
-            {/* 너비 600 이상 */}
-            {EventIcons.map((icon, index) => {
-              return (
-                <Link to={`/cosmetic`}>
-                  <IconBox>
-                    <img src={icon.url} alt={icon.name} />
-                    <span>{icon.name}</span>
-                  </IconBox>
-                </Link>
-              )
-            })}
-            {data?.map((icon, index) => {
-              return (
-                <Link to={`/cosmetic/${icon.category}`}>
-                  <IconBox>
-                    <img src={icon.url} alt={icon.name} />
-                    <span>{icon.name}</span>
-                  </IconBox>
-                </Link>
-              )
-            })}
-            <Spacing size={15} direction={'horizontal'} />
-          </IconCotainer>
-          <Flex
-            align={'center'}
-            justify={'flex-end'}
-            css={css`
-              height: 20px;
-            `}
-          >
-            <BsInfoCircleFill size={'10px'} fillOpacity={'0.3'} />
-            <Spacing size={5} direction={'horizontal'} />
-            <Text typography={'t8'} color={'fontGrey'}>
-              아이콘 제작자 justicon-Flaticon
-            </Text>
-          </Flex>
-        </>
+        <IconCotainer>
+          {/* 너비 600 이상 */}
+          {EventIcons.map((icon, index) => {
+            return (
+              <Link to={`/cosmetic`}>
+                <IconBox>
+                  <img src={icon.url} alt={icon.name} />
+                  <span>{icon.name}</span>
+                </IconBox>
+              </Link>
+            )
+          })}
+          {data?.map((icon, index) => {
+            return (
+              <Link to={`/cosmetic/${icon.category}`}>
+                <IconBox>
+                  <img src={icon.url} alt={icon.name} />
+                  <span>{icon.name}</span>
+                </IconBox>
+              </Link>
+            )
+          })}
+          <Spacing size={15} direction={'horizontal'} />
+        </IconCotainer>
       )}
     </>
   )
 }
+const LoadingBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  background-color: #eee;
+`
+const IconItem = styled.div`
+  height: 70px;
+  width: 70px;
+  background-color: lightGrey;
+  border-radius: 50%;
+  margin: 0px 10px;
+`
 
 const IconMoreCotainer = styled.div`
   display: flex;
   height: auto;
-  background-color: #fff4f5;
+  background-color: #fcfcfc;
   padding: 10px;
 
   @media (max-width: 600px) {
@@ -178,9 +183,10 @@ const IconCotainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100px;
   height: auto;
-  padding: 5px;
   overflow: scroll;
+  margin-top: 10px;
 `
 
 const IconBox = styled.div`
@@ -213,10 +219,5 @@ const IconBox = styled.div`
     width: 40px;
   }
 `
-const LoadingBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 120px;
-`
+
 export default MainIconBox

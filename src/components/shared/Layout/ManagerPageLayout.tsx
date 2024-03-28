@@ -58,16 +58,16 @@ export default function ManagerPageLayout({
 
 const Container = styled.div`
   display: flex;
-  height: 1000px;
+  height: 900px;
   width: 1400px;
 `
 const MoveNavBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 200px;
+  width: 250px;
+  padding: 15px;
   flex-shrink: 0;
-  padding: 20px;
   background-color: #ffd8da;
 `
 const SettingWrapper = styled.div`

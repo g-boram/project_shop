@@ -147,6 +147,7 @@ export default css`
     color: inherit;
     font: inherit;
     line-height: normal;
+    letter-spacing: 1.5px;
   }
   a {
     color: inherit;
@@ -155,10 +156,11 @@ export default css`
 
   /* 스크롤바 커스텀*/
   ::-webkit-scrollbar {
-    width: 2px;
+    width: 1px;
+    height: 2px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #ebd5d5;
+    background-color: #303030;
     border-radius: 10px;
   }
   ::-webkit-scrollbar-track {

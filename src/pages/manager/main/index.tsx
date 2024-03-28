@@ -10,41 +10,47 @@ import Spacing from '@/components/shared/Spacing'
 export default function SettingMainPage() {
   return (
     <MainPageBox>
-      <MoveBannerBox>
-        <Flex>
+      <Flex>
+        <MoveBannerBox>
           <Banner css={bannerStyled}>Banner1</Banner>
           <Banner css={bannerStyled}>Banner2</Banner>
           <Banner css={bannerStyled}>Banner3</Banner>
-        </Flex>
+        </MoveBannerBox>
         <Flex align={'center'} justify={'flex-end'}>
           <Link to={'/manager/main/setMainBanner'} css={linkStyle}>
             <Flex align={'center'}>
               <IoMdSettings size={20} />
               <Spacing size={10} direction="horizontal" />
-              <Button color={'pink'}>배너 이미지 변경하기</Button>
+              <Button size="large" color={'pink'}>
+                배너 이미지 변경하기
+              </Button>
             </Flex>
           </Link>
         </Flex>
-      </MoveBannerBox>
-      <MoveIconsBox>
-        <Flex>
-          <Icon />
-          <Icon />
-          <Icon />
-          <Icon />
-          <Icon />
-          <Icon />
-        </Flex>
+      </Flex>
+      <Flex>
+        <MoveIconsBox>
+          <Flex justify={'center'}>
+            <Icon />
+            <Icon />
+            <Icon />
+            <Icon />
+            <Icon />
+            <Icon />
+          </Flex>
+        </MoveIconsBox>
         <Flex align={'center'} justify={'flex-end'}>
           <Link to={'/manager/main/setCategoryIcons'} css={linkStyle}>
             <Flex align={'center'}>
               <IoMdSettings size={20} />
               <Spacing size={10} direction="horizontal" />
-              <Button color={'pink'}>아이콘 순서 변경하기</Button>
+              <Button size="large" color={'pink'}>
+                아이콘 순서 변경하기
+              </Button>
             </Flex>
           </Link>
         </Flex>
-      </MoveIconsBox>
+      </Flex>
     </MainPageBox>
   )
 }
@@ -53,19 +59,20 @@ const MainPageBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 50px 100px;
+  padding: 50px 0px;
   letter-spacing: 1.5px;
 `
 
 const MoveBannerBox = styled.div`
   position: relative;
-  height: 190px;
-  width: 500px;
+  display: flex;
+  height: 200px;
+  width: 700px;
   background-color: #bcbcbc;
   padding: 10px;
 `
 const Banner = styled.div`
-  height: 180px;
+  height: 150px;
   width: 100%;
   margin-right: 5px;
   margin-left: 5px;
@@ -75,7 +82,7 @@ const Banner = styled.div`
 const MoveIconsBox = styled.div`
   position: relative;
   height: 100px;
-  width: 500px;
+  width: 700px;
   background-color: #bcbcbc;
   padding: 10px;
 `
@@ -89,8 +96,8 @@ const Icon = styled.div`
 `
 
 const linkStyle = css`
-  position: absolute;
-  bottom: 10px;
+  margin-left: 20px;
+  width: 200px;
 `
 const bannerStyled = css`
   display: flex;

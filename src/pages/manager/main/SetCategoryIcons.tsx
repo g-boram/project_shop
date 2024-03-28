@@ -32,88 +32,90 @@ export default function SetCategoryIcons() {
     reorder(from, to)
   }
   return (
-    <ManagerPageLayout>
+    <>
       <ManagerHead
         title={'Main Category Icon'}
         desc={'메인 페이지 카테고리 아이콘 영역 이미지 순서변경'}
       />
-      <SettingContainer>
-        <DescBox>
-          <Flex direction="column">
-            <Text typography="t5">
+      <ManagerPageLayout>
+        <SettingContainer>
+          <DescBox>
+            <Text typography="t6">
               * 아이콘을 클릭 하여 희망순서로 드래그 해주세요
             </Text>
-            <Text typography="t5">
+            <Spacing size={10} />
+            <Text typography="t6">
               * 카테고리 이미지/이름 변경은 개발자에게 문의 해주세요
             </Text>
-            <Text typography="t5">
+            <Spacing size={10} />
+            <Text typography="t6">
               * 순서변경은 실시간으로 반영되니 신중히 정한 후 저장 해주세요
             </Text>
+          </DescBox>
+          <DragContainer>
+            <DragDropContext onDragEnd={handleDragEndDrop}>
+              <StrictModeDroppable droppableId="likes">
+                {(droppableProps) => (
+                  <ul
+                    ref={droppableProps.innerRef}
+                    {...droppableProps.droppableProps}
+                  >
+                    <Flex>
+                      {data?.map((icon, index) => {
+                        return (
+                          <Draggable
+                            key={icon.id}
+                            draggableId={icon.id}
+                            index={index}
+                          >
+                            {(draggableProps) => (
+                              <li
+                                ref={draggableProps.innerRef}
+                                {...draggableProps.draggableProps}
+                                {...draggableProps.dragHandleProps}
+                              >
+                                <IconBox>
+                                  <IconWrapper>
+                                    <img src={icon.url} alt={icon.name} />
+                                    <span>{icon.name}</span>
+                                  </IconWrapper>
+                                  <OrderBadge>{icon.order}</OrderBadge>
+                                </IconBox>
+                              </li>
+                            )}
+                          </Draggable>
+                        )
+                      })}
+                    </Flex>
+                  </ul>
+                )}
+              </StrictModeDroppable>
+            </DragDropContext>
+          </DragContainer>
+          <Spacing size={30} />
+          <Flex justify={'center'}>
+            <Button
+              disabled={!isEdit}
+              size={'large'}
+              color="pink"
+              full
+              onClick={() =>
+                open({
+                  title: '변경된 순서를 저장 하시겠습니까?',
+                  isCancle: true,
+                  onCancleClick: () => {},
+                  onButtonClick: () => {
+                    save()
+                  },
+                })
+              }
+            >
+              저장하기
+            </Button>
           </Flex>
-        </DescBox>
-        <DragContainer>
-          <DragDropContext onDragEnd={handleDragEndDrop}>
-            <StrictModeDroppable droppableId="likes">
-              {(droppableProps) => (
-                <ul
-                  ref={droppableProps.innerRef}
-                  {...droppableProps.droppableProps}
-                >
-                  <Flex>
-                    {data?.map((icon, index) => {
-                      return (
-                        <Draggable
-                          key={icon.id}
-                          draggableId={icon.id}
-                          index={index}
-                        >
-                          {(draggableProps) => (
-                            <li
-                              ref={draggableProps.innerRef}
-                              {...draggableProps.draggableProps}
-                              {...draggableProps.dragHandleProps}
-                            >
-                              <IconBox>
-                                <IconWrapper>
-                                  <img src={icon.url} alt={icon.name} />
-                                  <span>{icon.name}</span>
-                                </IconWrapper>
-                                <OrderBadge>{icon.order}</OrderBadge>
-                              </IconBox>
-                            </li>
-                          )}
-                        </Draggable>
-                      )
-                    })}
-                  </Flex>
-                </ul>
-              )}
-            </StrictModeDroppable>
-          </DragDropContext>
-        </DragContainer>
-        <Spacing size={30} />
-        <Flex justify={'center'}>
-          <Button
-            disabled={!isEdit}
-            size={'large'}
-            color="pink"
-            full
-            onClick={() =>
-              open({
-                title: '변경된 순서를 저장 하시겠습니까?',
-                isCancle: true,
-                onCancleClick: () => {},
-                onButtonClick: () => {
-                  save()
-                },
-              })
-            }
-          >
-            저장하기
-          </Button>
-        </Flex>
-      </SettingContainer>
-    </ManagerPageLayout>
+        </SettingContainer>
+      </ManagerPageLayout>
+    </>
   )
 }
 
@@ -150,12 +152,13 @@ const DragContainer = styled.div`
 `
 const DescBox = styled.div`
   height: auto;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
   box-shadow: 0px 0px 10px -2px #ffbdd2;
 `
 const SettingContainer = styled.div`
-  padding: 20px;
-  height: 800px;
+  padding: 50px 20px;
 `
 const IconBox = styled.div`
   height: 100px;

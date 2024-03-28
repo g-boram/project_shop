@@ -121,7 +121,6 @@ const SearchContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin-top: 10px;
   padding: 10px 20px;
 
   & input {
