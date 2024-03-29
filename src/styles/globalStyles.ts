@@ -156,8 +156,8 @@ export default css`
 
   /* 스크롤바 커스텀*/
   ::-webkit-scrollbar {
-    width: 1px;
-    height: 2px;
+    width: 2px;
+    height: 3px;
   }
   ::-webkit-scrollbar-thumb {
     background-color: #303030;

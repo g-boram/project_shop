@@ -55,6 +55,7 @@ const CosmeticDetailPage = () => {
     readonly label: string
     readonly value: string | null
   }
+  console.log('cosmetic', cosmetic)
 
   useEffect(() => {
     if (cosmetic) {
@@ -126,53 +127,53 @@ const CosmeticDetailPage = () => {
   }, [])
 
   // 태그 컴포넌트
-  // const [remainedTime, setRemainedTime] = useState(0)
-  // useEffect(() => {
-  //   if (cosmetic?.events == null || cosmetic.events.promoEndTime == null) {
-  //     return
-  //   }
+  const [remainedTime, setRemainedTime] = useState(0)
+  useEffect(() => {
+    if (cosmetic?.events == null || cosmetic.events.promoEndTime == null) {
+      return
+    }
 
-  //   const promoEndTime = cosmetic.events.promoEndTime
+    const promoEndTime = cosmetic.events.promoEndTime
 
-  //   const timer = setInterval(() => {
-  //     const 남은초 = differenceInMilliseconds(
-  //       parseISO(promoEndTime),
-  //       new Date(),
-  //     )
-  //     if (남은초 < 0) {
-  //       clearInterval(timer)
-  //       return
-  //     }
-  //     setRemainedTime(남은초)
-  //   }, 1_000)
+    const timer = setInterval(() => {
+      const 남은초 = differenceInMilliseconds(
+        parseISO(promoEndTime),
+        new Date(),
+      )
+      if (남은초 < 0) {
+        clearInterval(timer)
+        return
+      }
+      setRemainedTime(남은초)
+    }, 1_000)
 
-  //   return () => {
-  //     clearInterval(timer)
-  //   }
-  // }, [cosmetic?.events])
-  // const tagComponent = () => {
-  //   if (cosmetic?.events == null) {
-  //     return null
-  //   }
+    return () => {
+      clearInterval(timer)
+    }
+  }, [cosmetic?.events])
+  const tagComponent = () => {
+    if (cosmetic?.events == null) {
+      return null
+    }
 
-  //   const { name, tagThemeStyle } = cosmetic.events
+    const { name, tagThemeStyle } = cosmetic.events
 
-  //   const promotionTxt =
-  //     remainedTime > 0 ? ` - ${formatTime(remainedTime)} 남음` : ''
+    const promotionTxt =
+      remainedTime > 0 ? `-${formatTime(remainedTime)} 남음` : ''
 
-  //   if (promotionTxt === '') return
+    if (promotionTxt === '') return
 
-  //   return (
-  //     <Tag
-  //       color={tagThemeStyle.fontColor}
-  //       backgroundColor={tagThemeStyle.backgroundColor}
-  //       height={'20px'}
-  //       fontSize={'16px'}
-  //     >
-  //       {name.concat(promotionTxt)}
-  //     </Tag>
-  //   )
-  // }
+    return (
+      <Tag
+        color={tagThemeStyle.fontColor}
+        backgroundColor={tagThemeStyle.backgroundColor}
+        height={'20px'}
+        fontSize={'16px'}
+      >
+        {name.concat(promotionTxt)}
+      </Tag>
+    )
+  }
 
   // 찜하기, 공유하기 영역
   const topActionBox = () => {
@@ -336,47 +337,58 @@ const CosmeticDetailPage = () => {
           {/* 상세내용 영역 */}
           <CosmeticDetailBox>
             <DetailBox>
-              <MainImg>
-                {currentImg ? (
-                  <img src={currentImg} alt="" />
-                ) : (
-                  <Skeleton width={350} height={400} />
-                )}
-                <SubImg>
-                  {cosmetic?.url ? (
-                    <SubImgItem>
-                      <img
-                        src={cosmetic.url}
-                        alt={`mainImg`}
-                        onClick={() =>
-                          setCurrentImg(cosmetic.url ? cosmetic.url : '')
-                        }
-                      />
-                    </SubImgItem>
+              <div>
+                <HashTagBox>
+                  {cosmetic?.hashTags ? (
+                    cosmetic?.hashTags.map((tag, i) => <TagBox>#{tag}</TagBox>)
                   ) : (
-                    <>
-                      <Skeleton width={80} height={80} />
-                      <Spacing size={5} direction={'horizontal'} />
-                    </>
+                    <></>
                   )}
-                  {cosmetic?.subUrl ? (
-                    cosmetic?.subUrl.map((sub, idx) => (
+                </HashTagBox>
+                <MainImg>
+                  {currentImg ? (
+                    <img src={currentImg} alt="" />
+                  ) : (
+                    <Skeleton width={350} height={400} />
+                  )}
+                  <SubImg>
+                    {cosmetic?.url ? (
                       <SubImgItem>
                         <img
-                          src={sub.url}
-                          alt={`subImg${idx}`}
-                          onClick={() => setCurrentImg(sub.url ? sub.url : '')}
+                          src={cosmetic.url}
+                          alt={`mainImg`}
+                          onClick={() =>
+                            setCurrentImg(cosmetic.url ? cosmetic.url : '')
+                          }
                         />
                       </SubImgItem>
-                    ))
-                  ) : (
-                    <>
-                      <Skeleton width={80} height={80} />
-                      <Spacing size={5} direction={'horizontal'} />
-                    </>
-                  )}
-                </SubImg>
-              </MainImg>
+                    ) : (
+                      <>
+                        <Skeleton width={80} height={80} />
+                        <Spacing size={5} direction={'horizontal'} />
+                      </>
+                    )}
+                    {cosmetic?.subUrl ? (
+                      cosmetic?.subUrl.map((sub, idx) => (
+                        <SubImgItem>
+                          <img
+                            src={sub.url}
+                            alt={`subImg${idx}`}
+                            onClick={() =>
+                              setCurrentImg(sub.url ? sub.url : '')
+                            }
+                          />
+                        </SubImgItem>
+                      ))
+                    ) : (
+                      <>
+                        <Skeleton width={80} height={80} />
+                        <Spacing size={5} direction={'horizontal'} />
+                      </>
+                    )}
+                  </SubImg>
+                </MainImg>
+              </div>
               <DetailDesc>
                 {topActionBox()}
                 <DescBox>
@@ -468,7 +480,7 @@ const CosmeticDetailPage = () => {
                       </Text>
                     </Flex>
                   </Flex>
-                  {/* <TagStyle>{tagComponent()}</TagStyle> */}
+                  <TagStyle>{tagComponent()}</TagStyle>
                 </DescBox>
                 <BuyCosmeticBox>
                   <Select
@@ -578,10 +590,23 @@ const CosmeticDetailPage = () => {
               <Skeleton width={'100%'} height={350} />
             )}
           </MobileImgWrapper>
-          {/* <MobileTagStyle>{tagComponent()}</MobileTagStyle> */}
+          <MobileTagStyle>{tagComponent()}</MobileTagStyle>
           <MobileDetailBox>
             <Spacing size={20} />
             {topActionBox()}
+            <Spacing size={20} />
+            <HashTagBox>
+              {cosmetic?.hashTags ? (
+                cosmetic?.hashTags.map((tag, i) => <TagBox>#{tag}</TagBox>)
+              ) : (
+                <></>
+              )}
+              {cosmetic?.hashTags ? (
+                cosmetic?.hashTags.map((tag, i) => <TagBox>#{tag}</TagBox>)
+              ) : (
+                <></>
+              )}
+            </HashTagBox>
             <Spacing size={20} />
             {/* 제품명/브랜드명 */}
             {cosmetic?.brand_name && cosmetic?.name ? (
@@ -600,13 +625,11 @@ const CosmeticDetailPage = () => {
               <Skeleton width={300} height={40} />
             )}
             <Spacing size={10} />
-
             {/* 한줄설명 */}
             <Flex>
               <Text typography="t5">" {cosmetic?.comment} "</Text>
             </Flex>
             <Spacing size={15} />
-
             {/* 색상 */}
             <Flex justify={'space-between'} align={'center'}>
               <Text typography="t6">색상</Text>
@@ -615,7 +638,6 @@ const CosmeticDetailPage = () => {
               </Text>
             </Flex>
             <Spacing size={5} />
-
             {/* 가격 영역 */}
             <Flex justify={'space-between'}>
               <Flex align={'center'}>
@@ -739,6 +761,25 @@ const CosmeticDetailPage = () => {
   )
 }
 
+// 해시태그
+const TagBox = styled.div`
+  min-width: max-content;
+  margin-right: 10px;
+`
+const HashTagBox = styled.div`
+  width: 350px;
+  height: 55px;
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  overflow: scroll;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+`
+
 // 모바일 - Mobile
 const MobileContainer = styled.div`
   display: flex;
@@ -764,7 +805,7 @@ const MobileImgWrapper = styled.div`
 `
 const MobileDetailInfoBox = styled.div`
   background-color: white;
-  height: 300px;
+  min-height: 300px;
   width: 100%;
   margin-top: 20px;
 `
@@ -943,11 +984,11 @@ const TopIconBox = styled.div`
   width: 100%;
 `
 const CateTag = styled.div`
-  padding: 2px 8px;
+  padding: 2px 15px;
   height: 20px;
   background-color: #eee;
-  border: 1px solid #d1d1d1;
-  border-radius: 10px;
+  border: 1px solid grey;
+  border-radius: 15px;
 `
 const nameStyle = css`
   height: 80px;

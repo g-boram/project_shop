@@ -40,31 +40,31 @@ function CosmeticCategoryBox({
   }) => void
 }) {
   const [remainedTime, setRemainedTime] = useState(0)
-  // console.log(cosmetic)
+  console.log(cosmetic)
 
-  // useEffect(() => {
-  //   if (cosmetic.events == null || cosmetic.events.promoEndTime == null) {
-  //     return
-  //   }
+  useEffect(() => {
+    if (cosmetic.events == null || cosmetic.events.promoEndTime == null) {
+      return
+    }
 
-  //   const promoEndTime = cosmetic.events.promoEndTime
+    const promoEndTime = cosmetic.events.promoEndTime
 
-  //   const timer = setInterval(() => {
-  //     const 남은초 = differenceInMilliseconds(
-  //       parseISO(promoEndTime),
-  //       new Date(),
-  //     )
-  //     if (남은초 < 0) {
-  //       clearInterval(timer)
-  //       return
-  //     }
-  //     setRemainedTime(남은초)
-  //   }, 1_000)
+    const timer = setInterval(() => {
+      const 남은초 = differenceInMilliseconds(
+        parseISO(promoEndTime),
+        new Date(),
+      )
+      if (남은초 < 0) {
+        clearInterval(timer)
+        return
+      }
+      setRemainedTime(남은초)
+    }, 1_000)
 
-  //   return () => {
-  //     clearInterval(timer)
-  //   }
-  // }, [cosmetic.events])
+    return () => {
+      clearInterval(timer)
+    }
+  }, [cosmetic.events])
 
   // 태그 컴포넌트
   const tagComponent = () => {
@@ -75,17 +75,28 @@ function CosmeticCategoryBox({
     const { name, tagThemeStyle } = cosmetic.events
 
     const promotionTxt =
-      remainedTime > 0 ? ` - ${formatTime(remainedTime)} 남음` : ''
+      remainedTime > 0 ? `-${formatTime(remainedTime)} 남음` : ''
 
-    if (promotionTxt === '') return
+    // if (promotionTxt === '') return
 
     return (
-      <Tag
-        color={tagThemeStyle.fontColor}
-        backgroundColor={tagThemeStyle.backgroundColor}
-      >
-        {name.concat(promotionTxt)}
-      </Tag>
+      <>
+        {promotionTxt === '' ? (
+          <Tag
+            color={tagThemeStyle.fontColor}
+            backgroundColor={tagThemeStyle.backgroundColor}
+          >
+            {name}
+          </Tag>
+        ) : (
+          <Tag
+            color={tagThemeStyle.fontColor}
+            backgroundColor={tagThemeStyle.backgroundColor}
+          >
+            {name.concat(promotionTxt)}
+          </Tag>
+        )}
+      </>
     )
   }
 

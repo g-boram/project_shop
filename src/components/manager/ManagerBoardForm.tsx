@@ -65,95 +65,97 @@ const ManagerBoardForm = () => {
   }
 
   return (
-    <ManagerPageLayout>
+    <>
       <ManagerHead title={'Set Board Data'} />
-      <SettingContainer>
-        <Flex
-          justify={'flex-end'}
-          align={'flex-end'}
-          direction={'column'}
-          css={formTitleStyle}
-        >
-          <Text typography="t4">게시글 작성</Text>
-          <Text typography="t7" color="fontDarkGrey">
-            정해진 양식/확정 된 내용으로 등록해주세요
-          </Text>
-        </Flex>
-        <FormContainer>
-          <Flex direction="column">
-            <Spacing size={10} />
-            <Flex align={'center'}>
-              <Label>카테고리</Label>
-              <>
-                <CreatableSelect
-                  placeholder="카테고리를 선택해 주세요"
-                  onChange={(newValue) => setCategory(newValue)}
-                  options={MANAGER_CATEGORY}
-                  value={category}
-                  styles={{
-                    container: (containerStyles) => ({
-                      ...containerStyles,
-                      width: '100%',
-                      fontSize: '13px',
-                      border: '1px solid #cdcdff',
-                      borderRadius: '5px',
-                    }),
-                    control: (controlStyles) => ({
-                      ...controlStyles,
-                      border: '1px solid #cdcdff',
-                    }),
-                    menu: (controlStyles) => ({
-                      ...controlStyles,
-                      height: '150px',
-                      overflow: 'scroll',
-                    }),
-                  }}
-                />
-              </>
-            </Flex>
-            <Spacing size={10} />
-            <Flex>
-              <Label>제목</Label>
-              <InputBox>
-                <input
-                  name="title"
-                  id="title"
-                  onChange={handleFormValues}
-                  value={formValues.title}
-                />
-              </InputBox>
-            </Flex>
-            <Spacing size={10} />
-            <Flex>
-              <Label>내용</Label>
-              <TextareaBox>
-                <textarea
-                  name="content"
-                  id="content"
-                  onChange={handleFormValues}
-                  value={formValues.content}
-                />
-              </TextareaBox>
-            </Flex>
+      <ManagerPageLayout>
+        <SettingContainer>
+          <Flex
+            justify={'flex-end'}
+            align={'flex-end'}
+            direction={'column'}
+            css={formTitleStyle}
+          >
+            <Text typography="t4">게시글 작성</Text>
+            <Text typography="t7" color="fontDarkGrey">
+              정해진 양식/확정 된 내용으로 등록해주세요
+            </Text>
           </Flex>
+          <FormContainer>
+            <Flex direction="column">
+              <Spacing size={10} />
+              <Flex align={'center'}>
+                <Label>카테고리</Label>
+                <>
+                  <CreatableSelect
+                    placeholder="카테고리를 선택해 주세요"
+                    onChange={(newValue) => setCategory(newValue)}
+                    options={MANAGER_CATEGORY}
+                    value={category}
+                    styles={{
+                      container: (containerStyles) => ({
+                        ...containerStyles,
+                        width: '100%',
+                        fontSize: '13px',
+                        border: '1px solid #cdcdff',
+                        borderRadius: '5px',
+                      }),
+                      control: (controlStyles) => ({
+                        ...controlStyles,
+                        border: '1px solid #cdcdff',
+                      }),
+                      menu: (controlStyles) => ({
+                        ...controlStyles,
+                        height: '150px',
+                        overflow: 'scroll',
+                      }),
+                    }}
+                  />
+                </>
+              </Flex>
+              <Spacing size={10} />
+              <Flex>
+                <Label>제목</Label>
+                <InputBox>
+                  <input
+                    name="title"
+                    id="title"
+                    onChange={handleFormValues}
+                    value={formValues.title}
+                  />
+                </InputBox>
+              </Flex>
+              <Spacing size={10} />
+              <Flex>
+                <Label>내용</Label>
+                <TextareaBox>
+                  <textarea
+                    name="content"
+                    id="content"
+                    onChange={handleFormValues}
+                    value={formValues.content}
+                  />
+                </TextareaBox>
+              </Flex>
+            </Flex>
+            <Spacing size={20} />
+            <Flex justify={'center'}>
+              <Button color="lightPurple" full onClick={handleSubmit}>
+                게시글 등록
+              </Button>
+            </Flex>
+            <Spacing size={20} />
+          </FormContainer>
           <Spacing size={20} />
           <Flex justify={'center'}>
-            <Button color="lightPurple" full onClick={handleSubmit}>
-              게시글 등록
-            </Button>
+            <Link to={'/manager/data/setBoardData'}>
+              <Button size="medium" color="purple">
+                목록
+              </Button>
+            </Link>
           </Flex>
-          <Spacing size={20} />
-        </FormContainer>
-        <Spacing size={20} />
-        <Flex justify={'center'}>
-          <Link to={'/manager/data/setBoardData'}>
-            <Button size="medium" color="purple">
-              목록
-            </Button>
-          </Link>
-        </Flex>
-      </SettingContainer>
-    </ManagerPageLayout>
+        </SettingContainer>
+      </ManagerPageLayout>
+    </>
   )
 }
 
@@ -170,6 +172,7 @@ const formTitleStyle = css`
   border-bottom: 5px solid #b4b4ff;
   padding-bottom: 10px;
   margin-bottom: 20px;
+  margin-top: 80px;
   width: 1000px;
 `
 

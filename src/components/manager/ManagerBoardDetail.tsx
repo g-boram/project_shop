@@ -56,8 +56,8 @@ const ManagerBoardDetail = () => {
 
   return (
     <>
+      <ManagerHead title={'Set Board Data'} />
       <ManagerPageLayout>
-        <ManagerHead title={'Set Board Data'} />
         <SettingContainer>
           {board ? (
             <>

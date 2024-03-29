@@ -4,7 +4,7 @@ export interface CosmeticCategoryOption {
 }
 
 export const COSMETIC_CATEGORY = [
-  { label: '베이스', value: 'base' },
+  { label: '립스틱', value: 'lip' },
   { label: '스킨/앰플', value: 'skin' },
   { label: '미용도구', value: 'tools' },
   { label: '향수', value: 'perfume' },
@@ -15,6 +15,14 @@ export const COSMETIC_CATEGORY = [
   { label: '아이섀도우', value: 'shadow' },
   { label: '로션/크림', value: 'cream' },
   { label: '선크림', value: 'sunCare' },
+]
+export const EVENT_TAGBG = [
+  { label: '분홍색', value: '#de9eb2' },
+  { label: '검정색', value: '#212121' },
+  { label: '파랑색', value: '#2396f3' },
+  { label: '보라색', value: '#6643b5' },
+  { label: '초록색', value: '#4caf50' },
+  { label: '노랑색', value: '#ffd700' },
 ]
 
 export interface ColourOption {
@@ -40,7 +48,7 @@ export const colourOptions: readonly ColourOption[] = [
 ]
 
 export const CATEGORY = [
-  { name: '베이스', value: 'base' },
+  { name: '립스틱', value: 'lip' },
   { name: '스킨/앰플', value: 'skin' },
   { name: '미용도구', value: 'tools' },
   { name: '향수', value: 'perfume' },

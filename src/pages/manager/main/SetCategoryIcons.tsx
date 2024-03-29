@@ -162,7 +162,7 @@ const SettingContainer = styled.div`
 `
 const IconBox = styled.div`
   height: 100px;
-  width: 70px;
+  width: 80px;
   padding: 5px;
   display: flex;
   flex-direction: column;
@@ -186,7 +186,9 @@ const IconWrapper = styled.div`
   padding: 5px;
 
   & img {
-    height: 60px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid #eee;
   }
   & span {
     font-size: 13px;

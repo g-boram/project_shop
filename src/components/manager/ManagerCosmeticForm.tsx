@@ -39,27 +39,29 @@ const ManagerCosmeticForm = () => {
   }
 
   return (
-    <ManagerPageLayout>
+    <>
       <ManagerHead title={'Set Cosmetic Data'} />
-      <SettingContainer>
-        <CosmeticForm onSubmit={handleSubmit} setLoading={handleLoading} />
-        {isLoading ? (
-          <DimmedBox>
-            <PuffLoader color="#6643b5" size={'200px'} />
-          </DimmedBox>
-        ) : (
-          <></>
-        )}
-        <Spacing size={20} />
-        <Flex justify={'center'}>
-          <Link to={'/manager/data/setBoardData'}>
-            <Button size="medium" color="purple">
-              목록
-            </Button>
-          </Link>
-        </Flex>
-      </SettingContainer>
-    </ManagerPageLayout>
+      <ManagerPageLayout>
+        <SettingContainer>
+          <CosmeticForm onSubmit={handleSubmit} setLoading={handleLoading} />
+          {isLoading ? (
+            <DimmedBox>
+              <PuffLoader color="#6643b5" size={'200px'} />
+            </DimmedBox>
+          ) : (
+            <></>
+          )}
+          <Spacing size={20} />
+          <Flex justify={'center'}>
+            <Link to={'/manager/data/setBoardData'}>
+              <Button size="medium" color="purple">
+                목록
+              </Button>
+            </Link>
+          </Flex>
+        </SettingContainer>
+      </ManagerPageLayout>
+    </>
   )
 }
 

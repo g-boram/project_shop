@@ -16,6 +16,7 @@ import {
   ColourOption,
   CosmeticCategoryOption,
   COSMETIC_CATEGORY,
+  EVENT_TAGBG,
 } from '@/constants/cosmetic'
 import {
   cosmeticImgUploadAndUrl,
@@ -32,6 +33,8 @@ export default function CosmeticForm({
   setLoading: () => void
 }) {
   const [colors, setColors] = useState<MultiValue<ColourOption | undefined>[]>()
+  const [eventTagColor, setEventTagColor] =
+    useState<CosmeticCategoryOption | null>()
   const [category, setCategory] = useState<CosmeticCategoryOption | null>()
   // 메인사진
   const [currentImg, setCurrentImg] = useState<newImg>()
@@ -49,6 +52,11 @@ export default function CosmeticForm({
 
   const [newImgUrl, setNewImgUrl] = useState<string>('')
   const [contentImgUrl, setContentImgUrl] = useState<string>('')
+  const [eventFormValues, setEventFormValues] = useState({
+    eventName: '',
+    date: '',
+    time: '00',
+  })
   const [formValues, setFormValues] = useState<Cosmetic>({
     name: '',
     brand_name: '',
@@ -67,10 +75,17 @@ export default function CosmeticForm({
     hashTags: [],
   })
   const { open } = useAlertContext()
+
   const handleFormValues = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
     setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      [e.target.name]: e.target.value,
+    }))
+  }
+  const handleEventFormValues = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEventFormValues((prevFormValues) => ({
       ...prevFormValues,
       [e.target.name]: e.target.value,
     }))
@@ -226,7 +241,18 @@ export default function CosmeticForm({
       subUrl: currentSubImg,
       contentUrl: currentContentImg,
       hashTags: tags,
+      events: {
+        name: eventFormValues.eventName ? eventFormValues.eventName : '',
+        promoEndTime: eventFormValues.date
+          ? `${eventFormValues.date}T00:00:00+${eventFormValues.time}:00`
+          : '',
+        tagThemeStyle: {
+          backgroundColor: eventTagColor ? eventTagColor.value : '#2396f3',
+          fontColor: '#fff',
+        },
+      },
     } as Cosmetic
+    console.log('setValues', setValues)
     onSubmit(setValues)
   }
   const colourStyles: StylesConfig<ColourOption, true> = {
@@ -289,7 +315,6 @@ export default function CosmeticForm({
       },
     }),
   }
-
   // 해시태그 입력
   const onChangeHashTag = (e: any) => {
     setHashTag(e?.target?.value?.trim())
@@ -672,6 +697,7 @@ export default function CosmeticForm({
           </Flex>
         </Flex>
         <Spacing size={30} />
+        <InputHead># 해시태그</InputHead>
         <Flex>
           <Label>해시태그</Label>
           <Flex
@@ -701,6 +727,74 @@ export default function CosmeticForm({
         </Flex>
       </Flex>
       <Spacing size={20} />
+      <InputHead>태그 이벤트</InputHead>
+      <Spacing size={20} />
+      <Flex align={'center'}>
+        <Label>이벤트 이름</Label>
+        <InputBox>
+          <input
+            name="eventName"
+            id="eventName"
+            type={'text'}
+            placeholder={'이벤트 이름을 입력해주세요'}
+            onChange={handleEventFormValues}
+            value={eventFormValues.eventName}
+          />
+        </InputBox>
+        <Spacing size={20} direction="horizontal" />
+        <Label>종료 날짜</Label>
+        <InputBox>
+          <input
+            name="date"
+            id="date"
+            placeholder={'ex) 2000-01-01'}
+            onChange={handleEventFormValues}
+            value={eventFormValues.date}
+          />
+        </InputBox>
+        <Spacing size={20} direction="horizontal" />
+        <Label>종료 시간</Label>
+        <InputBox>
+          <input
+            name="time"
+            id="time"
+            maxLength={2}
+            placeholder={'ex) 09'}
+            onChange={handleEventFormValues}
+            value={eventFormValues.time}
+          />
+        </InputBox>
+      </Flex>
+      <Spacing size={10} />
+      <Flex align={'center'}>
+        <Label>태그 배경색</Label>
+        <>
+          <CreatableSelect
+            placeholder="이벤트 태그 색상을 선택해주세요"
+            onChange={(newValue) => setEventTagColor(newValue)}
+            options={EVENT_TAGBG}
+            value={eventTagColor}
+            styles={{
+              container: (containerStyles) => ({
+                ...containerStyles,
+                width: '100%',
+                fontSize: '15px',
+                borderRadius: '5px',
+              }),
+              control: (controlStyles) => ({
+                ...controlStyles,
+                border: '1px solid #cdcdff',
+              }),
+              menu: (controlStyles) => ({
+                ...controlStyles,
+                height: '200px',
+                overflow: 'scroll',
+              }),
+            }}
+          />
+        </>
+      </Flex>
+      <Spacing size={100} />
       <Flex justify={'center'}>
         <Button size="large" color="lightPurple" full onClick={getImgUrl}>
           게시글 등록
@@ -710,6 +804,17 @@ export default function CosmeticForm({
     </FormContainer>
   )
 }
+
+const InputHead = styled.div`
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  background-color: #eee;
+`
 
 const TagInput = styled.input`
   border: 2px solid #ededff;
@@ -742,6 +847,7 @@ const FormContainer = styled.div`
   width: 1000px;
   padding: 10px;
   margin-top: 20px;
+  margin-bottom: 50px;
   border: 2px solid #ededff;
   border-radius: 5px;
 `

@@ -48,7 +48,7 @@ function CosmeticBox({ cosmetic }: { cosmetic: Cosmetic }) {
     const { name, tagThemeStyle } = cosmetic.events
 
     const promotionTxt =
-      remainedTime > 0 ? ` - ${formatTime(remainedTime)} 남음` : ''
+      remainedTime > 0 ? `-${formatTime(remainedTime)} 남음` : ''
 
     if (promotionTxt === '') return
 
