@@ -31,6 +31,7 @@ import ManagerBoardDetail from './components/manager/ManagerBoardDetail'
 import CosmeticPage from './pages/user/cosmetic'
 import ManagerCosmeticForm from './components/manager/ManagerCosmeticForm'
 import CosmeticDetailPage from './pages/user/cosmetic/CosmeticDetailPage'
+import EventPage from './pages/user/EventPage'
 
 function App() {
   return (
@@ -55,9 +56,11 @@ function App() {
             <Route path="/board/edit/:id" Component={BoardEditPage} />
             {/* 게시판 카테고리별 리스트 페이지 */}
             <Route path="/board/category" Component={BoardCategoryPage} />
+            {/* 기타 페이지 */}
             <Route path="/storeMap" Component={StoreMapPage} />
+            <Route path="/event" Component={EventPage} />
 
-            {/* 관리자 페이지 */}
+            {/* 관리자 페이지 --------------------------------------------------------- */}
             <Route path="/manager" Component={ManagerPage} />
             <Route
               path="/manager/main/setMainBanner"
@@ -75,7 +78,6 @@ function App() {
               path="/manager/cosmetic/form"
               Component={ManagerCosmeticForm}
             />
-
             <Route path="/manager/data/setBoardData" Component={SetBoardData} />
             <Route path="/manager/board/form" Component={ManagerBoardForm} />
             <Route
@@ -86,7 +88,6 @@ function App() {
               path="/manager/board/edit/:id"
               Component={ManagerBoardEditForm}
             />
-
             {/* @TODO: 인증이 필요한 페이지 나누기 ex) 관리자,유저의 등급 ... */}
             <Route
               path="/my"

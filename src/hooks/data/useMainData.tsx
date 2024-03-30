@@ -22,6 +22,7 @@ export function useCosmeticHighStarData() {
 // 특정 이벤트 아이템 가져오기
 export function useLipEventCosmetic() {
   return useQuery('useCosmeticData', getCosmeticListAll, {
-    select: (data) => data.filter((v) => v.events?.name === 'redLip'),
+    select: (data) =>
+      data.filter((v) => v.events?.name === 'redLip').slice(0, 5),
   })
 }

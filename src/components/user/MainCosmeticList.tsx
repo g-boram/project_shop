@@ -9,44 +9,27 @@ import { FiPlus } from 'react-icons/fi'
 import { css } from '@emotion/react'
 
 const MainCosmeticList = () => {
-  const { data: cosmetic } = useCosmetics()
-
-  // const [filter, setFilter] = useState('os')
-
-  // const { data: cosmetic } = useQuery('mainCosmeticData', getCosmeticList, {
-  //   select:
-  //     filter === 'all'
-  //       ? undefined
-  //       : (data) => data.filter((v) => v.category === 'shadow'),
-  // })
-
-  // const highRatingList = getHighRatingCosList()
-  // console.log('highRatingList', highRatingList)
-
   // 별점이 4개이상인 데이터
   const { data: higtStar } = useCosmeticHighStarData()
 
   return (
     <CosmeticContainer>
+      <Spacing size={10} />
       <Flex justify={'space-between'}>
-        <Top title="인기 상품" subTitle="스킨부터 크림까지 최저가" />
+        <Top
+          title="⭐️ 별점 4 이상 상품"
+          subTitle="직접 사용해본 고객님들의 확실한 별점!"
+        />
         <Flex align={'center'}>
           <FiPlus size={'25px'} css={rocaleBtn} />
         </Flex>
       </Flex>
       <ListContainer>
-        {cosmetic?.map((cos, i) => {
-          return <CosmeticBox cosmetic={cos} key={i} />
-        })}
-      </ListContainer>
-
-      <Spacing size={10} />
-      {/* <Top title="⭐️ 별점 4 이상 상품" subTitle="스킨부터 크림까지 최저가" />
-      <ListContainer>
         {higtStar?.map((cos, i) => {
           return <CosmeticBox cosmetic={cos} key={i} />
         })}
-      </ListContainer> */}
+      </ListContainer>
+      <Spacing size={10} />
     </CosmeticContainer>
   )
 }
@@ -60,6 +43,7 @@ const ListContainer = styled.div`
 `
 const rocaleBtn = css`
   cursor: pointer;
+  margin-right: 20px;
   &:hover {
     transition: all 0.2s linear;
     transform: scale(1.4);

@@ -2,10 +2,11 @@ import { useLipEventCosmetic } from '@/hooks/data/useMainData'
 import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
+import SlideBannerData from './SlideBannerData'
 
 const SlideBanner = () => {
   const [position, setPosition] = useState<number>(0)
-  const { data: eventData } = useLipEventCosmetic()
+
   function onScroll() {
     setPosition(window.scrollY)
   }
@@ -15,8 +16,6 @@ const SlideBanner = () => {
       window.removeEventListener('scroll', onScroll)
     }
   }, [])
-  // console.log('position', position)
-  console.log('eventData', eventData)
 
   // 웹 사이즈
   const renderBanner = () => {
@@ -112,6 +111,7 @@ const SlideBanner = () => {
           css={m_banner5}
         />
       </MobileSlideBanner>
+      <SlideBannerData />
     </>
   )
 }

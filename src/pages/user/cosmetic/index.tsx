@@ -110,7 +110,7 @@ const CosmeticPage = () => {
 }
 
 const MobileCosmeticContainer = styled.div`
-  background-color: pink;
+  background-color: pink;x
   height: auto;
   padding: 10px;
 `
