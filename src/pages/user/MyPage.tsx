@@ -75,12 +75,18 @@ const UserInfoBox = styled.div`
 
   @media (max-width: 600px) {
     height: 250px;
+    width: 100vw;
   }
 `
 const UserInfo = styled.div`
-  width: 100%;
+  width: 1200px;
   background-color: white;
   padding: 20px;
+
+  @media (max-width: 600px) {
+    width: auto;
+    min-width: 300px;
+  }
 `
 
 const UserContentBox = styled.div`

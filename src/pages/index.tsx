@@ -1,5 +1,6 @@
 import BeautyYoutube from '@/components/main/BeautyYoutube'
 import IngEvent from '@/components/main/IngEvent'
+import MoveLinkImg from '@/components/main/MoveLinkImg'
 import SlideBanner from '@/components/main/SlideBanner'
 import Search from '@/components/shared/Search'
 import MainBanner from '@/components/user/MainBanner'
@@ -18,6 +19,7 @@ function HomePage() {
       <MainCosmeticList />
       <SlideBanner />
       <IngEvent />
+      <MoveLinkImg />
       <BeautyYoutube />
     </Layout>
   )

@@ -46,6 +46,7 @@ function BoardPage() {
   return (
     <BoardContainer>
       <HeadTitle title="게시판" desc="함께 소통해요 우리들의 게시판" />
+      <Spacing size={50} />
       <Flex css={layoutStyle}>
         <ChatingContainer>
           <EventImgBox>
