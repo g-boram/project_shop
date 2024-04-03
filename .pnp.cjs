@@ -46,6 +46,7 @@ const RAW_RUNTIME_STATE =
           ["@types/eslint", "npm:8.56.2"],\
           ["@types/jest", "npm:27.5.2"],\
           ["@types/node", "npm:16.18.82"],\
+          ["@types/node-sass", "npm:3.10.32"],\
           ["@types/react", "npm:18.2.57"],\
           ["@types/react-beautiful-dnd", "npm:13.1.8"],\
           ["@types/react-copy-to-clipboard", "npm:5.0.7"],\
@@ -61,7 +62,10 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.1.3"],\
           ["eslint-plugin-react", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:7.33.2"],\
           ["firebase", "npm:10.8.0"],\
+          ["node-gyp", "npm:10.1.0"],\
+          ["node-sass", "npm:3.13.1"],\
           ["prettier", "npm:3.2.5"],\
+          ["python2", "npm:0.0.1"],\
           ["react", "npm:18.2.0"],\
           ["react-beautiful-dnd", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:13.1.1"],\
           ["react-copy-to-clipboard", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.1.0"],\
@@ -76,6 +80,7 @@ const RAW_RUNTIME_STATE =
           ["react-toastify", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:10.0.4"],\
           ["react-virtuoso", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:4.7.1"],\
           ["recoil", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:0.7.7"],\
+          ["sass", "npm:1.72.0"],\
           ["swiper", "npm:11.0.7"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
           ["validator", "npm:13.11.0"],\
@@ -8573,6 +8578,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/node-sass", [\
+      ["npm:3.10.32", {\
+        "packageLocation": "../../../.yarn/berry/cache/@types-node-sass-npm-3.10.32-c935daf7c6-10c0.zip/node_modules/@types/node-sass/",\
+        "packageDependencies": [\
+          ["@types/node-sass", "npm:3.10.32"],\
+          ["@types/node", "npm:20.11.19"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/parse-json", [\
       ["npm:4.0.2", {\
         "packageLocation": "../../../.yarn/berry/cache/@types-parse-json-npm-4.0.2-f87f65692e-10c0.zip/node_modules/@types/parse-json/",\
@@ -16826,6 +16841,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["immutable", [\
+      ["npm:4.3.5", {\
+        "packageLocation": "../../../.yarn/berry/cache/immutable-npm-4.3.5-5958499808-10c0.zip/node_modules/immutable/",\
+        "packageDependencies": [\
+          ["immutable", "npm:4.3.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["import-fresh", [\
       ["npm:3.3.0", {\
         "packageLocation": "../../../.yarn/berry/cache/import-fresh-npm-3.3.0-3e34265ca9-10c0.zip/node_modules/import-fresh/",\
@@ -20288,6 +20312,23 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
+      ["npm:10.1.0", {\
+        "packageLocation": "./.yarn/unplugged/node-gyp-npm-10.1.0-bdea7d2ece/node_modules/node-gyp/",\
+        "packageDependencies": [\
+          ["node-gyp", "npm:10.1.0"],\
+          ["env-paths", "npm:2.2.1"],\
+          ["exponential-backoff", "npm:3.1.1"],\
+          ["glob", "npm:10.3.10"],\
+          ["graceful-fs", "npm:4.2.11"],\
+          ["make-fetch-happen", "npm:13.0.0"],\
+          ["nopt", "npm:7.2.0"],\
+          ["proc-log", "npm:3.0.0"],\
+          ["semver", "npm:7.6.0"],\
+          ["tar", "npm:6.2.0"],\
+          ["which", "npm:4.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:3.8.0", {\
         "packageLocation": "./.yarn/unplugged/node-gyp-npm-3.8.0-34b3928909/node_modules/node-gyp/",\
         "packageDependencies": [\
@@ -23207,6 +23248,7 @@ const RAW_RUNTIME_STATE =
           ["@types/eslint", "npm:8.56.2"],\
           ["@types/jest", "npm:27.5.2"],\
           ["@types/node", "npm:16.18.82"],\
+          ["@types/node-sass", "npm:3.10.32"],\
           ["@types/react", "npm:18.2.57"],\
           ["@types/react-beautiful-dnd", "npm:13.1.8"],\
           ["@types/react-copy-to-clipboard", "npm:5.0.7"],\
@@ -23222,7 +23264,10 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.1.3"],\
           ["eslint-plugin-react", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:7.33.2"],\
           ["firebase", "npm:10.8.0"],\
+          ["node-gyp", "npm:10.1.0"],\
+          ["node-sass", "npm:3.13.1"],\
           ["prettier", "npm:3.2.5"],\
+          ["python2", "npm:0.0.1"],\
           ["react", "npm:18.2.0"],\
           ["react-beautiful-dnd", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:13.1.1"],\
           ["react-copy-to-clipboard", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:5.1.0"],\
@@ -23237,6 +23282,7 @@ const RAW_RUNTIME_STATE =
           ["react-toastify", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:10.0.4"],\
           ["react-virtuoso", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:4.7.1"],\
           ["recoil", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:0.7.7"],\
+          ["sass", "npm:1.72.0"],\
           ["swiper", "npm:11.0.7"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
           ["validator", "npm:13.11.0"],\
@@ -23375,6 +23421,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/punycode-npm-2.3.1-97543c420d-10c0.zip/node_modules/punycode/",\
         "packageDependencies": [\
           ["punycode", "npm:2.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["python2", [\
+      ["npm:0.0.1", {\
+        "packageLocation": "../../../.yarn/berry/cache/python2-npm-0.0.1-7af43268ad-10c0.zip/node_modules/python2/",\
+        "packageDependencies": [\
+          ["python2", "npm:0.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -24802,6 +24857,18 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["sass", [\
+      ["npm:1.72.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/sass-npm-1.72.0-fb38bb530c-10c0.zip/node_modules/sass/",\
+        "packageDependencies": [\
+          ["sass", "npm:1.72.0"],\
+          ["chokidar", "npm:3.6.0"],\
+          ["immutable", "npm:4.3.5"],\
+          ["source-map-js", "npm:1.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["sass-graph", [\
       ["npm:2.2.6", {\
         "packageLocation": "../../../.yarn/berry/cache/sass-graph-npm-2.2.6-d12cd46276-10c0.zip/node_modules/sass-graph/",\
@@ -25407,6 +25474,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/source-map-js-npm-1.0.2-ee4f9f9b30-10c0.zip/node_modules/source-map-js/",\
         "packageDependencies": [\
           ["source-map-js", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:1.2.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/source-map-js-npm-1.2.0-6e63f357e5-10c0.zip/node_modules/source-map-js/",\
+        "packageDependencies": [\
+          ["source-map-js", "npm:1.2.0"]\
         ],\
         "linkType": "HARD"\
       }]\
