@@ -36,7 +36,7 @@ const listRowContainerStyles = css`
 `
 
 const listRowLeftStyles = css`
-  margin-right: 14px;
+  margin-right: 15px;
 `
 
 const listRowContentsStyles = css`

@@ -34,43 +34,52 @@ export function Review({ cosmeticId }: { cosmeticId: string }) {
         <ReviewList>
           <ul>
             {reviews?.map((review) => (
-              <ListRow
-                key={review.id}
-                left={
-                  review.user.photoURL ? (
-                    <img src={review.user.photoURL} alt="" width={40} />
-                  ) : (
-                    <img
-                      src={
-                        'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
-                      }
-                      alt=""
-                      width={40}
-                    />
-                  )
-                }
-                contents={
-                  <ListRow.Texts
-                    title={review.text}
-                    subTitle={format(review.createdAt, 'yyyy-MM-dd')}
-                  />
-                }
-                right={
-                  review.userId === user?.uid ? (
-                    <Button
-                      color="pink"
-                      onClick={() => {
-                        remove({
-                          reviewId: review.id,
-                          cosmeticId: review.cosmeticId,
-                        })
-                      }}
-                    >
-                      삭제
-                    </Button>
-                  ) : null
-                }
-              />
+              <>
+                <Spacing size={10} />
+                <ListRow
+                  key={review.id}
+                  left={
+                    review.user.photoURL ? (
+                      <img src={review.user.photoURL} alt="" width={40} />
+                    ) : (
+                      <img
+                        src={
+                          'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
+                        }
+                        alt=""
+                        width={40}
+                      />
+                    )
+                  }
+                  contents={
+                    <Flex direction="column">
+                      <Text typography="t5" bold>
+                        {review.text}
+                      </Text>
+                      <Spacing size={5} />
+                      <Text typography="t7">
+                        {format(review.createdAt, 'yyyy-MM-dd')}
+                      </Text>
+                    </Flex>
+                  }
+                  right={
+                    review.userId === user?.uid ? (
+                      <Button
+                        color="pink"
+                        onClick={() => {
+                          remove({
+                            reviewId: review.id,
+                            cosmeticId: review.cosmeticId,
+                          })
+                        }}
+                      >
+                        삭제
+                      </Button>
+                    ) : null
+                  }
+                />
+                <Spacing size={10} />
+              </>
             ))}
           </ul>
         </ReviewList>
@@ -89,13 +98,19 @@ export function Review({ cosmeticId }: { cosmeticId: string }) {
     <ReviewContainer>
       <ReviewBox>
         <Flex css={headStyle}>
-          <Text typography="t4" bold>
-            리뷰
-          </Text>
-          <Spacing size={10} direction="horizontal" />
-          <Text typography="t7">구매고객이 직접 인증하는 100% 리얼 Review</Text>
+          <div>
+            <Text typography="t3" bold>
+              리뷰
+            </Text>
+            <Spacing size={10} />
+            <Text typography="t7">
+              구매고객이 직접 인증하는 100% 리얼 Review
+            </Text>
+          </div>
+          <Text typography="t5">{reviews?.length} 개</Text>
         </Flex>
         {reviewRows()}
+        {/* TODO: 구입한 고객인지 판단후 작성 가능하게 해야 함 */}
         {user != null ? (
           <TextBox>
             <TextField value={text} onChange={handleTextChange} />
@@ -114,7 +129,7 @@ export function Review({ cosmeticId }: { cosmeticId: string }) {
                   }
                 }}
               >
-                작성
+                작성하기
               </Button>
             </Flex>
           </TextBox>
@@ -153,6 +168,7 @@ const ReviewBox = styled.div`
 const headStyle = css`
   height: 70px;
   align-items: flex-end;
+  justify-content: space-between;
   border-bottom: 1px solid #eee;
   padding-bottom: 5px;
   margin-bottom: 10px;

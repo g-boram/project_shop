@@ -13,7 +13,17 @@ import {
 } from 'firebase/firestore'
 import { store } from './firebase'
 
-// 리뷰 가져오기
+export async function getReviewsLength({ cosmeticId }: { cosmeticId: string }) {
+  const cosmeticRef = doc(store, COLLECTIONS.COSMETIC, cosmeticId)
+  const reviewQuery = query(collection(cosmeticRef, COLLECTIONS.REVIEW))
+  const reviewSnapShot = getDocs(reviewQuery)
+  const items = (await reviewSnapShot).docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }))
+  return items.length
+}
+
 export async function getReviews({ cosmeticId }: { cosmeticId: string }) {
   const cosmeticRef = doc(store, COLLECTIONS.COSMETIC, cosmeticId)
   const reviewQuery = query(
@@ -24,14 +34,12 @@ export async function getReviews({ cosmeticId }: { cosmeticId: string }) {
 
   const reviews = reviewSnapShot.docs.map((doc) => {
     const review = doc.data()
-    console.log('review-----', review)
     return {
       id: doc.id,
       ...review,
       createdAt: review.createdAt.toDate() as Date,
     } as Review
   })
-  console.log('review-----', reviews)
 
   const userMap: {
     [key: string]: User

@@ -67,7 +67,7 @@ function Navbar() {
               src={
                 user.photoURL !== ''
                   ? user.photoURL
-                  : 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_female2-1024.png'
+                  : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
               }
               alt="userImg"
               width={30}
@@ -110,11 +110,11 @@ function Navbar() {
                 src={
                   user.photoURL !== ''
                     ? user.photoURL
-                    : 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_female2-1024.png'
+                    : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
                 }
-                alt="userImg"
-                width={50}
-                height={50}
+                alt=""
+                width={70}
+                height={70}
                 style={{
                   borderRadius: '100%',
                   border: '2px solid #fff',
@@ -124,9 +124,13 @@ function Navbar() {
               />
               <Spacing size={20} direction={'horizontal'} />
               <Flex direction="column">
-                <Text typography="t6">{user.displayName}</Text>
+                <Text typography="t6" color="white">
+                  {user.displayName}
+                </Text>
                 <Spacing size={10} />
-                <Text typography="t6">{user.email}</Text>
+                <Text typography="t6" color="white">
+                  {user.email}
+                </Text>
               </Flex>
             </UserImgBox>
           </Link>
@@ -136,9 +140,13 @@ function Navbar() {
           </Button>
           <Spacing size={50} />
           <Flex direction="column" align={'center'} justify={'center'}>
-            <div>{user.displayName} 님! 오늘도 좋은하루 되세요! </div>
+            <Text typography="t6" color="white">
+              {user.displayName} 님! 오늘도 좋은하루 되세요!{' '}
+            </Text>
             <Spacing size={10} />
-            <div>봄느낌 가득한 이상품 어때요?</div>
+            <Text typography="t6" color="white">
+              봄느낌 가득한 이상품 어때요?
+            </Text>
             <Spacing size={20} />
           </Flex>
           <TodayCommentBox>{/* @TODO: 랜덤하게 바꾸기 */}</TodayCommentBox>
@@ -190,10 +198,7 @@ function Navbar() {
               onClick={() => setIsOpen(false)}
               css={css`
                 margin: 10px;
-                &:hover {
-                  transition: 0.5s;
-                  color: #c86b85;
-                }
+                color: #fff;
               `}
             >
               {nav.name}
@@ -279,11 +284,13 @@ const TodayCommentBox = styled.div`
   font-size: 14px;
 `
 const UserImgBox = styled.div`
-  height: 60px;
+  height: 80px;
   min-width: 240px;
   padding: 20px 10px;
   display: flex;
-  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  // background-color: #fff;
   border-radius: 10px;
 `
 const NavLogo = styled.div`
@@ -316,11 +323,12 @@ const slideRightBox = keyframes`
     transform: translateX(0);
   } 
 `
+// @TODO: 배경색 추후 고민해보기
 const mobileNavbarContainerStyles = css`
   padding: 20px 20px;
   height: 100vh;
   width: 60%;
-  background-color: #555;
+  background-color: #562837;
   gap: 10px;
   float: right;
   color: #eee;

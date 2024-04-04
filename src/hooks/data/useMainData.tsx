@@ -12,17 +12,26 @@ export function useMainCategoryIcons() {
   return useQuery('mainCategoryIcons', getCategoryIcon)
 }
 
-// 별점이 4이상인 데이터
+// 별점이 4이상인 데이터 rating > 4
 export function useCosmeticHighStarData() {
   return useQuery('useCosmeticData', getCosmeticListAll, {
     select: (data) => data.filter((v) => v.rating > 4),
   })
 }
 
-// 특정 이벤트 아이템 가져오기
+// 특정 이벤트 아이템 가져오기 events.name === 'redLip'
 export function useLipEventCosmetic() {
   return useQuery('useCosmeticData', getCosmeticListAll, {
     select: (data) =>
       data.filter((v) => v.events?.name === 'redLip').slice(0, 5),
   })
 }
+
+// 리뷰 많은순
+export function useManyReviewCosmetic() {
+  return useQuery('useCosmeticData', getCosmeticListAll, {
+    select: (data) =>
+      data.filter((v) => v.events?.name === 'redLip').slice(0, 5),
+  })
+}
+// 신상

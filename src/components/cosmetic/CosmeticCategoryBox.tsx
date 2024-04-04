@@ -13,6 +13,7 @@ import Tag from '../shared/Tag'
 import { MdOutlineRateReview } from 'react-icons/md'
 import { BiLike } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
+import { getReviewsLength } from '@/remote/review'
 
 function CosmeticCategoryBox({
   cosmetic,
@@ -40,7 +41,19 @@ function CosmeticCategoryBox({
   }) => void
 }) {
   const [remainedTime, setRemainedTime] = useState(0)
-  console.log(cosmetic)
+  const [reviewLeng, setReviewLeng] = useState<number>()
+
+  useEffect(() => {
+    const getLength = async () => {
+      if (cosmetic.id !== undefined) {
+        const cosmeticId = cosmetic.id
+        const leng = await getReviewsLength({ cosmeticId })
+
+        setReviewLeng(leng)
+      }
+    }
+    getLength()
+  }, [cosmetic])
 
   useEffect(() => {
     if (cosmetic.events == null || cosmetic.events.promoEndTime == null) {
@@ -99,7 +112,7 @@ function CosmeticCategoryBox({
       </>
     )
   }
-
+  // 좋아요
   const handleLike = (e: MouseEvent<HTMLImageElement>) => {
     e.preventDefault()
     onLike({
@@ -153,9 +166,7 @@ function CosmeticCategoryBox({
             <Text typography="t7">{cosmetic.like}</Text>
           </Flex>
           <Flex align={'center'}>
-            <Text typography="t7">
-              {cosmetic.reviews ? cosmetic.reviews?.length : 0}
-            </Text>
+            <Text typography="t7">{reviewLeng}</Text>
             <Spacing size={10} direction={'horizontal'} />
             <MdOutlineRateReview />
           </Flex>
