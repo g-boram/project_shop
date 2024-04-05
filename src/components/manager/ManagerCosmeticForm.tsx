@@ -27,7 +27,7 @@ const ManagerCosmeticForm = () => {
       ...formValues,
       uid: user?.uid,
       email: user?.email,
-      name: user?.displayName,
+      managerName: user?.displayName,
     }
     toast.success('게시글 등록 완료!')
     navigate('/manager/data/setCosmeticData')

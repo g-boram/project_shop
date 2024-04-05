@@ -103,7 +103,7 @@ const containerStyles = css`
   }
   transition: 1s;
   @media (max-width: 600px) {
-    height: 160px;
+    height: 200px;
     transition: 1s;
   }
   @media (min-width: 600px) {
@@ -115,5 +115,8 @@ const imageStyles = css`
   width: 100%;
   height: 100%;
   object-fit: contain;
+  @media (max-width: 600px) {
+    height: 160px;
+  }
 `
 export default MainBanner

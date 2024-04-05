@@ -26,6 +26,12 @@ export function useLipEventCosmetic() {
       data.filter((v) => v.events?.name === 'redLip').slice(0, 5),
   })
 }
+// 신상 events.name === 'new'
+export function useNewCosmetic() {
+  return useQuery('useCosmeticData', getCosmeticListAll, {
+    select: (data) => data.filter((v) => v.events?.name === 'new').slice(0, 9),
+  })
+}
 
 // 리뷰 많은순
 export function useManyReviewCosmetic() {
@@ -34,4 +40,3 @@ export function useManyReviewCosmetic() {
       data.filter((v) => v.events?.name === 'redLip').slice(0, 5),
   })
 }
-// 신상

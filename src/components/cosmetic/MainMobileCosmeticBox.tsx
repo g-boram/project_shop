@@ -3,17 +3,17 @@ import Flex from '../shared/Flex'
 import Text from '../shared/Text'
 import Spacing from '../shared/Spacing'
 import addDelimiter from '../../utils/addDelimiter'
-import formatTime from '../../utils/formatTime'
-import Tag from '../shared/Tag'
 
 import { Cosmetic } from '@models/cosmetic'
 import { FaStar } from 'react-icons/fa'
 import { css } from '@emotion/react'
-import { useEffect, useState } from 'react'
+import Tag from '../shared/Tag'
+import formatTime from '@/utils/formatTime'
 import { differenceInMilliseconds, parseISO } from 'date-fns'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function CosmeticBox({ cosmetic }: { cosmetic: Cosmetic }) {
+function MainMobileCosmeticBox({ cosmetic }: { cosmetic: Cosmetic }) {
   const navigete = useNavigate()
   const [remainedTime, setRemainedTime] = useState(0)
 
@@ -65,7 +65,6 @@ function CosmeticBox({ cosmetic }: { cosmetic: Cosmetic }) {
       </div>
     )
   }
-
   return (
     <CosmeticContainer
       onClick={() => navigete(`/cosmetic/detail/${cosmetic.id}`)}
@@ -98,7 +97,7 @@ function CosmeticBox({ cosmetic }: { cosmetic: Cosmetic }) {
           {addDelimiter(cosmetic.price)}
         </Text>
         <Spacing size={3} direction={'horizontal'} />
-        <Text typography="t6" bold>
+        <Text typography="t7" bold>
           {addDelimiter(Number(cosmetic.price) - Number(cosmetic.totalSale))}
         </Text>
       </Flex>
@@ -113,17 +112,16 @@ const CosmeticContainer = styled.div`
   flex-direction: column;
   background-color: white;
   padding: 10px;
-  height: 270px;
-  width: 150px;
+  height: 230px;
+  width: 120px;
   margin: 0px 5px;
   gap: 10px;
   margin: 5px 10px 5px 5px;
   border: 1px solid #eee;
-  cursor: pointer;
 `
 const ImgWrapper = styled.div`
-  height: 160px;
-  width: 150px;
+  height: 130px;
+  width: 120px;
   position: relative;
   background-color: #eee;
   & img {
@@ -149,4 +147,4 @@ const salePerStyle = css`
 const saleTextStyle = css`
   text-decoration-line: line-through;
 `
-export default CosmeticBox
+export default MainMobileCosmeticBox

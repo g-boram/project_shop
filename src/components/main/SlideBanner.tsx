@@ -178,6 +178,7 @@ const m_banner5 = css`
   width: 100px;
   right: 150px;
   top: -60px;
+  z-index: 2;
 `
 // 메인 립스틱
 const m_banner6 = css`
@@ -249,6 +250,7 @@ const banner5 = css`
   width: 200px;
   right: 280px;
   top: -60px;
+  z-index: 2;
 `
 // 메인 립스틱
 const banner6 = css`

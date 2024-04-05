@@ -2,11 +2,11 @@ import BeautyYoutube from '@/components/main/BeautyYoutube'
 import IngEvent from '@/components/main/IngEvent'
 import MoveLinkImg from '@/components/main/MoveLinkImg'
 import SlideBanner from '@/components/main/SlideBanner'
-import SlideTopItem from '@/components/main/SlideTopItem'
 import Search from '@/components/shared/Search'
 import MainBanner from '@/components/user/MainBanner'
 import MainCosmeticList from '@/components/user/MainCosmeticList'
 import MainIconBox from '@/components/user/MainIconBox'
+import SpecialCosmeticList from '@/components/user/SpecialCosmeticList'
 import styled from '@emotion/styled'
 
 // 메인 페이지
@@ -20,9 +20,9 @@ function HomePage() {
       <MainCosmeticList />
       <SlideBanner />
       <IngEvent />
-      <MoveLinkImg />
+      <SpecialCosmeticList />
       <BeautyYoutube />
-      <SlideTopItem />
+      <MoveLinkImg />
     </Layout>
   )
 }

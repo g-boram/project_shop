@@ -23,6 +23,9 @@ function Top({ title, subTitle }: TopProps) {
 
 const containerStyles = css`
   padding: 24px;
+  @media (max-width: 600px) {
+    padding: 20px;
+  }
 `
 
 export default Top
