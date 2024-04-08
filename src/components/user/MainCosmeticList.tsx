@@ -10,47 +10,45 @@ import { FiPlus } from 'react-icons/fi'
 import { css, keyframes } from '@emotion/react'
 import SlideTopItem from '../main/SlideTopItem'
 import Text from '../shared/Text'
+import Skeleton from '../shared/Skeleton'
 
 const MainCosmeticList = () => {
   // 별점이 4개이상인 데이터
   const { data: highStar } = useCosmeticHighStarData()
-  const { data: newItems } = useNewCosmetic()
+  const { data: newItems, isLoading } = useNewCosmetic()
 
   return (
-    <CosmeticContainer>
-      <Flex justify={'space-between'} css={topTitleStyle}>
-        <Flex direction="column">
-          <Text bold={true} typography="t5">
-            🛍️ N.E.W 신상 상품
-          </Text>
+    <>
+      {isLoading ? (
+        <Skeleton width={1400} height={500} />
+      ) : (
+        <CosmeticContainer>
+          <Flex justify={'space-between'} css={topTitleStyle}>
+            <Flex direction="column">
+              <Text bold={true} typography="t5">
+                🛍️ N.E.W 신상 상품
+              </Text>
+              <Spacing size={10} />
+              <Text typography="t8">
+                방금 들어온 따끈후끈 신상 제품을 소개합니다!
+              </Text>
+            </Flex>
+            <Flex align={'center'}>
+              <FiPlus size={'25px'} css={rocaleBtn} />
+            </Flex>
+          </Flex>
+          <SlideWrapper>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/main/newItems.gif`}
+              alt=""
+              css={mainImg}
+            />
+            <SlideTopItem data={newItems} />
+          </SlideWrapper>
           <Spacing size={10} />
-          <Text typography="t8">
-            방금 들어온 따끈후끈 신상 제품을 소개합니다!
-          </Text>
-        </Flex>
-        {/* <Top
-          title="⭐️ 별점 4 이상 상품"
-          subTitle="직접 사용해본 고객님들의 확실한 별점!"
-        /> */}
-        <Flex align={'center'}>
-          <FiPlus size={'25px'} css={rocaleBtn} />
-        </Flex>
-      </Flex>
-      <SlideWrapper>
-        <img
-          src={`${process.env.PUBLIC_URL}/images/main/mainSlide4.png`}
-          alt=""
-          css={mainImg}
-        />
-        <SlideTopItem data={newItems} />
-      </SlideWrapper>
-      {/* <ListContainer>
-        {higtStar?.map((cos, i) => {
-          return <CosmeticBox cosmetic={cos} key={i} />
-        })}
-      </ListContainer> */}
-      <Spacing size={10} />
-    </CosmeticContainer>
+        </CosmeticContainer>
+      )}
+    </>
   )
 }
 
@@ -79,6 +77,11 @@ const SlideWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   height: 350px;
+
+  & > img {
+    border-radius: 10px;
+  }
+
   @media (max-width: 600px) {
     height: 280px;
   }

@@ -1,56 +1,89 @@
+import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Button from '../shared/Button'
+import Flex from '../shared/Flex'
+import Text from '../shared/Text'
+
+import { FaClipboardList } from 'react-icons/fa'
+import Spacing from '../shared/Spacing'
 
 const MoveLinkImg = () => {
   return (
     <LinkContainer>
-      <ImgWrapper>
-        <Link to={'/board'}>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/main/linkImg_board.jpg`}
-            alt=""
-          />
-        </Link>
-      </ImgWrapper>
-      <ImgWrapper>
-        <Link to={'/storeMap'}>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/main/linkImg_map.jpg`}
-            alt=""
-          />
-        </Link>
-      </ImgWrapper>
+      <div css={btnBox}>
+        <FaClipboardList size={50} />
+        <Spacing size={20} />
+        <Text typography="t5" color="fontDarkGrey" bold>
+          Board
+        </Text>
+      </div>
+      <div css={btnBox}>
+        <FaClipboardList size={50} />
+        <Spacing size={20} />
+        <Text typography="t5" color="fontDarkGrey" bold>
+          Board
+        </Text>
+      </div>
     </LinkContainer>
   )
 }
 
 const LinkContainer = styled.div`
-  min-height: 250px;
-  margin: 20px 0;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  align-items: center;
+  width: 100%;
+  height: 350px;
+  margin: 60px 0 30px 0;
 
-  @media (max-width: 600px) {
-    min-height: 400px;
-    width: 100vw;
-    margin: 10px 0px;
-    flex-direction: column;
-    justify-content: flex-start;
+  div:nth-of-type(1) {
+    background-color: pink;
+    &: hover {
+      background-color: pink;
+    }
+  }
+  div:nth-of-type(2) {
+    background-color: yellow;
+    &: hover {
+      background-color: yellow;
+    }
   }
 `
-const ImgWrapper = styled.div`
-  height: 230px;
-  width: 49%;
+
+const btnBox = css`
+  height: 100px;
+  width: 100px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 50%;
+  border: 2px solid #eee;
+  padding: 20px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  color: black;
+
+  &: hover {
+    transition: 0.5s;
+    border: none;
+    transform: scale(1.2);
+  }
+`
+
+const ImgBox = styled.div`
+  height: 100%;
+  width: 100%;
 
   & img {
     height: 100%;
     width: 100%;
-  }
-
-  @media (max-width: 600px) {
-    width: 100vw;
-    height: 150px;
+    border-radius: 50%;
   }
 `
+
 export default MoveLinkImg

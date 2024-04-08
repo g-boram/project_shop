@@ -37,11 +37,11 @@ export default function SlideTopItem({ data }: { data: any }) {
         <>
           {innerWidth > 700 ? (
             <SlideContainer>
+              {/* 웹 */}
               <div>
                 <Swiper
                   className="sample-slider"
                   modules={[Autoplay]}
-                  spaceBetween={20}
                   slidesPerView={4} // 화면에 보여질 슬라이드 수
                   loop={true} // 무한 루프 활성화
                   autoplay={{
@@ -65,11 +65,11 @@ export default function SlideTopItem({ data }: { data: any }) {
             </SlideContainer>
           ) : (
             <SlideContainer>
+              {/* 모바일 */}
               <div>
                 <Swiper
                   className="sample-slider"
                   modules={[Autoplay]}
-                  spaceBetween={20}
                   slidesPerView={3} // 화면에 보여질 슬라이드 수
                   loop={true} // 무한 루프 활성화
                   autoplay={{

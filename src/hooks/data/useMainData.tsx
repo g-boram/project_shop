@@ -32,11 +32,17 @@ export function useNewCosmetic() {
     select: (data) => data.filter((v) => v.events?.name === 'new').slice(0, 9),
   })
 }
-
-// 리뷰 많은순
-export function useManyReviewCosmetic() {
+// 신상 events.name === 'new'
+export function useHotCosmetic() {
   return useQuery('useCosmeticData', getCosmeticListAll, {
-    select: (data) =>
-      data.filter((v) => v.events?.name === 'redLip').slice(0, 5),
+    select: (data) => data.filter((v) => v.events?.name === '핫딜').slice(0, 9),
   })
 }
+
+// 리뷰 많은순
+// export function useManyReviewCosmetic() {
+//   return useQuery('useCosmeticData', getCosmeticListAll, {
+//     select: (data) =>
+//       data.filter((v) => v.events?.name === 'redLip').slice(0, 5),
+//   })
+// }

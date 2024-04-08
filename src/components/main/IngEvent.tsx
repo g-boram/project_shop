@@ -16,6 +16,7 @@ const IngEvent = () => {
 
 const IngEventContainer = styled.div`
   margin-top: 10px;
+  margin-bottom: 60px;
 
   @media (min-width: 600px) {
     width: 100%;

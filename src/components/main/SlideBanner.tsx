@@ -222,7 +222,7 @@ const banner1 = css`
 const banner2 = css`
   position: absolute;
   width: 350px;
-  height: 380px;
+  height: 320px;
   right: 0;
   bottom: 0;
   transform: translateX(100px);
@@ -231,7 +231,7 @@ const banner2 = css`
 // 글씨
 const banner3 = css`
   position: absolute;
-  width: 300px;
+  width: 250px;
   right: 300px;
   bottom: 0;
 `
