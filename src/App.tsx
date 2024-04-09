@@ -32,6 +32,8 @@ import CosmeticPage from './pages/user/cosmetic'
 import ManagerCosmeticForm from './components/manager/ManagerCosmeticForm'
 import CosmeticDetailPage from './pages/user/cosmetic/CosmeticDetailPage'
 import EventPage from './pages/user/EventPage'
+import Footer from './components/shared/Footer'
+import BrandInfoPage from './pages/user/BrandInfoPage'
 
 function App() {
   return (
@@ -59,6 +61,7 @@ function App() {
             {/* 기타 페이지 */}
             <Route path="/storeMap" Component={StoreMapPage} />
             <Route path="/event" Component={EventPage} />
+            <Route path="/info" Component={BrandInfoPage} />
 
             {/* 관리자 페이지 --------------------------------------------------------- */}
             <Route path="/manager" Component={ManagerPage} />
@@ -101,13 +104,13 @@ function App() {
         </PageContainer>
         <BottomNavbar />
       </LayoutContainer>
+      <Footer />
     </BrowserRouter>
   )
 }
 
 const LayoutContainer = styled.div`
   position: relative;
-  // height: 100vh;
   max-width: 1400px;
   display: flex;
   flex-direction: column;
@@ -118,10 +121,12 @@ const LayoutContainer = styled.div`
 const PageContainer = styled.div`
   position: relative;
   min-height: 100vh;
-  width: 100%;
   max-width: 1400px;
   padding-bottom: 80px;
 
+  @media (max-width: 600px) {
+    width: 100vw;
+  }
   @media (min-width: 600px) {
     max-width: 1400px;
     min-width: 1200px;

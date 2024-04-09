@@ -4,18 +4,12 @@ const TitleJumping = () => {
   return (
     <Wrapper>
       <h1>
-        <span>S</span>
-        <span>P</span>
-        <span>E</span>
-        <span>C</span>
-        <span>I</span>
+        <span>B</span>
+        <span>O</span>
+        <span>R</span>
         <span>A</span>
-        <span>L</span>
-
-        <span>I</span>
-        <span>T</span>
-        <span>E</span>
         <span>M</span>
+        <span>Y</span>
       </h1>
     </Wrapper>
   )
@@ -45,6 +39,7 @@ const Wrapper = styled.div`
     animation: bounce 1s ease infinite alternate;
     font-family: 'Titan One', cursive;
     font-size: 80px;
+    font-weight: bold;
     color: #fff;
     text-shadow:
       0 1px 0 #ccc,

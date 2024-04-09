@@ -89,7 +89,8 @@ const Wrapper = styled.div`
   margin: 20px 0;
 
   @media (max-width: 600px) {
-    width: 100vw;
+    max-width: 420px;
+    padding: 0 10px;
   }
 `
 const CosmeticContainer = styled.div`

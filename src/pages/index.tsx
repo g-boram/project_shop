@@ -23,11 +23,11 @@ function HomePage() {
       <MainCosmeticList />
       <SlideBanner />
       <IngEvent />
-      <TitleJumping />
       <SpecialCosmeticList />
       <TitleNeon />
       <BeautyYoutube />
       <MoveLinkImg />
+      <TitleJumping />
     </Layout>
   )
 }

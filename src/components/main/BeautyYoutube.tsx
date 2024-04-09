@@ -119,8 +119,8 @@ const CardContainer = styled.div`
   }
 
   .swiper {
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     padding: 10px;
 
     @media (max-width: 600px) {
@@ -173,6 +173,7 @@ const YoutubeContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  // background: url(${`${process.env.PUBLIC_URL}/images/main/lights_bg.png`});
   background-color: #181818;
 
   @media (max-width: 600px) {
