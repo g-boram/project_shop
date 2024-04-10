@@ -16,7 +16,7 @@ import TitleShadoow from '@/components/shared/Title/TitleShadoow'
 // : 누구나 볼수있음
 function HomePage() {
   return (
-    <Layout>
+    <>
       <MainBanner />
       <MainIconBox />
       <Search />
@@ -28,7 +28,7 @@ function HomePage() {
       <BeautyYoutube />
       <MoveLinkImg />
       <TitleJumping />
-    </Layout>
+    </>
   )
 }
 

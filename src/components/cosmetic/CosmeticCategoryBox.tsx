@@ -207,7 +207,7 @@ const CosmeticContainer = styled.div`
   flex-shrink: 0;
   flex-direction: column;
   background-color: white;
-  border: 2px solid #eee;
+  border: 1px solid #eee;
   padding: 10px;
   height: 320px;
   width: 180px;

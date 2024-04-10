@@ -101,7 +101,7 @@ export default function SlideTopItem({ data }: { data: any }) {
             </SlideContainer>
           ) : (
             <SlideContainer>
-              <Skeleton width={500} height={300} />
+              <Skeleton width={430} height={300} />
             </SlideContainer>
           )}
         </>
@@ -111,7 +111,7 @@ export default function SlideTopItem({ data }: { data: any }) {
 }
 
 const SlideContainer = styled.div`
-  height: 350px;
+  height: 320px;
   width: 950px;
   background-color: fff;
 
@@ -120,7 +120,7 @@ const SlideContainer = styled.div`
   }
 
   @media (max-width: 600px) {
-    width: 100vw;
+    width: 100%;
     height: 300px;
   }
 `

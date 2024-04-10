@@ -20,7 +20,7 @@ const MainCosmeticList = () => {
   return (
     <>
       {isLoading ? (
-        <Skeleton width={1400} height={500} />
+        <Skeleton width={'100%'} height={500} />
       ) : (
         <CosmeticContainer>
           <Flex justify={'space-between'} css={topTitleStyle}>
@@ -66,7 +66,7 @@ const mainImg = css`
   height: 350px;
   margin-right: 30px;
   opacity: 0;
-  animation: ${slideOpacity} 2s ease-in-out forwards;
+  animation: ${slideOpacity} 1s ease-in-out forwards;
 
   @media (max-width: 600px) {
     display: none;
@@ -91,7 +91,7 @@ const SlideWrapper = styled.div`
   }
 `
 const CosmeticContainer = styled.div`
-  padding: 20px;
+  padding: 20px 0;
 
   @media (max-width: 600px) {
     padding: 0px;

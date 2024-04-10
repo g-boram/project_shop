@@ -106,8 +106,8 @@ function MobileCosmeticBox({
     })
   }
   return (
-    <Link to={`/cosmetic/detail/${cosmetic.id}`}>
-      <CosmeticContainer>
+    <CosmeticContainer>
+      <Link to={`/cosmetic/detail/${cosmetic.id}`}>
         <ImgWrapper>
           <IconWrapper>
             <img
@@ -166,19 +166,22 @@ function MobileCosmeticBox({
             <Text typography="t7">{cosmetic.like}</Text>
           </Flex>
         </Flex>
-      </CosmeticContainer>
-    </Link>
+      </Link>
+    </CosmeticContainer>
   )
 }
 
 const CosmeticContainer = styled.div`
-  border: 2px solid #eee;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
   padding: 10px;
-  max-width: 120px;
+  max-width: 160px;
 `
 const ImgWrapper = styled.div`
-  height: 150px;
-  width: 100%;
+  height: 140px;
+  width: 140px;
   position: relative;
   background-color: #f7f7f7;
   & img {

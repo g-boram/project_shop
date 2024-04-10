@@ -11,11 +11,12 @@ const TitleNeon = () => {
 
 const Wrapper = styled.div`
   margin: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   padding: 20px 0 10px 0;
   display: table;
   background-color: #181818;
+  border: 1px solid #181818;
 
   display: table-cell;
   text-align: center;

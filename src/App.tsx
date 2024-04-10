@@ -119,13 +119,14 @@ const LayoutContainer = styled.div`
   margin: 0 auto;
 `
 const PageContainer = styled.div`
-  position: relative;
-  min-height: 100vh;
+  // position: relative;
+  // min-height: 100vh;
   max-width: 1400px;
-  padding-bottom: 80px;
+  min-width: 430px;
 
   @media (max-width: 600px) {
-    width: 100vw;
+    width: 430px;
+    // padding-bottom: 80px;
   }
   @media (min-width: 600px) {
     max-width: 1400px;

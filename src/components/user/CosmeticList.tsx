@@ -51,7 +51,7 @@ const CosmeticContainer = styled.div`
 const ListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 `
 
 export default CosmeticList

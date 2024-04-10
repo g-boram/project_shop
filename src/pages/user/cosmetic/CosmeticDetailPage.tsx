@@ -26,7 +26,7 @@ import { useEffect, useRef, useState } from 'react'
 import { BiLike } from 'react-icons/bi'
 import { FaStar } from 'react-icons/fa'
 import { MdOutlineRateReview } from 'react-icons/md'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import useLike from '@/hooks/like/useLike'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import useShare from '@/hooks/share/useShare'
@@ -38,6 +38,7 @@ import Select from 'react-select'
 const CosmeticDetailPage = () => {
   const params = useParams()
   const share = useShare()
+  const navigate = useNavigate()
 
   const [innerWidth, setInnerWidth] = useState(0)
   const [moveInfo, setMoveInfo] = useState(0)
@@ -55,7 +56,6 @@ const CosmeticDetailPage = () => {
     readonly label: string
     readonly value: string | null
   }
-  console.log('cosmetic', cosmetic)
 
   useEffect(() => {
     if (cosmetic) {
@@ -208,6 +208,7 @@ const CosmeticDetailPage = () => {
               }}
             />
           </IconWrapper>
+          <Spacing size={5} />
           <Text typography="t6">찜하기</Text>
         </Flex>
 
@@ -228,6 +229,7 @@ const CosmeticDetailPage = () => {
               }}
             />
           </IconWrapper>
+          <Spacing size={5} />
           <Text typography="t6">카카오공유</Text>
         </Flex>
 
@@ -245,6 +247,7 @@ const CosmeticDetailPage = () => {
               />
             </CopyToClipboard>
           </IconWrapper>
+          <Spacing size={5} />
           <Text typography="t6">링크공유</Text>
         </Flex>
       </TopIconBox>
@@ -325,14 +328,76 @@ const CosmeticDetailPage = () => {
               <img src={TopMoveBanner} alt="" />
             </NavEventBanner>
             <Spacing size={30} />
-            {CATEGORY.map((cate, idx) => (
-              <Link to={`/cosmetic/${cate.value}`}>
-                <Button key={idx} color="pink" size="large" full>
-                  {cate.name}
-                </Button>
-                <Spacing size={5} />
-              </Link>
-            ))}
+
+            <SideBar>
+              <div
+                className="element1"
+                onClick={() => navigate('/cosmetic/lip')}
+              >
+                립스틱
+              </div>
+              <div
+                className="element2"
+                onClick={() => navigate('/cosmetic/skin')}
+              >
+                스킨 / 앰플
+              </div>
+              <div
+                className="element3"
+                onClick={() => navigate('/cosmetic/perfume')}
+              >
+                향수
+              </div>
+              <div
+                className="element4"
+                onClick={() => navigate('/cosmetic/maskara')}
+              >
+                마스카라
+              </div>
+              <div
+                className="element5"
+                onClick={() => navigate('/cosmetic/maskpack')}
+              >
+                마스크/팩
+              </div>
+              <div
+                className="element6"
+                onClick={() => navigate('/cosmetic/foundation')}
+              >
+                파운데이션
+              </div>
+              <div
+                className="element7"
+                onClick={() => navigate('/cosmetic/body')}
+              >
+                바디
+              </div>
+              <div
+                className="element8"
+                onClick={() => navigate('/cosmetic/shadow')}
+              >
+                아이섀도우
+              </div>
+              <div
+                className="element9"
+                onClick={() => navigate('/cosmetic/cream')}
+              >
+                로션/크림
+              </div>
+              <div
+                className="element10"
+                onClick={() => navigate('/cosmetic/sunCare')}
+              >
+                선크림
+              </div>
+              <div
+                className="element11"
+                onClick={() => navigate('/cosmetic/tools')}
+              >
+                미용도구
+              </div>
+              <div className="hovers"></div>
+            </SideBar>
           </CategoryNavBox>
           {/* 상세내용 영역 */}
           <CosmeticDetailBox>
@@ -397,8 +462,8 @@ const CosmeticDetailPage = () => {
                   {cosmetic?.brand_name && cosmetic?.name ? (
                     <Flex direction="column" css={nameStyle}>
                       <Spacing size={10} direction={'horizontal'} />
-                      <Text typography="t5">{cosmetic.brand_name}</Text>
-                      <Spacing size={5} direction={'horizontal'} />
+                      <Text typography="t4">{cosmetic.brand_name}</Text>
+                      <Spacing size={5} />
                       <Flex justify={'space-between'}>
                         <Text typography="t2" bold>
                           {cosmetic.name}
@@ -414,44 +479,44 @@ const CosmeticDetailPage = () => {
 
                   {/* 한줄설명 */}
                   <Flex>
-                    <Text typography="t5">" {cosmetic?.comment} "</Text>
+                    <Text typography="t3">" {cosmetic?.comment} "</Text>
                   </Flex>
-                  <Spacing size={15} />
+                  <Spacing size={20} />
 
                   {/* 색상 */}
                   <Flex justify={'space-between'} align={'center'}>
-                    <Text typography="t6">색상</Text>
-                    <Text typography="t6">
+                    <Text typography="t4">색상</Text>
+                    <Text typography="t5">
                       {cosmetic?.color?.map((col, idx) => col + ', ')}
                     </Text>
                   </Flex>
-                  <Spacing size={5} />
+                  <Spacing size={10} />
 
                   {/* 타입 */}
                   <Flex justify={'space-between'} align={'center'}>
-                    <Text typography="t6">타입</Text>
-                    <Text typography="t6">{cosmetic?.type}</Text>
+                    <Text typography="t4">타입</Text>
+                    <Text typography="t5">{cosmetic?.type}</Text>
                   </Flex>
-                  <Spacing size={5} />
+                  <Spacing size={10} />
 
                   {/* 제품향 */}
                   <Flex justify={'space-between'} align={'center'}>
-                    <Text typography="t6">제품 향</Text>
-                    <Text typography="t6">{cosmetic?.scent}</Text>
+                    <Text typography="t4">제품 향</Text>
+                    <Text typography="t5">{cosmetic?.scent}</Text>
                   </Flex>
-                  <Spacing size={5} />
+                  <Spacing size={10} />
 
                   {/* 제품용량 */}
                   <Flex justify={'space-between'} align={'center'}>
-                    <Text typography="t6">제품 용량</Text>
-                    <Text typography="t6">{cosmetic?.volume}</Text>
+                    <Text typography="t4">제품 용량</Text>
+                    <Text typography="t5">{cosmetic?.volume}</Text>
                   </Flex>
-                  <Spacing size={5} />
+                  <Spacing size={10} />
 
                   {/* 잔여수량 */}
                   <Flex justify={'space-between'} align={'center'}>
-                    <Text typography="t6">잔여 수량</Text>
-                    <Text typography="t6">{cosmetic?.count} 개</Text>
+                    <Text typography="t4">잔여 수량</Text>
+                    <Text typography="t5">{cosmetic?.count} 개</Text>
                   </Flex>
                   <Spacing size={40} />
 
@@ -480,6 +545,7 @@ const CosmeticDetailPage = () => {
                       </Text>
                     </Flex>
                   </Flex>
+
                   <TagStyle>{tagComponent()}</TagStyle>
                 </DescBox>
                 <BuyCosmeticBox>
@@ -551,7 +617,7 @@ const CosmeticDetailPage = () => {
                       <img src={NewUserBanner} alt="newUserEvent" />
                     </Link>
                   ) : (
-                    <Skeleton width={450} height={80} />
+                    <Skeleton width={450} height={90} />
                   )}
                 </DescEventBanner>
               </DetailDesc>
@@ -831,6 +897,7 @@ const CosmeticContainer = styled.div`
   padding-top: 10px;
   margin: 0 auto;
   display: flex;
+  gap: 20px;
 `
 const NavEventBanner = styled.div`
   background-color: white;
@@ -841,11 +908,107 @@ const NavEventBanner = styled.div`
     height: 100%;
     width: 100%;
     object-fit: contain;
+    border-radius: 15px;
+  }
+`
+const SideBar = styled.div`
+  * {
+    box-sizing: border-box;
+  }
+
+  background-color: #303030;
+  display: block;
+  height: 800px;
+  width: 100%;
+  font-weight: bold;
+  position: relative;
+  border-radius: 15px;
+
+  div {
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .hovers {
+    position: absolute;
+    top: 0;
+    width: 80%;
+    height: 40px;
+    background-color: #b95b5b;
+    border-radius: 40px;
+    border: 2px solid #b95b5b;
+    z-index: 1;
+    margin-left: 55px;
+    transition: 0.5s;
+  }
+
+  .element1:hover ~ .hovers {
+    background-color: #b95b5b;
+    border: 2px solid #b95b5b;
+    transform: translateY(0%);
+  }
+  .element2:hover ~ .hovers {
+    background-color: #0ebeff;
+    border: 2px solid #0ebeff;
+    transform: translateY(100%);
+  }
+  .element3:hover ~ .hovers {
+    background-color: #d87200;
+    border: 2px solid #d87200;
+    transform: translateY(200%);
+  }
+  .element4:hover ~ .hovers {
+    background-color: #47cf73;
+    border: 2px solid #47cf73;
+    transform: translateY(300%);
+  }
+  .element5:hover ~ .hovers {
+    background-color: #ae63e4;
+    border: 2px solid #ae63e4;
+    transform: translateY(400%);
+  }
+  .element6:hover ~ .hovers {
+    background-color: #ff7493;
+    border: 2px solid #ff7493;
+    transform: translateY(500%);
+  }
+  .element7:hover ~ .hovers {
+    background-color: #ffb900;
+    border: 2px solid #ffb900;
+    transform: translateY(600%);
+  }
+  .element8:hover ~ .hovers {
+    background-color: #6478ff;
+    border: 2px solid #6478ff;
+    transform: translateY(700%);
+  }
+  .element9:hover ~ .hovers {
+    background-color: #2e8b57;
+    border: 2px solid #2e8b57;
+    transform: translateY(800%);
+  }
+  .element10:hover ~ .hovers {
+    background-color: #d7567f;
+    border: 2px solid #d7567f;
+    transform: translateY(900%);
+  }
+  .element11:hover ~ .hovers {
+    background-color: #6482b9;
+    border: 2px solid #6482b9;
+    transform: translateY(1000%);
   }
 `
 const DescEventBanner = styled.div`
   background-color: #fff;
-  height: 80px;
+  height: 90px;
   width: 100%;
   margin-top: 5px;
 
@@ -867,6 +1030,7 @@ const CosmeticDetailBox = styled.div`
   flex-basis: 1150px;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 `
 const SelectItemBox = styled.div`
   width: 100%;
@@ -907,7 +1071,7 @@ const BuyCosmeticBox = styled.div`
 `
 const DetailBox = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   min-height: 700px;
   height: auto;
   width: 100%;
@@ -944,19 +1108,20 @@ const SubImgItem = styled.div`
 const MainImg = styled.div`
   background-color: white;
   height: 400px;
-  width: 350px;
+  width: 400px;
   border: 1px solid #eee;
 
   & img {
     height: 400px;
-    width: 350px;
+    width: 400px;
     object-fit: contain;
   }
 `
 const DescBox = styled.div`
   position: relative;
-  width: 400px;
+  width: 100%;
   min-height: 400px;
+  margin-bottom: 20px;
 `
 const DetailDesc = styled.div`
   background-color: white;
@@ -965,7 +1130,6 @@ const DetailDesc = styled.div`
   align-items: center;
   width: 500px;
   min-height: 500px;
-  margin-left: 10px;
 `
 const IconWrapper = styled.div`
   height: 30px;
@@ -979,15 +1143,14 @@ const IconWrapper = styled.div`
 `
 const TopIconBox = styled.div`
   display: flex;
-  justify-content: space-around;
-  height: 50px;
+  justify-content: space-evenly;
+  height: 60px;
   width: 100%;
 `
 const CateTag = styled.div`
-  padding: 2px 15px;
+  padding: 4px 20px;
   height: 20px;
   background-color: #eee;
-  border: 1px solid grey;
   border-radius: 15px;
 `
 const nameStyle = css`

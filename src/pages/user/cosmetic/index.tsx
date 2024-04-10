@@ -5,12 +5,13 @@ import CosmeticList from '@/components/user/CosmeticList'
 import MobileCosmeticList from '@/components/user/MobileCosmeticList'
 import TopMoveBanner from '../../../assets/moveBanner/gif_squareBanner_1.gif'
 import styled from '@emotion/styled'
-import { CATEGORY } from '@/constants/cosmetic'
-import { css } from '@emotion/react'
+import { css, keyframes } from '@emotion/react'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Search from '@/components/shared/Search'
 import useSearchCosmetics from '@/hooks/data/useSearchCosmetics'
+
+import { GiLipstick } from 'react-icons/gi'
 
 // 카테고리 category
 // 선물 - gift
@@ -33,6 +34,20 @@ const CosmeticPage = () => {
   const params = useParams()
   const [innerWidth, setInnerWidth] = useState(0)
   const [category, setCategory] = useState<string>('shadow')
+
+  const CATEGORY = [
+    { name: '립스틱', value: 'lip' },
+    { name: '스킨/앰플', value: 'skin' },
+    { name: '향수', value: 'perfume' },
+    { name: '마스카라', value: 'maskara' },
+    { name: '마스크/팩', value: 'maskpack' },
+    { name: '파운데이션', value: 'foundation' },
+    { name: '바디', value: 'body' },
+    { name: '아이섀도우', value: 'shadow' },
+    { name: '로션/크림', value: 'cream' },
+    { name: '선크림', value: 'sunCare' },
+    { name: '미용도구', value: 'tools' },
+  ]
 
   useEffect(() => {
     if (params?.category) {
@@ -57,6 +72,29 @@ const CosmeticPage = () => {
     }
   }, [])
 
+  const isClick = css`
+    background-color: #303030;
+    color: white;
+    font-weight: 'bold';
+  `
+  const MCategory = styled.div<{ value: string }>`
+    background-color: white;
+    height: 35px;
+    width: 44%;
+    margin-right: 5px;
+    padding-left: 15px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    transition: 1s;
+    border: 1px solid #eee;
+
+    background-color: ${(props) =>
+      props.value === category ? '#303030;' : 'white'};
+    color: ${(props) => (props.value === category ? 'white' : '')};
+    font-weight: ${(props) => (props.value === category ? 'bold' : '')};
+  `
   return (
     <>
       {innerWidth > 600 ? (
@@ -66,33 +104,86 @@ const CosmeticPage = () => {
               <img src={TopMoveBanner} alt="" />
             </NavEventBanner>
             <Spacing size={30} />
-            {CATEGORY.map((cate, idx) => (
-              <>
-                <Button
-                  key={idx}
-                  color="pink"
-                  size="large"
-                  full
-                  onClick={() => setCategory(cate.value)}
-                >
-                  {cate.name}
-                </Button>
-                <Spacing size={5} />
-              </>
-            ))}
+
+            <SideBar>
+              <div className="element1" onClick={() => setCategory('lip')}>
+                립스틱
+              </div>
+              <div className="element2" onClick={() => setCategory('skin')}>
+                스킨 / 앰플
+              </div>
+              <div className="element3" onClick={() => setCategory('perfume')}>
+                향수
+              </div>
+              <div className="element4" onClick={() => setCategory('maskara')}>
+                마스카라
+              </div>
+              <div className="element5" onClick={() => setCategory('maskpack')}>
+                마스크/팩
+              </div>
+              <div
+                className="element6"
+                onClick={() => setCategory('foundation')}
+              >
+                파운데이션
+              </div>
+              <div className="element7" onClick={() => setCategory('body')}>
+                바디
+              </div>
+              <div className="element8" onClick={() => setCategory('shadow')}>
+                아이섀도우
+              </div>
+              <div className="element9" onClick={() => setCategory('cream')}>
+                로션/크림
+              </div>
+              <div className="element10" onClick={() => setCategory('sunCare')}>
+                선크림
+              </div>
+              <div className="element11" onClick={() => setCategory('tools')}>
+                미용도구
+              </div>
+              <div className="hovers"></div>
+            </SideBar>
           </CategoryNavBox>
           <CosmeticListBox>
-            <MoveMainBanner>MoveMainBanner</MoveMainBanner>
+            <MoveMainBanner>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/cosmetic/category_banner1_2.png`}
+                alt=""
+                css={opacityImg_1}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/images/cosmetic/category_banner1_3.png`}
+                alt=""
+                css={opacityImg_2}
+              />
+            </MoveMainBanner>
             <Search />
             <CosmeticList category={category} />
           </CosmeticListBox>
         </CosmeticContainer>
       ) : (
         <MobileCosmeticContainer>
-          <MobileEventBannerBox>EentBanner</MobileEventBannerBox>
+          <MobileEventBannerBox>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/cosmetic/category_banner1_2.png`}
+              alt=""
+              css={mOpacityImg_1}
+            />
+            <img
+              src={`${process.env.PUBLIC_URL}/images/cosmetic/category_banner1_3.png`}
+              alt=""
+              css={mOpacityImg_2}
+            />
+          </MobileEventBannerBox>
           <MobileCategory>
             {CATEGORY.map((cate, idx) => (
-              <MCategory key={idx} onClick={() => setCategory(cate.value)}>
+              <MCategory
+                key={idx}
+                onClick={() => setCategory(cate.value)}
+                value={cate.value}
+              >
+                <Spacing size={10} direction="horizontal" />
                 {cate.name}
               </MCategory>
             ))}
@@ -109,38 +200,171 @@ const CosmeticPage = () => {
   )
 }
 
+const slideOpacity = keyframes`
+to {
+  opacity: 1;
+} 
+`
+
+const opacityImg_1 = css`
+  position: absolute;
+  top: 30px;
+  opacity: 0;
+  animation: ${slideOpacity} 2s ease-in-out forwards;
+`
+const opacityImg_2 = css`
+  position: absolute;
+  right: 350px;
+
+  opacity: 0;
+  animation: ${slideOpacity} 2s ease-in-out forwards;
+`
+const mOpacityImg_1 = css`
+  position: absolute;
+  top: 10px;
+  height: 45px;
+  width: 100px;
+  opacity: 0;
+  animation: ${slideOpacity} 2s ease-in-out forwards;
+`
+const mOpacityImg_2 = css`
+  position: absolute;
+  right: 120px;
+  top: 5px;
+  height: 65px;
+  width: 80px;
+  opacity: 0;
+  animation: ${slideOpacity} 2s ease-in-out forwards;
+`
+
+const SideBar = styled.div`
+  * {
+    box-sizing: border-box;
+  }
+
+  background-color: #303030;
+  display: block;
+  height: 100%;
+  width: 100%;
+  font-weight: bold;
+  position: relative;
+  border-radius: 15px;
+
+  div {
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .hovers {
+    position: absolute;
+    top: 0;
+    width: 80%;
+    height: 40px;
+    background-color: #b95b5b;
+    border-radius: 40px;
+    border: 2px solid #b95b5b;
+    z-index: 1;
+    margin-left: 55px;
+    transition: 0.5s;
+  }
+
+  .element1:hover ~ .hovers {
+    background-color: #b95b5b;
+    border: 2px solid #b95b5b;
+    transform: translateY(0%);
+  }
+  .element2:hover ~ .hovers {
+    background-color: #0ebeff;
+    border: 2px solid #0ebeff;
+    transform: translateY(100%);
+  }
+  .element3:hover ~ .hovers {
+    background-color: #d87200;
+    border: 2px solid #d87200;
+    transform: translateY(200%);
+  }
+  .element4:hover ~ .hovers {
+    background-color: #47cf73;
+    border: 2px solid #47cf73;
+    transform: translateY(300%);
+  }
+  .element5:hover ~ .hovers {
+    background-color: #ae63e4;
+    border: 2px solid #ae63e4;
+    transform: translateY(400%);
+  }
+  .element6:hover ~ .hovers {
+    background-color: #ff7493;
+    border: 2px solid #ff7493;
+    transform: translateY(500%);
+  }
+  .element7:hover ~ .hovers {
+    background-color: #ffb900;
+    border: 2px solid #ffb900;
+    transform: translateY(600%);
+  }
+  .element8:hover ~ .hovers {
+    background-color: #6478ff;
+    border: 2px solid #6478ff;
+    transform: translateY(700%);
+  }
+  .element9:hover ~ .hovers {
+    background-color: #2e8b57;
+    border: 2px solid #2e8b57;
+    transform: translateY(800%);
+  }
+  .element10:hover ~ .hovers {
+    background-color: #d7567f;
+    border: 2px solid #d7567f;
+    transform: translateY(900%);
+  }
+  .element11:hover ~ .hovers {
+    background-color: #6482b9;
+    border: 2px solid #6482b9;
+    transform: translateY(1000%);
+  }
+`
+
 const MobileCosmeticContainer = styled.div`
-  background-color: pink;x
-  height: auto;
+  min-height: 100vh;
   padding: 10px;
 `
 const MobileEventBannerBox = styled.div`
-  background-color: grey;
+  background-color: white;
+  height: 75px;
   width: 100%;
-  height: 80px;
+  position: relative;
+  background-image: url(${`${process.env.PUBLIC_URL}/images/cosmetic/category_banner1.jpg`});
+  background-size: cover;
 `
 const MobileCategory = styled.div`
   display: flex;
   flex-wrap: wrap;
-`
-const MCategory = styled.div`
-  background-color: white;
-  height: 30px;
-  width: 50%;
   margin-top: 10px;
 `
+
 const MobileListBox = styled.div`
-  background-color: white;
-  padding: 10px;
   overflow: scroll;
   margin-top: 20px;
 `
 
 const mobileHeader = css`
-  height: 50px;
-  background-color: yellow;
-  font-size: 16px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
   font-weight: bold;
+  border-bottom: 2px solid #303030;
+  margin-bottom: 20px;
 `
 const CosmeticContainer = styled.div`
   width: 1400px;
@@ -149,29 +373,32 @@ const CosmeticContainer = styled.div`
   display: flex;
 `
 const MoveMainBanner = styled.div`
-  background-color: grey;
-  height: 250px;
+  position: relative;
+  background-color: #eee;
+  height: 200px;
   width: 100%;
+  background-image: url(${`${process.env.PUBLIC_URL}/images/cosmetic/category_banner1.jpg`});
 `
 const NavEventBanner = styled.div`
   background-color: white;
-  height: 250px;
+  margin-top: 10px;
   width: 100%;
 
   & img {
     height: 100%;
     width: 100%;
     object-fit: contain;
+    border-radius: 15px;
   }
 `
 const CategoryNavBox = styled.div`
   height: auto;
-  flex-basis: 200px;
+  flex-basis: 250px;
 `
 const CosmeticListBox = styled.div`
   flex-basis: 1150px;
   background-color: white;
-  padding: 5px;
+  padding: 10px;
   overflow: scroll;
   display: flex;
   flex-direction: column;
