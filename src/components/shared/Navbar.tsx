@@ -104,38 +104,35 @@ function Navbar() {
     if (user != null) {
       return (
         <>
-          <Link to="/my">
-            <UserImgBox>
-              <img
-                src={
-                  user.photoURL !== ''
-                    ? user.photoURL
-                    : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
-                }
-                alt=""
-                width={70}
-                height={70}
-                style={{
-                  borderRadius: '100%',
-                  border: '2px solid #fff',
-                  backgroundColor: '#eee',
-                  marginLeft: '10px',
-                }}
-              />
-              <Spacing size={20} direction={'horizontal'} />
-              <Flex direction="column">
-                <Text typography="t6" color="white">
-                  {user.displayName}
-                </Text>
-                <Spacing size={10} />
-                <Text typography="t6" color="white">
-                  {user.email}
-                </Text>
-              </Flex>
-            </UserImgBox>
-          </Link>
+          <UserImgBox>
+            <img
+              src={
+                user.photoURL !== ''
+                  ? user.photoURL
+                  : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
+              }
+              alt=""
+              width={70}
+              height={70}
+              style={{
+                borderRadius: '100%',
+                border: '2px solid #fff',
+                backgroundColor: '#eee',
+              }}
+            />
+            <Spacing size={20} direction={'horizontal'} />
+            <Flex direction="column">
+              <Text typography="t6" color="white">
+                {user.displayName}
+              </Text>
+              <Spacing size={10} />
+              <Text typography="t6" color="white">
+                {user.email}
+              </Text>
+            </Flex>
+          </UserImgBox>
           <Spacing size={10} />
-          <Button size="small" full color="pink" onClick={handleLogout}>
+          <Button size="small" full color="grey" onClick={handleLogout}>
             로그아웃
           </Button>
           <Spacing size={50} />
@@ -149,7 +146,12 @@ function Navbar() {
             </Text>
             <Spacing size={20} />
           </Flex>
-          <TodayCommentBox>{/* @TODO: 랜덤하게 바꾸기 */}</TodayCommentBox>
+          <TodayCommentBox>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/event/slideNavImg1.jpg`}
+              alt=""
+            />
+          </TodayCommentBox>
           <Spacing size={10} />
           <Button full color="lightPurple">
             🌸 봄추천 상품 바로가기 !
@@ -276,22 +278,25 @@ const topNavbarStyles = css`
 `
 // 랜덤 한마디 영역
 const TodayCommentBox = styled.div`
-  height: 100px;
+  min-height: 100px;
   min-width: 240px;
-  padding: 20px 10px;
   background-color: #fff;
   border-radius: 10px;
   font-size: 14px;
+
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+  }
 `
 const UserImgBox = styled.div`
-  height: 80px;
-  min-width: 240px;
-  padding: 20px 10px;
+  height: 60px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  // background-color: #fff;
-  border-radius: 10px;
 `
 const NavLogo = styled.div`
   margin-right: 10px;
@@ -328,7 +333,7 @@ const mobileNavbarContainerStyles = css`
   padding: 20px 20px;
   height: 100vh;
   width: 60%;
-  background-color: #562837;
+  background-color: #303030;
   gap: 10px;
   float: right;
   color: #eee;

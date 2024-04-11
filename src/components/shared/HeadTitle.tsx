@@ -19,6 +19,10 @@ const Containder = styled.div`
   align-items: flex-end;
   height: 60px;
   margin-bottom: 50px;
+
+  @media (max-width: 600px) {
+    margin-bottom: 0px;
+  }
 `
 const Title = styled.div`
   font-size: 30px;

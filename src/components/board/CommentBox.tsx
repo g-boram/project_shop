@@ -233,8 +233,8 @@ const CommentBox = ({ board, getDetailBoard }: CommentsProps) => {
   return (
     <CommentContainer>
       <CommentHead>
-        <Text typography="t7" color="black">
-          댓글 {board?.comments ? board?.comments.length : 0}개
+        <Text typography="t6" color="black">
+          댓글 {board?.comments ? board?.comments.length : 0} 개
         </Text>
       </CommentHead>
       {board?.comments ? (
@@ -280,9 +280,8 @@ const commentLineStyle = css`
   margin: 10px 0px;
 `
 const CommentHead = styled.div`
-  height: 25px;
-  background-color: white;
-  border-bottom: 1px solid #f3d7ca;
+  height: 30px;
+  border-bottom: 1px solid #eee;
   padding: 0px 20px;
 `
 const CommentMoreList = styled.div`
@@ -310,7 +309,7 @@ const CommentForm = styled.div`
 `
 
 const CommentContainer = styled.div`
-  height: 500px;
+  min-height: 500px;
   padding: 20px 0px;
 `
 

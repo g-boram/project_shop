@@ -24,27 +24,26 @@ const MyLikes = () => {
                 <ImgWrapper>
                   <img src={like.url} alt="" />
                 </ImgWrapper>
-                <Spacing size={20} direction="horizontal" />
                 <Flex css={likeRowsStyle} align="center" justify={'flex-end'}>
                   <Flex direction="column">
-                    <Flex>
+                    <Flex justify={'flex-end'} align={'center'}>
                       <Text typography="t6">{like.category}</Text>
-                      <Spacing size={15} direction={'horizontal'} />
-                      <Text typography="t6" css={brandNameStyle}>
+                      <Spacing size={10} direction={'horizontal'} />
+                      <Text typography="t7" css={brandNameStyle}>
                         {like.brand_name}
                       </Text>
                     </Flex>
-                    <Spacing size={15} />
-                    <Flex justify={'flex-end'}>
+                    <Spacing size={10} />
+                    <Flex justify={'flex-end'} align={'center'}>
                       <Spacing size={15} direction={'horizontal'} />
-                      <Text typography="t4" bold>
+                      <Text typography="t5" bold>
                         {like.cosmeticName}
                       </Text>
                       <Spacing size={15} direction={'horizontal'} />
-                      <Text typography="t6">{like.volume}</Text>
+                      <Text typography="t7">{like.volume}</Text>
                     </Flex>
-                    <Spacing size={10} />
-                    <Flex justify={'flex-end'}>
+                    <Spacing size={15} />
+                    <Flex justify={'flex-end'} align={'center'}>
                       <Text typography="t6" css={salePerStyle}>
                         {addDelimiter(like.salePercent) + '%'}
                       </Text>
@@ -94,51 +93,53 @@ const MyLikes = () => {
 const LikeBox = styled.div`
   width: 100%;
   max-width: 1400px;
-  background-color: pink;
 `
 const LikeRow = styled.div`
   width: 100%;
   display: flex;
   padding: 10px 0;
+  align-items: center;
+  background-color: #f8f8f8;
   border-bottom: 1px solid #eee;
-  margin-bottom: 10px;
+  border-top: 1px solid #eee;
 `
 const DelButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 80px;
+
+  @media (max-width: 600px) {
+    width: 60px;
+  }
 `
 
 const ImgWrapper = styled.div`
-  width: 100px;
+  width: 150px;
   height: 100px;
+  margin-left: 20px;
+  border-radius: 10px;
   background-color: grey;
-
+  
   & > img {
     width: 100%;
     height: 100%;
     background-color: white;
     border-radius: 10px;
-    border: 1px solid #eee;
-    margin-left: 10px;
     object-fit: contain;
   }
   
   @media (max-width: 600px) {
-    height: 80px;
-    width: 80px:
+    height: 75px;
+    width: 70px:
+    margin-left: 20px;
     background-color: grey;
 
     & img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      background-color: white;
-      padding: 5px;
       border-radius: 10px;
-      border: 1px solid #eee;
-      margin-left: 10px;
     }
   }
 `
@@ -152,9 +153,18 @@ const cartBtn = css`
 `
 const btnRowStyle = css`
   width: 300px;
+
+  @media (max-width: 600px) {
+    width: 100px;
+    margin-right: 20px;
+  }
 `
 const likeRowsStyle = css`
   width: 100%;
+
+  @media (max-width: 600px) {
+    width: 80%;
+  }
 `
 const brandNameStyle = css`
   background-color: #eee;

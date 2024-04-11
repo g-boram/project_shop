@@ -93,21 +93,16 @@ const BoardEditForm = () => {
 
   return (
     <>
-      <NoticeBox>
-        <Flex
-          align={'center'}
-          css={css`
-            height: 100%;
-          `}
-        ></Flex>
-      </NoticeBox>
       <Flex
         justify={'flex-end'}
         align={'flex-end'}
         direction={'column'}
         css={formTitleStyle}
       >
-        <Text typography="t4">게시글 수정</Text>
+        <Text typography="t4" bold>
+          게시글 수정
+        </Text>
+        <Spacing size={20} />
         <Text typography="t7" color="fontDarkGrey">
           서로를 존중하는 말로 좋은 게시글 문화를 만들어가요
         </Text>
@@ -138,7 +133,7 @@ const BoardEditForm = () => {
                   }),
                   control: (controlStyles) => ({
                     ...controlStyles,
-                    border: '1px solid #e2e2e2',
+                    border: 'none',
                   }),
                   menu: (controlStyles) => ({
                     ...controlStyles,
@@ -176,7 +171,7 @@ const BoardEditForm = () => {
         </Flex>
         <Spacing size={20} />
         <Flex justify={'center'}>
-          <Button color="pink" full onClick={handleSubmit}>
+          <Button color="pink" size="medium" full onClick={handleSubmit}>
             게시글 등록
           </Button>
         </Flex>
@@ -190,12 +185,13 @@ const BoardEditForm = () => {
           </Button>
         </Link>
       </Flex>
+      <Spacing size={50} />
     </>
   )
 }
 const formTitleStyle = css`
   height: 100px;
-  border-bottom: 5px solid pink;
+  border-bottom: 4px solid #eee;
   padding-bottom: 10px;
   margin-bottom: 20px;
 `
@@ -203,7 +199,7 @@ const formTitleStyle = css`
 const FormContainer = styled.div`
   height: auto;
   padding: 10px;
-  border: 2px solid #f3d7ca;
+  border: 1px solid #eee;
   border-radius: 5px;
 `
 
@@ -251,13 +247,5 @@ const InputBox = styled.div`
     height: 40px;
   }
 `
-const NoticeBox = styled.div`
-  background-color: white;
-  padding: 0 10px;
-  border: 2px solid #f9ecec;
-  box-shadow: 0px 0px 10px -2px #ffbdd2;
-  height: 60px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-`
+
 export default BoardEditForm

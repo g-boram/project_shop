@@ -45,6 +45,7 @@ const Pagination = ({ total, limit, page, setPage }: any) => {
           &gt;
         </Button>
       </Flex>
+      <Spacing size={50} />
     </>
   )
 }

@@ -175,13 +175,14 @@ const CosmeticContainer = styled.div`
   border: 1px solid #eee;
   display: flex;
   flex-direction: column;
-  justify-items: center;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
-  max-width: 160px;
+  width: 155px;
 `
 const ImgWrapper = styled.div`
-  height: 140px;
-  width: 140px;
+  height: 150px;
+  width: 150px;
   position: relative;
   background-color: #f7f7f7;
   & img {

@@ -90,7 +90,7 @@ const CosmeticDetailPage = () => {
 
   const NavItem = styled.div<{ cate: number }>`
     background-color: ${(props) =>
-      props.cate === moveInfo ? '#feebeb;' : 'white'};
+      props.cate === moveInfo ? '#303030;' : 'white'};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,7 +101,7 @@ const CosmeticDetailPage = () => {
     margin-left: 10px;
     border: 2px solid #eee;
     border-radius: 8px 8px 0 0;
-    color: #757575;
+    color: ${(props) => (props.cate === moveInfo ? 'white' : '#757575')};
     cursor: pointer;
     border-bottom: none;
 
@@ -679,9 +679,9 @@ const CosmeticDetailPage = () => {
               <Flex direction="column" css={nameStyle}>
                 <Spacing size={10} direction={'horizontal'} />
                 <Text typography="t5">{cosmetic.brand_name}</Text>
-                <Spacing size={5} direction={'horizontal'} />
+                <Spacing size={10} />
                 <Flex justify={'space-between'}>
-                  <Text typography="t2" bold>
+                  <Text typography="t3" bold>
                     {cosmetic.name}
                   </Text>
                   <CateTag>{cosmetic.category}</CateTag>
@@ -698,12 +698,12 @@ const CosmeticDetailPage = () => {
             <Spacing size={15} />
             {/* 색상 */}
             <Flex justify={'space-between'} align={'center'}>
-              <Text typography="t6">색상</Text>
+              <Text typography="t5">색상</Text>
               <Text typography="t6">
                 {cosmetic?.color?.map((col, idx) => col + ', ')}
               </Text>
             </Flex>
-            <Spacing size={5} />
+            <Spacing size={10} />
             {/* 가격 영역 */}
             <Flex justify={'space-between'}>
               <Flex align={'center'}>
@@ -1143,7 +1143,7 @@ const IconWrapper = styled.div`
 `
 const TopIconBox = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   height: 60px;
   width: 100%;
 `

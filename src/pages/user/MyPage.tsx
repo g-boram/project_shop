@@ -1,13 +1,15 @@
+import MyCart from '@/components/setting/MyCart'
 import MyLikes from '@/components/setting/MyLikes'
-import Settings from '@/components/setting/Settings'
 import Flex from '@/components/shared/Flex'
 import HeadTitle from '@/components/shared/HeadTitle'
 import Spacing from '@/components/shared/Spacing'
 import Text from '@/components/shared/Text'
 import useUser from '@/hooks/auth/useUser'
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+
+import { IoHeart, IoCart } from 'react-icons/io5'
 import { useState } from 'react'
+import { css } from '@emotion/react'
 
 function MyPage() {
   const user = useUser()
@@ -16,12 +18,33 @@ function MyPage() {
 
   const renderComponents = () => {
     if (isCate === 0) {
-      return <Settings />
-    }
-    if (isCate === 1) {
       return <MyLikes />
     }
+    if (isCate === 1) {
+      return <MyCart />
+    }
   }
+
+  const CateItem = styled.div<{ cate: number }>`
+    width: 100%;
+    height: 60px;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px 15px 0 0;
+    background-color: ${(props) =>
+      props.cate === isCate ? '#303030' : 'white'};
+    color: ${(props) => (props.cate === isCate ? 'white' : '#303030')};
+    cursor: pointer;
+    font-weight: ${(props) => (props.cate === isCate ? 'bold' : '')};
+
+    @media (max-width: 600px) {
+      font-size: 18px;
+      height: 40px;
+    }
+  `
+
   return (
     <>
       <HeadTitle title="마이 페이지" desc="My Page" />
@@ -38,13 +61,18 @@ function MyPage() {
               alt="userImg"
               width={100}
               height={100}
-              style={{ borderRadius: '100%', border: '2px solid #fff' }}
+              style={{
+                borderRadius: '100%',
+                border: '2px solid #fff',
+                paddingLeft: '20px',
+              }}
             />
-            <Spacing size={30} direction="horizontal" />
+            <Spacing size={50} direction="horizontal" />
             <Flex direction="column" justify={'center'}>
               <Text typography="t3" bold>
                 {user?.displayName}{' '}
               </Text>
+              <Spacing size={10} />
               <Text typography="t6">{user?.email} </Text>
             </Flex>
           </Flex>
@@ -53,8 +81,16 @@ function MyPage() {
       <UserContentBox>
         <UserContentWrapper>
           <Flex css={categoryLine}>
-            <CateItem onClick={() => setIsCate(0)}>세팅</CateItem>
-            <CateItem onClick={() => setIsCate(1)}>찜 목록</CateItem>
+            <CateItem cate={0} onClick={() => setIsCate(0)}>
+              찜 목록
+              <Spacing size={10} direction="horizontal" />
+              <IoHeart />
+            </CateItem>
+            <CateItem cate={1} onClick={() => setIsCate(1)}>
+              장바구니
+              <Spacing size={10} direction="horizontal" />
+              <IoCart />
+            </CateItem>
           </Flex>
           {renderComponents()}
         </UserContentWrapper>
@@ -69,28 +105,27 @@ const UserInfoBox = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
+  justify-content: center
   flex-direction: column;
   align-items: center;
-  background-color: grey;
 
   @media (max-width: 600px) {
-    height: 250px;
-    width: 100vw;
+    height: 200px;
   }
 `
 const UserInfo = styled.div`
   width: 1200px;
   background-color: white;
-  padding: 20px;
 
   @media (max-width: 600px) {
-    width: auto;
-    min-width: 300px;
+    width: 100%;
+    width: 300px;
   }
 `
 
 const UserContentBox = styled.div`
   width: 100%;
+  min-height: 600px;
 `
 const UserContentWrapper = styled.div`
   width: 100%;
@@ -105,15 +140,10 @@ const UserContentWrapper = styled.div`
     height: 250px;
   }
 `
-const CateItem = styled.div`
-  width: 100%;
-  height: 60px;
-  background-color: white;
-  cursor: pointer;
-`
+
 const categoryLine = css`
   width: 100%;
-  height: 60px;
+  margin-bottom: 30px;
   border-bottom: 2px solid #000;
 `
 export default MyPage

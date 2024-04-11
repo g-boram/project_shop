@@ -203,7 +203,7 @@ const formTitleStyle = css`
 const FormContainer = styled.div`
   height: auto;
   padding: 10px;
-  border: 2px solid #f3d7ca;
+  border: 2px solid #eee;
   border-radius: 5px;
 `
 

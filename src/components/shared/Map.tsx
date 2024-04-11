@@ -5,6 +5,8 @@ import stores from '@/mock/storeData.json'
 import Skeleton from './Skeleton'
 import Text from './Text'
 
+import { IoStorefrontOutline } from 'react-icons/io5'
+import { HiOutlineCursorClick } from 'react-icons/hi'
 import { IoIosSend } from 'react-icons/io'
 import { MdPhoneIphone } from 'react-icons/md'
 import { css } from '@emotion/react'
@@ -96,11 +98,6 @@ function Map() {
           // 선택한 가게 저장
           window.kakao.maps.event.addListener(marker, 'click', function () {
             setCurrentStore(store)
-            // setLocation({
-            //   ...location,
-            //   lat: store.lat,
-            //   lng: store.lng,
-            // })
           })
         })
       })
@@ -132,12 +129,7 @@ function Map() {
                 justify={'space-between'}
                 align={'center'}
               >
-                <Flex
-                  align={'center'}
-                  css={css`
-                    width: 100%;
-                  `}
-                >
+                <Flex align={'center'} css={markerMobileStyle}>
                   <IconBox>
                     <img
                       src={
@@ -152,6 +144,9 @@ function Map() {
                     direction="column"
                     css={css`
                       margin: 0px 30px;
+                      @media (max-width: 600px) {
+                        margin: 0px;
+                      }
                     `}
                   >
                     <Text typography="t6" css={categoryStyle}>
@@ -161,7 +156,7 @@ function Map() {
                     <Text typography="t4" bold css={categoryStyle}>
                       {currentStore.name}
                     </Text>
-                    <Spacing size={10} />
+                    <Spacing size={20} />
                     <Text typography="t6" css={categoryStyle}>
                       운영시간: {currentStore.open} ~ {currentStore.close}
                     </Text>
@@ -173,7 +168,7 @@ function Map() {
                     <Text typography="t6" css={categoryStyle}>
                       Tel: {currentStore.tel_no}
                     </Text>
-                    <Spacing size={5} />
+                    <Spacing size={10} />
                     <Text typography="t6" css={categoryStyle}>
                       {currentStore.address}
                     </Text>
@@ -198,7 +193,23 @@ function Map() {
                 </Flex>
               </Flex>
             ) : (
-              <></>
+              <NoCurrentBox>
+                <Flex>
+                  <IoStorefrontOutline size={30} />
+                  <Spacing size={10} direction="horizontal" />
+                  <HiOutlineCursorClick size={20} />
+                </Flex>
+                <Spacing size={10} />
+                <Text typography="t4">
+                  Boramy 제품을 직접 확인하고 사용해볼 수 있는 오프라인 매장!
+                </Text>
+                <Spacing size={30} />
+                <Text typography="t5">지도에 표시된 마커를 클릭 해보세요</Text>
+                <Spacing size={10} />
+                <Text typography="t5">
+                  오프라인 매장의 정보를 확인할 수 있습니다
+                </Text>
+              </NoCurrentBox>
             )}
           </DescWrapper>
         </DescBox>
@@ -207,7 +218,20 @@ function Map() {
   )
 }
 
-const MapBox = styled.div``
+const NoCurrentBox = styled.div`
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
+
+const MapBox = styled.div`
+  @media (max-width: 600px) {
+    margin-top: 30px;
+  }
+`
 
 const HeadLine = styled.div`
   height: 50px;
@@ -217,11 +241,16 @@ const HeadLine = styled.div`
   border-radius: 15px 15px 0 0;
 `
 const DescWrapper = styled.div`
-  width: 90%;
+  width: 95%;
   min-height: 170px;
   background-color: white;
   padding: 10px;
   border-radius: 10px;
+
+  @media (max-width: 600px) {
+    width: 87%;
+    padding: 15px;
+  }
 `
 const DescBox = styled.div`
   display: flex;
@@ -234,12 +263,14 @@ const DescBox = styled.div`
   border-radius: 0 0 15px 15px;
 `
 const IconBox = styled.div`
-  height: 80px;
-  width: 80px;
+  height: 100px;
+  width: 100px;
+  margin-left: 20px;
 
   @media (max-width: 600px) {
     height: 60px;
     width: 60px;
+    margin-bottom: 20px;
   }
   & img {
     height: 100%;
@@ -261,6 +292,11 @@ const StoreDescBox = styled.div`
 
 const categoryStyle = css`
   display: contents;
+`
+const markerMobileStyle = css`
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `
 const flexMobileStyle = css`
   @media (max-width: 600px) {

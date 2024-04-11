@@ -23,8 +23,11 @@ const MobileCosmeticList = ({ category }: { category: string }) => {
   )
 }
 const CosmeticContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 10px;
 `
 
 export default MobileCosmeticList

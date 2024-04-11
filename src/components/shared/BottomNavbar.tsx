@@ -1,10 +1,12 @@
 import styled from '@emotion/styled'
 import Flex from './Flex'
-
-import { IoHome, IoHeart, IoCart } from 'react-icons/io5'
-import { FaFaceSmile } from 'react-icons/fa6'
 import Text from './Text'
+
+import { IoHome } from 'react-icons/io5'
+import { FaFaceSmile, FaPencil } from 'react-icons/fa6'
+import { GiLipstick } from 'react-icons/gi'
 import { Link } from 'react-router-dom'
+import Spacing from './Spacing'
 
 export default function BottomNavbar() {
   return (
@@ -13,26 +15,29 @@ export default function BottomNavbar() {
         <Link to={'/'}>
           <Flex justify={'center'} align={'center'} direction={'column'}>
             <IoHome size={'25px'} color={'grey'} />
+            <Spacing size={5} />
             <Text typography="t7" color={'fontGrey'}>
               Home
             </Text>
           </Flex>
         </Link>
 
-        <Link to={'/my'}>
+        <Link to={'/cosmetic'}>
           <Flex justify={'center'} align={'center'} direction={'column'}>
-            <IoHeart size={'25px'} color={'grey'} />
+            <GiLipstick size={'25px'} color={'grey'} />
+            <Spacing size={5} />
             <Text typography="t7" color={'fontGrey'}>
-              Like
+              Cosmetic
             </Text>
           </Flex>
         </Link>
 
-        <Link to={'/cart'}>
+        <Link to={'/board'}>
           <Flex justify={'center'} align={'center'} direction={'column'}>
-            <IoCart size={'25px'} color={'grey'} />
+            <FaPencil size={'25px'} color={'grey'} />
+            <Spacing size={5} />
             <Text typography="t7" color={'fontGrey'}>
-              Cart
+              Board
             </Text>
           </Flex>
         </Link>
@@ -40,12 +45,12 @@ export default function BottomNavbar() {
         <Link to={'/my'}>
           <Flex justify={'center'} align={'center'} direction={'column'}>
             <FaFaceSmile size={'25px'} color={'grey'} />
+            <Spacing size={5} />
             <Text typography="t7" color={'fontGrey'}>
               My
             </Text>
           </Flex>
         </Link>
-        {/* <div>알림</div> */}
       </Flex>
     </BottomNavContainer>
   )
@@ -56,7 +61,7 @@ const BottomNavContainer = styled.div`
   background-color: white;
   padding-top: 10px;
   box-shadow: 0px 0px 10px -2px #ffbdd2;
-  height: 50px;
+  height: 55px;
   width: 100%;
   position: sticky;
   bottom: 0;

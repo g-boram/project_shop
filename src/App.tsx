@@ -125,8 +125,7 @@ const PageContainer = styled.div`
   min-width: 430px;
 
   @media (max-width: 600px) {
-    width: 430px;
-    // padding-bottom: 80px;
+    max-width: 430px;
   }
   @media (min-width: 600px) {
     max-width: 1400px;

@@ -75,10 +75,14 @@ const BoardDetailForm = () => {
             direction={'column'}
             css={formTitleStyle}
           >
-            <Text typography="t6">{board.name}</Text>
+            <Text typography="t6" bold>
+              {board.name}
+            </Text>
+            <Spacing size={20} />
             <Text typography="t7" color="fontDarkGrey">
               {board.createAt?.slice(0, 20)}
             </Text>
+            <Spacing size={10} />
           </Flex>
           <FormContainer>{board.content}</FormContainer>
           <Spacing size={20} />
@@ -144,7 +148,7 @@ const BoardDetailForm = () => {
 
 const formTitleStyle = css`
   height: 100px;
-  border-bottom: 5px solid pink;
+  border-bottom: 4px solid #eee;
   height: 100px;
   margin-bottom: 20px;
 `
@@ -154,7 +158,7 @@ const FormContainer = styled.div`
   max-height: 400px;
   padding: 20px 15px;
   overflow: scroll;
-  border: 2px solid #f3d7ca;
+  border: 1px solid #eee;
   border-radius: 5px;
 `
 
@@ -163,7 +167,7 @@ const FormLoadContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 600px;
-  border: 2px solid #f3d7ca;
+  border: 2px solid #eee;
   border-radius: 5px;
 `
 

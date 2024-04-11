@@ -321,13 +321,13 @@ const NoData = styled.div`
 
 const LabelLine = styled.div`
   width: 100%;
-  height: 30px;
+  height: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
   margin-bottom: 10px;
-  background-color: #f9ecec;
+  background-color: #eee;
 `
 
 const linkBtnBoxStyle = css`

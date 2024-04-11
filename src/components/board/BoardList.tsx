@@ -84,12 +84,12 @@ const BoardList = () => {
     <>
       <Flex justify={'flex-end'} align={'flex-end'} css={linkBtnBoxStyle}>
         <Link to={'/board/category'}>
-          <Button color="pink" size="small" onClick={changeMyBoard}>
+          <Button color="pink" size="medium" onClick={changeMyBoard}>
             내가쓴글
           </Button>
         </Link>
         <Link to={'/board/form'}>
-          <Button color="pink" size="small">
+          <Button color="pink" size="medium">
             글쓰기
           </Button>
         </Link>
@@ -463,17 +463,19 @@ const NoData = styled.div`
 
 const LabelLine = styled.div`
   width: 100%;
-  height: 30px;
+  height: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
   margin-bottom: 10px;
-  background-color: #f9ecec;
+  background-color: #eee;
 `
 
 const linkBtnBoxStyle = css`
   height: 60px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   gap: 5px;
 `
 

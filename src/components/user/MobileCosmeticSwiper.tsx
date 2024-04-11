@@ -73,10 +73,10 @@ const LoadingBox = styled.div`
 const containerStyles = css`
   .swiper-button-next,
   .swiper-button-prev {
-    color: pink;
+    color: #303030;
   }
   .swiper-pagination-bullet-active {
-    background: pink;
+    background: #303030;
   }
   transition: 1s;
 `

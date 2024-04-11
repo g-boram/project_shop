@@ -170,7 +170,7 @@ const FormLoadContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #f3d7ca;
+  border: 2px solid #eee;s
   border-radius: 5px;
 `
 

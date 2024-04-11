@@ -46,7 +46,7 @@ function BoardPage() {
   return (
     <BoardContainer>
       <HeadTitle title="게시판" desc="함께 소통해요 우리들의 게시판" />
-      <Spacing size={50} />
+      <Spacing size={30} />
       <Flex css={layoutStyle}>
         <ChatingContainer>
           <EventImgBox>
@@ -118,23 +118,29 @@ const CategoryBox = styled.div`
   margin-top: 40px;
   height: 25px;
   border-bottom: 2px solid #f9ecec;
+
+  @media (max-width: 600px) {
+    margin-top: 0px;
+  }
 `
 
 const BoardContainer = styled.div`
   height: auto;
+  width: 1400px;
 
-  @media (min-width: 800px) {
-    min-width: 1200px;
+  @media (max-width: 600px) {
+    width: 100vw;
   }
 `
 const ChatingContainer = styled.div`
   flex-grow: 0;
-  @media (min-width: 800px) {
+  @media (min-width: 600px) {
     width: 380px;
     height: 630px;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     height: 350px;
+    width: 95%;
     margin-bottom: 70px;
   }
 `
@@ -143,8 +149,8 @@ const BoardListContainer = styled.div`
   flex-direction: column;
   flex-grow: 1;
 
-  @media (max-width: 800px) {
-    width: 800px;
+  @media (max-width: 600px) {
+    width: 95%;
   }
 `
 
@@ -177,7 +183,10 @@ const EventImgBox = styled.div`
 const moreBtn = css`
   width: 80px;
   gap: 10px;
-  font-size: 12px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   color: grey;
   cursor: pointer;
   &: hover {
@@ -188,12 +197,17 @@ const moreBtn = css`
 const linkBtnBoxStyle = css`
   height: 60px;
   gap: 5px;
+  @media (max-width: 600px) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 `
 
 const layoutStyle = css`
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     gap: 10px;
     flex-direction: column;
+    align-items: center;
   }
   @media (min-width: 600px) {
     gap: 10px;
