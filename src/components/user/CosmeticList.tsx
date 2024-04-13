@@ -10,7 +10,6 @@ const CosmeticList = ({ category }: { category: string }) => {
   const { data: likes, mutate: like } = useLike()
 
   const searchData = useSearchCosmetics()
-  console.log('searchData', searchData)
 
   return (
     <CosmeticContainer>

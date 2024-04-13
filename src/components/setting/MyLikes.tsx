@@ -7,80 +7,85 @@ import Spacing from '../shared/Spacing'
 import Text from '../shared/Text'
 
 import { css } from '@emotion/react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaCartPlus } from 'react-icons/fa6'
 
 const MyLikes = () => {
   const { data } = useLike()
-  console.log('like data', data)
+  const navigate = useNavigate()
 
   return (
     <>
       {data ? (
         <LikeBox>
           {data.map((like, i) => (
-            <Link to={`/cosmetic/detail/${like.cosmeticId}`}>
-              <LikeRow>
-                <ImgWrapper>
-                  <img src={like.url} alt="" />
-                </ImgWrapper>
-                <Flex css={likeRowsStyle} align="center" justify={'flex-end'}>
-                  <Flex direction="column">
-                    <Flex justify={'flex-end'} align={'center'}>
-                      <Text typography="t6">{like.category}</Text>
-                      <Spacing size={10} direction={'horizontal'} />
-                      <Text typography="t7" css={brandNameStyle}>
-                        {like.brand_name}
-                      </Text>
-                    </Flex>
-                    <Spacing size={10} />
-                    <Flex justify={'flex-end'} align={'center'}>
-                      <Spacing size={15} direction={'horizontal'} />
-                      <Text typography="t5" bold>
-                        {like.cosmeticName}
-                      </Text>
-                      <Spacing size={15} direction={'horizontal'} />
-                      <Text typography="t7">{like.volume}</Text>
-                    </Flex>
-                    <Spacing size={15} />
-                    <Flex justify={'flex-end'} align={'center'}>
-                      <Text typography="t6" css={salePerStyle}>
-                        {addDelimiter(like.salePercent) + '%'}
-                      </Text>
-                      <Spacing size={20} direction={'horizontal'} />
-                      <Text typography="t9" css={saleTextStyle}>
-                        {addDelimiter(like.price)}
-                      </Text>
-                      <Spacing size={5} direction={'horizontal'} />
-                      <Text typography="t6" bold>
-                        {addDelimiter(
-                          Number(like.price) - Number(like.totalSale),
-                        )}
-                      </Text>
-                    </Flex>
+            <LikeRow>
+              <ImgWrapper>
+                <img src={like.url} alt="" />
+              </ImgWrapper>
+
+              <Flex
+                css={likeRowsStyle}
+                align="center"
+                justify={'flex-end'}
+                onClick={() => navigate(`/cosmetic/detail/${like.cosmeticId}`)}
+              >
+                <Flex direction="column">
+                  <Flex justify={'flex-end'} align={'center'}>
+                    <Text typography="t6">{like.category}</Text>
+                    <Spacing size={10} direction={'horizontal'} />
+                    <Text typography="t7" css={brandNameStyle}>
+                      {like.brand_name}
+                    </Text>
+                  </Flex>
+                  <Spacing size={10} />
+                  <Flex justify={'flex-end'} align={'center'}>
+                    <Spacing size={15} direction={'horizontal'} />
+                    <Text typography="t5" bold>
+                      {like.cosmeticName}
+                    </Text>
+                    <Spacing size={15} direction={'horizontal'} />
+                    <Text typography="t7">{like.volume}</Text>
+                  </Flex>
+                  <Spacing size={15} />
+                  <Flex justify={'flex-end'} align={'center'}>
+                    <Text typography="t6" css={salePerStyle}>
+                      {addDelimiter(like.salePercent) + '%'}
+                    </Text>
+                    <Spacing size={20} direction={'horizontal'} />
+                    <Text typography="t9" css={saleTextStyle}>
+                      {addDelimiter(like.price)}
+                    </Text>
+                    <Spacing size={5} direction={'horizontal'} />
+                    <Text typography="t6" bold>
+                      {addDelimiter(
+                        Number(like.price) - Number(like.totalSale),
+                      )}
+                    </Text>
                   </Flex>
                 </Flex>
-                <Spacing size={50} direction={'horizontal'} />
-                <Flex css={btnRowStyle}>
-                  <Flex
-                    direction="column"
-                    justify={'center'}
-                    align={'center'}
-                    css={cartBtn}
-                  >
-                    <FaCartPlus size={25} />
-                    <Spacing size={10} />
-                    <div css={cartText}>장바구니에 담기</div>
-                  </Flex>
-                  <Spacing size={20} direction={'horizontal'} />
-                  <DelButton>
-                    <Button size="medium" color="error">
-                      삭제
-                    </Button>
-                  </DelButton>
+              </Flex>
+
+              <Spacing size={50} direction={'horizontal'} />
+              <Flex css={btnRowStyle}>
+                <Flex
+                  direction="column"
+                  justify={'center'}
+                  align={'center'}
+                  css={cartBtn}
+                >
+                  <FaCartPlus size={25} />
+                  <Spacing size={10} />
+                  <div css={cartText}>장바구니에 담기</div>
                 </Flex>
-              </LikeRow>
-            </Link>
+                <Spacing size={20} direction={'horizontal'} />
+                <DelButton>
+                  <Button size="medium" color="error">
+                    삭제
+                  </Button>
+                </DelButton>
+              </Flex>
+            </LikeRow>
           ))}
         </LikeBox>
       ) : (
@@ -102,6 +107,10 @@ const LikeRow = styled.div`
   background-color: #f8f8f8;
   border-bottom: 1px solid #eee;
   border-top: 1px solid #eee;
+  justify-content: space-between;
+  @media (max-width: 600px) {
+    justify-content: flex-end;
+  }
 `
 const DelButton = styled.div`
   display: flex;
@@ -115,31 +124,34 @@ const DelButton = styled.div`
 `
 
 const ImgWrapper = styled.div`
-  width: 150px;
-  height: 100px;
-  margin-left: 20px;
-  border-radius: 10px;
-  background-color: grey;
-  
-  & > img {
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    border-radius: 10px;
-    object-fit: contain;
-  }
-  
-  @media (max-width: 600px) {
-    height: 75px;
-    width: 70px:
+  @media (min-width: 600px) {
+    width: 150px;
+    height: 100px;
     margin-left: 20px;
-    background-color: grey;
+    border-radius: 10px;
+    background-color: white;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+  }
+
+  @media (max-width: 600px) {
+    height: 80px;
+    width: 150px;
+    margin-left: 10px;
+    background-color: white;
+    border-radius: 15%;
 
     & img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      border-radius: 10px;
+      background-color: white;
     }
   }
 `
@@ -163,7 +175,7 @@ const likeRowsStyle = css`
   width: 100%;
 
   @media (max-width: 600px) {
-    width: 80%;
+    min-width: 100px;
   }
 `
 const brandNameStyle = css`

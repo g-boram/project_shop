@@ -259,6 +259,7 @@ const EventPageContainer = styled.div`
 
   @media (max-width: 600px) {
     width: 100vw;
+    min-height: 100vh;
   }
 `
 const EventListBox = styled.div`

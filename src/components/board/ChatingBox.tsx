@@ -2,7 +2,9 @@ import useUser from '@/hooks/auth/useUser'
 import styled from '@emotion/styled'
 import Flex from '../shared/Flex'
 import Spacing from '../shared/Spacing'
+import Text from '../shared/Text'
 
+import { FaUserAltSlash } from 'react-icons/fa'
 import { ChatingProps } from '@/models/board'
 import { addChating } from '@/remote/board'
 import { useEffect, useRef, useState } from 'react'
@@ -10,7 +12,7 @@ import { BsFillSendCheckFill } from 'react-icons/bs'
 import { css } from '@emotion/react'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { store } from '@/remote/firebase'
-import Text from '../shared/Text'
+import Button from '../shared/Button'
 
 const ChatingBox = () => {
   const user = useUser()
@@ -84,33 +86,43 @@ const ChatingBox = () => {
   return (
     <ChatingWrapper>
       <ChatArea ref={chatListRef}>
-        {chat
-          ? chat.map((c, idx) => (
-              <Flex
-                direction={user?.uid === c.uid ? 'row' : 'row-reverse'}
-                justify={'flex-end'}
-                align={'center'}
-                css={ChatBoxStyle}
-                key={idx}
-              >
-                <Text typography={'t8'} color={'fontDarkGrey'}>
-                  {c.createAt?.slice(0, 20)}
-                </Text>
-                <ChatContent uid={c.uid}>{c.content}</ChatContent>
-                <img
-                  src={
-                    c.photoURL !== ''
-                      ? c.photoURL
-                      : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
-                  }
-                  alt="userImg"
-                  width={40}
-                  height={40}
-                  style={{ borderRadius: '100%' }}
-                />
-              </Flex>
-            ))
-          : null}
+        {chat ? (
+          chat.map((c, idx) => (
+            <Flex
+              direction={user?.uid === c.uid ? 'row' : 'row-reverse'}
+              justify={'flex-end'}
+              align={'center'}
+              css={ChatBoxStyle}
+              key={idx}
+            >
+              <Text typography={'t8'} color={'fontDarkGrey'}>
+                {c.createAt?.slice(0, 20)}
+              </Text>
+              <ChatContent uid={c.uid}>{c.content}</ChatContent>
+              <img
+                src={
+                  c.photoURL !== ''
+                    ? c.photoURL
+                    : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
+                }
+                alt="userImg"
+                width={40}
+                height={40}
+                style={{ borderRadius: '100%' }}
+              />
+            </Flex>
+          ))
+        ) : (
+          <NoChatBox>
+            <FaUserAltSlash size={30} color={'grey'} />
+            <Spacing size={10} />
+            <Text typography="t6" color="fontGrey">
+              채팅 기능은 로그인 후에 이용할 수 있습니다
+            </Text>
+            <Spacing size={30} />
+            <Button color="grey">로그인 하러 가기</Button>
+          </NoChatBox>
+        )}
       </ChatArea>
       <Flex direction="column">
         <Spacing size={10} />
@@ -133,6 +145,14 @@ const ChatingBox = () => {
   )
 }
 
+const NoChatBox = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
 const ChatingWrapper = styled.div`
   height: 90%;
   margin-top: 10px;

@@ -6,7 +6,7 @@ import Flex from '../shared/Flex'
 import Pagination from '../shared/Pagination'
 import Text from '../shared/Text'
 import styled from '@emotion/styled'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from '../shared/Button'
 import Spacing from '../shared/Spacing'
 import useUser from '@/hooks/auth/useUser'
@@ -15,6 +15,7 @@ import { FcDeleteDatabase } from 'react-icons/fc'
 
 const BoardList = () => {
   const user = useUser()
+  const navigate = useNavigate()
   const [category, setCategory] = useState<string>('info')
   const [myBoard, setMyboard] = useState<BoardFormProps[]>([])
   const [isMyBoard, setIsMyboard] = useState(false)
@@ -83,16 +84,36 @@ const BoardList = () => {
   return (
     <>
       <Flex justify={'flex-end'} align={'flex-end'} css={linkBtnBoxStyle}>
-        <Link to={'/board/category'}>
-          <Button color="pink" size="medium" onClick={changeMyBoard}>
-            내가쓴글
-          </Button>
-        </Link>
-        <Link to={'/board/form'}>
-          <Button color="pink" size="medium">
-            글쓰기
-          </Button>
-        </Link>
+        {user ? (
+          <>
+            <Button color="pink" size="medium" onClick={changeMyBoard}>
+              내가쓴글
+            </Button>
+            <Link to={'/board/form'}>
+              <Button color="pink" size="medium">
+                글쓰기
+              </Button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Button
+              color="pink"
+              size="medium"
+              onClick={() => navigate('/signin')}
+            >
+              내가쓴글
+            </Button>
+
+            <Button
+              color="pink"
+              size="medium"
+              onClick={() => navigate('/signin')}
+            >
+              글쓰기
+            </Button>
+          </>
+        )}
       </Flex>
       <Flex justify={'flex-start'} align={'center'}>
         <CategoryBtn

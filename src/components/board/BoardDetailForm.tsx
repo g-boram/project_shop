@@ -108,6 +108,14 @@ const BoardDetailForm = () => {
                 <Spacing size={15} direction={'horizontal'} />
                 <Button
                   size="medium"
+                  color="grey"
+                  onClick={() => navigate('/board/category')}
+                >
+                  목록
+                </Button>
+                <Spacing size={15} direction={'horizontal'} />
+                <Button
+                  size="medium"
                   color="error"
                   onClick={() =>
                     open({
@@ -124,13 +132,22 @@ const BoardDetailForm = () => {
                 </Button>
               </>
             ) : (
-              <Button
-                size="medium"
-                color="lightPurple"
-                onClick={() => navigate(-1)}
-              >
-                뒤로가기
-              </Button>
+              <>
+                <Button
+                  size="medium"
+                  color="lightPurple"
+                  onClick={() => navigate(-1)}
+                >
+                  뒤로가기
+                </Button>
+                <Button
+                  size="medium"
+                  color="grey"
+                  onClick={() => navigate('/board/category')}
+                >
+                  목록
+                </Button>
+              </>
             )}
           </Flex>
         </>
@@ -149,7 +166,6 @@ const BoardDetailForm = () => {
 const formTitleStyle = css`
   height: 100px;
   border-bottom: 4px solid #eee;
-  height: 100px;
   margin-bottom: 20px;
 `
 

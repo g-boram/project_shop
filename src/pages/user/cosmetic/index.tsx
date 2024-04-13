@@ -12,6 +12,8 @@ import Search from '@/components/shared/Search'
 import useSearchCosmetics from '@/hooks/data/useSearchCosmetics'
 
 import { GiLipstick } from 'react-icons/gi'
+import { useSetRecoilState } from 'recoil'
+import { cosmeticAtom } from '@/atom/cosmetic'
 
 // 카테고리 category
 // 선물 - gift
@@ -34,6 +36,8 @@ const CosmeticPage = () => {
   const params = useParams()
   const [innerWidth, setInnerWidth] = useState(0)
   const [category, setCategory] = useState<string>('shadow')
+
+  const setCosmetic = useSetRecoilState(cosmeticAtom)
 
   const CATEGORY = [
     { name: '립스틱', value: 'lip' },
@@ -106,40 +110,103 @@ const CosmeticPage = () => {
             <Spacing size={30} />
 
             <SideBar>
-              <div className="element1" onClick={() => setCategory('lip')}>
+              <div
+                className="element1"
+                onClick={() => {
+                  setCosmetic(null)
+                  setCategory('lip')
+                }}
+              >
                 립스틱
               </div>
-              <div className="element2" onClick={() => setCategory('skin')}>
+              <div
+                className="element2"
+                onClick={() => {
+                  setCosmetic(null)
+                  setCategory('skin')
+                }}
+              >
                 스킨 / 앰플
               </div>
-              <div className="element3" onClick={() => setCategory('perfume')}>
+              <div
+                className="element3"
+                onClick={() => {
+                  setCosmetic(null)
+                  setCategory('perfume')
+                }}
+              >
                 향수
               </div>
-              <div className="element4" onClick={() => setCategory('maskara')}>
+              <div
+                className="element4"
+                onClick={() => {
+                  setCosmetic(null)
+                  setCategory('maskara')
+                }}
+              >
                 마스카라
               </div>
-              <div className="element5" onClick={() => setCategory('maskpack')}>
+              <div
+                className="element5"
+                onClick={() => {
+                  setCosmetic(null)
+                  setCategory('maskpack')
+                }}
+              >
                 마스크/팩
               </div>
               <div
                 className="element6"
-                onClick={() => setCategory('foundation')}
+                onClick={() => {
+                  setCosmetic(null)
+                  setCategory('foundation')
+                }}
               >
                 파운데이션
               </div>
-              <div className="element7" onClick={() => setCategory('body')}>
+              <div
+                className="element7"
+                onClick={() => {
+                  setCosmetic(null)
+                  setCategory('body')
+                }}
+              >
                 바디
               </div>
-              <div className="element8" onClick={() => setCategory('shadow')}>
+              <div
+                className="element8"
+                onClick={() => {
+                  setCosmetic(null)
+                  setCategory('shadow')
+                }}
+              >
                 아이섀도우
               </div>
-              <div className="element9" onClick={() => setCategory('cream')}>
+              <div
+                className="element9"
+                onClick={() => {
+                  setCosmetic(null)
+                  setCategory('cream')
+                }}
+              >
                 로션/크림
               </div>
-              <div className="element10" onClick={() => setCategory('sunCare')}>
+              <div
+                className="element10"
+                onClick={() => {
+                  setCosmetic(null)
+                  setCategory('sunCare')
+                }}
+              >
                 선크림
               </div>
-              <div className="element11" onClick={() => setCategory('tools')}>
+              <div
+                className="element11"
+                onClick={() => {
+                  setCosmetic(null)
+                  setCategory('tools')
+                }}
+              >
                 미용도구
               </div>
               <div className="hovers"></div>

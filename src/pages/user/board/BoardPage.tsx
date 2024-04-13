@@ -2,7 +2,7 @@ import { getBoardList } from '@/remote/board'
 import { css } from '@emotion/react'
 import { useState } from 'react'
 import { useQuery } from 'react-query'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IoNotificationsCircle } from 'react-icons/io5'
 import { FaArrowRightLong } from 'react-icons/fa6'
 import BoardMove from '@/components/board'
@@ -13,12 +13,15 @@ import styled from '@emotion/styled'
 import Text from '@/components/shared/Text'
 import Spacing from '@/components/shared/Spacing'
 import ChatingBox from '@/components/board/ChatingBox'
+import useUser from '@/hooks/auth/useUser'
 
 // 카테고리: chat(실시간), qna, info, notice, event
 
 // * 게시판 메인페이지
 ////////////////////////////////////////
 function BoardPage() {
+  const user = useUser()
+  const navigate = useNavigate()
   const [category, setCategory] = useState<string>('info')
 
   const { data: notice, isLoading } = useQuery('boardListOther', getBoardList, {
@@ -77,11 +80,15 @@ function BoardPage() {
             </Flex>
           </NoticeBox>
           <Flex justify={'flex-end'} align={'flex-end'} css={linkBtnBoxStyle}>
-            <Link to={'/board/category'}>
-              <Button color="pink" size="small">
-                글쓰기
-              </Button>
-            </Link>
+            <Button
+              color="pink"
+              size="small"
+              onClick={() =>
+                user ? navigate('/board/form') : navigate('/signin')
+              }
+            >
+              글쓰기
+            </Button>
           </Flex>
           <CategoryBox>
             <Flex justify={'space-between'} align={'center'}>

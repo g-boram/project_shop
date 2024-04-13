@@ -153,7 +153,7 @@ const MainIconBox = () => {
 const LoadingBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
   align-items: center;
   justify-content: center;
   min-height: 120px;

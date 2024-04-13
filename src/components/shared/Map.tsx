@@ -200,9 +200,10 @@ function Map() {
                   <HiOutlineCursorClick size={20} />
                 </Flex>
                 <Spacing size={10} />
-                <Text typography="t4">
-                  Boramy 제품을 직접 확인하고 사용해볼 수 있는 오프라인 매장!
+                <Text typography="t5">
+                  Boramy 제품을 직접 확인하고 사용해볼 수 있는
                 </Text>
+                <Text typography="t5">오프라인 매장!</Text>
                 <Spacing size={30} />
                 <Text typography="t5">지도에 표시된 마커를 클릭 해보세요</Text>
                 <Spacing size={10} />

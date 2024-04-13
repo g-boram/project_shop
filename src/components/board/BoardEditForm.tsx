@@ -172,7 +172,7 @@ const BoardEditForm = () => {
         <Spacing size={20} />
         <Flex justify={'center'}>
           <Button color="pink" size="medium" full onClick={handleSubmit}>
-            게시글 등록
+            게시글 수정
           </Button>
         </Flex>
         <Spacing size={20} />

@@ -84,6 +84,7 @@ const SignupWrapper = styled.div`
   @media (max-width: 600px) {
     gap: 10px;
     flex-direction: column;
+    min-height: 100vh;
   }
   @media (min-width: 600px) {
     max-width: 1000px;

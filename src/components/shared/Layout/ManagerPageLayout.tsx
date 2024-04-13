@@ -68,7 +68,7 @@ const MoveNavBox = styled.div`
   width: 250px;
   padding: 15px;
   flex-shrink: 0;
-  background-color: #ffd8da;
+  background-color: #eee;
 `
 const SettingWrapper = styled.div`
   overflow: scroll;

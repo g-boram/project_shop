@@ -21,14 +21,15 @@ const Containder = styled.div`
   width: 100%;
   margin-top: 20px;
   padding-bottom: 25px;
-  background-color: #ffecec;
+  background-color: #303030;
 `
 const Title = styled.div`
   font-size: 30px;
+  color: white;
   margin-right: 50px;
   margin-left: 30px;
 `
 const Desc = styled.div`
   font-size: 14px;
-  color: ${`var(--fontGrey)`};
+  color: white;
 `

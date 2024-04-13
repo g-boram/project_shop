@@ -10,7 +10,7 @@ import { css, keyframes } from '@emotion/react'
 import { FaUserCircle } from 'react-icons/fa'
 import { BiMenu } from 'react-icons/bi'
 import { AiOutlineClose } from 'react-icons/ai'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useCallback, useState } from 'react'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/remote/firebase'
@@ -22,11 +22,13 @@ const navList = [
   { to: '/my', name: '• 마이 페이지' },
   { to: '/storeMap', name: '• 매장 찾기' },
   { to: '/board', name: '• 게시판' },
+  { to: '/event', name: '• Event' },
 ]
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const user = useUser()
+  const navigate = useNavigate()
   const isKakao = sessionStorage.getItem('kakao')
   const location = useLocation()
   const showSignButton =
@@ -86,10 +88,6 @@ function Navbar() {
     if (showSignButton) {
       return (
         <>
-          <Link to="/manager">
-            <div css={fontWhiteStyle}>관리자 페이지</div>
-          </Link>
-          <Spacing size={10} direction="horizontal" />
           <Link to="/signin">
             <div css={fontWhiteStyle}>로그인/회원가입</div>
           </Link>
@@ -159,16 +157,52 @@ function Navbar() {
           <Spacing size={30} />
         </>
       )
-    }
-    // 로그인 회원가입 화면이 아닐경우
-    if (showSignButton) {
+    } else {
       return (
-        <Link to="/signin">
-          <div css={fontWhiteStyle}>로그인/회원가입</div>
-        </Link>
+        <>
+          <Spacing size={10} />
+          <Button
+            size="small"
+            full
+            color="pink"
+            onClick={() => navigate('/signin')}
+          >
+            로그인 하기
+          </Button>
+          <Spacing size={50} />
+          <Flex direction="column" align={'center'} justify={'center'}>
+            <Text typography="t6" color="white">
+              오늘도 좋은하루 되세요!{' '}
+            </Text>
+            <Spacing size={10} />
+            <Text typography="t6" color="white">
+              봄느낌 가득한 이상품 어때요?
+            </Text>
+            <Spacing size={20} />
+          </Flex>
+          <TodayCommentBox>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/event/slideNavImg1.jpg`}
+              alt=""
+            />
+          </TodayCommentBox>
+          <Spacing size={10} />
+          <Button full color="lightPurple">
+            🌸 봄추천 상품 바로가기 !
+          </Button>
+          <Spacing size={30} />
+        </>
       )
     }
-    return null
+    // 로그인 회원가입 화면이 아닐경우
+    // if (showSignButton) {
+    //   return (
+    //     <Link to="/signin">
+    //       <div css={fontWhiteStyle}>로그인/회원가입</div>
+    //     </Link>
+    //   )
+    // }
+    // return null
   }, [user, showSignButton, handleLogout])
 
   // 오른쪽 슬라이딩 바 토글여부로 활성화

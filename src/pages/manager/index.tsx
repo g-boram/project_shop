@@ -23,9 +23,7 @@ function ManagerPage() {
     <>
       <ManagerHead
         title={'ManagerPage'}
-        desc={
-          '관리자 페이지 입니다. 추가 설정은 010-0000-0000 으로 연락 주세요'
-        }
+        desc={'관리자 페이지 입니다. 추가 설정은 010-5829-0424 로 연락 주세요'}
       />
       <ManagerPageContainer>
         <Flex
@@ -57,7 +55,7 @@ function ManagerPage() {
 }
 
 const ManagerPageContainer = styled.div`
-  background: #fff7f9;
+  background: #eee;
   width: 1400px;
   height: 900px;
 `
