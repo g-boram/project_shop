@@ -62,8 +62,6 @@ const Container = styled.div`
   position: absolute;
   padding-top: 30px;
   background-color: #303030;
-  display: flex;
-  flex-direction: column;
 
   @media (max-width: 600px) {
     display: none;
@@ -72,7 +70,8 @@ const Container = styled.div`
 const IconBox = styled.div`
   display: flex;
   max-width: 1400px;
-  justify-content: space-evenly;
+  margin: 0 auto;
+  justify-content: space-between;
 `
 
 export default Footer
