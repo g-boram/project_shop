@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
 import axios from 'axios'
+import styled from '@emotion/styled'
+
+import { useEffect, useState } from 'react'
 import { User } from '@/models/user'
 import { useNavigate } from 'react-router-dom'
 import { collection, doc, getDoc, setDoc } from 'firebase/firestore'
@@ -7,6 +9,9 @@ import { COLLECTIONS } from '@/constants'
 import { store } from '@/remote/firebase'
 import { useSetRecoilState } from 'recoil'
 import { userAtom } from '@/atom/user'
+import { PuffLoader } from 'react-spinners'
+import { RiKakaoTalkFill } from 'react-icons/ri'
+import Spacing from '../shared/Spacing'
 
 export default function KakaoLogin() {
   const code = new URL(window.location.href).searchParams.get('code')
@@ -106,7 +111,7 @@ export default function KakaoLogin() {
       )
       // 이미 가입한 유저
       if (userSnapshot.exists()) {
-        navigate(-1)
+        navigate('/')
         setUser(loginUser)
         sessionStorage.setItem('kakao', JSON.stringify(loginUser))
       } else {
@@ -116,7 +121,7 @@ export default function KakaoLogin() {
         )
         setUser(loginUser)
         sessionStorage.setItem('kakao', JSON.stringify(loginUser))
-        navigate(-1)
+        navigate('/')
       }
     } catch (error) {
       console.log('카카오 로그인 유저정보 저장 실패', error)
@@ -124,8 +129,21 @@ export default function KakaoLogin() {
   }
 
   return (
-    <div>
-      <h2>KaKao로 로그인하기...</h2>
-    </div>
+    <KakaoLoadingBox>
+      <RiKakaoTalkFill size={80} />
+      <Spacing size={20} />
+      <h1>KaKao로 로그인 중이에요!</h1>
+      <Spacing size={20} />
+      <PuffLoader color="#efbde6" />
+    </KakaoLoadingBox>
   )
 }
+
+const KakaoLoadingBox = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`

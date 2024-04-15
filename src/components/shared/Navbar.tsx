@@ -44,6 +44,7 @@ function Navbar() {
     } else {
       signOut(auth)
     }
+    navigate('/')
   }, [])
 
   // 로그인 여부에 따른 링크
