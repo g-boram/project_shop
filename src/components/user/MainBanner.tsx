@@ -8,10 +8,12 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import styled from '@emotion/styled'
+import { useNavigate } from 'react-router-dom'
 
 const MainBanner = () => {
   // 데이터베이스 이미지데이터 가져오기
   const { isLoading, data } = useMainBanner()
+  const navigate = useNavigate()
 
   if (data == null || isLoading) {
     return (
@@ -49,7 +51,7 @@ const MainBanner = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <MainBadgeBox>
+      <MainBadgeBox onClick={() => navigate('/event')}>
         <img
           src={`${process.env.PUBLIC_URL}/images/main/main_badge1.jpg`}
           alt=""
@@ -67,6 +69,7 @@ const MainBadgeBox = styled.div`
   display: flex;
   align-items: center;
   background-color: white;
+  cursor: pointer;
 
   & img {
     height: 380px;

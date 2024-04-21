@@ -12,7 +12,8 @@ const TitleNeon = () => {
 const Wrapper = styled.div`
   margin: 0;
   width: 100vw;
-  height: 100%;
+  min-width: 1200px;
+  height: 200px;
   padding: 20px 0 10px 0;
   display: table;
   background-color: #181818;
@@ -22,6 +23,9 @@ const Wrapper = styled.div`
   text-align: center;
   vertical-align: middle;
 
+  @media (max-width: 600px) {
+    min-width: 100vw;
+  }
   @font-face {
     font-family: neon;
     src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);

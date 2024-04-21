@@ -138,6 +138,7 @@ const UserContentWrapper = styled.div`
 
   @media (max-width: 600px) {
     height: 250px;
+    width: 100vw;
   }
 `
 

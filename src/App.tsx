@@ -17,7 +17,6 @@ import BoardPage from './pages/user/board/BoardPage'
 import StoreMapPage from './pages/user/StoreMapPage'
 import BottomNavbar from './components/shared/BottomNavbar'
 import BoardFormPage from './pages/user/board/BoardFormPage'
-// import Layout from './components/shared/Layout'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import styled from '@emotion/styled'
@@ -117,15 +116,15 @@ const LayoutContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  @media (max-width: 600px) {
+    max-width: 100vw;
+  }
 `
 const PageContainer = styled.div`
-  // position: relative;
-  // min-height: 100vh;
   max-width: 1400px;
-  min-width: 430px;
 
   @media (max-width: 600px) {
-    max-width: 430px;
+    max-width: 100vw;
   }
   @media (min-width: 600px) {
     max-width: 1400px;

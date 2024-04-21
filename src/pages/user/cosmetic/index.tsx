@@ -255,10 +255,12 @@ const CosmeticPage = () => {
               </MCategory>
             ))}
           </MobileCategory>
+
           <MobileListBox>
             <Flex justify={'space-between'} css={mobileHeader}>
               {category}
             </Flex>
+            <Search />
             <MobileCosmeticList category={category} />
           </MobileListBox>
         </MobileCosmeticContainer>
@@ -430,8 +432,7 @@ const mobileHeader = css`
   align-items: center;
   font-size: 24px;
   font-weight: bold;
-  border-bottom: 2px solid #303030;
-  margin-bottom: 20px;
+  border-bottom: 1px solid #303030;
 `
 const CosmeticContainer = styled.div`
   width: 1400px;

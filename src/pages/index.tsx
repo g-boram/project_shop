@@ -10,7 +10,6 @@ import MainIconBox from '@/components/user/MainIconBox'
 import SpecialCosmeticList from '@/components/user/SpecialCosmeticList'
 import styled from '@emotion/styled'
 import TitleNeon from '@/components/shared/Title/TitleNeon'
-import TitleShadoow from '@/components/shared/Title/TitleShadoow'
 
 // 메인 페이지
 // : 누구나 볼수있음
@@ -27,15 +26,9 @@ function HomePage() {
       <TitleNeon />
       <BeautyYoutube />
       <MoveLinkImg />
-      <TitleJumping />
+      {/* <TitleJumping /> */}
     </>
   )
 }
 
-const Layout = styled.div`
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-`
 export default HomePage

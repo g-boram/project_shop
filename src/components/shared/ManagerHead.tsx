@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import Flex from './Flex'
 
 interface titleProps {
   title: string
@@ -21,15 +20,16 @@ const Containder = styled.div`
   width: 100%;
   margin-top: 20px;
   padding-bottom: 25px;
-  background-color: #303030;
+  background-color: #eee;
 `
 const Title = styled.div`
   font-size: 30px;
   color: white;
   margin-right: 50px;
   margin-left: 30px;
+  color: black;
 `
 const Desc = styled.div`
   font-size: 14px;
-  color: white;
+  color: black;
 `

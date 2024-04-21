@@ -13,7 +13,7 @@ import addDelimiter from '@/utils/addDelimiter'
 import formatTime from '@/utils/formatTime'
 import styled from '@emotion/styled'
 import MobileCosmeticSwiper from '@/components/user/MobileCosmeticSwiper'
-
+import { FaCartPlus } from 'react-icons/fa6'
 import { COLLECTIONS } from '@/constants'
 import { CATEGORY } from '@/constants/cosmetic'
 import { Cosmetic } from '@/models/cosmetic'
@@ -175,6 +175,11 @@ const CosmeticDetailPage = () => {
     )
   }
 
+  // 장바구니 추가
+  const addCartItem = () => {
+    console.log('buyItem', buyItem)
+    console.log('cosmetic', cosmetic)
+  }
   // 찜하기, 공유하기 영역
   const topActionBox = () => {
     return (
@@ -604,6 +609,10 @@ const CosmeticDetailPage = () => {
                           )}{' '}
                           원
                         </Text>
+                        <Flex direction="column" onClick={addCartItem}>
+                          <FaCartPlus size={30} />
+                          <Text typography="t6">장바구니</Text>
+                        </Flex>
                       </TotalCountBox>
                     </Flex>
                   ) : (
