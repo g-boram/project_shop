@@ -7,8 +7,7 @@ import Spacing from '../shared/Spacing'
 import Text from '../shared/Text'
 
 import { css } from '@emotion/react'
-import { Link, useNavigate } from 'react-router-dom'
-import { FaCartPlus } from 'react-icons/fa6'
+import { useNavigate } from 'react-router-dom'
 
 const MyLikes = () => {
   const { data } = useLike()
@@ -16,7 +15,7 @@ const MyLikes = () => {
 
   return (
     <>
-      {data ? (
+      {data && data.length !== 0 ? (
         <LikeBox>
           {data.map((like, i) => (
             <LikeRow>
@@ -66,18 +65,7 @@ const MyLikes = () => {
                 </Flex>
               </Flex>
 
-              <Spacing size={50} direction={'horizontal'} />
               <Flex css={btnRowStyle}>
-                <Flex
-                  direction="column"
-                  justify={'center'}
-                  align={'center'}
-                  css={cartBtn}
-                >
-                  <FaCartPlus size={25} />
-                  <Spacing size={10} />
-                  <div css={cartText}>장바구니에 담기</div>
-                </Flex>
                 <Spacing size={20} direction={'horizontal'} />
                 <DelButton>
                   <Button size="medium" color="error">
@@ -89,15 +77,43 @@ const MyLikes = () => {
           ))}
         </LikeBox>
       ) : (
-        <LikeBox>NoLikes</LikeBox>
+        <NoLikeBox>
+          <div>찜 한 상품이 없습니다 ㅠㅠ</div>
+          <Spacing size={20} />
+          <div>
+            <Button
+              size="large"
+              color="pink"
+              onClick={() => navigate('/cosmetic')}
+            >
+              상품 둘러보러 가기 !
+            </Button>
+          </div>
+        </NoLikeBox>
       )}
     </>
   )
 }
 
+const NoLikeBox = styled.div`
+  width: 100%;
+  max-width: 1400px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  @media (max-width: 600px) {
+    width: 100vw;
+  }
+`
 const LikeBox = styled.div`
   width: 100%;
   max-width: 1400px;
+  @media (max-width: 600px) {
+    width: 100vw;
+  }
 `
 const LikeRow = styled.div`
   width: 100%;

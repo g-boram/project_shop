@@ -26,7 +26,7 @@ function MyPage() {
   }
 
   const CateItem = styled.div<{ cate: number }>`
-    width: 100%;
+    width: 80%;
     height: 60px;
     font-size: 22px;
     display: flex;

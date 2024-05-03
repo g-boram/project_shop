@@ -22,6 +22,15 @@ const MoveLinkImg = () => {
       display: none;
     }
   `
+  const WebText = styled.div`
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 10px;
+
+    @media (max-width: 600px) {
+      display: none;
+    }
+  `
 
   return (
     <Flex direction="column" align={'center'} justify={'center'}>
@@ -36,7 +45,18 @@ const MoveLinkImg = () => {
           <img
             src="https://cdn.pixabay.com/photo/2015/05/31/13/29/lipstick-791761_1280.jpg"
             alt=""
+            onClick={() => navigate('/storeMap')}
           />
+          <WebText>
+            <Button
+              color="grey"
+              size="large"
+              full
+              onClick={() => navigate('/storeMap')}
+            >
+              매장위치 찾기
+            </Button>
+          </WebText>
           <MobileText boxNum={1}>
             <Button color="grey" full onClick={() => navigate('/storeMap')}>
               매장위치 찾기
@@ -66,7 +86,18 @@ const MoveLinkImg = () => {
           <img
             src="https://cdn.pixabay.com/photo/2016/03/27/23/11/post-it-notes-1284667_1280.jpg"
             alt=""
+            onClick={() => navigate('/board')}
           />
+          <WebText>
+            <Button
+              color="purple"
+              size="large"
+              full
+              onClick={() => navigate('/board')}
+            >
+              게시판 이동
+            </Button>
+          </WebText>
           <MobileText boxNum={2}>
             <Button color="purple" full onClick={() => navigate('/board')}>
               게시판 이동
@@ -98,7 +129,18 @@ const MoveLinkImg = () => {
           <img
             src="https://cdn.pixabay.com/photo/2016/10/22/20/55/makeup-brushes-1761648_1280.jpg"
             alt=""
+            onClick={() => navigate('/my')}
           />
+          <WebText>
+            <Button
+              color="pink"
+              size="large"
+              full
+              onClick={() => navigate('/my')}
+            >
+              마이페이지
+            </Button>
+          </WebText>
           <MobileText boxNum={3}>
             <Button color="pink" full onClick={() => navigate('/my')}>
               마이페이지
@@ -126,7 +168,18 @@ const MoveLinkImg = () => {
           <img
             src="https://cdn.pixabay.com/photo/2020/02/08/10/35/soap-4829708_1280.jpg"
             alt=""
+            onClick={() => navigate('/info')}
           />
+          <WebText>
+            <Button
+              color="primary"
+              size="large"
+              full
+              onClick={() => navigate('/info')}
+            >
+              브랜드 소개
+            </Button>
+          </WebText>
           <MobileText boxNum={4}>
             <Button color="primary" full onClick={() => navigate('/info')}>
               브랜드 소개
@@ -205,6 +258,7 @@ const ImgBox = styled.div`
   &:hover > img {
     width: 100%;
     height: 100%;
+    cursor: pointer;
   }
 `
 

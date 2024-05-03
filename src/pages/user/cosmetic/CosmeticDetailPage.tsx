@@ -34,6 +34,7 @@ import useDetailCosmetic from '@/hooks/data/useDetailCosmetic'
 import { useQuery, useQueryClient } from 'react-query'
 import { getDetailCosmetic } from '@/remote/cosmetic'
 import Select from 'react-select'
+import { addCartItem } from '@/remote/cart'
 
 const CosmeticDetailPage = () => {
   const params = useParams()
@@ -176,9 +177,22 @@ const CosmeticDetailPage = () => {
   }
 
   // 장바구니 추가
-  const addCartItem = () => {
-    console.log('buyItem', buyItem)
-    console.log('cosmetic', cosmetic)
+  const addCart = () => {
+    const buy = buyItem.map((v, i) => v.value)
+
+    const item = {
+      id: cosmetic?.id,
+      brand: cosmetic?.brand_name,
+      category: cosmetic?.category,
+      desc: cosmetic?.comment,
+      price: cosmetic?.price,
+      totalSale: cosmetic?.totalSale,
+      name: cosmetic?.name,
+      imageURL: cosmetic?.url,
+      salePercent: cosmetic?.salePercent,
+      buyItem: buy,
+    }
+    addCartItem(item)
   }
   // 찜하기, 공유하기 영역
   const topActionBox = () => {
@@ -609,7 +623,7 @@ const CosmeticDetailPage = () => {
                           )}{' '}
                           원
                         </Text>
-                        <Flex direction="column" onClick={addCartItem}>
+                        <Flex direction="column" onClick={addCart}>
                           <FaCartPlus size={30} />
                           <Text typography="t6">장바구니</Text>
                         </Flex>
