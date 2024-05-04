@@ -36,6 +36,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/jest-dom", "npm:5.17.0"],\
           ["@testing-library/react", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:13.4.0"],\
           ["@testing-library/user-event", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:13.5.0"],\
+          ["@tosspayments/payment-sdk", "npm:1.7.1"],\
           ["@types/chroma-js", "npm:2.4.4"],\
           ["@types/eslint", "npm:8.56.7"],\
           ["@types/jest", "npm:27.5.2"],\
@@ -6342,6 +6343,36 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/@tootallnate-quickjs-emscripten-npm-0.23.0-a889ea7aeb/node_modules/@tootallnate/quickjs-emscripten/",\
         "packageDependencies": [\
           ["@tootallnate/quickjs-emscripten", "npm:0.23.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tosspayments/payment-sdk", [\
+      ["npm:1.7.1", {\
+        "packageLocation": "../../../.yarn/berry/cache/@tosspayments-payment-sdk-npm-1.7.1-c571cf2667-10c0.zip/node_modules/@tosspayments/payment-sdk/",\
+        "packageDependencies": [\
+          ["@tosspayments/payment-sdk", "npm:1.7.1"],\
+          ["@tosspayments/payment__types", "npm:1.67.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tosspayments/payment__types", [\
+      ["npm:1.67.2", {\
+        "packageLocation": "../../../.yarn/berry/cache/@tosspayments-payment__types-npm-1.67.2-a30904cd96-10c0.zip/node_modules/@tosspayments/payment__types/",\
+        "packageDependencies": [\
+          ["@tosspayments/payment__types", "npm:1.67.2"],\
+          ["@tosspayments/sdk-constants", "npm:0.2.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tosspayments/sdk-constants", [\
+      ["npm:0.2.2", {\
+        "packageLocation": "../../../.yarn/berry/cache/@tosspayments-sdk-constants-npm-0.2.2-89678e20e8-10c0.zip/node_modules/@tosspayments/sdk-constants/",\
+        "packageDependencies": [\
+          ["@tosspayments/sdk-constants", "npm:0.2.2"],\
+          ["type-fest", "npm:2.19.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -20259,6 +20290,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/jest-dom", "npm:5.17.0"],\
           ["@testing-library/react", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:13.4.0"],\
           ["@testing-library/user-event", "virtual:d6c570c3e15fc1704e0ab95c68cd9decc541867a57a9f979a28dae874b2ff8d24f6d466735cca8f476b89099def4ce3711bc86ab470c9d217d2c36d01219a8d3#npm:13.5.0"],\
+          ["@tosspayments/payment-sdk", "npm:1.7.1"],\
           ["@types/chroma-js", "npm:2.4.4"],\
           ["@types/eslint", "npm:8.56.7"],\
           ["@types/jest", "npm:27.5.2"],\
@@ -23797,6 +23829,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/type-fest-npm-0.21.3-5ff2a9c6fd-10c0.zip/node_modules/type-fest/",\
         "packageDependencies": [\
           ["type-fest", "npm:0.21.3"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:2.19.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/type-fest-npm-2.19.0-918b953248-10c0.zip/node_modules/type-fest/",\
+        "packageDependencies": [\
+          ["type-fest", "npm:2.19.0"]\
         ],\
         "linkType": "HARD"\
       }]\

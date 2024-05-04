@@ -126,6 +126,7 @@ const LikeRow = styled.div`
   justify-content: space-between;
   @media (max-width: 600px) {
     justify-content: flex-end;
+    width: 100vw;
   }
 `
 const DelButton = styled.div`
@@ -171,19 +172,12 @@ const ImgWrapper = styled.div`
     }
   }
 `
-const cartText = css`
-  @media (max-width: 600px) {
-    display: none;
-  }
-`
-const cartBtn = css`
-  pointer: cursor;
-`
+
 const btnRowStyle = css`
-  width: 300px;
+  // width: 300px;
 
   @media (max-width: 600px) {
-    width: 100px;
+    // width: 100px;
     margin-right: 20px;
   }
 `

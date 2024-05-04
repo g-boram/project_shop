@@ -3700,6 +3700,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tosspayments/payment-sdk@npm:^1.7.1":
+  version: 1.7.1
+  resolution: "@tosspayments/payment-sdk@npm:1.7.1"
+  dependencies:
+    "@tosspayments/payment__types": "npm:1.67.2"
+  checksum: 10c0/60832febab6d506a695e95cace2428b6d50d5fdb79eb8d56e429a3c3059b4c53a48dba80ecc0a74b060f3979a0a9f6c3dba054958e9df92aa93b6fe32aa32ee3
+  languageName: node
+  linkType: hard
+
+"@tosspayments/payment__types@npm:1.67.2":
+  version: 1.67.2
+  resolution: "@tosspayments/payment__types@npm:1.67.2"
+  dependencies:
+    "@tosspayments/sdk-constants": "npm:^0.2.2"
+  checksum: 10c0/ec4383d9a4e33083c3a4940db0a0a71bc3bacaebb39586780a6ecf8f4d563f6b1d0f6475b7061b19f0bf607257be2985cbc7f74fea775fb4ece6a2b4e8a4fda1
+  languageName: node
+  linkType: hard
+
+"@tosspayments/sdk-constants@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "@tosspayments/sdk-constants@npm:0.2.2"
+  dependencies:
+    type-fest: "npm:^2.11.2"
+  checksum: 10c0/8a3981d0183fe2af2c45f6b20f21f4ce83c9bfa160fbcd4fe3d2768a859cffc9d0c6a02725290637daf8970938143a95bca92ea192c619889be7b6741b01c94f
+  languageName: node
+  linkType: hard
+
 "@trysound/sax@npm:0.2.0":
   version: 0.2.0
   resolution: "@trysound/sax@npm:0.2.0"
@@ -14899,6 +14926,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:^5.14.1"
     "@testing-library/react": "npm:^13.0.0"
     "@testing-library/user-event": "npm:^13.2.1"
+    "@tosspayments/payment-sdk": "npm:^1.7.1"
     "@types/chroma-js": "npm:^2"
     "@types/eslint": "npm:^8"
     "@types/jest": "npm:^27.0.1"
@@ -17794,6 +17822,13 @@ __metadata:
   version: 0.21.3
   resolution: "type-fest@npm:0.21.3"
   checksum: 10c0/902bd57bfa30d51d4779b641c2bc403cdf1371fb9c91d3c058b0133694fcfdb817aef07a47f40faf79039eecbaa39ee9d3c532deff244f3a19ce68cea71a61e8
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^2.11.2":
+  version: 2.19.0
+  resolution: "type-fest@npm:2.19.0"
+  checksum: 10c0/a5a7ecf2e654251613218c215c7493574594951c08e52ab9881c9df6a6da0aeca7528c213c622bc374b4e0cb5c443aa3ab758da4e3c959783ce884c3194e12cb
   languageName: node
   linkType: hard
 

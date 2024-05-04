@@ -46,9 +46,8 @@ function MyPage() {
   `
 
   return (
-    <>
+    <Wrapper>
       <HeadTitle title="마이 페이지" desc="My Page" />
-
       <UserInfoBox>
         <UserInfo>
           <Flex>
@@ -95,10 +94,13 @@ function MyPage() {
           {renderComponents()}
         </UserContentWrapper>
       </UserContentBox>
-    </>
+    </Wrapper>
   )
 }
 
+const Wrapper = styled.div`
+  min-height: 100vh;
+`
 const UserInfoBox = styled.div`
   width: 100%;
   height: 250px;
@@ -111,6 +113,7 @@ const UserInfoBox = styled.div`
 
   @media (max-width: 600px) {
     height: 200px;
+    width: 100vw;
   }
 `
 const UserInfo = styled.div`
@@ -118,7 +121,7 @@ const UserInfo = styled.div`
   background-color: white;
 
   @media (max-width: 600px) {
-    width: 100%;
+    width: 100vw;
     width: 300px;
   }
 `
@@ -137,7 +140,7 @@ const UserContentWrapper = styled.div`
   background-color: white;
 
   @media (max-width: 600px) {
-    height: 250px;
+    min-height: 250px;
     width: 100vw;
   }
 `

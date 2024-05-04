@@ -33,6 +33,8 @@ import CosmeticDetailPage from './pages/user/cosmetic/CosmeticDetailPage'
 import EventPage from './pages/user/EventPage'
 import Footer from './components/shared/Footer'
 import BrandInfoPage from './pages/user/BrandInfoPage'
+import OrderPage from './pages/user/OrderPage'
+import OrderDetailPage from './pages/user/OrderDetailPage'
 
 function App() {
   return (
@@ -61,6 +63,8 @@ function App() {
             <Route path="/storeMap" Component={StoreMapPage} />
             <Route path="/event" Component={EventPage} />
             <Route path="/info" Component={BrandInfoPage} />
+            <Route path="/order" Component={OrderPage} />
+            <Route path="/order/detail/:id" Component={OrderDetailPage} />
 
             {/* 관리자 페이지 --------------------------------------------------------- */}
             <Route path="/manager" Component={ManagerPage} />
@@ -117,7 +121,7 @@ const LayoutContainer = styled.div`
   align-items: center;
   margin: 0 auto;
   @media (max-width: 600px) {
-    max-width: 100vw;
+    min-width: 100vw;
   }
 `
 const PageContainer = styled.div`

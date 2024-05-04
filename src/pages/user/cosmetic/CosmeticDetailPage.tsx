@@ -15,31 +15,29 @@ import styled from '@emotion/styled'
 import MobileCosmeticSwiper from '@/components/user/MobileCosmeticSwiper'
 import { FaCartPlus } from 'react-icons/fa6'
 import { COLLECTIONS } from '@/constants'
-import { CATEGORY } from '@/constants/cosmetic'
 import { Cosmetic } from '@/models/cosmetic'
 import { store } from '@/remote/firebase'
 import { css } from '@emotion/react'
 import { RxCross2 } from 'react-icons/rx'
 import { differenceInMilliseconds, parseISO } from 'date-fns'
-import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore'
-import { useEffect, useRef, useState } from 'react'
-import { BiLike } from 'react-icons/bi'
+import { doc, onSnapshot } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
 import { FaStar } from 'react-icons/fa'
-import { MdOutlineRateReview } from 'react-icons/md'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import useLike from '@/hooks/like/useLike'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import useShare from '@/hooks/share/useShare'
-import useDetailCosmetic from '@/hooks/data/useDetailCosmetic'
-import { useQuery, useQueryClient } from 'react-query'
-import { getDetailCosmetic } from '@/remote/cosmetic'
 import Select from 'react-select'
 import { addCartItem } from '@/remote/cart'
+import { toast } from 'react-toastify'
+import { useSetRecoilState } from 'recoil'
+import { orderItemAtom } from '@/atom/orderItem'
 
 const CosmeticDetailPage = () => {
   const params = useParams()
   const share = useShare()
   const navigate = useNavigate()
+  const setOrderItem = useSetRecoilState(orderItemAtom)
 
   const [innerWidth, setInnerWidth] = useState(0)
   const [moveInfo, setMoveInfo] = useState(0)
@@ -176,6 +174,29 @@ const CosmeticDetailPage = () => {
     )
   }
 
+  const handleOrderItem = () => {
+    if (buyItem.length === 0) {
+      toast.error('상품을 선택해 주세요')
+    } else {
+      const buy = buyItem.map((v, i) => v.value)
+
+      const item = {
+        id: cosmetic?.id,
+        brand: cosmetic?.brand_name,
+        category: cosmetic?.category,
+        desc: cosmetic?.comment,
+        price: cosmetic?.price,
+        totalSale: cosmetic?.totalSale,
+        name: cosmetic?.name,
+        imageURL: cosmetic?.url,
+        salePercent: cosmetic?.salePercent,
+        buyItem: buy,
+      }
+      setOrderItem(item)
+      navigate('/order')
+    }
+  }
+
   // 장바구니 추가
   const addCart = () => {
     const buy = buyItem.map((v, i) => v.value)
@@ -300,7 +321,12 @@ const CosmeticDetailPage = () => {
             매진
           </Button>
         ) : (
-          <Button color="pink" size="large" full>
+          <Button
+            color="pink"
+            size="large"
+            full
+            onClick={() => handleOrderItem()}
+          >
             구매하기
           </Button>
         )}
@@ -809,6 +835,10 @@ const CosmeticDetailPage = () => {
                       )}{' '}
                       원
                     </Text>
+                    <Flex direction="column" onClick={addCart}>
+                      <FaCartPlus size={30} />
+                      <Text typography="t6">장바구니</Text>
+                    </Flex>
                   </TotalCountBox>
                 </Flex>
               ) : (
