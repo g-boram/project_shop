@@ -326,6 +326,7 @@ const CosmeticDetailPage = () => {
             size="large"
             full
             onClick={() => handleOrderItem()}
+            css={buyBtnStyle}
           >
             구매하기
           </Button>
@@ -1216,5 +1217,10 @@ const salePerStyle = css`
 `
 const saleTextStyle = css`
   text-decoration-line: line-through;
+`
+const buyBtnStyle = css`
+  @media (max-width: 600px) {
+    display: none;
+  }
 `
 export default CosmeticDetailPage

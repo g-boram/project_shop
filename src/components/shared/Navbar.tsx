@@ -111,11 +111,11 @@ function Navbar() {
                   : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-1024.png'
               }
               alt=""
-              width={70}
-              height={70}
+              width={60}
+              height={60}
               style={{
                 borderRadius: '100%',
-                border: '2px solid #fff',
+                border: '1px solid #fff',
                 backgroundColor: '#eee',
               }}
             />
@@ -134,16 +134,16 @@ function Navbar() {
           <Button size="small" full color="grey" onClick={handleLogout}>
             로그아웃
           </Button>
-          <Spacing size={50} />
+          <Spacing size={30} />
           <Flex direction="column" align={'center'} justify={'center'}>
-            <Text typography="t6" color="white">
+            <Text typography="t7" color="white">
               {user.displayName} 님! 오늘도 좋은하루 되세요!{' '}
             </Text>
             <Spacing size={10} />
-            <Text typography="t6" color="white">
+            <Text typography="t7" color="white">
               봄느낌 가득한 이상품 어때요?
             </Text>
-            <Spacing size={20} />
+            <Spacing size={30} />
           </Flex>
           <TodayCommentBox>
             <img
@@ -170,13 +170,13 @@ function Navbar() {
           >
             로그인 하기
           </Button>
-          <Spacing size={50} />
+          <Spacing size={20} />
           <Flex direction="column" align={'center'} justify={'center'}>
-            <Text typography="t6" color="white">
+            <Text typography="t7" color="white">
               오늘도 좋은하루 되세요!{' '}
             </Text>
             <Spacing size={10} />
-            <Text typography="t6" color="white">
+            <Text typography="t7" color="white">
               봄느낌 가득한 이상품 어때요?
             </Text>
             <Spacing size={20} />
@@ -234,7 +234,6 @@ function Navbar() {
               key={i}
               onClick={() => setIsOpen(false)}
               css={css`
-                margin: 10px;
                 color: #fff;
               `}
             >
@@ -313,8 +312,8 @@ const topNavbarStyles = css`
 `
 // 랜덤 한마디 영역
 const TodayCommentBox = styled.div`
-  min-height: 100px;
-  min-width: 240px;
+  min-height: 90px;
+  width: 200px;
   background-color: #fff;
   border-radius: 10px;
   font-size: 14px;

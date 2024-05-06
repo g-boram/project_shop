@@ -109,7 +109,6 @@ function Map() {
     loadKakaoMap()
   }, [])
 
-  console.log('currentStore', currentStore)
   return (
     <>
       <MapBox>
@@ -146,6 +145,7 @@ function Map() {
                       margin: 0px 30px;
                       @media (max-width: 600px) {
                         margin: 0px;
+                        width: 100%;
                       }
                     `}
                   >
@@ -229,7 +229,9 @@ const NoCurrentBox = styled.div`
 `
 
 const MapBox = styled.div`
+  width: 100%;
   @media (max-width: 600px) {
+    width: 100vw;
     margin-top: 30px;
   }
 `
@@ -297,11 +299,13 @@ const categoryStyle = css`
 const markerMobileStyle = css`
   @media (max-width: 600px) {
     flex-direction: column;
+    width: 100%;
   }
 `
 const flexMobileStyle = css`
   @media (max-width: 600px) {
     flex-direction: column;
+    width: 100%;
   }
 `
 const flexMobileJustify = css`

@@ -113,9 +113,21 @@ function MyPage() {
             <Text typography="t4">총 주문건수</Text>
             <Text typography="t4">{order?.length} 건</Text>
           </Flex>
+          <Spacing size={10} />
+          <Flex justify={'space-between'}>
+            {order?.length !== undefined ? (
+              order?.length < 10 ? (
+                <Text typography="t6">고객님은 Yellow 등급 입니다.</Text>
+              ) : (
+                <Text typography="t6">고객님은 Yellow 등급 입니다.</Text>
+              )
+            ) : (
+              <Text typography="t6">아직 구매내역이 없으시네용</Text>
+            )}
+          </Flex>
         </OrderWrapper>
       </UserInfoBox>
-      <MemberShipWrapper>MemberShipWrapper</MemberShipWrapper>
+      {/* <MemberShipWrapper>MemberShipWrapper</MemberShipWrapper> */}
       <UserContentBox>
         <UserContentWrapper>
           <Flex css={categoryLine}>
@@ -161,17 +173,17 @@ const UserInfoBox = styled.div`
 const OrderWrapper = styled.div`
   width: 80%;
   height: 80px;
-  background-color: #eee;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px -2px #d2d0d0;
   margin-bottom: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   @media (max-width: 600px) {
     margin-top: 20px;
   }
-`
-const MemberShipWrapper = styled.div`
-  height: 80px;
-  background-color: #eee;
-  margin-bottom: 20px;
 `
 
 const UserInfo = styled.div`

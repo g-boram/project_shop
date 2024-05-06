@@ -95,6 +95,7 @@ const MyCart = () => {
                     <Button
                       size="medium"
                       onClick={() => setOrderItemAtom(like)}
+                      css={buyBtnStyle}
                     >
                       구매하기
                     </Button>
@@ -219,6 +220,8 @@ const btnRowStyle = css`
   height: 40px;
   margin-top: 50px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
 `
 const likeRowsStyle = css`
   margin-right: 20px;
@@ -232,6 +235,11 @@ const brandNameStyle = css`
 `
 const salePerStyle = css`
   color: red;
+`
+const buyBtnStyle = css`
+  @media (max-width: 600px) {
+    display: none;
+  }
 `
 const saleTextStyle = css`
   text-decoration-line: line-through;
