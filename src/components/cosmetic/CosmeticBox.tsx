@@ -18,7 +18,7 @@ function CosmeticBox({ cosmetic }: { cosmetic: Cosmetic }) {
   const [remainedTime, setRemainedTime] = useState(0)
 
   useEffect(() => {
-    if (cosmetic.events == null || cosmetic.events.promoEndTime == null) {
+    if (cosmetic.events?.name === '' || cosmetic.events?.promoEndTime == null) {
       return
     }
 
@@ -72,7 +72,9 @@ function CosmeticBox({ cosmetic }: { cosmetic: Cosmetic }) {
     >
       <ImgWrapper>
         {cosmetic.url ? <img src={cosmetic.url} alt={cosmetic.name} /> : null}
-        <span css={tagStyle}>{tagComponent()}</span>
+        {cosmetic.events?.name !== '' ? (
+          <span css={tagStyle}>{tagComponent()}</span>
+        ) : null}
       </ImgWrapper>
 
       <Flex direction="column" css={nameStyle}>

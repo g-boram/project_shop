@@ -1,13 +1,9 @@
-import { BsInfoCircleFill } from 'react-icons/bs'
-
-import { useMainCategoryIcons } from '@/hooks/data/useMainData'
 import styled from '@emotion/styled'
-import { useEffect, useState } from 'react'
 import Button from '../shared/Button'
 import Flex from '../shared/Flex'
-import Text from '../shared/Text'
 import Spacing from '../shared/Spacing'
-import { css } from '@emotion/react'
+import { useMainCategoryIcons } from '@/hooks/data/useMainData'
+import { useEffect, useState } from 'react'
 import { PropagateLoader } from 'react-spinners'
 import { Link } from 'react-router-dom'
 
@@ -15,7 +11,7 @@ const MainIconBox = () => {
   const { data, isLoading } = useMainCategoryIcons()
   const [isMore, setIsMore] = useState(false)
 
-  const [innerWidth, setInnerWidth] = useState(0)
+  const [innerWidth, setInnerWidth] = useState(700)
   const handleResize = () => {
     setInnerWidth(window.innerWidth)
   }

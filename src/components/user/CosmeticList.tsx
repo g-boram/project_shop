@@ -4,13 +4,16 @@ import useCosmeticsCategory from '@/hooks/data/useCosmeticsCategory'
 import CosmeticCategoryBox from '../cosmetic/CosmeticCategoryBox'
 import { useEffect } from 'react'
 import useSearchCosmetics from '@/hooks/data/useSearchCosmetics'
+import useCosmetics from '@/hooks/data/useCosmetics'
 
 const CosmeticList = ({ category }: { category: string }) => {
-  const { data: cosmetic } = useCosmeticsCategory(category)
+  // const { data: cosmetic } = useCosmeticsCategory(category)
+  const { data: cosmetic } = useCosmetics(category)
   const { data: likes, mutate: like } = useLike()
 
   const searchData = useSearchCosmetics()
-
+  console.log('category', category)
+  console.log('cosmetic', cosmetic)
   return (
     <CosmeticContainer>
       <ListContainer>

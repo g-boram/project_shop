@@ -147,7 +147,9 @@ function CosmeticCategoryBox({
             />
           </IconWrapper>
           {cosmetic.url ? <img src={cosmetic.url} alt={cosmetic.name} /> : null}
-          <TagStyle>{tagComponent()}</TagStyle>
+          {cosmetic.events?.name !== '' ? (
+            <TagStyle>{tagComponent()}</TagStyle>
+          ) : null}
         </ImgWrapper>
 
         <Flex direction="column" css={nameStyle}>
@@ -219,8 +221,9 @@ const ImgWrapper = styled.div`
   width: 100%;
   background-color: #f7f7f7;
   & img {
-    height: auto;
+    max-height: 210px;
     width: 100%;
+    object-fit: cover;
   }
 `
 const TagStyle = styled.div`
@@ -245,7 +248,7 @@ const IconWrapper = styled.div`
   top: 4px;
   right: 4px;
   width: 30px;
-  height: 30px;
+
   cursor: pointer;
   & img {
     width: 100%;

@@ -29,10 +29,11 @@ const ManagerCosmeticForm = () => {
       email: user?.email,
       managerName: user?.displayName,
     }
-    toast.success('게시글 등록 완료!')
-    navigate('/manager/data/setCosmeticData')
     try {
-      await addCosmetic(formData)
+      await addCosmetic(formData).then(() => {
+        toast.success('화장품 등록 완료!')
+        navigate('/manager/data/setCosmeticData')
+      })
     } catch (e: any) {
       console.log('formData Error', e)
     }
@@ -46,7 +47,7 @@ const ManagerCosmeticForm = () => {
           <CosmeticForm onSubmit={handleSubmit} setLoading={handleLoading} />
           {isLoading ? (
             <DimmedBox>
-              <PuffLoader color="#6643b5" size={'200px'} />
+              {/* <PuffLoader color="#6643b5" size={'200px'} /> */}
             </DimmedBox>
           ) : (
             <></>

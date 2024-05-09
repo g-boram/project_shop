@@ -492,10 +492,11 @@ const CosmeticDetailPage = () => {
                         </SubImgItem>
                       ))
                     ) : (
-                      <>
-                        <Skeleton width={80} height={80} />
-                        <Spacing size={5} direction={'horizontal'} />
-                      </>
+                      // <>
+                      //   <Skeleton width={80} height={80} />
+                      //   <Spacing size={5} direction={'horizontal'} />
+                      // </>
+                      <></>
                     )}
                   </SubImg>
                 </MainImg>
@@ -706,7 +707,9 @@ const CosmeticDetailPage = () => {
               <Skeleton width={'100%'} height={350} />
             )}
           </MobileImgWrapper>
-          <MobileTagStyle>{tagComponent()}</MobileTagStyle>
+          {cosmetic?.events?.name !== '' ? (
+            <MobileTagStyle>{tagComponent()}</MobileTagStyle>
+          ) : null}
           <MobileDetailBox>
             <Spacing size={20} />
             {topActionBox()}

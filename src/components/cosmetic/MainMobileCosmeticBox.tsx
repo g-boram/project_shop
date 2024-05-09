@@ -71,7 +71,9 @@ function MainMobileCosmeticBox({ cosmetic }: { cosmetic: Cosmetic }) {
     >
       <ImgWrapper>
         {cosmetic.url ? <img src={cosmetic.url} alt={cosmetic.name} /> : null}
-        <span css={tagStyle}>{tagComponent()}</span>
+        {cosmetic.events?.name !== '' ? (
+          <span css={tagStyle}>{tagComponent()}</span>
+        ) : null}
       </ImgWrapper>
 
       <Flex direction="column" css={nameStyle}>

@@ -30,7 +30,7 @@ const MobileDetailCosmeticInfo = ({
       <InfoContentBox>
         <ImgWrapper>
           {data?.contentUrl ? (
-            <img src={data?.contentUrl.img} alt="contentImg" />
+            <img src={data?.contentUrl} alt="contentImg" />
           ) : (
             <></>
           )}

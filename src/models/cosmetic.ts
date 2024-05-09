@@ -14,7 +14,7 @@ export interface Cosmetic {
   like?: number
   url?: string
   subUrl?: subImgInterface[]
-  contentUrl?: contentImgInterface
+  contentUrl?: string
   count: number | string
   reviews?: string[]
   totalSale: number | string

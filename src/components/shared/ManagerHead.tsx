@@ -20,7 +20,7 @@ const Containder = styled.div`
   width: 100%;
   margin-top: 20px;
   padding-bottom: 25px;
-  background-color: #eee;
+  margin-bottom: 30px;
 `
 const Title = styled.div`
   font-size: 30px;

@@ -35,7 +35,7 @@ import { cosmeticAtom } from '@/atom/cosmetic'
 const CosmeticPage = () => {
   const params = useParams()
   const [innerWidth, setInnerWidth] = useState(0)
-  const [category, setCategory] = useState<string>('shadow')
+  const [category, setCategory] = useState<string>('lip')
 
   const setCosmetic = useSetRecoilState(cosmeticAtom)
 

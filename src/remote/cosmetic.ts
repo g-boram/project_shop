@@ -11,6 +11,7 @@ import {
   documentId,
   orderBy,
   addDoc,
+  Timestamp,
 } from 'firebase/firestore'
 
 import { COLLECTIONS } from '@/constants'
@@ -22,11 +23,11 @@ import { User } from '@/models/user'
 export async function getCosmetics(pageParams?: QuerySnapshot<Cosmetic>) {
   const cosmeticsQuery =
     pageParams == null
-      ? query(collection(store, COLLECTIONS.COSMETIC), limit(10))
+      ? query(collection(store, COLLECTIONS.COSMETIC), limit(100))
       : query(
           collection(store, COLLECTIONS.COSMETIC),
           startAfter(pageParams),
-          limit(10),
+          limit(100),
         )
   const cosmeticsSnapshot = await getDocs(cosmeticsQuery)
 
@@ -102,6 +103,7 @@ export async function getRecommentHoels(hotelsId: string[]) {
 // 화장품 데이터 저장하기
 export const addCosmetic = async (cosmeticData: Cosmetic) => {
   const cosmeticRef = collection(store, `${COLLECTIONS.COSMETIC}`)
+  // const date = Timestamp.now().toDate()
   await addDoc(cosmeticRef, {
     ...cosmeticData,
     createAt: new Date()?.toLocaleDateString('ko', {

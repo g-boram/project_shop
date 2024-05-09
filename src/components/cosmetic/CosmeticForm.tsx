@@ -73,6 +73,7 @@ export default function CosmeticForm({
     rating: 0,
     like: 0,
     hashTags: [],
+    contentUrl: '',
   })
   const { open } = useAlertContext()
 
@@ -171,7 +172,7 @@ export default function CosmeticForm({
   }
 
   useEffect(() => {
-    if (newImgUrl !== '' && contentImgUrl !== '') {
+    if (newImgUrl !== '') {
       open({
         title: '신규 화장품을 등록 하시겠습니까?',
         isCancle: true,
@@ -239,7 +240,7 @@ export default function CosmeticForm({
       color: colorArr,
       url: newImgUrl,
       subUrl: currentSubImg,
-      contentUrl: currentContentImg,
+      contentUrl: contentImgUrl ? contentImgUrl : { img: '', url: '' },
       hashTags: tags,
       events: {
         name: eventFormValues.eventName ? eventFormValues.eventName : '',
@@ -797,7 +798,7 @@ export default function CosmeticForm({
       <Spacing size={100} />
       <Flex justify={'center'}>
         <Button size="large" color="lightPurple" full onClick={getImgUrl}>
-          게시글 등록
+          화장품 등록
         </Button>
       </Flex>
       <Spacing size={20} />

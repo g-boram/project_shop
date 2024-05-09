@@ -18,7 +18,7 @@ function useCosmeticsCategory(category: string) {
       },
     },
   )
-
+  console.log('infinity data', data)
   // 더 가져올 페이지가 있는지 여부 판단하는 함수
   const loadMore = useCallback(() => {
     if (hasNextPage === false || isFetching) {
