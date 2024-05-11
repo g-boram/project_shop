@@ -26,7 +26,7 @@ function HomePage() {
       <TitleNeon />
       <BeautyYoutube />
       <MoveLinkImg />
-      {/* <TitleJumping /> */}
+      <TitleJumping />
     </>
   )
 }

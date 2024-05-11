@@ -8,6 +8,11 @@ import { css } from '@emotion/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { FaMapLocationDot } from 'react-icons/fa6'
+import { FaChalkboardTeacher } from 'react-icons/fa'
+import { FaUserCheck } from 'react-icons/fa6'
+import { BsFillInfoCircleFill } from 'react-icons/bs'
+
 const MoveLinkImg = () => {
   const navigate = useNavigate()
   const [num, setNum] = useState(0)
@@ -65,6 +70,10 @@ const MoveLinkImg = () => {
       height: 50%;
       cursor: pointer;
     }
+
+    @media (max-width: 600px) {
+      min-height: 100px;
+    }
   `
 
   return (
@@ -78,11 +87,6 @@ const MoveLinkImg = () => {
         </Flex>
         <Container>
           <ImgBox boxNum={1} onClick={() => setNum(1)}>
-            {/* <img
-              src="https://cdn.pixabay.com/photo/2015/05/31/13/29/lipstick-791761_1280.jpg"
-              alt=""
-              onClick={() => navigate('/storeMap')}
-            /> */}
             <span>
               <Flex direction="column" align={'flex-end'}>
                 <Text typography="t2" bold>
@@ -165,6 +169,77 @@ const MoveLinkImg = () => {
             </span>
           </ImgBox>
         </Container>
+        <MobileContainer>
+          <Spacing size={20} />
+          <Flex justify={'space-between'} align={'center'}>
+            <FaMapLocationDot size={40} />
+            <Flex direction="column" align={'flex-end'}>
+              <Text typography="t4" bold>
+                매장위치 찾기{' '}
+              </Text>
+              <Spacing size={10} />
+              <Button
+                color="grey"
+                size="medium"
+                onClick={() => navigate('/storeMap')}
+              >
+                바로가기
+              </Button>
+            </Flex>
+          </Flex>
+          <Spacing size={20} />
+          <Flex justify={'space-between'} align={'center'}>
+            <FaChalkboardTeacher size={40} />
+            <Flex direction="column" align={'flex-end'}>
+              <Text typography="t4" bold>
+                공지사항 & 게시판 & QnA{' '}
+              </Text>
+              <Spacing size={10} />
+              <Button
+                color="purple"
+                size="medium"
+                onClick={() => navigate('/board')}
+              >
+                바로가기
+              </Button>
+            </Flex>
+          </Flex>
+          <Spacing size={20} />
+          <Flex justify={'space-between'} align={'center'}>
+            <FaUserCheck size={40} />
+            <Flex direction="column" align={'flex-end'}>
+              <Text typography="t4" bold>
+                마이 페이지{' '}
+              </Text>
+              <Spacing size={10} />
+              <Button
+                color="pink"
+                size="medium"
+                onClick={() => navigate('/my')}
+              >
+                바로가기
+              </Button>
+            </Flex>
+          </Flex>
+          <Spacing size={20} />
+          <Flex justify={'space-between'} align={'center'}>
+            <BsFillInfoCircleFill size={40} />
+            <Flex direction="column" align={'flex-end'}>
+              <Text typography="t4" bold>
+                브랜드 소개
+              </Text>
+              <Spacing size={10} />
+              <Button
+                color="primary"
+                size="medium"
+                onClick={() => navigate('/info')}
+              >
+                바로가기
+              </Button>
+            </Flex>
+          </Flex>
+          <Spacing size={20} />
+        </MobileContainer>
       </Flex>
     </>
   )
@@ -185,6 +260,18 @@ const Container = styled.div`
   margin: 30px 0 60px 0;
   box-sizing: border-box;
   height: 250px;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+`
+const MobileContainer = styled.div`
+  width: 90vw;
+  height: 400px;
+
+  @media (min-width: 600px) {
+    display: none;
+  }
 `
 
 export default MoveLinkImg
