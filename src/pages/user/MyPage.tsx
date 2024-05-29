@@ -15,13 +15,17 @@ import { store } from '@/remote/firebase'
 import { useQuery } from 'react-query'
 import { getDetailOrders } from '@/remote/order'
 import { OrderProps } from '@/models/order'
+import Button from '@/components/shared/Button'
+import { useNavigate } from 'react-router-dom'
 
 function MyPage() {
   const user = useUser()
   const userID = user?.uid
+  const navigate = useNavigate()
+
   const [isCate, setIsCate] = useState(0)
   const [order, setOrder] = useState<OrderProps[] | undefined>()
-  console.log('order', order?.length)
+  console.log('userId', userID)
 
   // 주문 데이터 가져오기
   const getDetailOrders = async (id: string | undefined) => {
@@ -122,10 +126,21 @@ function MyPage() {
                 <Text typography="t6">고객님은 Yellow 등급 입니다.</Text>
               )
             ) : (
-              <Text typography="t6">아직 구매내역이 없으시네용</Text>
+              <Text typography="t6">아직 구매내역이 없으시네용ㅠㅠ</Text>
             )}
           </Flex>
         </OrderWrapper>
+        <MoveOrderBtn>
+          <Button
+            color="pink"
+            size="large"
+            onClick={() => {
+              navigate(`/order/detail/${userID}`)
+            }}
+          >
+            주문내역 확인
+          </Button>
+        </MoveOrderBtn>
       </UserInfoBox>
       {/* <MemberShipWrapper>MemberShipWrapper</MemberShipWrapper> */}
       <UserContentBox>
@@ -176,7 +191,7 @@ const OrderWrapper = styled.div`
   border-radius: 15px;
   box-shadow: 0px 0px 10px -2px #d2d0d0;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 10px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -212,6 +227,18 @@ const UserContentWrapper = styled.div`
   @media (max-width: 600px) {
     min-height: 250px;
     width: 100vw;
+  }
+`
+const MoveOrderBtn = styled.div`
+  width: 300px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 600px) {
+    width: 150px;
+    margin: 20px 0 40px 0;
   }
 `
 
